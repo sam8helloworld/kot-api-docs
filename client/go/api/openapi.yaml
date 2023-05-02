@@ -131,7 +131,7 @@ paths:
       operationId: GetAdministrators
       parameters:
       - description: 指定されたプロパティをレスポンスに追加
-        explode: true
+        explode: false
         in: query
         name: additionalFields
         required: false
@@ -302,7 +302,7 @@ components:
       style: simple
     additionalFields_get_administrators:
       description: 指定されたプロパティをレスポンスに追加
-      explode: true
+      explode: false
       in: query
       name: additionalFields
       required: false

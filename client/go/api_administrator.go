@@ -16,7 +16,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 )
 
 
@@ -76,15 +75,7 @@ func (a *AdministratorApiService) GetAdministratorsExecute(r ApiGetAdministrator
 	localVarFormParams := url.Values{}
 
 	if r.additionalFields != nil {
-		t := *r.additionalFields
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", s.Index(i), "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", t, "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", r.additionalFields, "csv")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
