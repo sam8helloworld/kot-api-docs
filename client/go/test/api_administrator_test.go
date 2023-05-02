@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/sam8helloworld/kot-api-docs"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/sam8helloworld/kot-api-docs"
 )
 
 func Test_openapi_AdministratorApiService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_AdministratorApiService(t *testing.T) {
 
 	t.Run("Test AdministratorApiService GetAdministrators", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AdministratorApi.GetAdministrators(context.Background()).Execute()
 
