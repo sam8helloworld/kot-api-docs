@@ -3,7 +3,7 @@ get:
   parameters:
     - $ref: "../../components/parameters/additionalFields.yml"
   tags:
-    - Administrators
+    - Administrator
   description: 管理者のデータを取得する。
   externalDocs:
     description: 一覧

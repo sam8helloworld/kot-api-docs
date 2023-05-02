@@ -7,4 +7,4 @@
   $ref: ./company/company.yml
 
 /administrators:
-  $ref: ./administrators/administrators.yml
+  $ref: ./administrator/administrators.yml
