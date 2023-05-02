@@ -1,6 +1,0 @@
-name: additionalFields
-in: query
-description: 指定されたプロパティをレスポンスに追加
-schema:
-  type: string
-  example: associatedEmployees
