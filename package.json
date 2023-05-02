@@ -4,6 +4,8 @@
   "description": "king of timeのAPIドキュメント",
   "main": "index.js",
   "scripts": {
+    "validate": "swagger-cli validate ./docs/index.yml",
+    "bundle": "swagger-cli bundle -t yaml -o ./docs/swagger.yml ./docs/index.yml",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
