@@ -2,3 +2,6 @@
   $ref: ./token/token.yml
 /tokens/{token}/available:
   $ref: ./token/token_available.yml
+
+/company:
+  $ref: ./company/company.yml
