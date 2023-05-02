@@ -3,6 +3,8 @@ parameters:
     $ref: "./parameters/token.yml"
   additionalFields:
     $ref: "./parameters/additionalFields.yml"
+  additionalFields_get_employees:
+    $ref: "./parameters/additionalFields_get_employees.yml"
   date:
     $ref: "./parameters/date.yml"
   division:

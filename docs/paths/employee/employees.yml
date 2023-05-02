@@ -4,7 +4,7 @@ get:
     - $ref: "../../components/parameters/date.yml"
     - $ref: "../../components/parameters/division.yml"
     - $ref: "../../components/parameters/includeResigner.yml"
-    - $ref: "../../components/parameters/additionalFields.yml"
+    - $ref: "../../components/parameters/additionalFields_get_employees.yml"
   tags:
     - Employee
   description: 従業員データの一覧を取得する。

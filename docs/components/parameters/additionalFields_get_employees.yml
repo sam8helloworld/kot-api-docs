@@ -1,0 +1,17 @@
+name: additionalFields
+in: query
+description: 指定されたプロパティをレスポンスに追加
+schema:
+  type: array
+  items:
+    type: string
+    enum:
+      - lastNamePhonetics
+      - firstNamePhonetics
+      - hiredDate
+      - birthDate
+      - resignationDate
+      - emailAddresses
+      - allDayRegardingWorkInMinute
+  example:
+    - emailAddresses
