@@ -19,10 +19,15 @@ var _ MappedNullable = &GetCompany200Response{}
 
 // GetCompany200Response struct for GetCompany200Response
 type GetCompany200Response struct {
+	// 企業識別キー
 	Key string `json:"key"`
+	// 企業コード
 	Code string `json:"code"`
+	// 企業名
 	Name string `json:"name"`
+	// ホスト名
 	Host string `json:"host"`
+	// 事業年度開始日
 	BusinessYearStartDate string `json:"businessYearStartDate"`
 	Settings GetCompany200ResponseSettings `json:"settings"`
 }

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TimeDisplayFormat** | **string** |  | 
-**DecimalTreatType** | **string** |  | 
+**TimeDisplayFormat** | **string** | 表示形式（decimal： 10進法　sexagesimal： 60進法） | 
+**DecimalTreatType** | **string** | 10進表示の小数第3位の扱い（roundDown： 切下げ　roundUp： 切上げ　round： 四捨五入） | 
 
 ## Methods
 

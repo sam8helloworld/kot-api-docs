@@ -17,9 +17,11 @@ import (
 // checks if the GetCompany200ResponseSettings type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetCompany200ResponseSettings{}
 
-// GetCompany200ResponseSettings struct for GetCompany200ResponseSettings
+// GetCompany200ResponseSettings 企業設定情報
 type GetCompany200ResponseSettings struct {
+	// 表示形式（decimal： 10進法　sexagesimal： 60進法）
 	TimeDisplayFormat string `json:"timeDisplayFormat"`
+	// 10進表示の小数第3位の扱い（roundDown： 切下げ　roundUp： 切上げ　round： 四捨五入）
 	DecimalTreatType string `json:"decimalTreatType"`
 }
 

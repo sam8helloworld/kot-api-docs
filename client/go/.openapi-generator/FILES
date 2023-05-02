@@ -20,5 +20,4 @@ model_get_company_200_response.go
 model_get_company_200_response_settings.go
 model_refresh_access_token_201_response.go
 response.go
-test/api_company_test.go
 utils.go

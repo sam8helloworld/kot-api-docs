@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Key** | **string** |  | 
-**Code** | **string** |  | 
-**Name** | **string** |  | 
-**Host** | **string** |  | 
-**BusinessYearStartDate** | **string** |  | 
+**Key** | **string** | 企業識別キー | 
+**Code** | **string** | 企業コード | 
+**Name** | **string** | 企業名 | 
+**Host** | **string** | ホスト名 | 
+**BusinessYearStartDate** | **string** | 事業年度開始日 | 
 **Settings** | [**GetCompany200ResponseSettings**](GetCompany200ResponseSettings.md) |  | 
 
 ## Methods
