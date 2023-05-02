@@ -1,0 +1,7 @@
+name: employeeCode
+in: path
+description: 詳細を取得したい従業員コード
+required: true
+schema:
+  type: string
+  example: 1000
