@@ -19,63 +19,93 @@ import (
 )
 
 
-// AdministratorsApiService AdministratorsApi service
-type AdministratorsApiService service
+// EmployeeApiService EmployeeApi service
+type EmployeeApiService service
 
-type ApiGetAdministratorsRequest struct {
+type ApiGetEmployeesRequest struct {
 	ctx context.Context
-	ApiService *AdministratorsApiService
-	additionalFields *string
+	ApiService *EmployeeApiService
+	date *string
+	division *string
+	includeResigner *bool
+	additionalFields *[]string
+}
+
+// 指定された年月日時点での従業員のデータを表示 ・過去日は最大3年前まで ・未来日は最大1年後まで
+func (r ApiGetEmployeesRequest) Date(date string) ApiGetEmployeesRequest {
+	r.date = &date
+	return r
+}
+
+// 所属コード
+func (r ApiGetEmployeesRequest) Division(division string) ApiGetEmployeesRequest {
+	r.division = &division
+	return r
+}
+
+// 指定された年月日時点で退職済みの従業員を含む場合 True
+func (r ApiGetEmployeesRequest) IncludeResigner(includeResigner bool) ApiGetEmployeesRequest {
+	r.includeResigner = &includeResigner
+	return r
 }
 
 // 指定されたプロパティをレスポンスに追加
-func (r ApiGetAdministratorsRequest) AdditionalFields(additionalFields string) ApiGetAdministratorsRequest {
+func (r ApiGetEmployeesRequest) AdditionalFields(additionalFields []string) ApiGetEmployeesRequest {
 	r.additionalFields = &additionalFields
 	return r
 }
 
-func (r ApiGetAdministratorsRequest) Execute() ([]GetAdministrators200ResponseInner, *http.Response, error) {
-	return r.ApiService.GetAdministratorsExecute(r)
+func (r ApiGetEmployeesRequest) Execute() ([]GetEmployees200ResponseInner, *http.Response, error) {
+	return r.ApiService.GetEmployeesExecute(r)
 }
 
 /*
-GetAdministrators Method for GetAdministrators
+GetEmployees Method for GetEmployees
 
-管理者のデータを取得する。
+従業員データの一覧を取得する。
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAdministratorsRequest
+ @return ApiGetEmployeesRequest
 */
-func (a *AdministratorsApiService) GetAdministrators(ctx context.Context) ApiGetAdministratorsRequest {
-	return ApiGetAdministratorsRequest{
+func (a *EmployeeApiService) GetEmployees(ctx context.Context) ApiGetEmployeesRequest {
+	return ApiGetEmployeesRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []GetAdministrators200ResponseInner
-func (a *AdministratorsApiService) GetAdministratorsExecute(r ApiGetAdministratorsRequest) ([]GetAdministrators200ResponseInner, *http.Response, error) {
+//  @return []GetEmployees200ResponseInner
+func (a *EmployeeApiService) GetEmployeesExecute(r ApiGetEmployeesRequest) ([]GetEmployees200ResponseInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []GetAdministrators200ResponseInner
+		localVarReturnValue  []GetEmployees200ResponseInner
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdministratorsApiService.GetAdministrators")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmployeeApiService.GetEmployees")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/administrators"
+	localVarPath := localBasePath + "/employees"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.date != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "date", r.date, "")
+	}
+	if r.division != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "division", r.division, "")
+	}
+	if r.includeResigner != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeResigner", r.includeResigner, "")
+	}
 	if r.additionalFields != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", r.additionalFields, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", r.additionalFields, "csv")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

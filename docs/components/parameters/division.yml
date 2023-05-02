@@ -1,0 +1,6 @@
+name: division
+in: query
+description: 所属コード
+schema:
+  type: string
+  example: 1000

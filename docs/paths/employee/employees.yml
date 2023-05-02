@@ -1,0 +1,156 @@
+get:
+  operationId: GetEmployees
+  parameters:
+    - $ref: "../../components/parameters/date.yml"
+    - $ref: "../../components/parameters/division.yml"
+    - $ref: "../../components/parameters/includeResigner.yml"
+    - $ref: "../../components/parameters/additionalFields_get_employees.yml"
+  tags:
+    - Employee
+  description: 従業員データの一覧を取得する。
+  externalDocs:
+    description: 一覧
+    url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-get
+  responses:
+    "200":
+      description: ""
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            example: application/json
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              required:
+                - divisionCode
+                - divisionName
+                - gender
+                - typeCode
+                - typeName
+                - code
+                - key
+                - lastName
+                - firstName
+                - employeeGroups
+              properties:
+                divisionCode:
+                  type: string
+                  description: 所属コード
+                divisionName:
+                  type: string
+                  description: 所属名
+                gender:
+                  type: string
+                  description: 性別（male： 男性　female： 女性）
+                typeCode:
+                  type: string
+                  description: 雇用区分コード
+                typeName:
+                  type: string
+                  description: 雇用区分名
+                code:
+                  type: string
+                  description: 従業員コード
+                key:
+                  type: string
+                  description: 従業員識別キー（従業員コードが変更されても不変）
+                lastName:
+                  type: string
+                  description: 姓
+                firstName:
+                  type: string
+                  description: 名
+                employeeGroups:
+                  type: array
+                  description: 従業員グループ情報
+                  items:
+                    type: object
+                    required:
+                      - code
+                      - name
+                    properties:
+                      code:
+                        type: string
+                        description: 従業員グループコード
+                      name:
+                        type: string
+                        description: 従業員グループ名
+                lastNamePhonetics:
+                  type: string
+                  description: 姓（カナ）
+                firstNamePhonetics:
+                  type: string
+                  description: 名（カナ）
+                hiredDate:
+                  type: string
+                  format: date
+                  description: 入社年月日
+                birthDate:
+                  type: string
+                  format: date
+                  description: 生年月日
+                resignationDate:
+                  type: string
+                  format: date
+                  description: 退職年月日
+                emailAddresses:
+                  type: array
+                  description: メールアドレス
+                  items:
+                    type: string
+                    format: email
+                allDayRegardingWorkInMinute:
+                  type: integer
+                  description: 日の契約労働時間
+                  example: 480
+            example:
+              [
+                {
+                  "divisionCode": "1000",
+                  "divisionName": "本社",
+                  "gender": "male",
+                  "typeCode": "1",
+                  "typeName": "正社員",
+                  "code": "1000",
+                  "lastName": "勤怠",
+                  "firstName": "太郎",
+                  "key": "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+                  "emailAddresses": [
+                    "kintaitarou@h-t.co.jp"
+                  ],
+                  "employeeGroups": [
+                    {
+                      "code": "0001",
+                      "name": "人事部"
+                    },
+                    {
+                      "code": "0002",
+                      "name": "総務部"
+                    }
+                  ]
+                },
+                {
+                  "divisionCode": "1000",
+                  "divisionName": "本社",
+                  "gender": "female",
+                  "typeCode": "1",
+                  "typeName": "正社員",
+                  "code": "2000",
+                  "lastName": "勤怠",
+                  "firstName": "花子",
+                  "key": "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4",
+                  "emailAddresses": [
+                    "kintaihanako@h-t.co.jp"
+                  ],
+                  "employeeGroups": [
+                    {
+                      "code": "0003",
+                      "name": "営業部"
+                    }
+                  ]
+                }
+              ]

@@ -1,0 +1,11 @@
+name: date
+in: query
+description: |-
+  指定された年月日時点での従業員のデータを表示
+  ・過去日は最大3年前まで
+  ・未来日は最大1年後まで
+schema:
+  type: string
+  format: date
+  description: defaultは当日
+  example: 2016-10-10

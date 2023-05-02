@@ -1,9 +1,9 @@
 get:
   operationId: GetAdministrators
   parameters:
-    - $ref: "../../components/parameters/additionalFields.yml"
+    - $ref: "../../components/parameters/additionalFields_get_administrators.yml"
   tags:
-    - Administrators
+    - Administrator
   description: 管理者のデータを取得する。
   externalDocs:
     description: 一覧

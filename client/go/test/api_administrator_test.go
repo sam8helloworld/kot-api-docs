@@ -1,7 +1,7 @@
 /*
 KING OF TIME WebAPI
 
-Testing AdministratorsApiService
+Testing AdministratorApiService
 
 */
 
@@ -18,8 +18,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_openapi_AdministratorsApiService(t *testing.T) {
-
+func Test_openapi_AdministratorApiService(t *testing.T) {
 	configuration := &openapiclient.Configuration{
 		DefaultHeader: make(map[string]string),
 		UserAgent:     "OpenAPI-Generator/1.0.0/go",
@@ -34,14 +33,15 @@ func Test_openapi_AdministratorsApiService(t *testing.T) {
 	}
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test AdministratorsApiService GetAdministrators", func(t *testing.T) {
+	t.Run("Test AdministratorApiService GetAdministrators", func(t *testing.T) {
 		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
 		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
-		resp, httpRes, err := apiClient.AdministratorsApi.GetAdministrators(ctx).AdditionalFields("associatedEmployees").Execute()
+		resp, httpRes, err := apiClient.AdministratorApi.GetAdministrators(ctx).AdditionalFields([]string{"associatedEmployees"}).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
+
 	})
 
 }
