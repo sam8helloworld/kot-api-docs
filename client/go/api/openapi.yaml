@@ -276,8 +276,35 @@ paths:
                   - code: "0003"
                     name: 営業部
                 items:
-                  $ref: '#/components/schemas/employee'
+                  $ref: '#/components/schemas/employee_response'
                 type: array
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Employee
+    post:
+      description: 従業員のデータを登録する。(1件)
+      externalDocs:
+        description: 登録
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-post
+      operationId: RegisterEmployee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/employee_request'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterEmployee_201_response'
           description: ""
           headers:
             Content-Type:
@@ -353,7 +380,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/employee'
+                $ref: '#/components/schemas/employee_response'
           description: ""
           headers:
             Content-Type:
@@ -459,7 +486,7 @@ components:
         type: string
       style: simple
   schemas:
-    employee:
+    employee_response:
       example:
         lastName: lastName
         code: code
@@ -515,7 +542,7 @@ components:
         employeeGroups:
           description: 従業員グループ情報
           items:
-            $ref: '#/components/schemas/employee_employeeGroups_inner'
+            $ref: '#/components/schemas/employee_response_employeeGroups_inner'
           type: array
         lastNamePhonetics:
           description: 姓（カナ）
@@ -556,6 +583,62 @@ components:
       - lastName
       - typeCode
       - typeName
+      type: object
+    employee_request:
+      properties:
+        divisionCode:
+          description: 所属コード
+          type: string
+        gender:
+          description: 性別（male： 男性　female： 女性）
+          type: string
+        typeCode:
+          description: 雇用区分コード
+          type: string
+        code:
+          description: 従業員コード
+          type: string
+        lastName:
+          description: 姓
+          type: string
+        firstName:
+          description: 名
+          type: string
+        lastNamePhonetics:
+          description: 姓（カナ）
+          type: string
+        firstNamePhonetics:
+          description: 名（カナ）
+          type: string
+        hiredDate:
+          description: 入社年月日
+          format: date
+          type: string
+        birthDate:
+          description: 生年月日
+          format: date
+          type: string
+        resignationDate:
+          description: 退職年月日
+          format: date
+          type: string
+        emailAddresses:
+          description: メールアドレス
+          items:
+            format: email
+            type: string
+          type: array
+        allDayRegardingWorkInMinute:
+          description: 日の契約労働時間
+          example: 480
+          type: integer
+      required:
+      - code
+      - divisionCode
+      - firstName
+      - gender
+      - lastName
+      - typeCode
       type: object
     RefreshAccessToken_201_response:
       example:
@@ -671,7 +754,49 @@ components:
       - key
       - name
       type: object
-    employee_employeeGroups_inner:
+    RegisterEmployee_201_response:
+      example:
+        divisionCode: "1000"
+        gender: male
+        typeCode: "1"
+        code: "1000"
+        lastName: 勤怠
+        firstName: 太郎
+        key: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4
+        emailAddresses:
+        - kintaitarou@h-t.co.jp
+      properties:
+        divisionCode:
+          description: 所属コード
+          type: string
+        gender:
+          description: 性別（male： 男性　female： 女性）
+          type: string
+        typeCode:
+          description: 雇用区分コード
+          type: string
+        code:
+          description: 従業員コード
+          type: string
+        lastName:
+          description: 姓
+          type: string
+        firstName:
+          description: 名
+          type: string
+        key:
+          description: 従業員識別キー（従業員コードが変更されても不変）
+          type: string
+      required:
+      - code
+      - divisionCode
+      - firstName
+      - gender
+      - key
+      - lastName
+      - typeCode
+      type: object
+    employee_response_employeeGroups_inner:
       example:
         code: code
         name: name

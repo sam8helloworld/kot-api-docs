@@ -6,12 +6,13 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetEmployee**](EmployeeApi.md#GetEmployee) | **Get** /employees/{employeeCode} | 
 [**GetEmployees**](EmployeeApi.md#GetEmployees) | **Get** /employees | 
+[**RegisterEmployee**](EmployeeApi.md#RegisterEmployee) | **Post** /employees | 
 
 
 
 ## GetEmployee
 
-> Employee GetEmployee(ctx, employeeCode).Date(date).IncludeResigner(includeResigner).AdditionalFields(additionalFields).Execute()
+> EmployeeResponse GetEmployee(ctx, employeeCode).Date(date).IncludeResigner(includeResigner).AdditionalFields(additionalFields).Execute()
 
 
 
@@ -43,7 +44,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `EmployeeApi.GetEmployee``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetEmployee`: Employee
+    // response from `GetEmployee`: EmployeeResponse
     fmt.Fprintf(os.Stdout, "Response from `EmployeeApi.GetEmployee`: %v\n", resp)
 }
 ```
@@ -70,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Employee**](Employee.md)
+[**EmployeeResponse**](EmployeeResponse.md)
 
 ### Authorization
 
@@ -88,7 +89,7 @@ Name | Type | Description  | Notes
 
 ## GetEmployees
 
-> []Employee GetEmployees(ctx).Date(date).Division(division).IncludeResigner(includeResigner).AdditionalFields(additionalFields).Execute()
+> []EmployeeResponse GetEmployees(ctx).Date(date).Division(division).IncludeResigner(includeResigner).AdditionalFields(additionalFields).Execute()
 
 
 
@@ -120,7 +121,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `EmployeeApi.GetEmployees``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetEmployees`: []Employee
+    // response from `GetEmployees`: []EmployeeResponse
     fmt.Fprintf(os.Stdout, "Response from `EmployeeApi.GetEmployees`: %v\n", resp)
 }
 ```
@@ -143,7 +144,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Employee**](Employee.md)
+[**[]EmployeeResponse**](EmployeeResponse.md)
 
 ### Authorization
 
@@ -152,6 +153,72 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RegisterEmployee
+
+> RegisterEmployee201Response RegisterEmployee(ctx).EmployeeRequest(employeeRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/sam8helloworld/kot-api-docs"
+)
+
+func main() {
+    employeeRequest := *openapiclient.NewEmployeeRequest("DivisionCode_example", "Gender_example", "TypeCode_example", "Code_example", "LastName_example", "FirstName_example") // EmployeeRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EmployeeApi.RegisterEmployee(context.Background()).EmployeeRequest(employeeRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EmployeeApi.RegisterEmployee``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `RegisterEmployee`: RegisterEmployee201Response
+    fmt.Fprintf(os.Stdout, "Response from `EmployeeApi.RegisterEmployee`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRegisterEmployeeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **employeeRequest** | [**EmployeeRequest**](EmployeeRequest.md) |  | 
+
+### Return type
+
+[**RegisterEmployee201Response**](RegisterEmployee201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
