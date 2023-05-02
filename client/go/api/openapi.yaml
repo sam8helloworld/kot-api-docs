@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  description: KING OF TIME WebAPI specification https://developer.kingtime.jp/
+  title: KING OF TIME WebAPI
+  version: 1.0.0
+servers:
+- description: Production server (uses live data)
+  url: https://api.kingtime.jp/v1.0
+security:
+- Bearer: []
+tags:
+- externalDocs:
+    url: https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3
+  name: Token
+paths:
+  /tokens/{token}:
+    delete:
+      description: 指定されたアクセストークンを利用停止する。
+      externalDocs:
+        url: https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-delete
+      operationId: SuspendAccessToken
+      parameters:
+      - description: 処理対象のトークン
+        explode: false
+        in: path
+        name: token
+        required: true
+        schema:
+          example: 8j9f7v4893y58rvt7nyfq2893n75tr78937n83
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: This response has no content.
+      tags:
+      - Token
+    post:
+      description: 指定されたアクセストークンを利用停止し、新たに同じ設定でアクセストークンを発行する。
+      externalDocs:
+        url: https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-post
+      operationId: RefreshAccessToken
+      parameters:
+      - description: 処理対象のトークン
+        explode: false
+        in: path
+        name: token
+        required: true
+        schema:
+          example: 8j9f7v4893y58rvt7nyfq2893n75tr78937n83
+          type: string
+        style: simple
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshAccessToken_201_response'
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json; charset=utf-8
+                type: string
+              style: simple
+      tags:
+      - Token
+  /tokens/{token}/available:
+    get:
+      description: 指定されたアクセストークンが有効か確認する。
+      externalDocs:
+        url: https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-get
+      operationId: GetAccessTokenAvailability
+      parameters:
+      - description: 処理対象のトークン
+        explode: false
+        in: path
+        name: token
+        required: true
+        schema:
+          example: 8j9f7v4893y58rvt7nyfq2893n75tr78937n83
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAccessTokenAvailability_200_response'
+          description: ""
+      tags:
+      - Token
+components:
+  parameters:
+    token:
+      description: 処理対象のトークン
+      explode: false
+      in: path
+      name: token
+      required: true
+      schema:
+        example: 8j9f7v4893y58rvt7nyfq2893n75tr78937n83
+        type: string
+      style: simple
+  schemas:
+    GetAccessTokenAvailability_200_response:
+      example:
+        available: true
+      properties:
+        available:
+          type: boolean
+      required:
+      - available
+      type: object
+    RefreshAccessToken_201_response:
+      example:
+        token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      properties:
+        token:
+          description: refreshed access token
+          example: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          type: string
+      required:
+      - token
+      type: object
+  securitySchemes:
+    Bearer:
+      description: Credentials or access token for API
+      scheme: bearer
+      type: http
