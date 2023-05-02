@@ -16,11 +16,145 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 
 // EmployeeApiService EmployeeApi service
 type EmployeeApiService service
+
+type ApiGetEmployeeRequest struct {
+	ctx context.Context
+	ApiService *EmployeeApiService
+	employeeCode string
+	date *string
+	includeResigner *bool
+	additionalFields *[]string
+}
+
+// 指定された年月日時点での従業員のデータを表示 ・過去日は最大3年前まで ・未来日は最大1年後まで
+func (r ApiGetEmployeeRequest) Date(date string) ApiGetEmployeeRequest {
+	r.date = &date
+	return r
+}
+
+// 指定された年月日時点で退職済みの従業員を含む場合 True
+func (r ApiGetEmployeeRequest) IncludeResigner(includeResigner bool) ApiGetEmployeeRequest {
+	r.includeResigner = &includeResigner
+	return r
+}
+
+// 指定されたプロパティをレスポンスに追加
+func (r ApiGetEmployeeRequest) AdditionalFields(additionalFields []string) ApiGetEmployeeRequest {
+	r.additionalFields = &additionalFields
+	return r
+}
+
+func (r ApiGetEmployeeRequest) Execute() (*Employee, *http.Response, error) {
+	return r.ApiService.GetEmployeeExecute(r)
+}
+
+/*
+GetEmployee Method for GetEmployee
+
+指定した従業員のデータを取得する。
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param employeeCode 詳細を取得したい従業員コード
+ @return ApiGetEmployeeRequest
+*/
+func (a *EmployeeApiService) GetEmployee(ctx context.Context, employeeCode string) ApiGetEmployeeRequest {
+	return ApiGetEmployeeRequest{
+		ApiService: a,
+		ctx: ctx,
+		employeeCode: employeeCode,
+	}
+}
+
+// Execute executes the request
+//  @return Employee
+func (a *EmployeeApiService) GetEmployeeExecute(r ApiGetEmployeeRequest) (*Employee, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Employee
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmployeeApiService.GetEmployee")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/employees/{employeeCode}"
+	localVarPath = strings.Replace(localVarPath, "{"+"employeeCode"+"}", url.PathEscape(parameterValueToString(r.employeeCode, "employeeCode")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.date != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "date", r.date, "")
+	}
+	if r.includeResigner != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeResigner", r.includeResigner, "")
+	}
+	if r.additionalFields != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", r.additionalFields, "csv")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 type ApiGetEmployeesRequest struct {
 	ctx context.Context
@@ -55,7 +189,7 @@ func (r ApiGetEmployeesRequest) AdditionalFields(additionalFields []string) ApiG
 	return r
 }
 
-func (r ApiGetEmployeesRequest) Execute() ([]GetEmployees200ResponseInner, *http.Response, error) {
+func (r ApiGetEmployeesRequest) Execute() ([]Employee, *http.Response, error) {
 	return r.ApiService.GetEmployeesExecute(r)
 }
 
@@ -75,13 +209,13 @@ func (a *EmployeeApiService) GetEmployees(ctx context.Context) ApiGetEmployeesRe
 }
 
 // Execute executes the request
-//  @return []GetEmployees200ResponseInner
-func (a *EmployeeApiService) GetEmployeesExecute(r ApiGetEmployeesRequest) ([]GetEmployees200ResponseInner, *http.Response, error) {
+//  @return []Employee
+func (a *EmployeeApiService) GetEmployeesExecute(r ApiGetEmployeesRequest) ([]Employee, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []GetEmployees200ResponseInner
+		localVarReturnValue  []Employee
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmployeeApiService.GetEmployees")
