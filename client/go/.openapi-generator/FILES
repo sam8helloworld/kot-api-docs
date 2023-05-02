@@ -22,6 +22,7 @@ docs/GetCompany200ResponseSettings.md
 docs/RefreshAccessToken201Response.md
 docs/RegisterEmployee201Response.md
 docs/TokenApi.md
+docs/UpdateEmployeeRequest.md
 git_push.sh
 go.mod
 go.sum
@@ -35,5 +36,6 @@ model_get_company_200_response.go
 model_get_company_200_response_settings.go
 model_refresh_access_token_201_response.go
 model_register_employee_201_response.go
+model_update_employee_request.go
 response.go
 utils.go

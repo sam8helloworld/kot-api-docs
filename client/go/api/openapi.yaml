@@ -315,6 +315,57 @@ paths:
               style: simple
       tags:
       - Employee
+    put:
+      description: |-
+        従業員のデータを更新する。(1件)
+        Request Bodyにて指定された項目のみ更新する。
+        項目が指定され、値が無いまたは空文字列の場合は、該当項目をNULLで更新する。
+        レスポンスには、AdditionalFieldを含むすべての従業員データを含める。
+      externalDocs:
+        description: 更新
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-put
+      operationId: UpdateEmployee
+      parameters:
+      - description: 従業員識別キー（従業員コードが変更されても不変）
+        explode: false
+        in: path
+        name: employeeKey
+        required: true
+        schema:
+          example: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+          type: string
+        style: simple
+      - description: 所属、雇用区分を更新したい年月日
+        explode: true
+        in: query
+        name: updateDate
+        required: false
+        schema:
+          description: defaultは当日
+          format: date
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmployee_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/employee_response'
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Employee
   /employees/{employeeCode}:
     get:
       description: 指定した従業員のデータを取得する。
@@ -375,6 +426,193 @@ paths:
             type: string
           type: array
         style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/employee_response'
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Employee
+  /employees/{employeeKey}:
+    get:
+      description: 従業員データの一覧を取得する。
+      externalDocs:
+        description: 一覧
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-get
+      operationId: GetEmployees
+      parameters:
+      - description: |-
+          指定された年月日時点での従業員のデータを表示
+          ・過去日は最大3年前まで
+          ・未来日は最大1年後まで
+        explode: true
+        in: query
+        name: date
+        required: false
+        schema:
+          description: defaultは当日
+          format: date
+          type: string
+        style: form
+      - description: 所属コード
+        explode: true
+        in: query
+        name: division
+        required: false
+        schema:
+          example: "1000"
+          type: string
+        style: form
+      - description: 指定された年月日時点で退職済みの従業員を含む場合 True
+        explode: true
+        in: query
+        name: includeResigner
+        required: false
+        schema:
+          default: false
+          example: true
+          type: boolean
+        style: form
+      - description: 指定されたプロパティをレスポンスに追加
+        explode: false
+        in: query
+        name: additionalFields
+        required: false
+        schema:
+          example:
+          - emailAddresses
+          items:
+            enum:
+            - lastNamePhonetics
+            - firstNamePhonetics
+            - hiredDate
+            - birthDate
+            - resignationDate
+            - emailAddresses
+            - allDayRegardingWorkInMinute
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                - divisionCode: "1000"
+                  divisionName: 本社
+                  gender: male
+                  typeCode: "1"
+                  typeName: 正社員
+                  code: "1000"
+                  lastName: 勤怠
+                  firstName: 太郎
+                  key: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+                  emailAddresses:
+                  - kintaitarou@h-t.co.jp
+                  employeeGroups:
+                  - code: "0001"
+                    name: 人事部
+                  - code: "0002"
+                    name: 総務部
+                - divisionCode: "1000"
+                  divisionName: 本社
+                  gender: female
+                  typeCode: "1"
+                  typeName: 正社員
+                  code: "2000"
+                  lastName: 勤怠
+                  firstName: 花子
+                  key: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4
+                  emailAddresses:
+                  - kintaihanako@h-t.co.jp
+                  employeeGroups:
+                  - code: "0003"
+                    name: 営業部
+                items:
+                  $ref: '#/components/schemas/employee_response'
+                type: array
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Employee
+    post:
+      description: 従業員のデータを登録する。(1件)
+      externalDocs:
+        description: 登録
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-post
+      operationId: RegisterEmployee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/employee_request'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterEmployee_201_response'
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Employee
+    put:
+      description: |-
+        従業員のデータを更新する。(1件)
+        Request Bodyにて指定された項目のみ更新する。
+        項目が指定され、値が無いまたは空文字列の場合は、該当項目をNULLで更新する。
+        レスポンスには、AdditionalFieldを含むすべての従業員データを含める。
+      externalDocs:
+        description: 更新
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-put
+      operationId: UpdateEmployee
+      parameters:
+      - description: 従業員識別キー（従業員コードが変更されても不変）
+        explode: false
+        in: path
+        name: employeeKey
+        required: true
+        schema:
+          example: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+          type: string
+        style: simple
+      - description: 所属、雇用区分を更新したい年月日
+        explode: true
+        in: query
+        name: updateDate
+        required: false
+        schema:
+          description: defaultは当日
+          format: date
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmployee_request'
       responses:
         "200":
           content:
@@ -485,6 +723,27 @@ components:
         example: "1000"
         type: string
       style: simple
+    employeeKey:
+      description: 従業員識別キー（従業員コードが変更されても不変）
+      explode: false
+      in: path
+      name: employeeKey
+      required: true
+      schema:
+        example: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+        type: string
+      style: simple
+    updateDate:
+      description: 所属、雇用区分を更新したい年月日
+      explode: true
+      in: query
+      name: updateDate
+      required: false
+      schema:
+        description: defaultは当日
+        format: date
+        type: string
+      style: form
   schemas:
     employee_response:
       example:
@@ -753,6 +1012,64 @@ components:
       - code
       - key
       - name
+      type: object
+    UpdateEmployee_request:
+      example:
+        divisionCode: "1000"
+        gender: male
+        typeCode: "1"
+        code: "1000"
+        lastName: 勤怠
+        firstName: 太郎
+        emailAddresses:
+        - kintaitarou@h-t.co.jp
+      properties:
+        divisionCode:
+          description: 所属コード
+          type: string
+        gender:
+          description: 性別（male： 男性　female： 女性）
+          type: string
+        typeCode:
+          description: 雇用区分コード
+          type: string
+        code:
+          description: 従業員コード
+          type: string
+        lastName:
+          description: 姓
+          type: string
+        firstName:
+          description: 名
+          type: string
+        lastNamePhonetics:
+          description: 姓（カナ）
+          type: string
+        firstNamePhonetics:
+          description: 名（カナ）
+          type: string
+        hiredDate:
+          description: 入社年月日
+          format: date
+          type: string
+        birthDate:
+          description: 生年月日
+          format: date
+          type: string
+        resignationDate:
+          description: 退職年月日
+          format: date
+          type: string
+        emailAddresses:
+          description: メールアドレス
+          items:
+            format: email
+            type: string
+          type: array
+        allDayRegardingWorkInMinute:
+          description: 日の契約労働時間
+          example: 480
+          type: integer
       type: object
     RegisterEmployee_201_response:
       example:
