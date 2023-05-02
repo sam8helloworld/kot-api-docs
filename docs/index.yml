@@ -30,3 +30,6 @@ tags:
   - name: Administrator
     externalDocs:
       url: https://developer.kingtime.jp/#%E7%AE%A1%E7%90%86%E8%80%85
+  - name: Employee
+    externalDocs:
+      url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1
