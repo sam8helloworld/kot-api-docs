@@ -3,6 +3,12 @@ parameters:
     $ref: "./parameters/token.yml"
   additionalFields:
     $ref: "./parameters/additionalFields.yml"
+  date:
+    $ref: "./parameters/date.yml"
+  division:
+    $ref: "./parameters/division.yml"
+  includeResigner:
+    $ref: "./parameters/includeResigner.yml"
 
 securitySchemes:
   Bearer:

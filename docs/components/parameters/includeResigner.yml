@@ -1,0 +1,7 @@
+name: includeResigner
+in: query
+description: 指定された年月日時点で退職済みの従業員を含む場合 True
+schema:
+  type: boolean
+  example: true
+  default: false

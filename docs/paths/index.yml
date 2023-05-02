@@ -8,3 +8,6 @@
 
 /administrators:
   $ref: ./administrator/administrators.yml
+
+/employees:
+  $ref: ./employee/employees.yml
