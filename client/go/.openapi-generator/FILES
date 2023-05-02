@@ -32,5 +32,4 @@ model_get_employees_200_response_inner.go
 model_get_employees_200_response_inner_employee_groups_inner.go
 model_refresh_access_token_201_response.go
 response.go
-test/api_employee_test.go
 utils.go

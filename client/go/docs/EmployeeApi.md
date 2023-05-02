@@ -33,7 +33,7 @@ func main() {
     date := time.Now() // string | 指定された年月日時点での従業員のデータを表示 ・過去日は最大3年前まで ・未来日は最大1年後まで (optional)
     division := "1000" // string | 所属コード (optional)
     includeResigner := true // bool | 指定された年月日時点で退職済みの従業員を含む場合 True (optional) (default to false)
-    additionalFields := "associatedEmployees" // string | 指定されたプロパティをレスポンスに追加 (optional)
+    additionalFields := []string{"AdditionalFields_example"} // []string | 指定されたプロパティをレスポンスに追加 (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
  **date** | **string** | 指定された年月日時点での従業員のデータを表示 ・過去日は最大3年前まで ・未来日は最大1年後まで | 
  **division** | **string** | 所属コード | 
  **includeResigner** | **bool** | 指定された年月日時点で退職済みの従業員を含む場合 True | [default to false]
- **additionalFields** | **string** | 指定されたプロパティをレスポンスに追加 | 
+ **additionalFields** | **[]string** | 指定されたプロパティをレスポンスに追加 | 
 
 ### Return type
 

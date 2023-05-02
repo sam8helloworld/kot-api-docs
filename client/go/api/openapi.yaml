@@ -219,8 +219,19 @@ paths:
         name: additionalFields
         required: false
         schema:
-          example: associatedEmployees
-          type: string
+          example:
+          - emailAddresses
+          items:
+            enum:
+            - lastNamePhonetics
+            - firstNamePhonetics
+            - hiredDate
+            - birthDate
+            - resignationDate
+            - emailAddresses
+            - allDayRegardingWorkInMinute
+            type: string
+          type: array
         style: form
       responses:
         "200":
@@ -292,6 +303,27 @@ components:
       schema:
         example: associatedEmployees
         type: string
+      style: form
+    additionalFields_get_employees:
+      description: 指定されたプロパティをレスポンスに追加
+      explode: true
+      in: query
+      name: additionalFields
+      required: false
+      schema:
+        example:
+        - emailAddresses
+        items:
+          enum:
+          - lastNamePhonetics
+          - firstNamePhonetics
+          - hiredDate
+          - birthDate
+          - resignationDate
+          - emailAddresses
+          - allDayRegardingWorkInMinute
+          type: string
+        type: array
       style: form
     date:
       description: |-

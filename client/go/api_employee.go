@@ -16,6 +16,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"reflect"
 )
 
 
@@ -28,7 +29,7 @@ type ApiGetEmployeesRequest struct {
 	date *string
 	division *string
 	includeResigner *bool
-	additionalFields *string
+	additionalFields *[]string
 }
 
 // 指定された年月日時点での従業員のデータを表示 ・過去日は最大3年前まで ・未来日は最大1年後まで
@@ -50,7 +51,7 @@ func (r ApiGetEmployeesRequest) IncludeResigner(includeResigner bool) ApiGetEmpl
 }
 
 // 指定されたプロパティをレスポンスに追加
-func (r ApiGetEmployeesRequest) AdditionalFields(additionalFields string) ApiGetEmployeesRequest {
+func (r ApiGetEmployeesRequest) AdditionalFields(additionalFields []string) ApiGetEmployeesRequest {
 	r.additionalFields = &additionalFields
 	return r
 }
@@ -105,7 +106,15 @@ func (a *EmployeeApiService) GetEmployeesExecute(r ApiGetEmployeesRequest) ([]Ge
 		parameterAddToHeaderOrQuery(localVarQueryParams, "includeResigner", r.includeResigner, "")
 	}
 	if r.additionalFields != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", r.additionalFields, "")
+		t := *r.additionalFields
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", s.Index(i), "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", t, "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

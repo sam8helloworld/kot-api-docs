@@ -225,7 +225,7 @@ paths:
         - $ref: '#/components/parameters/date'
         - $ref: '#/components/parameters/division'
         - $ref: '#/components/parameters/includeResigner'
-        - $ref: '#/components/parameters/additionalFields'
+        - $ref: '#/components/parameters/additionalFields_get_employees'
       tags:
         - Employee
       description: 従業員データの一覧を取得する。
@@ -376,6 +376,24 @@ components:
       schema:
         type: string
         example: associatedEmployees
+    additionalFields_get_employees:
+      name: additionalFields
+      in: query
+      description: 指定されたプロパティをレスポンスに追加
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+            - lastNamePhonetics
+            - firstNamePhonetics
+            - hiredDate
+            - birthDate
+            - resignationDate
+            - emailAddresses
+            - allDayRegardingWorkInMinute
+        example:
+          - emailAddresses
     date:
       name: date
       in: query
