@@ -36,7 +36,7 @@ func Test_openapi_AdministratorApiService(t *testing.T) {
 	t.Run("Test AdministratorApiService GetAdministrators", func(t *testing.T) {
 		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
 		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
-		resp, httpRes, err := apiClient.AdministratorApi.GetAdministrators(ctx).AdditionalFields("associatedEmployees").Execute()
+		resp, httpRes, err := apiClient.AdministratorApi.GetAdministrators(ctx).AdditionalFields([]string{"associatedEmployees"}).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
