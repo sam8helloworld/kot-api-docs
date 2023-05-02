@@ -1,6 +1,8 @@
 parameters:
   token:
     $ref: "./parameters/token.yml"
+  additionalFields:
+    $ref: "./parameters/additionalFields.yml"
 
 securitySchemes:
   Bearer:

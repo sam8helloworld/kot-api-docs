@@ -1,0 +1,89 @@
+get:
+  operationId: GetAdministrators
+  parameters:
+    - $ref: "../../components/parameters/additionalFields.yml"
+  tags:
+    - Administrators
+  description: 管理者のデータを取得する。
+  externalDocs:
+    description: 一覧
+    url: https://developer.kingtime.jp/#%E7%AE%A1%E7%90%86%E8%80%85-%E7%AE%A1%E7%90%86%E8%80%85%E3%83%87%E3%83%BC%E3%82%BF-get
+  responses:
+    "200":
+      description: ""
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            example: application/json
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - code
+              - key
+              - name
+            properties:
+              code:
+                type: string
+                description: 管理者コード
+              key:
+                type: string
+                description: 管理者識別キー（管理者コードが変更されても不変）
+              name:
+                type: string
+                description: 管理者名
+              emailAddresses:
+                type: string
+                format: email
+                description: メールアドレス
+              associatedEmployees:
+                type: object
+                description: 割当従業員
+                required:
+                  - code
+                  - key
+                  - lastName
+                  - firstName
+                properties:
+                  code:
+                    type: string
+                    description: 従業員コード
+                  key:
+                    type: string
+                    description: 従業員識別キー（従業員コードが変更されても不変）
+                  lastName:
+                    type: string
+                    description: 姓
+                  firstName:
+                    type: string
+                    description: 名
+              
+            example:
+              [
+                {
+                  "code": "admin",
+                  "key": "4888a97dd7bbc6a26a18743f4697a1de4b38b6ee646a9620b286499c3df6918c",
+                  "name": "全権管理者"
+                },
+                {
+                  "code": "2000",
+                  "key": "6713cd21ca98689efec9fe27352152c4c77a34b32f5de30b6335d141ad714baf",
+                  "name": "エリアマネージャー",
+                  "associatedEmployees": [
+                    {
+                      "code": "1000",
+                      "key": "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+                      "lastName": "勤怠",
+                      "firstName": "太郎"
+                    },
+                    {
+                      "code": "2000",
+                      "key": "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4",
+                      "lastName": "勤怠",
+                      "firstName": "花子"
+                    }
+                  ]
+                }
+              ]
