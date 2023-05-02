@@ -20,19 +20,27 @@ import (
 
 func Test_openapi_CompanyApiService(t *testing.T) {
 
-	configuration := openapiclient.NewConfiguration()
+	configuration := &openapiclient.Configuration{
+		DefaultHeader: make(map[string]string),
+		UserAgent:     "OpenAPI-Generator/1.0.0/go",
+		Debug:         false,
+		Servers: openapiclient.ServerConfigurations{
+			{
+				URL:         "http://localhost:8001",
+				Description: "Mock server (uses example data)",
+			},
+		},
+		OperationServers: map[string]openapiclient.ServerConfigurations{},
+	}
 	apiClient := openapiclient.NewAPIClient(configuration)
 
 	t.Run("Test CompanyApiService GetCompany", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.CompanyApi.GetCompany(context.Background()).Execute()
+		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
+		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		resp, httpRes, err := apiClient.CompanyApi.GetCompany(ctx).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
-
 	})
-
 }
