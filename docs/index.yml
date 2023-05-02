@@ -16,3 +16,7 @@ paths:
 
 components:
   $ref: "./components/index.yml"
+
+tags:
+  - name: トークン
+    url: https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3
