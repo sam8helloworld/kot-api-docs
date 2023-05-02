@@ -1,0 +1,28 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: KING OF TIME WebAPI
+  description: 'KING OF TIME WebAPI specification https://developer.kingtime.jp/'
+paths:
+  /.healthcheck:
+    get:
+      operationId: GetHealthCheck
+      description: ヘルスチェックを行う
+      responses:
+        '200':
+          description: Returns a list of data sets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthcheck'
+components:
+  schemas:
+    healthcheck:
+      type: object
+      required:
+        - result
+      properties:
+        result:
+          type: string
+          description: success or failure
+          example: success

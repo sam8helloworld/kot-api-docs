@@ -1,0 +1,3 @@
+schemas:
+  healthcheck:
+    $ref: "./schemas/healthcheck.yml"
