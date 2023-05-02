@@ -21,7 +21,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import openapi "github.com/GIT_USER_ID/GIT_REPO_ID"
+import openapi "github.com/sam8helloworld/kot-api-docs"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -77,6 +77,7 @@ All URIs are relative to *https://api.kingtime.jp/v1.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AdministratorsApi* | [**GetAdministrators**](docs/AdministratorsApi.md#getadministrators) | **Get** /administrators | 
 *CompanyApi* | [**GetCompany**](docs/CompanyApi.md#getcompany) | **Get** /company | 
 *TokenApi* | [**GetAccessTokenAvailability**](docs/TokenApi.md#getaccesstokenavailability) | **Get** /tokens/{token}/available | 
 *TokenApi* | [**RefreshAccessToken**](docs/TokenApi.md#refreshaccesstoken) | **Post** /tokens/{token} | 
@@ -86,6 +87,8 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [GetAccessTokenAvailability200Response](docs/GetAccessTokenAvailability200Response.md)
+ - [GetAdministrators200ResponseInner](docs/GetAdministrators200ResponseInner.md)
+ - [GetAdministrators200ResponseInnerAssociatedEmployeesInner](docs/GetAdministrators200ResponseInnerAssociatedEmployeesInner.md)
  - [GetCompany200Response](docs/GetCompany200Response.md)
  - [GetCompany200ResponseSettings](docs/GetCompany200ResponseSettings.md)
  - [RefreshAccessToken201Response](docs/RefreshAccessToken201Response.md)

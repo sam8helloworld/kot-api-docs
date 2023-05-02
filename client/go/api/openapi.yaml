@@ -15,6 +15,9 @@ tags:
 - externalDocs:
     url: https://developer.kingtime.jp/#%E4%BC%81%E6%A5%AD%E6%83%85%E5%A0%B1
   name: Company
+- externalDocs:
+    url: https://developer.kingtime.jp/#%E7%AE%A1%E7%90%86%E8%80%85
+  name: Administrators
 paths:
   /tokens/{token}:
     delete:
@@ -116,6 +119,57 @@ paths:
               style: simple
       tags:
       - Company
+  /administrators:
+    get:
+      description: 管理者のデータを取得する。
+      externalDocs:
+        description: 一覧
+        url: https://developer.kingtime.jp/#%E7%AE%A1%E7%90%86%E8%80%85-%E7%AE%A1%E7%90%86%E8%80%85%E3%83%87%E3%83%BC%E3%82%BF-get
+      operationId: GetAdministrators
+      parameters:
+      - description: 指定されたプロパティをレスポンスに追加
+        explode: true
+        in: query
+        name: additionalFields
+        required: false
+        schema:
+          example: associatedEmployees
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                - code: admin
+                  key: 4888a97dd7bbc6a26a18743f4697a1de4b38b6ee646a9620b286499c3df6918c
+                  name: 全権管理者
+                - code: "2000"
+                  key: 6713cd21ca98689efec9fe27352152c4c77a34b32f5de30b6335d141ad714baf
+                  name: エリアマネージャー
+                  associatedEmployees:
+                  - code: "1000"
+                    key: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+                    lastName: 勤怠
+                    firstName: 太郎
+                  - code: "2000"
+                    key: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4
+                    lastName: 勤怠
+                    firstName: 花子
+                items:
+                  $ref: '#/components/schemas/GetAdministrators_200_response_inner'
+                type: array
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Administrators
 components:
   parameters:
     token:
@@ -128,6 +182,16 @@ components:
         example: 8j9f7v4893y58rvt7nyfq2893n75tr78937n83
         type: string
       style: simple
+    additionalFields:
+      description: 指定されたプロパティをレスポンスに追加
+      explode: true
+      in: query
+      name: additionalFields
+      required: false
+      schema:
+        example: associatedEmployees
+        type: string
+      style: form
   schemas:
     GetCompany_200_response_settings:
       description: 企業設定情報
@@ -178,6 +242,30 @@ components:
       - name
       - settings
       type: object
+    GetAdministrators_200_response_inner:
+      properties:
+        code:
+          description: 管理者コード
+          type: string
+        key:
+          description: 管理者識別キー（管理者コードが変更されても不変）
+          type: string
+        name:
+          description: 管理者名
+          type: string
+        emailAddresses:
+          description: メールアドレス
+          format: email
+          type: string
+        associatedEmployees:
+          items:
+            $ref: '#/components/schemas/GetAdministrators_200_response_inner_associatedEmployees_inner'
+          type: array
+      required:
+      - code
+      - key
+      - name
+      type: object
     GetAccessTokenAvailability_200_response:
       example:
         available: true
@@ -197,6 +285,27 @@ components:
           type: string
       required:
       - token
+      type: object
+    GetAdministrators_200_response_inner_associatedEmployees_inner:
+      description: 割当従業員
+      properties:
+        code:
+          description: 従業員コード
+          type: string
+        key:
+          description: 従業員識別キー（従業員コードが変更されても不変）
+          type: string
+        lastName:
+          description: 姓
+          type: string
+        firstName:
+          description: 名
+          type: string
+      required:
+      - code
+      - firstName
+      - key
+      - lastName
       type: object
   securitySchemes:
     Bearer:
