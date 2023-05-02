@@ -1,6 +1,6 @@
-schemas:
-  healthcheck:
-    $ref: "./schemas/healthcheck.yml"
+parameters:
+  token:
+    $ref: "./parameters/token.yml"
 
 securitySchemes:
   Bearer:

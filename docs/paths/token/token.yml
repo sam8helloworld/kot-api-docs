@@ -1,0 +1,26 @@
+post:
+  operationId: RefreshAccessToken
+  parameters:
+    - $ref: "../../components/parameters/token.yml"
+  tags:
+    - Token
+  description: 指定されたアクセストークンを利用停止し、新たに同じ設定でアクセストークンを発行する。
+  responses:
+    "201":
+      description: アクセストークンの発行に成功した場合
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            example: application/json; charset=utf-8
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - token
+            properties:
+              token:
+                type: string
+                description: refreshed access token
+                example: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

@@ -17,6 +17,10 @@ paths:
 components:
   $ref: "./components/index.yml"
 
+security:
+  - Bearer: []
+
 tags:
-  - name: トークン
-    url: https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3
+  - name: Token
+    externalDocs:
+      url: https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3
