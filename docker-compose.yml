@@ -8,3 +8,12 @@ services:
       - ./docs/swagger.yml:/swagger.yml
     environment:
       SWAGGER_JSON: /swagger.yml
+  
+  swagger-mock-api:
+    image: stoplight/prism:3
+    container_name: swagger-mock-api
+    ports:
+      - "8001:4010"
+    command: mock -h 0.0.0.0 /swagger.yml
+    volumes:
+      - ./docs/swagger.yml:/swagger.yml
