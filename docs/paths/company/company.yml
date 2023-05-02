@@ -1,0 +1,59 @@
+get:
+  operationId: GetCompany
+  tags:
+    - Company
+  description: 企業情報データを取得する。
+  externalDocs:
+    url: https://developer.kingtime.jp/#%E4%BC%81%E6%A5%AD%E6%83%85%E5%A0%B1-%E4%BC%81%E6%A5%AD%E6%83%85%E5%A0%B1%E3%83%87%E3%83%BC%E3%82%BF-get
+  responses:
+    "200":
+      description: ""
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            example: application/json
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - key
+              - code
+              - name
+              - host
+              - businessYearStartDate
+              - settings
+            properties:
+              key:
+                type: string
+              code:
+                type: string
+              name:
+                type: string
+              host:
+                type: string
+              businessYearStartDate:
+                type: string
+              settings:
+                type: object
+                required:
+                  - timeDisplayFormat
+                  - decimalTreatType
+                properties:
+                  timeDisplayFormat:
+                    type: string
+                  decimalTreatType:
+                    type: string
+            example:
+              {
+                "key": "1qazxsw23edc....",
+                "code": "cmp",
+                "name": "企業名",
+                "host": "s2.kingtime.jp",
+                "businessYearStartDate": "04/01",
+                "settings": {
+                  "timeDisplayFormat": "decimal",
+                  "decimalTreatType": "roundUp"
+                }
+              }
