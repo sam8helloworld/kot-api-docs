@@ -19,4 +19,5 @@ jobs:
           go-version: 1.19.x
 
       - name: Test
-        run: go test ./client/go/...
+        working-directory: client/go
+        run: go test ./...
