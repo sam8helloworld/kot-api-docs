@@ -1,0 +1,14 @@
+openapi: 3.1.0
+
+info:
+  version: 1.0.0
+  title: KING OF TIME WebAPI
+  description: >-
+    KING OF TIME WebAPI specification
+    https://developer.kingtime.jp/
+
+paths:
+  $ref: "./paths/index.yml"
+
+components:
+  $ref: "./components/index.yml"

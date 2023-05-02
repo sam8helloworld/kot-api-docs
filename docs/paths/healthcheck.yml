@@ -1,0 +1,10 @@
+get:
+  operationId: GetHealthCheck
+  description: ヘルスチェックを行う
+  responses:
+    "200":
+      description: Returns a list of data sets
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/healthcheck.yml"
