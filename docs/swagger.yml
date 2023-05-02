@@ -386,8 +386,8 @@ components:
       schema:
         type: string
         format: date
+        description: defaultは当日
         example: 2016-10-10T00:00:00.000Z
-        default: '{当日}'
     division:
       name: division
       in: query

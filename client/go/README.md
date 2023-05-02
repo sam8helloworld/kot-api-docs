@@ -79,6 +79,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AdministratorApi* | [**GetAdministrators**](docs/AdministratorApi.md#getadministrators) | **Get** /administrators | 
 *CompanyApi* | [**GetCompany**](docs/CompanyApi.md#getcompany) | **Get** /company | 
+*EmployeeApi* | [**GetEmployees**](docs/EmployeeApi.md#getemployees) | **Get** /employees | 
 *TokenApi* | [**GetAccessTokenAvailability**](docs/TokenApi.md#getaccesstokenavailability) | **Get** /tokens/{token}/available | 
 *TokenApi* | [**RefreshAccessToken**](docs/TokenApi.md#refreshaccesstoken) | **Post** /tokens/{token} | 
 *TokenApi* | [**SuspendAccessToken**](docs/TokenApi.md#suspendaccesstoken) | **Delete** /tokens/{token} | 
@@ -91,6 +92,8 @@ Class | Method | HTTP request | Description
  - [GetAdministrators200ResponseInnerAssociatedEmployeesInner](docs/GetAdministrators200ResponseInnerAssociatedEmployeesInner.md)
  - [GetCompany200Response](docs/GetCompany200Response.md)
  - [GetCompany200ResponseSettings](docs/GetCompany200ResponseSettings.md)
+ - [GetEmployees200ResponseInner](docs/GetEmployees200ResponseInner.md)
+ - [GetEmployees200ResponseInnerEmployeeGroupsInner](docs/GetEmployees200ResponseInnerEmployeeGroupsInner.md)
  - [RefreshAccessToken201Response](docs/RefreshAccessToken201Response.md)
 
 
