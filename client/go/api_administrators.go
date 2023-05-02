@@ -34,7 +34,7 @@ func (r ApiGetAdministratorsRequest) AdditionalFields(additionalFields string) A
 	return r
 }
 
-func (r ApiGetAdministratorsRequest) Execute() (*GetAdministrators200Response, *http.Response, error) {
+func (r ApiGetAdministratorsRequest) Execute() ([]GetAdministrators200ResponseInner, *http.Response, error) {
 	return r.ApiService.GetAdministratorsExecute(r)
 }
 
@@ -54,13 +54,13 @@ func (a *AdministratorsApiService) GetAdministrators(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return GetAdministrators200Response
-func (a *AdministratorsApiService) GetAdministratorsExecute(r ApiGetAdministratorsRequest) (*GetAdministrators200Response, *http.Response, error) {
+//  @return []GetAdministrators200ResponseInner
+func (a *AdministratorsApiService) GetAdministratorsExecute(r ApiGetAdministratorsRequest) ([]GetAdministrators200ResponseInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetAdministrators200Response
+		localVarReturnValue  []GetAdministrators200ResponseInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdministratorsApiService.GetAdministrators")

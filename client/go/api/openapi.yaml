@@ -141,7 +141,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAdministrators_200_response'
+                example:
+                - code: admin
+                  key: 4888a97dd7bbc6a26a18743f4697a1de4b38b6ee646a9620b286499c3df6918c
+                  name: 全権管理者
+                - code: "2000"
+                  key: 6713cd21ca98689efec9fe27352152c4c77a34b32f5de30b6335d141ad714baf
+                  name: エリアマネージャー
+                  associatedEmployees:
+                  - code: "1000"
+                    key: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+                    lastName: 勤怠
+                    firstName: 太郎
+                  - code: "2000"
+                    key: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4
+                    lastName: 勤怠
+                    firstName: 花子
+                items:
+                  $ref: '#/components/schemas/GetAdministrators_200_response_inner'
+                type: array
           description: ""
           headers:
             Content-Type:
@@ -224,27 +242,7 @@ components:
       - name
       - settings
       type: object
-    GetAccessTokenAvailability_200_response:
-      example:
-        available: true
-      properties:
-        available:
-          type: boolean
-      required:
-      - available
-      type: object
-    RefreshAccessToken_201_response:
-      example:
-        token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-      properties:
-        token:
-          description: refreshed access token
-          example: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-          type: string
-      required:
-      - token
-      type: object
-    GetAdministrators_200_response_associatedEmployees:
+    GetAdministrators_200_response_inner_associatedEmployees:
       description: 割当従業員
       properties:
         code:
@@ -265,23 +263,7 @@ components:
       - key
       - lastName
       type: object
-    GetAdministrators_200_response:
-      example:
-      - code: admin
-        key: 4888a97dd7bbc6a26a18743f4697a1de4b38b6ee646a9620b286499c3df6918c
-        name: 全権管理者
-      - code: "2000"
-        key: 6713cd21ca98689efec9fe27352152c4c77a34b32f5de30b6335d141ad714baf
-        name: エリアマネージャー
-        associatedEmployees:
-        - code: "1000"
-          key: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
-          lastName: 勤怠
-          firstName: 太郎
-        - code: "2000"
-          key: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4
-          lastName: 勤怠
-          firstName: 花子
+    GetAdministrators_200_response_inner:
       properties:
         code:
           description: 管理者コード
@@ -297,11 +279,31 @@ components:
           format: email
           type: string
         associatedEmployees:
-          $ref: '#/components/schemas/GetAdministrators_200_response_associatedEmployees'
+          $ref: '#/components/schemas/GetAdministrators_200_response_inner_associatedEmployees'
       required:
       - code
       - key
       - name
+      type: object
+    GetAccessTokenAvailability_200_response:
+      example:
+        available: true
+      properties:
+        available:
+          type: boolean
+      required:
+      - available
+      type: object
+    RefreshAccessToken_201_response:
+      example:
+        token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      properties:
+        token:
+          description: refreshed access token
+          example: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          type: string
+      required:
+      - token
       type: object
   securitySchemes:
     Bearer:

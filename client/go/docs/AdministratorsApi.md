@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## GetAdministrators
 
-> GetAdministrators200Response GetAdministrators(ctx).AdditionalFields(additionalFields).Execute()
+> []GetAdministrators200ResponseInner GetAdministrators(ctx).AdditionalFields(additionalFields).Execute()
 
 
 
@@ -38,7 +38,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AdministratorsApi.GetAdministrators``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetAdministrators`: GetAdministrators200Response
+    // response from `GetAdministrators`: []GetAdministrators200ResponseInner
     fmt.Fprintf(os.Stdout, "Response from `AdministratorsApi.GetAdministrators`: %v\n", resp)
 }
 ```
@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetAdministrators200Response**](GetAdministrators200Response.md)
+[**[]GetAdministrators200ResponseInner**](GetAdministrators200ResponseInner.md)
 
 ### Authorization
 
