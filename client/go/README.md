@@ -88,7 +88,7 @@ Class | Method | HTTP request | Description
 
  - [GetAccessTokenAvailability200Response](docs/GetAccessTokenAvailability200Response.md)
  - [GetAdministrators200ResponseInner](docs/GetAdministrators200ResponseInner.md)
- - [GetAdministrators200ResponseInnerAssociatedEmployees](docs/GetAdministrators200ResponseInnerAssociatedEmployees.md)
+ - [GetAdministrators200ResponseInnerAssociatedEmployeesInner](docs/GetAdministrators200ResponseInnerAssociatedEmployeesInner.md)
  - [GetCompany200Response](docs/GetCompany200Response.md)
  - [GetCompany200ResponseSettings](docs/GetCompany200ResponseSettings.md)
  - [RefreshAccessToken201Response](docs/RefreshAccessToken201Response.md)

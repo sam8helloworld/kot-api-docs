@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Key** | **string** | 管理者識別キー（管理者コードが変更されても不変） | 
 **Name** | **string** | 管理者名 | 
 **EmailAddresses** | Pointer to **string** | メールアドレス | [optional] 
-**AssociatedEmployees** | Pointer to [**GetAdministrators200ResponseInnerAssociatedEmployees**](GetAdministrators200ResponseInnerAssociatedEmployees.md) |  | [optional] 
+**AssociatedEmployees** | Pointer to [**[]GetAdministrators200ResponseInnerAssociatedEmployeesInner**](GetAdministrators200ResponseInnerAssociatedEmployeesInner.md) |  | [optional] 
 
 ## Methods
 
@@ -116,20 +116,20 @@ HasEmailAddresses returns a boolean if a field has been set.
 
 ### GetAssociatedEmployees
 
-`func (o *GetAdministrators200ResponseInner) GetAssociatedEmployees() GetAdministrators200ResponseInnerAssociatedEmployees`
+`func (o *GetAdministrators200ResponseInner) GetAssociatedEmployees() []GetAdministrators200ResponseInnerAssociatedEmployeesInner`
 
 GetAssociatedEmployees returns the AssociatedEmployees field if non-nil, zero value otherwise.
 
 ### GetAssociatedEmployeesOk
 
-`func (o *GetAdministrators200ResponseInner) GetAssociatedEmployeesOk() (*GetAdministrators200ResponseInnerAssociatedEmployees, bool)`
+`func (o *GetAdministrators200ResponseInner) GetAssociatedEmployeesOk() (*[]GetAdministrators200ResponseInnerAssociatedEmployeesInner, bool)`
 
 GetAssociatedEmployeesOk returns a tuple with the AssociatedEmployees field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAssociatedEmployees
 
-`func (o *GetAdministrators200ResponseInner) SetAssociatedEmployees(v GetAdministrators200ResponseInnerAssociatedEmployees)`
+`func (o *GetAdministrators200ResponseInner) SetAssociatedEmployees(v []GetAdministrators200ResponseInnerAssociatedEmployeesInner)`
 
 SetAssociatedEmployees sets AssociatedEmployees field to given value.
 

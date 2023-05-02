@@ -27,7 +27,7 @@ type GetAdministrators200ResponseInner struct {
 	Name string `json:"name"`
 	// メールアドレス
 	EmailAddresses *string `json:"emailAddresses,omitempty"`
-	AssociatedEmployees *GetAdministrators200ResponseInnerAssociatedEmployees `json:"associatedEmployees,omitempty"`
+	AssociatedEmployees []GetAdministrators200ResponseInnerAssociatedEmployeesInner `json:"associatedEmployees,omitempty"`
 }
 
 // NewGetAdministrators200ResponseInner instantiates a new GetAdministrators200ResponseInner object
@@ -155,17 +155,17 @@ func (o *GetAdministrators200ResponseInner) SetEmailAddresses(v string) {
 }
 
 // GetAssociatedEmployees returns the AssociatedEmployees field value if set, zero value otherwise.
-func (o *GetAdministrators200ResponseInner) GetAssociatedEmployees() GetAdministrators200ResponseInnerAssociatedEmployees {
+func (o *GetAdministrators200ResponseInner) GetAssociatedEmployees() []GetAdministrators200ResponseInnerAssociatedEmployeesInner {
 	if o == nil || IsNil(o.AssociatedEmployees) {
-		var ret GetAdministrators200ResponseInnerAssociatedEmployees
+		var ret []GetAdministrators200ResponseInnerAssociatedEmployeesInner
 		return ret
 	}
-	return *o.AssociatedEmployees
+	return o.AssociatedEmployees
 }
 
 // GetAssociatedEmployeesOk returns a tuple with the AssociatedEmployees field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAdministrators200ResponseInner) GetAssociatedEmployeesOk() (*GetAdministrators200ResponseInnerAssociatedEmployees, bool) {
+func (o *GetAdministrators200ResponseInner) GetAssociatedEmployeesOk() ([]GetAdministrators200ResponseInnerAssociatedEmployeesInner, bool) {
 	if o == nil || IsNil(o.AssociatedEmployees) {
 		return nil, false
 	}
@@ -181,9 +181,9 @@ func (o *GetAdministrators200ResponseInner) HasAssociatedEmployees() bool {
 	return false
 }
 
-// SetAssociatedEmployees gets a reference to the given GetAdministrators200ResponseInnerAssociatedEmployees and assigns it to the AssociatedEmployees field.
-func (o *GetAdministrators200ResponseInner) SetAssociatedEmployees(v GetAdministrators200ResponseInnerAssociatedEmployees) {
-	o.AssociatedEmployees = &v
+// SetAssociatedEmployees gets a reference to the given []GetAdministrators200ResponseInnerAssociatedEmployeesInner and assigns it to the AssociatedEmployees field.
+func (o *GetAdministrators200ResponseInner) SetAssociatedEmployees(v []GetAdministrators200ResponseInnerAssociatedEmployeesInner) {
+	o.AssociatedEmployees = v
 }
 
 func (o GetAdministrators200ResponseInner) MarshalJSON() ([]byte, error) {

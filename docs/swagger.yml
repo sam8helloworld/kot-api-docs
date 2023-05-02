@@ -180,26 +180,28 @@ paths:
                       format: email
                       description: メールアドレス
                     associatedEmployees:
-                      type: object
-                      description: 割当従業員
-                      required:
-                        - code
-                        - key
-                        - lastName
-                        - firstName
-                      properties:
-                        code:
-                          type: string
-                          description: 従業員コード
-                        key:
-                          type: string
-                          description: 従業員識別キー（従業員コードが変更されても不変）
-                        lastName:
-                          type: string
-                          description: 姓
-                        firstName:
-                          type: string
-                          description: 名
+                      type: array
+                      items:
+                        type: object
+                        description: 割当従業員
+                        required:
+                          - code
+                          - key
+                          - lastName
+                          - firstName
+                        properties:
+                          code:
+                            type: string
+                            description: 従業員コード
+                          key:
+                            type: string
+                            description: 従業員識別キー（従業員コードが変更されても不変）
+                          lastName:
+                            type: string
+                            description: 姓
+                          firstName:
+                            type: string
+                            description: 名
                 example:
                   - code: admin
                     key: 4888a97dd7bbc6a26a18743f4697a1de4b38b6ee646a9620b286499c3df6918c

@@ -242,27 +242,6 @@ components:
       - name
       - settings
       type: object
-    GetAdministrators_200_response_inner_associatedEmployees:
-      description: 割当従業員
-      properties:
-        code:
-          description: 従業員コード
-          type: string
-        key:
-          description: 従業員識別キー（従業員コードが変更されても不変）
-          type: string
-        lastName:
-          description: 姓
-          type: string
-        firstName:
-          description: 名
-          type: string
-      required:
-      - code
-      - firstName
-      - key
-      - lastName
-      type: object
     GetAdministrators_200_response_inner:
       properties:
         code:
@@ -279,7 +258,9 @@ components:
           format: email
           type: string
         associatedEmployees:
-          $ref: '#/components/schemas/GetAdministrators_200_response_inner_associatedEmployees'
+          items:
+            $ref: '#/components/schemas/GetAdministrators_200_response_inner_associatedEmployees_inner'
+          type: array
       required:
       - code
       - key
@@ -304,6 +285,27 @@ components:
           type: string
       required:
       - token
+      type: object
+    GetAdministrators_200_response_inner_associatedEmployees_inner:
+      description: 割当従業員
+      properties:
+        code:
+          description: 従業員コード
+          type: string
+        key:
+          description: 従業員識別キー（従業員コードが変更されても不変）
+          type: string
+        lastName:
+          description: 姓
+          type: string
+        firstName:
+          description: 名
+          type: string
+      required:
+      - code
+      - firstName
+      - key
+      - lastName
       type: object
   securitySchemes:
     Bearer:
