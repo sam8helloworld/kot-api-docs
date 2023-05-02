@@ -7,7 +7,7 @@ servers:
   - url: 'https://api.kingtime.jp/v1.0'
     description: Production server (uses live data)
 paths:
-  '/token/{token}':
+  '/tokens/{token}':
     post:
       operationId: RefreshAccessToken
       parameters:
@@ -19,7 +19,6 @@ paths:
         url: 'https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-post'
       responses:
         '201':
-          description: アクセストークンの発行に成功した場合
           headers:
             Content-Type:
               schema:
@@ -36,6 +35,17 @@ paths:
                     type: string
                     description: refreshed access token
                     example: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    delete:
+      operationId: SuspendAccessToken
+      parameters:
+        - $ref: '#/components/parameters/token'
+      tags:
+        - Token
+      description: 指定されたアクセストークンを利用停止する。
+      externalDocs:
+        url: 'https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-delete'
+      responses:
+        '204': null
 components:
   parameters:
     token:
