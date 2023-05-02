@@ -220,7 +220,7 @@ paths:
           type: boolean
         style: form
       - description: 指定されたプロパティをレスポンスに追加
-        explode: true
+        explode: false
         in: query
         name: additionalFields
         required: false
@@ -318,7 +318,7 @@ components:
       style: form
     additionalFields_get_employees:
       description: 指定されたプロパティをレスポンスに追加
-      explode: true
+      explode: false
       in: query
       name: additionalFields
       required: false

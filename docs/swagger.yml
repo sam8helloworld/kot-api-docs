@@ -386,9 +386,9 @@ components:
       name: additionalFields
       in: query
       description: 指定されたプロパティをレスポンスに追加
+      explode: false
       schema:
         type: array
-        explode: false
         items:
           type: string
           enum:
