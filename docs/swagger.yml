@@ -142,7 +142,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/additionalFields'
       tags:
-        - Administrators
+        - Administrator
       description: 管理者のデータを取得する。
       externalDocs:
         description: 一覧
@@ -249,6 +249,6 @@ tags:
   - name: Company
     externalDocs:
       url: 'https://developer.kingtime.jp/#%E4%BC%81%E6%A5%AD%E6%83%85%E5%A0%B1'
-  - name: Administrators
+  - name: Administrator
     externalDocs:
       url: 'https://developer.kingtime.jp/#%E7%AE%A1%E7%90%86%E8%80%85'

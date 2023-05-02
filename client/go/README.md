@@ -77,7 +77,7 @@ All URIs are relative to *https://api.kingtime.jp/v1.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AdministratorsApi* | [**GetAdministrators**](docs/AdministratorsApi.md#getadministrators) | **Get** /administrators | 
+*AdministratorApi* | [**GetAdministrators**](docs/AdministratorApi.md#getadministrators) | **Get** /administrators | 
 *CompanyApi* | [**GetCompany**](docs/CompanyApi.md#getcompany) | **Get** /company | 
 *TokenApi* | [**GetAccessTokenAvailability**](docs/TokenApi.md#getaccesstokenavailability) | **Get** /tokens/{token}/available | 
 *TokenApi* | [**RefreshAccessToken**](docs/TokenApi.md#refreshaccesstoken) | **Post** /tokens/{token} | 
