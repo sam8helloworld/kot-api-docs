@@ -22,7 +22,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../components/schemas/employee.yml"
+            $ref: "../../components/schemas/employee_response.yml"
             example:
               {
                 "divisionCode": "1000",

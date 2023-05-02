@@ -24,7 +24,7 @@ get:
           schema:
             type: array
             items:
-              $ref: "../../components/schemas/employee.yml"
+              $ref: "../../components/schemas/employee_response.yml"
             example:
               [
                 {
@@ -72,3 +72,83 @@ get:
                   ]
                 }
               ]
+post:
+  operationId: RegisterEmployee
+  tags:
+    - Employee
+  description: 従業員のデータを登録する。(1件)
+  externalDocs:
+    description: 登録
+    url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-post
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/employee_request.yml"
+          example:
+            {
+              "divisionCode": "1000",
+              "gender": "male",
+              "typeCode": "1",
+              "code": "1000",
+              "lastName": "勤怠",
+              "firstName": "太郎",
+              "emailAddresses": [
+                "kintaitarou@h-t.co.jp"
+              ]
+            }
+  responses:
+    "201":
+      description: ""
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            example: application/json
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - divisionCode
+              - gender
+              - typeCode
+              - code
+              - lastName
+              - firstName
+              - key
+            properties:
+              divisionCode:
+                type: string
+                description: 所属コード
+              gender:
+                type: string
+                description: 性別（male： 男性　female： 女性）
+              typeCode:
+                type: string
+                description: 雇用区分コード
+              code:
+                type: string
+                description: 従業員コード
+              lastName:
+                type: string
+                description: 姓
+              firstName:
+                type: string
+                description: 名
+              key:
+                type: string
+                description: 従業員識別キー（従業員コードが変更されても不変）
+            example:
+              {
+                "divisionCode": "1000",
+                "gender": "male",
+                "typeCode": "1",
+                "code": "1000",
+                "lastName": "勤怠",
+                "firstName": "太郎",
+                "key": "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4",
+                "emailAddresses": [
+                  "kintaitarou@h-t.co.jp"
+                ]
+              }

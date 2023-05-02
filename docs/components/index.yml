@@ -15,8 +15,10 @@ parameters:
     $ref: "./parameters/employeeCode.yml"
 
 schemas:
-  employee:
-    $ref: "./schemas/employee.yml"
+  employee_response:
+    $ref: "./schemas/employee_response.yml"
+  employee_request:
+    $ref: "./schemas/employee_request.yml"
 
 securitySchemes:
   Bearer:
