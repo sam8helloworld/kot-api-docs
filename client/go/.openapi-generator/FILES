@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -15,5 +14,4 @@ go.sum
 model_get_access_token_availability_200_response.go
 model_refresh_access_token_201_response.go
 response.go
-test/api_token_test.go
 utils.go
