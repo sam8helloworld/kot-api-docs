@@ -47,6 +47,27 @@ paths:
       responses:
         '204':
           description: This response has no content.
+  '/tokens/{token}/available':
+    get:
+      operationId: GetAccessTokenAvailability
+      parameters:
+        - $ref: '#/components/parameters/token'
+      tags:
+        - Token
+      description: 指定されたアクセストークンが有効か確認する。
+      externalDocs:
+        url: 'https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-get'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - available
+                properties:
+                  available:
+                    type: boolean
 components:
   parameters:
     token:
