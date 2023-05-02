@@ -7,6 +7,10 @@ info:
     KING OF TIME WebAPI specification
     https://developer.kingtime.jp/
 
+servers:
+  - url: https://api.kingtime.jp/v1.0
+    description: Production server (uses live data)
+
 paths:
   $ref: "./paths/index.yml"
 
