@@ -13,3 +13,5 @@
   $ref: ./employee/employees.yml
 /employees/{employeeCode}:
   $ref: ./employee/employee.yml
+/employees/{employeeKey}:
+  $ref: ./employee/employees.yml

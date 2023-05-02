@@ -13,6 +13,10 @@ parameters:
     $ref: "./parameters/includeResigner.yml"
   employeeCode:
     $ref: "./parameters/employeeCode.yml"
+  employeeKey:
+    $ref: "./parameters/employeeKey.yml"
+  updateDate:
+    $ref: "./parameters/updateDate.yml"
 
 schemas:
   employee_response:

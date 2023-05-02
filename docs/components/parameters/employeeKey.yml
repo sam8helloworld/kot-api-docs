@@ -1,0 +1,7 @@
+name: employeeKey
+in: path
+description: 従業員識別キー（従業員コードが変更されても不変）
+required: true
+schema:
+  type: string
+  example: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3

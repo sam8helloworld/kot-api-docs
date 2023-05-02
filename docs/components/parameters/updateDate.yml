@@ -1,0 +1,8 @@
+name: updateDate
+in: query
+description: 所属、雇用区分を更新したい年月日
+schema:
+  type: string
+  format: date
+  description: defaultは当日
+  example: 2016-05-01
