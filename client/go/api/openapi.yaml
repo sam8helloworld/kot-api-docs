@@ -136,8 +136,14 @@ paths:
         name: additionalFields
         required: false
         schema:
-          example: associatedEmployees
-          type: string
+          example:
+          - associatedEmployees
+          items:
+            enum:
+            - emailAddresses
+            - associatedEmployees
+            type: string
+          type: array
         style: form
       responses:
         "200":
@@ -294,15 +300,21 @@ components:
         example: 8j9f7v4893y58rvt7nyfq2893n75tr78937n83
         type: string
       style: simple
-    additionalFields:
+    additionalFields_get_administrators:
       description: 指定されたプロパティをレスポンスに追加
       explode: true
       in: query
       name: additionalFields
       required: false
       schema:
-        example: associatedEmployees
-        type: string
+        example:
+        - associatedEmployees
+        items:
+          enum:
+          - emailAddresses
+          - associatedEmployees
+          type: string
+        type: array
       style: form
     additionalFields_get_employees:
       description: 指定されたプロパティをレスポンスに追加

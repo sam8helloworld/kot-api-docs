@@ -29,7 +29,7 @@ import (
 )
 
 func main() {
-    additionalFields := "associatedEmployees" // string | 指定されたプロパティをレスポンスに追加 (optional)
+    additionalFields := []string{"AdditionalFields_example"} // []string | 指定されたプロパティをレスポンスに追加 (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -54,7 +54,7 @@ Other parameters are passed through a pointer to a apiGetAdministratorsRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **additionalFields** | **string** | 指定されたプロパティをレスポンスに追加 | 
+ **additionalFields** | **[]string** | 指定されたプロパティをレスポンスに追加 | 
 
 ### Return type
 

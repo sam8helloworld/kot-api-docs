@@ -140,7 +140,7 @@ paths:
     get:
       operationId: GetAdministrators
       parameters:
-        - $ref: '#/components/parameters/additionalFields'
+        - $ref: '#/components/parameters/additionalFields_get_administrators'
       tags:
         - Administrator
       description: 管理者のデータを取得する。
@@ -369,13 +369,19 @@ components:
       schema:
         type: string
         example: 8j9f7v4893y58rvt7nyfq2893n75tr78937n83
-    additionalFields:
+    additionalFields_get_administrators:
       name: additionalFields
       in: query
       description: 指定されたプロパティをレスポンスに追加
       schema:
-        type: string
-        example: associatedEmployees
+        type: array
+        items:
+          type: string
+          enum:
+            - emailAddresses
+            - associatedEmployees
+        example:
+          - associatedEmployees
     additionalFields_get_employees:
       name: additionalFields
       in: query

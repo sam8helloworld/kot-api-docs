@@ -16,6 +16,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"reflect"
 )
 
 
@@ -25,11 +26,11 @@ type AdministratorApiService service
 type ApiGetAdministratorsRequest struct {
 	ctx context.Context
 	ApiService *AdministratorApiService
-	additionalFields *string
+	additionalFields *[]string
 }
 
 // 指定されたプロパティをレスポンスに追加
-func (r ApiGetAdministratorsRequest) AdditionalFields(additionalFields string) ApiGetAdministratorsRequest {
+func (r ApiGetAdministratorsRequest) AdditionalFields(additionalFields []string) ApiGetAdministratorsRequest {
 	r.additionalFields = &additionalFields
 	return r
 }
@@ -75,7 +76,15 @@ func (a *AdministratorApiService) GetAdministratorsExecute(r ApiGetAdministrator
 	localVarFormParams := url.Values{}
 
 	if r.additionalFields != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", r.additionalFields, "")
+		t := *r.additionalFields
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", s.Index(i), "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", t, "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
