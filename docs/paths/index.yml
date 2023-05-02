@@ -1,2 +1,2 @@
-/token/{token}:
+/tokens/{token}:
   $ref: ./token/token.yml
