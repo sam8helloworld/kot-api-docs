@@ -77,6 +77,7 @@ All URIs are relative to *https://api.kingtime.jp/v1.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*CompanyApi* | [**GetCompany**](docs/CompanyApi.md#getcompany) | **Get** /company | 
 *TokenApi* | [**GetAccessTokenAvailability**](docs/TokenApi.md#getaccesstokenavailability) | **Get** /tokens/{token}/available | 
 *TokenApi* | [**RefreshAccessToken**](docs/TokenApi.md#refreshaccesstoken) | **Post** /tokens/{token} | 
 *TokenApi* | [**SuspendAccessToken**](docs/TokenApi.md#suspendaccesstoken) | **Delete** /tokens/{token} | 
@@ -85,6 +86,8 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [GetAccessTokenAvailability200Response](docs/GetAccessTokenAvailability200Response.md)
+ - [GetCompany200Response](docs/GetCompany200Response.md)
+ - [GetCompany200ResponseSettings](docs/GetCompany200ResponseSettings.md)
  - [RefreshAccessToken201Response](docs/RefreshAccessToken201Response.md)
 
 

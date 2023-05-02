@@ -12,6 +12,9 @@ tags:
 - externalDocs:
     url: https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3
   name: Token
+- externalDocs:
+    url: https://developer.kingtime.jp/#%E4%BC%81%E6%A5%AD%E6%83%85%E5%A0%B1
+  name: Company
 paths:
   /tokens/{token}:
     delete:
@@ -90,6 +93,28 @@ paths:
           description: ""
       tags:
       - Token
+  /company:
+    get:
+      description: 企業情報データを取得する。
+      externalDocs:
+        url: https://developer.kingtime.jp/#%E4%BC%81%E6%A5%AD%E6%83%85%E5%A0%B1-%E4%BC%81%E6%A5%AD%E6%83%85%E5%A0%B1%E3%83%87%E3%83%BC%E3%82%BF-get
+      operationId: GetCompany
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCompany_200_response'
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Company
 components:
   parameters:
     token:
@@ -103,6 +128,47 @@ components:
         type: string
       style: simple
   schemas:
+    GetCompany_200_response_settings:
+      properties:
+        timeDisplayFormat:
+          type: string
+        decimalTreatType:
+          type: string
+      required:
+      - decimalTreatType
+      - timeDisplayFormat
+      type: object
+    GetCompany_200_response:
+      example:
+        key: 1qazxsw23edc....
+        code: cmp
+        name: 企業名
+        host: s2.kingtime.jp
+        businessYearStartDate: 04/01
+        settings:
+          timeDisplayFormat: decimal
+          decimalTreatType: roundUp
+      properties:
+        key:
+          type: string
+        code:
+          type: string
+        name:
+          type: string
+        host:
+          type: string
+        businessYearStartDate:
+          type: string
+        settings:
+          $ref: '#/components/schemas/GetCompany_200_response_settings'
+      required:
+      - businessYearStartDate
+      - code
+      - host
+      - key
+      - name
+      - settings
+      type: object
     GetAccessTokenAvailability_200_response:
       example:
         available: true
