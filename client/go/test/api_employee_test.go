@@ -38,7 +38,7 @@ func Test_openapi_EmployeeApiService(t *testing.T) {
 
 		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
 		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
-		resp, httpRes, err := apiClient.EmployeeApi.GetEmployees(ctx).Date("2016-10-10").Division("1000").IncludeResigner(true).AdditionalFields("emailAddresses").Execute()
+		resp, httpRes, err := apiClient.EmployeeApi.GetEmployees(ctx).Date("2016-10-10").Division("1000").IncludeResigner(true).AdditionalFields([]string{"emailAddresses"}).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
