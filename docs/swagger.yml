@@ -388,6 +388,7 @@ components:
       description: 指定されたプロパティをレスポンスに追加
       schema:
         type: array
+        explode: false
         items:
           type: string
           enum:
