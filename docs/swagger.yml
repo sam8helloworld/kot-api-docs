@@ -34,3 +34,6 @@ components:
       type: http
       scheme: bearer
       description: Credentials or access token for API
+tags:
+  - name: トークン
+    url: 'https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3'
