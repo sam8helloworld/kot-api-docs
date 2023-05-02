@@ -1,3 +1,9 @@
-schemas:
-  healthcheck:
-    $ref: "./schemas/healthcheck.yml"
+parameters:
+  token:
+    $ref: "./parameters/token.yml"
+
+securitySchemes:
+  Bearer:
+    type: http
+    scheme: bearer
+    description: Credentials or access token for API

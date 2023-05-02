@@ -1,28 +1,91 @@
-openapi: 3.1.0
+openapi: 3.0.3
 info:
   version: 1.0.0
   title: KING OF TIME WebAPI
   description: 'KING OF TIME WebAPI specification https://developer.kingtime.jp/'
+servers:
+  - url: 'https://api.kingtime.jp/v1.0'
+    description: Production server (uses live data)
 paths:
-  /.healthcheck:
-    get:
-      operationId: GetHealthCheck
-      description: ヘルスチェックを行う
+  '/tokens/{token}':
+    post:
+      operationId: RefreshAccessToken
+      parameters:
+        - $ref: '#/components/parameters/token'
+      tags:
+        - Token
+      description: 指定されたアクセストークンを利用停止し、新たに同じ設定でアクセストークンを発行する。
+      externalDocs:
+        url: 'https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-post'
       responses:
-        '200':
-          description: Returns a list of data sets
+        '201':
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/healthcheck'
+                type: object
+                required:
+                  - token
+                properties:
+                  token:
+                    type: string
+                    description: refreshed access token
+                    example: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    delete:
+      operationId: SuspendAccessToken
+      parameters:
+        - $ref: '#/components/parameters/token'
+      tags:
+        - Token
+      description: 指定されたアクセストークンを利用停止する。
+      externalDocs:
+        url: 'https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-delete'
+      responses:
+        '204':
+          description: This response has no content.
+  '/tokens/{token}/available':
+    get:
+      operationId: GetAccessTokenAvailability
+      parameters:
+        - $ref: '#/components/parameters/token'
+      tags:
+        - Token
+      description: 指定されたアクセストークンが有効か確認する。
+      externalDocs:
+        url: 'https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-get'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - available
+                properties:
+                  available:
+                    type: boolean
 components:
-  schemas:
-    healthcheck:
-      type: object
-      required:
-        - result
-      properties:
-        result:
-          type: string
-          description: success or failure
-          example: success
+  parameters:
+    token:
+      name: token
+      in: path
+      description: 処理対象のトークン
+      required: true
+      schema:
+        type: string
+        example: 8j9f7v4893y58rvt7nyfq2893n75tr78937n83
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: Credentials or access token for API
+security:
+  - Bearer: []
+tags:
+  - name: Token
+    externalDocs:
+      url: 'https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3'

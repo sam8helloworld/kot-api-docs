@@ -1,2 +1,4 @@
-/.healthcheck:
-  $ref: ./healthcheck.yml
+/tokens/{token}:
+  $ref: ./token/token.yml
+/tokens/{token}/available:
+  $ref: ./token/token_available.yml

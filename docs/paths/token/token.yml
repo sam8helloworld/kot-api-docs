@@ -1,0 +1,39 @@
+post:
+  operationId: RefreshAccessToken
+  parameters:
+    - $ref: "../../components/parameters/token.yml"
+  tags:
+    - Token
+  description: 指定されたアクセストークンを利用停止し、新たに同じ設定でアクセストークンを発行する。
+  externalDocs:
+    url: https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-post
+  responses:
+    "201":
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            example: application/json; charset=utf-8
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - token
+            properties:
+              token:
+                type: string
+                description: refreshed access token
+                example: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+delete:
+  operationId: SuspendAccessToken
+  parameters:
+    - $ref: "../../components/parameters/token.yml"
+  tags:
+    - Token
+  description: 指定されたアクセストークンを利用停止する。
+  externalDocs:
+    url: https://developer.kingtime.jp/#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3-delete
+  responses:
+    "204":
+      description: This response has no content.

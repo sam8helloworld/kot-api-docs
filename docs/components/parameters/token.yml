@@ -1,0 +1,7 @@
+name: token
+in: path
+description: 処理対象のトークン
+required: true
+schema:
+  type: string
+  example: 8j9f7v4893y58rvt7nyfq2893n75tr78937n83
