@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**DeleteEmployee**](EmployeeApi.md#DeleteEmployee) | **Delete** /employees/{employeeKey} | 
 [**GetDivisions**](EmployeeApi.md#GetDivisions) | **Get** /divisions | 
 [**GetEmployee**](EmployeeApi.md#GetEmployee) | **Get** /employees/{employeeCode} | 
+[**GetEmployeeGroups**](EmployeeApi.md#GetEmployeeGroups) | **Get** /employee-groups | 
 [**GetEmployees**](EmployeeApi.md#GetEmployees) | **Get** /employees | 
 [**GetWorkingTypes**](EmployeeApi.md#GetWorkingTypes) | **Get** /working-types | 
 [**RegisterEmployee**](EmployeeApi.md#RegisterEmployee) | **Post** /employees | 
@@ -205,6 +206,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**EmployeeResponse**](EmployeeResponse.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetEmployeeGroups
+
+> []GetEmployeeGroups200ResponseInner GetEmployeeGroups(ctx).AdditionalFields(additionalFields).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/sam8helloworld/kot-api-docs"
+)
+
+func main() {
+    additionalFields := []string{"AdditionalFields_example"} // []string | 指定されたプロパティをレスポンスに追加 (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EmployeeApi.GetEmployeeGroups(context.Background()).AdditionalFields(additionalFields).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EmployeeApi.GetEmployeeGroups``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetEmployeeGroups`: []GetEmployeeGroups200ResponseInner
+    fmt.Fprintf(os.Stdout, "Response from `EmployeeApi.GetEmployeeGroups`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetEmployeeGroupsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **additionalFields** | **[]string** | 指定されたプロパティをレスポンスに追加 | 
+
+### Return type
+
+[**[]GetEmployeeGroups200ResponseInner**](GetEmployeeGroups200ResponseInner.md)
 
 ### Authorization
 

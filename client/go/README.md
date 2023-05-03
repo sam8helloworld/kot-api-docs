@@ -82,6 +82,7 @@ Class | Method | HTTP request | Description
 *EmployeeApi* | [**DeleteEmployee**](docs/EmployeeApi.md#deleteemployee) | **Delete** /employees/{employeeKey} | 
 *EmployeeApi* | [**GetDivisions**](docs/EmployeeApi.md#getdivisions) | **Get** /divisions | 
 *EmployeeApi* | [**GetEmployee**](docs/EmployeeApi.md#getemployee) | **Get** /employees/{employeeCode} | 
+*EmployeeApi* | [**GetEmployeeGroups**](docs/EmployeeApi.md#getemployeegroups) | **Get** /employee-groups | 
 *EmployeeApi* | [**GetEmployees**](docs/EmployeeApi.md#getemployees) | **Get** /employees | 
 *EmployeeApi* | [**GetWorkingTypes**](docs/EmployeeApi.md#getworkingtypes) | **Get** /working-types | 
 *EmployeeApi* | [**RegisterEmployee**](docs/EmployeeApi.md#registeremployee) | **Post** /employees | 
@@ -102,6 +103,8 @@ Class | Method | HTTP request | Description
  - [GetAdministrators200ResponseInnerAssociatedEmployeesInner](docs/GetAdministrators200ResponseInnerAssociatedEmployeesInner.md)
  - [GetCompany200Response](docs/GetCompany200Response.md)
  - [GetCompany200ResponseSettings](docs/GetCompany200ResponseSettings.md)
+ - [GetEmployeeGroups200ResponseInner](docs/GetEmployeeGroups200ResponseInner.md)
+ - [GetEmployeeGroups200ResponseInnerCategory](docs/GetEmployeeGroups200ResponseInnerCategory.md)
  - [RefreshAccessToken201Response](docs/RefreshAccessToken201Response.md)
  - [RegisterEmployee201Response](docs/RegisterEmployee201Response.md)
  - [UpdateEmployeeRequest](docs/UpdateEmployeeRequest.md)
