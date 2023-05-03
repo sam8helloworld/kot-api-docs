@@ -6,13 +6,17 @@
 /company:
   $ref: ./company/index.yml
 
-/administrators:
+/administrators{?additionalFields}:
   $ref: ./administrators/index.yml
 
+/employees{?date,division,includeResigner,additionalFields}:
+  $ref: ./employees/index{?date,division,includeResigner,additionalFields}.yml
+/employees/{employeeCode}{?date,includeResigner,additionalFields}:
+  $ref: ./employees/{employeeCode}{?date,includeResigner,additionalFields}.yml
 /employees:
   $ref: ./employees/index.yml
-/employees/{employeeCode}:
-  $ref: ./employees/{employeeCode}.yml
+/employees/{employeeKey}{?updateDate}:
+  $ref: ./employees/{employeeKey}.yml
 /employees/{employeeKey}:
   $ref: ./employees/{employeeKey}.yml
 
