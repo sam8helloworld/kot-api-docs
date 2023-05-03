@@ -24,3 +24,6 @@
 
 /employee-groups:
   $ref: ./employee-group/employee-groups.yml
+
+/daily-workings:
+  $ref: ./daily-working/daily-workings.yml
