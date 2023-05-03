@@ -123,4 +123,14 @@ func Test_openapi_EmployeeApiService(t *testing.T) {
 		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 	})
+
+	t.Run("Test EmployeeApiService GetEmployeeGroups", func(t *testing.T) {
+		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
+		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		resp, httpRes, err := apiClient.EmployeeApi.GetEmployeeGroups(ctx).AdditionalFields([]string{"category"}).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+	})
 }
