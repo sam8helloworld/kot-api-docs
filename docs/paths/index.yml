@@ -4,26 +4,26 @@
   $ref: ./tokens/{token}_available.yml
 
 /company:
-  $ref: ./company/company.yml
+  $ref: ./company/index.yml
 
 /administrators:
-  $ref: ./administrator/administrators.yml
+  $ref: ./administrators/index.yml
 
 /employees:
-  $ref: ./employee/employees.yml
+  $ref: ./employees/index.yml
 /employees/{employeeCode}:
-  $ref: ./employee/employee.yml
+  $ref: ./employees/{employeeCode}.yml
 /employees/{employeeKey}:
-  $ref: ./employee/employee_edit.yml
+  $ref: ./employees/{employeeKey}.yml
 
 /divisions:
-  $ref: ./division/divisions.yml
+  $ref: ./divisions/index.yml
 
 /working-types:
-  $ref: ./working-type/working-types.yml
+  $ref: ./working-types/index.yml
 
 /employee-groups:
-  $ref: ./employee-group/employee-groups.yml
+  $ref: ./employee-groups/index.yml
 
 /daily-workings:
   $ref: ./daily-workings/index.yml
