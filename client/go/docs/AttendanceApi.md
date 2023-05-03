@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetDailyWorking**](AttendanceApi.md#GetDailyWorking) | **Get** /daily-workings/{date} | 
 [**GetDailyWorkings**](AttendanceApi.md#GetDailyWorkings) | **Get** /daily-workings | 
+[**RegisterDailyWorkingTimerecord**](AttendanceApi.md#RegisterDailyWorkingTimerecord) | **Post** /daily-workings/timerecord/{employeeKey} | 
 
 
 
@@ -154,6 +155,79 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RegisterDailyWorkingTimerecord
+
+> DailyWorkingTimerecordResponse RegisterDailyWorkingTimerecord(ctx, employeeKey).DailyWorkingTimerecordRequest(dailyWorkingTimerecordRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    "time"
+    openapiclient "github.com/sam8helloworld/kot-api-docs"
+)
+
+func main() {
+    employeeKey := "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3" // string | 従業員識別キー（従業員コードが変更されても不変）
+    dailyWorkingTimerecordRequest := *openapiclient.NewDailyWorkingTimerecordRequest(time.Now(), time.Now()) // DailyWorkingTimerecordRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AttendanceApi.RegisterDailyWorkingTimerecord(context.Background(), employeeKey).DailyWorkingTimerecordRequest(dailyWorkingTimerecordRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AttendanceApi.RegisterDailyWorkingTimerecord``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `RegisterDailyWorkingTimerecord`: DailyWorkingTimerecordResponse
+    fmt.Fprintf(os.Stdout, "Response from `AttendanceApi.RegisterDailyWorkingTimerecord`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**employeeKey** | **string** | 従業員識別キー（従業員コードが変更されても不変） | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRegisterDailyWorkingTimerecordRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **dailyWorkingTimerecordRequest** | [**DailyWorkingTimerecordRequest**](DailyWorkingTimerecordRequest.md) |  | 
+
+### Return type
+
+[**DailyWorkingTimerecordResponse**](DailyWorkingTimerecordResponse.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

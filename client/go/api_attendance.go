@@ -304,3 +304,114 @@ func (a *AttendanceApiService) GetDailyWorkingsExecute(r ApiGetDailyWorkingsRequ
 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
+
+type ApiRegisterDailyWorkingTimerecordRequest struct {
+	ctx context.Context
+	ApiService *AttendanceApiService
+	employeeKey string
+	dailyWorkingTimerecordRequest *DailyWorkingTimerecordRequest
+}
+
+func (r ApiRegisterDailyWorkingTimerecordRequest) DailyWorkingTimerecordRequest(dailyWorkingTimerecordRequest DailyWorkingTimerecordRequest) ApiRegisterDailyWorkingTimerecordRequest {
+	r.dailyWorkingTimerecordRequest = &dailyWorkingTimerecordRequest
+	return r
+}
+
+func (r ApiRegisterDailyWorkingTimerecordRequest) Execute() (*DailyWorkingTimerecordResponse, *http.Response, error) {
+	return r.ApiService.RegisterDailyWorkingTimerecordExecute(r)
+}
+
+/*
+RegisterDailyWorkingTimerecord Method for RegisterDailyWorkingTimerecord
+
+指定した従業員の打刻データを登録する。(1件)
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param employeeKey 従業員識別キー（従業員コードが変更されても不変）
+ @return ApiRegisterDailyWorkingTimerecordRequest
+*/
+func (a *AttendanceApiService) RegisterDailyWorkingTimerecord(ctx context.Context, employeeKey string) ApiRegisterDailyWorkingTimerecordRequest {
+	return ApiRegisterDailyWorkingTimerecordRequest{
+		ApiService: a,
+		ctx: ctx,
+		employeeKey: employeeKey,
+	}
+}
+
+// Execute executes the request
+//  @return DailyWorkingTimerecordResponse
+func (a *AttendanceApiService) RegisterDailyWorkingTimerecordExecute(r ApiRegisterDailyWorkingTimerecordRequest) (*DailyWorkingTimerecordResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DailyWorkingTimerecordResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AttendanceApiService.RegisterDailyWorkingTimerecord")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/daily-workings/timerecord/{employeeKey}"
+	localVarPath = strings.Replace(localVarPath, "{"+"employeeKey"+"}", url.PathEscape(parameterValueToString(r.employeeKey, "employeeKey")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.dailyWorkingTimerecordRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
