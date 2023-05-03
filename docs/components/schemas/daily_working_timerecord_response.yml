@@ -1,0 +1,123 @@
+type: object
+required:
+  - date
+  - employeeKey
+  - timeRecord
+properties:
+  date:
+    type: string
+    format: date
+    description: 日時
+  employeeKey:
+    type: string
+    description: 従業員識別キー（従業員コードが変更されても不変）
+  timeRecord:
+    type: array
+    description: 打刻
+    items:
+      type: object
+      required:
+        - time
+        - code
+        - name
+        - divisionCode
+        - divisionName
+        - latitude
+        - longitude
+      properties:
+        time:
+          type: string
+          format: date-time
+          description: 打刻時間
+        code:
+          type: string
+          description: 打刻種別コード
+          enum:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+            - "7"
+            - "8"
+        name:
+          type: string
+          description: 打刻種別名
+        divisionCode:
+          type: string
+          description: 打刻所属コード
+        divisionName:
+          type: string
+          description: 打刻所属名
+        latitude:
+          type: number
+          format: double
+          description: 緯度
+        longitude:
+          type: number
+          format: double
+          description: 経度
+  currentDateEmployee:
+    type: object
+    description: 今日時点の従業員データ
+    required:
+      - divisionCode
+      - divisionName
+      - gender
+      - typeCode
+      - typeName
+      - code
+      - lastName
+      - firstName
+      - lastNamePhonetics
+      - firstNamePhonetics
+      - employeeGroups
+    properties:
+      divisionCode:
+        type: string
+        description: 所属コード
+      divisionName:
+        type: string
+        description: 所属名
+      gender:
+        type: string
+        description: 性別（no_selected： 選択しない　male： 男性　female： 女性）
+        enum:
+          - no_selected
+          - male
+          - female
+      typeCode:
+        type: string
+        description: 雇用区分コード
+      typeName:
+        type: string
+        description: 雇用区分名
+      code:
+        type: string
+        description: 従業員コード
+      lastName:
+        type: string
+        description: 姓
+      firstName:
+        type: string
+        description: 名
+      lastNamePhonetics:
+        type: string
+        description: 姓（カナ）
+      firstNamePhonetics:
+        type: string
+        description: 名（カナ）
+      employeeGroups:
+        type: array
+        description: 従業員グループ情報
+        items:
+          type: object
+          required:
+            - code
+            - name
+          properties:
+            code:
+              type: string
+              description: 従業員グループコード
+            name:
+              type: string
+              description: 従業員グループ名
