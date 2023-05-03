@@ -30,4 +30,4 @@
 /daily-workings/{date}:
   $ref: ./daily-working/daily-working.yml
 /daily-workings/timerecord/{employeeKey}:
-  $ref: ./daily-working/daily-working.yml
+  $ref: ./daily-working/daily-working_timerecord.yml
