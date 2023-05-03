@@ -31,3 +31,5 @@
   $ref: ./daily-working/daily-working.yml
 /daily-workings/timerecord/{employeeKey}:
   $ref: ./daily-working/daily-working_timerecord.yml
+/daily-workings/timerecord/:
+  $ref: ./daily-working/daily-working_timerecords.yml

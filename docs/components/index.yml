@@ -29,6 +29,8 @@ parameters:
     $ref: "./parameters/additionalFields_daily-workings.yml"
   date_required:
     $ref: "./parameters/date_required.yml"
+  employeeKeys:
+    $ref: "./parameters/employeeKeys.yml"
 
 schemas:
   employee_response:

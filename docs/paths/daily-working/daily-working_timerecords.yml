@@ -1,0 +1,99 @@
+get:
+  operationId: GetDailyWorkingTimerecords
+  parameters:
+    - $ref: "../../components/parameters/employeeKeys.yml"
+    - $ref: "../../components/parameters/division.yml"
+    - $ref: "../../components/parameters/ondivision.yml"
+    - $ref: "../../components/parameters/start.yml"
+    - $ref: "../../components/parameters/end.yml"
+    - $ref: "../../components/parameters/additionalFields_daily-workings.yml"
+  tags:
+    - Attendance
+  description: 日別打刻データの一覧を取得する。 従業員を指定した場合、対象従業員の日別打刻データを取得する。
+  externalDocs:
+    description: 一覧
+    url: https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0-%E6%97%A5%E5%88%A5%E6%89%93%E5%88%BB%E3%83%87%E3%83%BC%E3%82%BF-get
+  responses:
+    "200":
+      description: ""
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            example: application/json
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../components/schemas/daily_working_timerecord_response.yml"
+            example:
+              [
+                {
+                  "date": "2016-05-01",
+                  "dailyWorkings": [
+                    {
+                      "date": "2016-05-01",
+                      "employeeKey": "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+                      "currentDateEmployee": {
+                        "divisionCode": "1000",
+                        "divisionName": "本社",
+                        "gender": "male",
+                        "typeCode": "1",
+                        "typeName": "正社員",
+                        "code": "1000",
+                        "lastName": "勤怠",
+                        "firstName": "太郎",
+                        "lastNamePhonetics": "キンタイ",
+                        "firstNamePhonetics": "タロウ",
+                        "employeeGroups": [
+                          {
+                            "code": "0001",
+                            "name": "人事部"
+                          },
+                          {
+                            "code": "0002",
+                            "name": "総務部"
+                          }
+                        ]
+                      },
+                      "timeRecord": [
+                        {
+                          "time": "2016-05-01T09:00:00+09:00",
+                          "code": "1",
+                          "name": "出勤",
+                          "divisionCode": "1000",
+                          "divisionName": "本社",
+                          "latitude": 35.6672237,
+                          "longitude": 139.7422207
+                        },
+                        {
+                          "time": "2015-05-01T18:00:00+09:00",
+                          "code": "2",
+                          "name": "退勤",
+                          "divisionCode": "1000",
+                          "divisionName": "本社",
+                          "credentialCode": 300,
+                          "credentialName": "KOTSL",
+                          "latitude": 35.6672237,
+                          "longitude": 139.7422207
+                        },
+                        {
+                          "time": "2016-05-01T10:00:00+09:00",
+                          "code": "3",
+                          "name": "休憩開始",
+                          "divisionCode": "1000",
+                          "divisionName": "本社"
+                        },
+                        {
+                          "time": "2016-05-01T11:00:00+09:00",
+                          "code": "4",
+                          "name": "休憩終了",
+                          "divisionCode": "1000",
+                          "divisionName": "本社"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
