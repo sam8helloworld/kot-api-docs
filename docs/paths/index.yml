@@ -33,3 +33,5 @@
   $ref: ./daily-working/daily-working_timerecord.yml
 /daily-workings/timerecord/:
   $ref: ./daily-working/daily-working_timerecords.yml
+/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}:
+  $ref: ./daily-working/daily-working_timerecords.yml
