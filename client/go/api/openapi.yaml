@@ -865,7 +865,7 @@ paths:
                       divisionName: 正社員
                       divisionCode: "1000"
               schema:
-                $ref: '#/components/schemas/daily_working_timerecord_response'
+                $ref: '#/components/schemas/RegisterDailyWorkingTimerecord_201_response'
           description: ""
           headers:
             Content-Type:
@@ -1015,7 +1015,7 @@ paths:
                       divisionCode: "1000"
                       divisionName: 本社
                 items:
-                  $ref: '#/components/schemas/daily_working_timerecord_response'
+                  $ref: '#/components/schemas/GetDailyWorkingTimerecords_200_response_inner'
                 type: array
           description: ""
           headers:
@@ -1301,7 +1301,7 @@ components:
         employeeGroups:
           description: 従業員グループ情報
           items:
-            $ref: '#/components/schemas/employee_response_employeeGroups_inner'
+            $ref: '#/components/schemas/GetDailyWorkingTimerecords_200_response_inner_currentDateEmployee_employeeGroups_inner'
           type: array
         lastNamePhonetics:
           description: 姓（カナ）
@@ -1559,7 +1559,7 @@ components:
         customDailyWorkings:
           $ref: '#/components/schemas/daily_working_response_customDailyWorkings'
         currentDateEmployee:
-          $ref: '#/components/schemas/daily_working_response_currentDateEmployee'
+          $ref: '#/components/schemas/GetDailyWorkingTimerecords_200_response_inner_currentDateEmployee'
       required:
       - assigned
       - autoBreakOff
@@ -1623,61 +1623,6 @@ components:
       required:
       - date
       - time
-      type: object
-    daily_working_timerecord_response:
-      example:
-        date: 2000-01-23
-        timeRecord:
-        - divisionCode: divisionCode
-          code: "1"
-          latitude: 0.8008281904610115
-          name: name
-          divisionName: divisionName
-          time: 2000-01-23T04:56:07.000+00:00
-          longitude: 6.027456183070403
-        - divisionCode: divisionCode
-          code: "1"
-          latitude: 0.8008281904610115
-          name: name
-          divisionName: divisionName
-          time: 2000-01-23T04:56:07.000+00:00
-          longitude: 6.027456183070403
-        currentDateEmployee:
-          divisionCode: divisionCode
-          lastName: lastName
-          firstName: firstName
-          code: code
-          gender: no_selected
-          divisionName: divisionName
-          typeName: typeName
-          firstNamePhonetics: firstNamePhonetics
-          lastNamePhonetics: lastNamePhonetics
-          typeCode: typeCode
-          employeeGroups:
-          - code: code
-            name: name
-          - code: code
-            name: name
-        employeeKey: employeeKey
-      properties:
-        date:
-          description: 日時
-          format: date
-          type: string
-        employeeKey:
-          description: 従業員識別キー（従業員コードが変更されても不変）
-          type: string
-        timeRecord:
-          description: 打刻
-          items:
-            $ref: '#/components/schemas/daily_working_timerecord_response_timeRecord_inner'
-          type: array
-        currentDateEmployee:
-          $ref: '#/components/schemas/daily_working_response_currentDateEmployee'
-      required:
-      - date
-      - employeeKey
-      - timeRecord
       type: object
     RefreshAccessToken_201_response:
       example:
@@ -1920,7 +1865,85 @@ components:
       - code
       - name
       type: object
-    employee_response_employeeGroups_inner:
+    RegisterDailyWorkingTimerecord_201_response_timeRecord:
+      description: 打刻
+      example:
+        divisionCode: divisionCode
+        code: "1"
+        latitude: 0.8008281904610115
+        name: name
+        divisionName: divisionName
+        time: 2000-01-23T04:56:07.000+00:00
+        longitude: 6.027456183070403
+      properties:
+        time:
+          description: 打刻時間
+          format: date-time
+          type: string
+        code:
+          description: 打刻種別コード
+          enum:
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "7"
+          - "8"
+          type: string
+        name:
+          description: 打刻種別名
+          type: string
+        divisionCode:
+          description: 打刻所属コード
+          type: string
+        divisionName:
+          description: 打刻所属名
+          type: string
+        latitude:
+          description: 緯度
+          format: double
+          type: number
+        longitude:
+          description: 経度
+          format: double
+          type: number
+      required:
+      - code
+      - divisionCode
+      - divisionName
+      - latitude
+      - longitude
+      - name
+      - time
+      type: object
+    RegisterDailyWorkingTimerecord_201_response:
+      example:
+        date: 2000-01-23
+        timeRecord:
+          divisionCode: divisionCode
+          code: "1"
+          latitude: 0.8008281904610115
+          name: name
+          divisionName: divisionName
+          time: 2000-01-23T04:56:07.000+00:00
+          longitude: 6.027456183070403
+        employeeKey: employeeKey
+      properties:
+        date:
+          description: 日時
+          format: date
+          type: string
+        employeeKey:
+          description: 従業員識別キー（従業員コードが変更されても不変）
+          type: string
+        timeRecord:
+          $ref: '#/components/schemas/RegisterDailyWorkingTimerecord_201_response_timeRecord'
+      required:
+      - date
+      - employeeKey
+      - timeRecord
+      type: object
+    GetDailyWorkingTimerecords_200_response_inner_currentDateEmployee_employeeGroups_inner:
       example:
         code: code
         name: name
@@ -1934,6 +1957,98 @@ components:
       required:
       - code
       - name
+      type: object
+    GetDailyWorkingTimerecords_200_response_inner_currentDateEmployee:
+      description: 今日時点の従業員データ
+      example:
+        divisionCode: divisionCode
+        lastName: lastName
+        firstName: firstName
+        code: code
+        gender: no_selected
+        divisionName: divisionName
+        typeName: typeName
+        firstNamePhonetics: firstNamePhonetics
+        lastNamePhonetics: lastNamePhonetics
+        typeCode: typeCode
+        employeeGroups:
+        - code: code
+          name: name
+        - code: code
+          name: name
+      properties:
+        divisionCode:
+          description: 所属コード
+          type: string
+        divisionName:
+          description: 所属名
+          type: string
+        gender:
+          description: 性別（no_selected： 選択しない　male： 男性　female： 女性）
+          enum:
+          - no_selected
+          - male
+          - female
+          type: string
+        typeCode:
+          description: 雇用区分コード
+          type: string
+        typeName:
+          description: 雇用区分名
+          type: string
+        code:
+          description: 従業員コード
+          type: string
+        lastName:
+          description: 姓
+          type: string
+        firstName:
+          description: 名
+          type: string
+        lastNamePhonetics:
+          description: 姓（カナ）
+          type: string
+        firstNamePhonetics:
+          description: 名（カナ）
+          type: string
+        employeeGroups:
+          description: 従業員グループ情報
+          items:
+            $ref: '#/components/schemas/GetDailyWorkingTimerecords_200_response_inner_currentDateEmployee_employeeGroups_inner'
+          type: array
+      required:
+      - code
+      - divisionCode
+      - divisionName
+      - employeeGroups
+      - firstName
+      - firstNamePhonetics
+      - gender
+      - lastName
+      - lastNamePhonetics
+      - typeCode
+      - typeName
+      type: object
+    GetDailyWorkingTimerecords_200_response_inner:
+      properties:
+        date:
+          description: 日時
+          format: date
+          type: string
+        employeeKey:
+          description: 従業員識別キー（従業員コードが変更されても不変）
+          type: string
+        timeRecord:
+          description: 打刻
+          items:
+            $ref: '#/paths/~1daily-workings~1timerecord~1%7BemployeeKey%7D/post/responses/201/content/application~1json/schema/properties/timeRecord'
+          type: array
+        currentDateEmployee:
+          $ref: '#/components/schemas/GetDailyWorkingTimerecords_200_response_inner_currentDateEmployee'
+      required:
+      - date
+      - employeeKey
+      - timeRecord
       type: object
     daily_working_response_holidaysObtained_fulltimeHoliday:
       example:
@@ -2058,127 +2173,6 @@ components:
       - calculationUnitCode
       - code
       - name
-      type: object
-    daily_working_response_currentDateEmployee:
-      description: 今日時点の従業員データ
-      example:
-        divisionCode: divisionCode
-        lastName: lastName
-        firstName: firstName
-        code: code
-        gender: no_selected
-        divisionName: divisionName
-        typeName: typeName
-        firstNamePhonetics: firstNamePhonetics
-        lastNamePhonetics: lastNamePhonetics
-        typeCode: typeCode
-        employeeGroups:
-        - code: code
-          name: name
-        - code: code
-          name: name
-      properties:
-        divisionCode:
-          description: 所属コード
-          type: string
-        divisionName:
-          description: 所属名
-          type: string
-        gender:
-          description: 性別（no_selected： 選択しない　male： 男性　female： 女性）
-          enum:
-          - no_selected
-          - male
-          - female
-          type: string
-        typeCode:
-          description: 雇用区分コード
-          type: string
-        typeName:
-          description: 雇用区分名
-          type: string
-        code:
-          description: 従業員コード
-          type: string
-        lastName:
-          description: 姓
-          type: string
-        firstName:
-          description: 名
-          type: string
-        lastNamePhonetics:
-          description: 姓（カナ）
-          type: string
-        firstNamePhonetics:
-          description: 名（カナ）
-          type: string
-        employeeGroups:
-          description: 従業員グループ情報
-          items:
-            $ref: '#/components/schemas/employee_response_employeeGroups_inner'
-          type: array
-      required:
-      - code
-      - divisionCode
-      - divisionName
-      - employeeGroups
-      - firstName
-      - firstNamePhonetics
-      - gender
-      - lastName
-      - lastNamePhonetics
-      - typeCode
-      - typeName
-      type: object
-    daily_working_timerecord_response_timeRecord_inner:
-      example:
-        divisionCode: divisionCode
-        code: "1"
-        latitude: 0.8008281904610115
-        name: name
-        divisionName: divisionName
-        time: 2000-01-23T04:56:07.000+00:00
-        longitude: 6.027456183070403
-      properties:
-        time:
-          description: 打刻時間
-          format: date-time
-          type: string
-        code:
-          description: 打刻種別コード
-          enum:
-          - "1"
-          - "2"
-          - "3"
-          - "4"
-          - "7"
-          - "8"
-          type: string
-        name:
-          description: 打刻種別名
-          type: string
-        divisionCode:
-          description: 打刻所属コード
-          type: string
-        divisionName:
-          description: 打刻所属名
-          type: string
-        latitude:
-          description: 緯度
-          format: double
-          type: number
-        longitude:
-          description: 経度
-          format: double
-          type: number
-      required:
-      - code
-      - divisionCode
-      - divisionName
-      - latitude
-      - longitude
-      - name
-      - time
       type: object
   securitySchemes:
     Bearer:

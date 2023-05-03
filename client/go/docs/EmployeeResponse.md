@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **Key** | **string** | 従業員識別キー（従業員コードが変更されても不変） | 
 **LastName** | **string** | 姓 | 
 **FirstName** | **string** | 名 | 
-**EmployeeGroups** | [**[]EmployeeResponseEmployeeGroupsInner**](EmployeeResponseEmployeeGroupsInner.md) | 従業員グループ情報 | 
+**EmployeeGroups** | [**[]GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner**](GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner.md) | 従業員グループ情報 | 
 **LastNamePhonetics** | Pointer to **string** | 姓（カナ） | [optional] 
 **FirstNamePhonetics** | Pointer to **string** | 名（カナ） | [optional] 
 **HiredDate** | Pointer to **string** | 入社年月日 | [optional] 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewEmployeeResponse
 
-`func NewEmployeeResponse(divisionCode string, divisionName string, gender string, typeCode string, typeName string, code string, key string, lastName string, firstName string, employeeGroups []EmployeeResponseEmployeeGroupsInner, ) *EmployeeResponse`
+`func NewEmployeeResponse(divisionCode string, divisionName string, gender string, typeCode string, typeName string, code string, key string, lastName string, firstName string, employeeGroups []GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner, ) *EmployeeResponse`
 
 NewEmployeeResponse instantiates a new EmployeeResponse object
 This constructor will assign default values to properties that have it defined,
@@ -223,20 +223,20 @@ SetFirstName sets FirstName field to given value.
 
 ### GetEmployeeGroups
 
-`func (o *EmployeeResponse) GetEmployeeGroups() []EmployeeResponseEmployeeGroupsInner`
+`func (o *EmployeeResponse) GetEmployeeGroups() []GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner`
 
 GetEmployeeGroups returns the EmployeeGroups field if non-nil, zero value otherwise.
 
 ### GetEmployeeGroupsOk
 
-`func (o *EmployeeResponse) GetEmployeeGroupsOk() (*[]EmployeeResponseEmployeeGroupsInner, bool)`
+`func (o *EmployeeResponse) GetEmployeeGroupsOk() (*[]GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner, bool)`
 
 GetEmployeeGroupsOk returns a tuple with the EmployeeGroups field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEmployeeGroups
 
-`func (o *EmployeeResponse) SetEmployeeGroups(v []EmployeeResponseEmployeeGroupsInner)`
+`func (o *EmployeeResponse) SetEmployeeGroups(v []GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner)`
 
 SetEmployeeGroups sets EmployeeGroups field to given value.
 

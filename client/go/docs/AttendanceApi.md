@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 ## GetDailyWorkingTimerecords
 
-> []DailyWorkingTimerecordResponse GetDailyWorkingTimerecords(ctx).EmployeeKeys(employeeKeys).Division(division).Ondivision(ondivision).Start(start).End(end).AdditionalFields(additionalFields).Execute()
+> []GetDailyWorkingTimerecords200ResponseInner GetDailyWorkingTimerecords(ctx).EmployeeKeys(employeeKeys).Division(division).Ondivision(ondivision).Start(start).End(end).AdditionalFields(additionalFields).Execute()
 
 
 
@@ -124,7 +124,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AttendanceApi.GetDailyWorkingTimerecords``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetDailyWorkingTimerecords`: []DailyWorkingTimerecordResponse
+    // response from `GetDailyWorkingTimerecords`: []GetDailyWorkingTimerecords200ResponseInner
     fmt.Fprintf(os.Stdout, "Response from `AttendanceApi.GetDailyWorkingTimerecords`: %v\n", resp)
 }
 ```
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]DailyWorkingTimerecordResponse**](DailyWorkingTimerecordResponse.md)
+[**[]GetDailyWorkingTimerecords200ResponseInner**](GetDailyWorkingTimerecords200ResponseInner.md)
 
 ### Authorization
 
@@ -242,7 +242,7 @@ Name | Type | Description  | Notes
 
 ## RegisterDailyWorkingTimerecord
 
-> DailyWorkingTimerecordResponse RegisterDailyWorkingTimerecord(ctx, employeeKey).DailyWorkingTimerecordRequest(dailyWorkingTimerecordRequest).Execute()
+> RegisterDailyWorkingTimerecord201Response RegisterDailyWorkingTimerecord(ctx, employeeKey).DailyWorkingTimerecordRequest(dailyWorkingTimerecordRequest).Execute()
 
 
 
@@ -272,7 +272,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AttendanceApi.RegisterDailyWorkingTimerecord``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `RegisterDailyWorkingTimerecord`: DailyWorkingTimerecordResponse
+    // response from `RegisterDailyWorkingTimerecord`: RegisterDailyWorkingTimerecord201Response
     fmt.Fprintf(os.Stdout, "Response from `AttendanceApi.RegisterDailyWorkingTimerecord`: %v\n", resp)
 }
 ```
@@ -297,7 +297,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DailyWorkingTimerecordResponse**](DailyWorkingTimerecordResponse.md)
+[**RegisterDailyWorkingTimerecord201Response**](RegisterDailyWorkingTimerecord201Response.md)
 
 ### Authorization
 

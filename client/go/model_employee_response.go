@@ -38,7 +38,7 @@ type EmployeeResponse struct {
 	// 名
 	FirstName string `json:"firstName"`
 	// 従業員グループ情報
-	EmployeeGroups []EmployeeResponseEmployeeGroupsInner `json:"employeeGroups"`
+	EmployeeGroups []GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner `json:"employeeGroups"`
 	// 姓（カナ）
 	LastNamePhonetics *string `json:"lastNamePhonetics,omitempty"`
 	// 名（カナ）
@@ -59,7 +59,7 @@ type EmployeeResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEmployeeResponse(divisionCode string, divisionName string, gender string, typeCode string, typeName string, code string, key string, lastName string, firstName string, employeeGroups []EmployeeResponseEmployeeGroupsInner) *EmployeeResponse {
+func NewEmployeeResponse(divisionCode string, divisionName string, gender string, typeCode string, typeName string, code string, key string, lastName string, firstName string, employeeGroups []GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner) *EmployeeResponse {
 	this := EmployeeResponse{}
 	this.DivisionCode = divisionCode
 	this.DivisionName = divisionName
@@ -299,9 +299,9 @@ func (o *EmployeeResponse) SetFirstName(v string) {
 }
 
 // GetEmployeeGroups returns the EmployeeGroups field value
-func (o *EmployeeResponse) GetEmployeeGroups() []EmployeeResponseEmployeeGroupsInner {
+func (o *EmployeeResponse) GetEmployeeGroups() []GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner {
 	if o == nil {
-		var ret []EmployeeResponseEmployeeGroupsInner
+		var ret []GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner
 		return ret
 	}
 
@@ -310,7 +310,7 @@ func (o *EmployeeResponse) GetEmployeeGroups() []EmployeeResponseEmployeeGroupsI
 
 // GetEmployeeGroupsOk returns a tuple with the EmployeeGroups field value
 // and a boolean to check if the value has been set.
-func (o *EmployeeResponse) GetEmployeeGroupsOk() ([]EmployeeResponseEmployeeGroupsInner, bool) {
+func (o *EmployeeResponse) GetEmployeeGroupsOk() ([]GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -318,7 +318,7 @@ func (o *EmployeeResponse) GetEmployeeGroupsOk() ([]EmployeeResponseEmployeeGrou
 }
 
 // SetEmployeeGroups sets field value
-func (o *EmployeeResponse) SetEmployeeGroups(v []EmployeeResponseEmployeeGroupsInner) {
+func (o *EmployeeResponse) SetEmployeeGroups(v []GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner) {
 	o.EmployeeGroups = v
 }
 

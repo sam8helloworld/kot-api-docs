@@ -203,7 +203,7 @@ func (r ApiGetDailyWorkingTimerecordsRequest) AdditionalFields(additionalFields 
 	return r
 }
 
-func (r ApiGetDailyWorkingTimerecordsRequest) Execute() ([]DailyWorkingTimerecordResponse, *http.Response, error) {
+func (r ApiGetDailyWorkingTimerecordsRequest) Execute() ([]GetDailyWorkingTimerecords200ResponseInner, *http.Response, error) {
 	return r.ApiService.GetDailyWorkingTimerecordsExecute(r)
 }
 
@@ -223,13 +223,13 @@ func (a *AttendanceApiService) GetDailyWorkingTimerecords(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return []DailyWorkingTimerecordResponse
-func (a *AttendanceApiService) GetDailyWorkingTimerecordsExecute(r ApiGetDailyWorkingTimerecordsRequest) ([]DailyWorkingTimerecordResponse, *http.Response, error) {
+//  @return []GetDailyWorkingTimerecords200ResponseInner
+func (a *AttendanceApiService) GetDailyWorkingTimerecordsExecute(r ApiGetDailyWorkingTimerecordsRequest) ([]GetDailyWorkingTimerecords200ResponseInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []DailyWorkingTimerecordResponse
+		localVarReturnValue  []GetDailyWorkingTimerecords200ResponseInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AttendanceApiService.GetDailyWorkingTimerecords")
@@ -476,7 +476,7 @@ func (r ApiRegisterDailyWorkingTimerecordRequest) DailyWorkingTimerecordRequest(
 	return r
 }
 
-func (r ApiRegisterDailyWorkingTimerecordRequest) Execute() (*DailyWorkingTimerecordResponse, *http.Response, error) {
+func (r ApiRegisterDailyWorkingTimerecordRequest) Execute() (*RegisterDailyWorkingTimerecord201Response, *http.Response, error) {
 	return r.ApiService.RegisterDailyWorkingTimerecordExecute(r)
 }
 
@@ -498,13 +498,13 @@ func (a *AttendanceApiService) RegisterDailyWorkingTimerecord(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return DailyWorkingTimerecordResponse
-func (a *AttendanceApiService) RegisterDailyWorkingTimerecordExecute(r ApiRegisterDailyWorkingTimerecordRequest) (*DailyWorkingTimerecordResponse, *http.Response, error) {
+//  @return RegisterDailyWorkingTimerecord201Response
+func (a *AttendanceApiService) RegisterDailyWorkingTimerecordExecute(r ApiRegisterDailyWorkingTimerecordRequest) (*RegisterDailyWorkingTimerecord201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DailyWorkingTimerecordResponse
+		localVarReturnValue  *RegisterDailyWorkingTimerecord201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AttendanceApiService.RegisterDailyWorkingTimerecord")
