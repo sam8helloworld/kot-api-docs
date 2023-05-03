@@ -74,4 +74,23 @@ func Test_openapi_EmployeeApiService(t *testing.T) {
 		assert.Equal(t, 201, httpRes.StatusCode)
 	})
 
+	t.Run("Test EmployeeApiService UpdateEmployee", func(t *testing.T) {
+		employeeKey := "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3"
+		body := openapiclient.UpdateEmployeeRequest{
+			DivisionCode:   openapiclient.PtrString("1000"),
+			Gender:         openapiclient.PtrString("male"),
+			TypeCode:       openapiclient.PtrString("1"),
+			Code:           openapiclient.PtrString("1000"),
+			LastName:       openapiclient.PtrString("勤怠"),
+			FirstName:      openapiclient.PtrString("太郎"),
+			EmailAddresses: []string{"kintaitarou@h-t.co.jp"},
+		}
+		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
+		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		resp, httpRes, err := apiClient.EmployeeApi.UpdateEmployee(ctx, employeeKey).UpdateDate("2016-05-01").UpdateEmployeeRequest(body).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 201, httpRes.StatusCode)
+	})
 }
