@@ -93,4 +93,14 @@ func Test_openapi_EmployeeApiService(t *testing.T) {
 		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 	})
+
+	t.Run("Test EmployeeApiService DeleteEmployee", func(t *testing.T) {
+		employeeKey := "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3"
+		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
+		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		httpRes, err := apiClient.EmployeeApi.DeleteEmployee(ctx, employeeKey).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 204, httpRes.StatusCode)
+	})
 }
