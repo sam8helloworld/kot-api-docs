@@ -1,5 +1,6 @@
 get:
   operationId: GetEmployee
+  summary: /employees/{employeeCode}{?date,includeResigner,additionalFields}
   parameters:
     - $ref: "../../components/parameters/employeeCode.yml"
     - $ref: "../../components/parameters/date.yml"

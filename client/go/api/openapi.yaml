@@ -180,8 +180,86 @@ paths:
                 example: application/json
                 type: string
               style: simple
+      summary: "/administrators{?additionalFields}"
       tags:
       - Administrator
+  /employees/{employeeCode}:
+    get:
+      description: 指定した従業員のデータを取得する。
+      externalDocs:
+        description: 従業員指定
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-get-1
+      operationId: GetEmployee
+      parameters:
+      - description: 詳細を取得したい従業員コード
+        explode: false
+        in: path
+        name: employeeCode
+        required: true
+        schema:
+          example: "1000"
+          type: string
+        style: simple
+      - description: |-
+          指定された年月日時点での従業員のデータを表示
+          ・過去日は最大3年前まで
+          ・未来日は最大1年後まで
+        explode: true
+        in: query
+        name: date
+        required: false
+        schema:
+          description: defaultは当日
+          format: date
+          type: string
+        style: form
+      - description: 指定された年月日時点で退職済みの従業員を含む場合 True
+        explode: true
+        in: query
+        name: includeResigner
+        required: false
+        schema:
+          default: false
+          example: true
+          type: boolean
+        style: form
+      - description: 指定されたプロパティをレスポンスに追加
+        explode: false
+        in: query
+        name: additionalFields
+        required: false
+        schema:
+          example:
+          - emailAddresses
+          items:
+            enum:
+            - lastNamePhonetics
+            - firstNamePhonetics
+            - hiredDate
+            - birthDate
+            - resignationDate
+            - emailAddresses
+            - allDayRegardingWorkInMinute
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/employee_response'
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      summary: "/employees/{employeeCode}{?date,includeResigner,additionalFields}"
+      tags:
+      - Employee
   /employees:
     get:
       description: 従業員データの一覧を取得する。
@@ -289,6 +367,7 @@ paths:
                 example: application/json
                 type: string
               style: simple
+      summary: "/employees{?date,division,includeResigner,additionalFields}"
       tags:
       - Employee
     post:
@@ -308,82 +387,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RegisterEmployee_201_response'
-          description: ""
-          headers:
-            Content-Type:
-              explode: false
-              schema:
-                example: application/json
-                type: string
-              style: simple
-      tags:
-      - Employee
-  /employees/{employeeCode}:
-    get:
-      description: 指定した従業員のデータを取得する。
-      externalDocs:
-        description: 従業員指定
-        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-get-1
-      operationId: GetEmployee
-      parameters:
-      - description: 詳細を取得したい従業員コード
-        explode: false
-        in: path
-        name: employeeCode
-        required: true
-        schema:
-          example: "1000"
-          type: string
-        style: simple
-      - description: |-
-          指定された年月日時点での従業員のデータを表示
-          ・過去日は最大3年前まで
-          ・未来日は最大1年後まで
-        explode: true
-        in: query
-        name: date
-        required: false
-        schema:
-          description: defaultは当日
-          format: date
-          type: string
-        style: form
-      - description: 指定された年月日時点で退職済みの従業員を含む場合 True
-        explode: true
-        in: query
-        name: includeResigner
-        required: false
-        schema:
-          default: false
-          example: true
-          type: boolean
-        style: form
-      - description: 指定されたプロパティをレスポンスに追加
-        explode: false
-        in: query
-        name: additionalFields
-        required: false
-        schema:
-          example:
-          - emailAddresses
-          items:
-            enum:
-            - lastNamePhonetics
-            - firstNamePhonetics
-            - hiredDate
-            - birthDate
-            - resignationDate
-            - emailAddresses
-            - allDayRegardingWorkInMinute
-            type: string
-          type: array
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/employee_response'
           description: ""
           headers:
             Content-Type:
@@ -414,6 +417,7 @@ paths:
       responses:
         "204":
           description: This response has no content.
+      summary: "/employees/{employeeKey}"
       tags:
       - Employee
     put:
@@ -465,6 +469,7 @@ paths:
                 example: application/json
                 type: string
               style: simple
+      summary: "/employees/{employeeKey}{?updateDate}"
       tags:
       - Employee
   /divisions:
@@ -803,78 +808,6 @@ paths:
       tags:
       - Attendance
   /daily-workings/timerecord/{employeeKey}:
-    get:
-      description: 指定した年月日の日別打刻データを取得する。
-      externalDocs:
-        description: 年月日指定
-        url: https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0-%E6%97%A5%E5%88%A5%E6%89%93%E5%88%BB%E3%83%87%E3%83%BC%E3%82%BF-get-1
-      operationId: GetDailyWorkingTimerecord
-      parameters:
-      - description: |-
-          指定された年月日時点での従業員のデータを表示
-          ・過去日は最大3年前まで
-          ・未来日は最大1年後まで
-        explode: true
-        in: query
-        name: date
-        required: false
-        schema:
-          description: defaultは当日
-          format: date
-          type: string
-        style: form
-      - description: 所属コード
-        explode: true
-        in: query
-        name: division
-        required: false
-        schema:
-          example: "1000"
-          type: string
-        style: form
-      - description: |-
-          ・true:所属に基づいた勤務データ
-          ・false:出勤先に基づいた勤務データ
-          ・divisionが指定されている場合のみ使用可能
-        explode: true
-        in: query
-        name: ondivision
-        required: false
-        schema:
-          default: true
-          example: true
-          type: boolean
-        style: form
-      - description: 指定されたプロパティをレスポンスに追加
-        explode: false
-        in: query
-        name: additionalFields
-        required: false
-        schema:
-          example:
-          - currentDateEmployee
-          items:
-            enum:
-            - currentDateEmployee
-            type: string
-          type: array
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetDailyWorkingTimerecord_200_response'
-          description: ""
-          headers:
-            Content-Type:
-              explode: false
-              schema:
-                example: application/json
-                type: string
-              style: simple
-      tags:
-      - Attendance
     post:
       description: 指定した従業員の打刻データを登録する。(1件)
       externalDocs:
@@ -1099,28 +1032,26 @@ paths:
               style: simple
       tags:
       - Attendance
-  /daily-workings/timerecord/{date}{?division,ondivision,additionalFields}:
+  /daily-workings/timerecord/{date}:
     get:
-      description: 日別打刻データの一覧を取得する。 従業員を指定した場合、対象従業員の日別打刻データを取得する。
+      description: 指定した年月日の日別打刻データを取得する。
       externalDocs:
-        description: 一覧
-        url: https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0-%E6%97%A5%E5%88%A5%E6%89%93%E5%88%BB%E3%83%87%E3%83%BC%E3%82%BF-get
-      operationId: GetDailyWorkingTimerecords
+        description: 年月日指定
+        url: https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0-%E6%97%A5%E5%88%A5%E6%89%93%E5%88%BB%E3%83%87%E3%83%BC%E3%82%BF-get-1
+      operationId: GetDailyWorkingTimerecord
       parameters:
       - description: |-
-          従業員識別キー（従業員コードが変更されても不変）
-          ,区切りで複数従業員の指定可能
-          divisionが指定されていない場合のみ使用可能
-        explode: false
+          指定された年月日時点での従業員のデータを表示
+          ・過去日は最大3年前まで
+          ・未来日は最大1年後まで
+        explode: true
         in: query
-        name: employeeKeys
+        name: date
         required: false
         schema:
-          example:
-          - 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
-          items:
-            type: string
-          type: array
+          description: defaultは当日
+          format: date
+          type: string
         style: form
       - description: 所属コード
         explode: true
@@ -1144,32 +1075,6 @@ paths:
           example: true
           type: boolean
         style: form
-      - description: |-
-          取得したい期間の開始年月日
-          ・過去日は最大3年前まで
-        explode: true
-        in: query
-        name: start
-        required: false
-        schema:
-          description: defaultは当日
-          format: date
-          type: string
-        style: form
-      - description: |-
-          取得したい期間の終了年月日
-          ・startとendは同時に指定
-          ・期間は最大62日
-          ・未来日は最大1年後まで
-        explode: true
-        in: query
-        name: end
-        required: false
-        schema:
-          description: defaultは当日
-          format: date
-          type: string
-        style: form
       - description: 指定されたプロパティをレスポンスに追加
         explode: false
         in: query
@@ -1189,57 +1094,7 @@ paths:
           content:
             application/json:
               schema:
-                example:
-                - date: 2016-05-01
-                  dailyWorkings:
-                  - date: 2016-05-01
-                    employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
-                    currentDateEmployee:
-                      divisionCode: "1000"
-                      divisionName: 本社
-                      gender: male
-                      typeCode: "1"
-                      typeName: 正社員
-                      code: "1000"
-                      lastName: 勤怠
-                      firstName: 太郎
-                      lastNamePhonetics: キンタイ
-                      firstNamePhonetics: タロウ
-                      employeeGroups:
-                      - code: "0001"
-                        name: 人事部
-                      - code: "0002"
-                        name: 総務部
-                    timeRecord:
-                    - time: 2016-05-01T09:00:00+09:00
-                      code: "1"
-                      name: 出勤
-                      divisionCode: "1000"
-                      divisionName: 本社
-                      latitude: 35.6672237
-                      longitude: 139.7422207
-                    - time: 2015-05-01T18:00:00+09:00
-                      code: "2"
-                      name: 退勤
-                      divisionCode: "1000"
-                      divisionName: 本社
-                      credentialCode: 300
-                      credentialName: KOTSL
-                      latitude: 35.6672237
-                      longitude: 139.7422207
-                    - time: 2016-05-01T10:00:00+09:00
-                      code: "3"
-                      name: 休憩開始
-                      divisionCode: "1000"
-                      divisionName: 本社
-                    - time: 2016-05-01T11:00:00+09:00
-                      code: "4"
-                      name: 休憩終了
-                      divisionCode: "1000"
-                      divisionName: 本社
-                items:
-                  $ref: '#/components/schemas/GetDailyWorkingTimerecords_200_response_inner'
-                type: array
+                $ref: '#/components/schemas/GetDailyWorkingTimerecord_200_response'
           description: ""
           headers:
             Content-Type:
@@ -1248,6 +1103,7 @@ paths:
                 example: application/json
                 type: string
               style: simple
+      summary: "/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}"
       tags:
       - Attendance
 components:
@@ -2139,67 +1995,6 @@ components:
       - code
       - name
       type: object
-    GetDailyWorkingTimerecord_200_response:
-      example:
-        date: 2016-05-01
-        dailyWorkings:
-        - date: 2016-05-01
-          employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
-          currentDateEmployee:
-            divisionCode: "1000"
-            divisionName: 本社
-            gender: male
-            typeCode: "1"
-            typeName: 正社員
-            code: "1000"
-            lastName: 勤怠
-            firstName: 太郎
-            lastNamePhonetics: キンタイ
-            firstNamePhonetics: タロウ
-            employeeGroups:
-            - code: "0001"
-              name: 人事部
-            - code: "0002"
-              name: 総務部
-          timeRecord:
-          - time: 2016-05-01T09:00:00+09:00
-            code: "1"
-            name: 出勤
-            divisionCode: "1000"
-            divisionName: 本社
-            latitude: 35.6672237
-            longitude: 139.7422207
-          - time: 2015-05-01T18:00:00+09:00
-            code: "2"
-            name: 退勤
-            divisionCode: "1000"
-            divisionName: 本社
-            credentialCode: 300
-            credentialName: KOTSL
-            latitude: 35.6672237
-            longitude: 139.7422207
-          - time: 2016-05-01T10:00:00+09:00
-            code: "3"
-            name: 休憩開始
-            divisionCode: "1000"
-            divisionName: 本社
-          - time: 2016-05-01T11:00:00+09:00
-            code: "4"
-            name: 休憩終了
-            divisionCode: "1000"
-            divisionName: 本社
-      properties:
-        date:
-          format: date
-          type: string
-        dailyWorkings:
-          items:
-            $ref: '#/components/schemas/daily_working_timerecord'
-          type: array
-      required:
-      - dailyWorkings
-      - date
-      type: object
     RegisterDailyWorkingTimerecord_201_response:
       example:
         date: 2000-01-23
@@ -2333,6 +2128,67 @@ components:
       - date
       - employeeKey
       - timeRecord
+      type: object
+    GetDailyWorkingTimerecord_200_response:
+      example:
+        date: 2016-05-01
+        dailyWorkings:
+        - date: 2016-05-01
+          employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+          currentDateEmployee:
+            divisionCode: "1000"
+            divisionName: 本社
+            gender: male
+            typeCode: "1"
+            typeName: 正社員
+            code: "1000"
+            lastName: 勤怠
+            firstName: 太郎
+            lastNamePhonetics: キンタイ
+            firstNamePhonetics: タロウ
+            employeeGroups:
+            - code: "0001"
+              name: 人事部
+            - code: "0002"
+              name: 総務部
+          timeRecord:
+          - time: 2016-05-01T09:00:00+09:00
+            code: "1"
+            name: 出勤
+            divisionCode: "1000"
+            divisionName: 本社
+            latitude: 35.6672237
+            longitude: 139.7422207
+          - time: 2015-05-01T18:00:00+09:00
+            code: "2"
+            name: 退勤
+            divisionCode: "1000"
+            divisionName: 本社
+            credentialCode: 300
+            credentialName: KOTSL
+            latitude: 35.6672237
+            longitude: 139.7422207
+          - time: 2016-05-01T10:00:00+09:00
+            code: "3"
+            name: 休憩開始
+            divisionCode: "1000"
+            divisionName: 本社
+          - time: 2016-05-01T11:00:00+09:00
+            code: "4"
+            name: 休憩終了
+            divisionCode: "1000"
+            divisionName: 本社
+      properties:
+        date:
+          format: date
+          type: string
+        dailyWorkings:
+          items:
+            $ref: '#/components/schemas/daily_working_timerecord'
+          type: array
+      required:
+      - dailyWorkings
+      - date
       type: object
     daily_working_response_holidaysObtained_fulltimeHoliday:
       example:

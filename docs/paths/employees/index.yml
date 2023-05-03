@@ -1,5 +1,6 @@
 get:
   operationId: GetEmployees
+  summary: /employees{?date,division,includeResigner,additionalFields}
   parameters:
     - $ref: "../../components/parameters/date.yml"
     - $ref: "../../components/parameters/division.yml"
@@ -72,6 +73,7 @@ get:
                   ]
                 }
               ]
+
 post:
   operationId: RegisterEmployee
   tags:

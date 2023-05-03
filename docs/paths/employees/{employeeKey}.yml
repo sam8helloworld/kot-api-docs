@@ -1,5 +1,20 @@
+delete:
+  operationId: DeleteEmployee
+  summary: /employees/{employeeKey}
+  parameters:
+    - $ref: "../../components/parameters/employeeKey.yml"
+  tags:
+    - Employee
+  description: 従業員のデータを削除する。(1件)
+  externalDocs:
+    description: 削除
+    url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-delete
+  responses:
+    "204":
+      description: "This response has no content."
 put:
   operationId: UpdateEmployee
+  summary: /employees/{employeeKey}{?updateDate}
   parameters:
     - $ref: "../../components/parameters/employeeKey.yml"
     - $ref: "../../components/parameters/updateDate.yml"
@@ -110,16 +125,3 @@ put:
                 ],
                 "allDayRegardingWorkInMinute": 480
               }
-delete:
-  operationId: DeleteEmployee
-  parameters:
-    - $ref: "../../components/parameters/employeeKey.yml"
-  tags:
-    - Employee
-  description: 従業員のデータを削除する。(1件)
-  externalDocs:
-    description: 削除
-    url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-delete
-  responses:
-    "204":
-      description: "This response has no content."

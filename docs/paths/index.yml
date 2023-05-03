@@ -1,37 +1,37 @@
 /tokens/{token}:
-  $ref: ./token/token.yml
+  $ref: ./tokens/{token}.yml
 /tokens/{token}/available:
-  $ref: ./token/token_available.yml
+  $ref: ./tokens/{token}_available.yml
 
 /company:
-  $ref: ./company/company.yml
+  $ref: ./company/index.yml
 
 /administrators:
-  $ref: ./administrator/administrators.yml
+  $ref: ./administrators/index.yml
 
-/employees:
-  $ref: ./employee/employees.yml
 /employees/{employeeCode}:
-  $ref: ./employee/employee.yml
+  $ref: ./employees/{employeeCode}.yml
+/employees:
+  $ref: ./employees/index.yml
 /employees/{employeeKey}:
-  $ref: ./employee/employee_edit.yml
+  $ref: ./employees/{employeeKey}.yml
 
 /divisions:
-  $ref: ./division/divisions.yml
+  $ref: ./divisions/index.yml
 
 /working-types:
-  $ref: ./working-type/working-types.yml
+  $ref: ./working-types/index.yml
 
 /employee-groups:
-  $ref: ./employee-group/employee-groups.yml
+  $ref: ./employee-groups/index.yml
 
 /daily-workings:
-  $ref: ./daily-working/daily-workings.yml
+  $ref: ./daily-workings/index.yml
 /daily-workings/{date}:
-  $ref: ./daily-working/daily-working.yml
+  $ref: ./daily-workings/{date}.yml
 /daily-workings/timerecord/{employeeKey}:
-  $ref: ./daily-working/daily-working_timerecord.yml
+  $ref: ./daily-workings/timerecord_{employeeKey}.yml
 /daily-workings/timerecord/:
-  $ref: ./daily-working/daily-working_timerecords.yml
-/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}:
-  $ref: ./daily-working/daily-working_timerecords.yml
+  $ref: ./daily-workings/timerecord.yml
+/daily-workings/timerecord/{date}:
+  $ref: ./daily-workings/timerecord_{date}.yml

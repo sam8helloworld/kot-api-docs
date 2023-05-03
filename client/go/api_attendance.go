@@ -194,7 +194,7 @@ func (r ApiGetDailyWorkingTimerecordRequest) Execute() (*GetDailyWorkingTimereco
 }
 
 /*
-GetDailyWorkingTimerecord Method for GetDailyWorkingTimerecord
+GetDailyWorkingTimerecord /daily-workings/timerecord/{date}{?division,ondivision,additionalFields}
 
 指定した年月日の日別打刻データを取得する。
 
@@ -223,7 +223,7 @@ func (a *AttendanceApiService) GetDailyWorkingTimerecordExecute(r ApiGetDailyWor
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/daily-workings/timerecord/{employeeKey}"
+	localVarPath := localBasePath + "/daily-workings/timerecord/{date}"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -377,165 +377,6 @@ func (a *AttendanceApiService) GetDailyWorkingTimerecordsExecute(r ApiGetDailyWo
 	}
 
 	localVarPath := localBasePath + "/daily-workings/timerecord/"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.employeeKeys != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "employeeKeys", r.employeeKeys, "csv")
-	}
-	if r.division != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "division", r.division, "")
-	}
-	if r.ondivision != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ondivision", r.ondivision, "")
-	}
-	if r.start != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "")
-	}
-	if r.end != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "end", r.end, "")
-	}
-	if r.additionalFields != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", r.additionalFields, "csv")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetDailyWorkingTimerecords_0Request struct {
-	ctx context.Context
-	ApiService *AttendanceApiService
-	employeeKeys *[]string
-	division *string
-	ondivision *bool
-	start *string
-	end *string
-	additionalFields *[]string
-}
-
-// 従業員識別キー（従業員コードが変更されても不変） ,区切りで複数従業員の指定可能 divisionが指定されていない場合のみ使用可能
-func (r ApiGetDailyWorkingTimerecords_0Request) EmployeeKeys(employeeKeys []string) ApiGetDailyWorkingTimerecords_0Request {
-	r.employeeKeys = &employeeKeys
-	return r
-}
-
-// 所属コード
-func (r ApiGetDailyWorkingTimerecords_0Request) Division(division string) ApiGetDailyWorkingTimerecords_0Request {
-	r.division = &division
-	return r
-}
-
-// ・true:所属に基づいた勤務データ ・false:出勤先に基づいた勤務データ ・divisionが指定されている場合のみ使用可能
-func (r ApiGetDailyWorkingTimerecords_0Request) Ondivision(ondivision bool) ApiGetDailyWorkingTimerecords_0Request {
-	r.ondivision = &ondivision
-	return r
-}
-
-// 取得したい期間の開始年月日 ・過去日は最大3年前まで
-func (r ApiGetDailyWorkingTimerecords_0Request) Start(start string) ApiGetDailyWorkingTimerecords_0Request {
-	r.start = &start
-	return r
-}
-
-// 取得したい期間の終了年月日 ・startとendは同時に指定 ・期間は最大62日 ・未来日は最大1年後まで
-func (r ApiGetDailyWorkingTimerecords_0Request) End(end string) ApiGetDailyWorkingTimerecords_0Request {
-	r.end = &end
-	return r
-}
-
-// 指定されたプロパティをレスポンスに追加
-func (r ApiGetDailyWorkingTimerecords_0Request) AdditionalFields(additionalFields []string) ApiGetDailyWorkingTimerecords_0Request {
-	r.additionalFields = &additionalFields
-	return r
-}
-
-func (r ApiGetDailyWorkingTimerecords_0Request) Execute() ([]GetDailyWorkingTimerecords200ResponseInner, *http.Response, error) {
-	return r.ApiService.GetDailyWorkingTimerecords_1Execute(r)
-}
-
-/*
-GetDailyWorkingTimerecords_0 Method for GetDailyWorkingTimerecords_0
-
-日別打刻データの一覧を取得する。 従業員を指定した場合、対象従業員の日別打刻データを取得する。
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetDailyWorkingTimerecords_0Request
-*/
-func (a *AttendanceApiService) GetDailyWorkingTimerecords_1(ctx context.Context) ApiGetDailyWorkingTimerecords_0Request {
-	return ApiGetDailyWorkingTimerecords_0Request{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return []GetDailyWorkingTimerecords200ResponseInner
-func (a *AttendanceApiService) GetDailyWorkingTimerecords_1Execute(r ApiGetDailyWorkingTimerecords_0Request) ([]GetDailyWorkingTimerecords200ResponseInner, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []GetDailyWorkingTimerecords200ResponseInner
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AttendanceApiService.GetDailyWorkingTimerecords_1")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

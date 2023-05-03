@@ -5,9 +5,8 @@ All URIs are relative to *https://api.kingtime.jp/v1.0*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetDailyWorking**](AttendanceApi.md#GetDailyWorking) | **Get** /daily-workings/{date} | 
-[**GetDailyWorkingTimerecord**](AttendanceApi.md#GetDailyWorkingTimerecord) | **Get** /daily-workings/timerecord/{employeeKey} | 
+[**GetDailyWorkingTimerecord**](AttendanceApi.md#GetDailyWorkingTimerecord) | **Get** /daily-workings/timerecord/{date} | /daily-workings/timerecord/{date}{?division,ondivision,additionalFields}
 [**GetDailyWorkingTimerecords**](AttendanceApi.md#GetDailyWorkingTimerecords) | **Get** /daily-workings/timerecord/ | 
-[**GetDailyWorkingTimerecords_0**](AttendanceApi.md#GetDailyWorkingTimerecords_0) | **Get** /daily-workings/timerecord/{date}{?division,ondivision,additionalFields} | 
 [**GetDailyWorkings**](AttendanceApi.md#GetDailyWorkings) | **Get** /daily-workings | 
 [**RegisterDailyWorkingTimerecord**](AttendanceApi.md#RegisterDailyWorkingTimerecord) | **Post** /daily-workings/timerecord/{employeeKey} | 
 
@@ -94,7 +93,7 @@ Name | Type | Description  | Notes
 
 > GetDailyWorkingTimerecord200Response GetDailyWorkingTimerecord(ctx).Date(date).Division(division).Ondivision(ondivision).AdditionalFields(additionalFields).Execute()
 
-
+/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}
 
 
 
@@ -211,83 +210,6 @@ func main() {
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetDailyWorkingTimerecordsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **employeeKeys** | **[]string** | 従業員識別キー（従業員コードが変更されても不変） ,区切りで複数従業員の指定可能 divisionが指定されていない場合のみ使用可能 | 
- **division** | **string** | 所属コード | 
- **ondivision** | **bool** | ・true:所属に基づいた勤務データ ・false:出勤先に基づいた勤務データ ・divisionが指定されている場合のみ使用可能 | [default to true]
- **start** | **string** | 取得したい期間の開始年月日 ・過去日は最大3年前まで | 
- **end** | **string** | 取得したい期間の終了年月日 ・startとendは同時に指定 ・期間は最大62日 ・未来日は最大1年後まで | 
- **additionalFields** | **[]string** | 指定されたプロパティをレスポンスに追加 | 
-
-### Return type
-
-[**[]GetDailyWorkingTimerecords200ResponseInner**](GetDailyWorkingTimerecords200ResponseInner.md)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetDailyWorkingTimerecords_0
-
-> []GetDailyWorkingTimerecords200ResponseInner GetDailyWorkingTimerecords_0(ctx).EmployeeKeys(employeeKeys).Division(division).Ondivision(ondivision).Start(start).End(end).AdditionalFields(additionalFields).Execute()
-
-
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    "time"
-    openapiclient "github.com/sam8helloworld/kot-api-docs"
-)
-
-func main() {
-    employeeKeys := []string{"Inner_example"} // []string | 従業員識別キー（従業員コードが変更されても不変） ,区切りで複数従業員の指定可能 divisionが指定されていない場合のみ使用可能 (optional)
-    division := "1000" // string | 所属コード (optional)
-    ondivision := true // bool | ・true:所属に基づいた勤務データ ・false:出勤先に基づいた勤務データ ・divisionが指定されている場合のみ使用可能 (optional) (default to true)
-    start := time.Now() // string | 取得したい期間の開始年月日 ・過去日は最大3年前まで (optional)
-    end := time.Now() // string | 取得したい期間の終了年月日 ・startとendは同時に指定 ・期間は最大62日 ・未来日は最大1年後まで (optional)
-    additionalFields := []string{"AdditionalFields_example"} // []string | 指定されたプロパティをレスポンスに追加 (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AttendanceApi.GetDailyWorkingTimerecords_0(context.Background()).EmployeeKeys(employeeKeys).Division(division).Ondivision(ondivision).Start(start).End(end).AdditionalFields(additionalFields).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AttendanceApi.GetDailyWorkingTimerecords_0``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetDailyWorkingTimerecords_0`: []GetDailyWorkingTimerecords200ResponseInner
-    fmt.Fprintf(os.Stdout, "Response from `AttendanceApi.GetDailyWorkingTimerecords_0`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetDailyWorkingTimerecords_1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes

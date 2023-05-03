@@ -34,7 +34,7 @@ func (r ApiDeleteEmployeeRequest) Execute() (*http.Response, error) {
 }
 
 /*
-DeleteEmployee Method for DeleteEmployee
+DeleteEmployee /employees/{employeeKey}
 
 従業員のデータを削除する。(1件)
 
@@ -246,7 +246,7 @@ func (r ApiGetEmployeeRequest) Execute() (*EmployeeResponse, *http.Response, err
 }
 
 /*
-GetEmployee Method for GetEmployee
+GetEmployee /employees/{employeeCode}{?date,includeResigner,additionalFields}
 
 指定した従業員のデータを取得する。
 
@@ -495,7 +495,7 @@ func (r ApiGetEmployeesRequest) Execute() ([]EmployeeResponse, *http.Response, e
 }
 
 /*
-GetEmployees Method for GetEmployees
+GetEmployees /employees{?date,division,includeResigner,additionalFields}
 
 従業員データの一覧を取得する。
 
@@ -826,7 +826,7 @@ func (r ApiUpdateEmployeeRequest) Execute() (*EmployeeResponse, *http.Response, 
 }
 
 /*
-UpdateEmployee Method for UpdateEmployee
+UpdateEmployee /employees/{employeeKey}{?updateDate}
 
 従業員のデータを更新する。(1件)
 Request Bodyにて指定された項目のみ更新する。

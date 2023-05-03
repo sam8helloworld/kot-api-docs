@@ -1,5 +1,6 @@
 get:
   operationId: GetAdministrators
+  summary: /administrators{?additionalFields}
   parameters:
     - $ref: "../../components/parameters/additionalFields_administrator.yml"
   tags:

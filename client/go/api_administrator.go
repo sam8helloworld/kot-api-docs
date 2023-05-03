@@ -39,7 +39,7 @@ func (r ApiGetAdministratorsRequest) Execute() ([]GetAdministrators200ResponseIn
 }
 
 /*
-GetAdministrators Method for GetAdministrators
+GetAdministrators /administrators{?additionalFields}
 
 管理者のデータを取得する。
 
