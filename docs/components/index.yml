@@ -23,6 +23,8 @@ schemas:
     $ref: "./schemas/employee_response.yml"
   employee_request:
     $ref: "./schemas/employee_request.yml"
+  division_response:
+    $ref: "./schemas/division_response.yml"
 
 securitySchemes:
   Bearer:

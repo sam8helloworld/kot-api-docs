@@ -514,6 +514,36 @@ paths:
       responses:
         '204':
           description: This response has no content.
+  /divisions:
+    get:
+      operationId: GetDivisions
+      tags:
+        - Employee
+      description: 所属データの一覧を取得する。
+      externalDocs:
+        description: 一覧
+        url: 'https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E6%89%80%E5%B1%9E%E3%83%87%E3%83%BC%E3%82%BF-get'
+      responses:
+        '200':
+          description: ''
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/division_response'
+                example:
+                  - code: '1000'
+                    name: 本社
+                    dayBorderTime: '00:00'
+                  - code: '2000'
+                    name: 支社
+                    dayBorderTime: '05:00'
 components:
   parameters:
     token:
@@ -750,6 +780,23 @@ components:
           type: integer
           description: 日の契約労働時間
           example: 480
+    division_response:
+      type: object
+      required:
+        - code
+        - name
+        - dayBorderTime
+      properties:
+        code:
+          type: string
+          desctiption: 所属コード
+        name:
+          type: string
+          description: 所属名
+        dayBorderTime:
+          type: string
+          pattern: '^(?:[01][0-9]|2[0-3]):[0-5][0-9]$'
+          description: 所属名
   securitySchemes:
     Bearer:
       type: http

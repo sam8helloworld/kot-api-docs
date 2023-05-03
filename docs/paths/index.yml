@@ -15,3 +15,6 @@
   $ref: ./employee/employee.yml
 /employees/{employeeKey}:
   $ref: ./employee/employee_edit.yml
+
+/divisions:
+  $ref: ./division/divisions.yml

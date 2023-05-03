@@ -1,0 +1,16 @@
+type: object
+required:
+  - code
+  - name
+  - dayBorderTime
+properties:
+  code:
+    type: string
+    description: 所属コード
+  name:
+    type: string
+    description: 所属名
+  dayBorderTime:
+    type: string
+    pattern: ^(?:[01][0-9]|2[0-3]):[0-5][0-9]$
+    description: 所属名
