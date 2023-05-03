@@ -39,7 +39,7 @@ func (r ApiGetAdministratorsRequest) Execute() ([]GetAdministrators200ResponseIn
 }
 
 /*
-GetAdministrators Method for GetAdministrators
+GetAdministrators /administrators{?additionalFields}
 
 管理者のデータを取得する。
 
@@ -68,7 +68,7 @@ func (a *AdministratorApiService) GetAdministratorsExecute(r ApiGetAdministrator
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/administrators{?additionalFields}"
+	localVarPath := localBasePath + "/administrators"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

@@ -125,7 +125,7 @@ paths:
               style: simple
       tags:
       - Company
-  /administrators{?additionalFields}:
+  /administrators:
     get:
       description: 管理者のデータを取得する。
       externalDocs:
@@ -180,9 +180,87 @@ paths:
                 example: application/json
                 type: string
               style: simple
+      summary: "/administrators{?additionalFields}"
       tags:
       - Administrator
-  /employees{?date,division,includeResigner,additionalFields}:
+  /employees/{employeeCode}:
+    get:
+      description: 指定した従業員のデータを取得する。
+      externalDocs:
+        description: 従業員指定
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-get-1
+      operationId: GetEmployee
+      parameters:
+      - description: 詳細を取得したい従業員コード
+        explode: false
+        in: path
+        name: employeeCode
+        required: true
+        schema:
+          example: "1000"
+          type: string
+        style: simple
+      - description: |-
+          指定された年月日時点での従業員のデータを表示
+          ・過去日は最大3年前まで
+          ・未来日は最大1年後まで
+        explode: true
+        in: query
+        name: date
+        required: false
+        schema:
+          description: defaultは当日
+          format: date
+          type: string
+        style: form
+      - description: 指定された年月日時点で退職済みの従業員を含む場合 True
+        explode: true
+        in: query
+        name: includeResigner
+        required: false
+        schema:
+          default: false
+          example: true
+          type: boolean
+        style: form
+      - description: 指定されたプロパティをレスポンスに追加
+        explode: false
+        in: query
+        name: additionalFields
+        required: false
+        schema:
+          example:
+          - emailAddresses
+          items:
+            enum:
+            - lastNamePhonetics
+            - firstNamePhonetics
+            - hiredDate
+            - birthDate
+            - resignationDate
+            - emailAddresses
+            - allDayRegardingWorkInMinute
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/employee_response'
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      summary: "/employees/{employeeCode}{?date,includeResigner,additionalFields}"
+      tags:
+      - Employee
+  /employees:
     get:
       description: 従業員データの一覧を取得する。
       externalDocs:
@@ -289,85 +367,9 @@ paths:
                 example: application/json
                 type: string
               style: simple
+      summary: "/employees{?date,division,includeResigner,additionalFields}"
       tags:
       - Employee
-  /employees/{employeeCode}{?date,includeResigner,additionalFields}:
-    get:
-      description: 指定した従業員のデータを取得する。
-      externalDocs:
-        description: 従業員指定
-        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-get-1
-      operationId: GetEmployee
-      parameters:
-      - description: 詳細を取得したい従業員コード
-        explode: false
-        in: path
-        name: employeeCode
-        required: true
-        schema:
-          example: "1000"
-          type: string
-        style: simple
-      - description: |-
-          指定された年月日時点での従業員のデータを表示
-          ・過去日は最大3年前まで
-          ・未来日は最大1年後まで
-        explode: true
-        in: query
-        name: date
-        required: false
-        schema:
-          description: defaultは当日
-          format: date
-          type: string
-        style: form
-      - description: 指定された年月日時点で退職済みの従業員を含む場合 True
-        explode: true
-        in: query
-        name: includeResigner
-        required: false
-        schema:
-          default: false
-          example: true
-          type: boolean
-        style: form
-      - description: 指定されたプロパティをレスポンスに追加
-        explode: false
-        in: query
-        name: additionalFields
-        required: false
-        schema:
-          example:
-          - emailAddresses
-          items:
-            enum:
-            - lastNamePhonetics
-            - firstNamePhonetics
-            - hiredDate
-            - birthDate
-            - resignationDate
-            - emailAddresses
-            - allDayRegardingWorkInMinute
-            type: string
-          type: array
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/employee_response'
-          description: ""
-          headers:
-            Content-Type:
-              explode: false
-              schema:
-                example: application/json
-                type: string
-              style: simple
-      tags:
-      - Employee
-  /employees:
     post:
       description: 従業員のデータを登録する。(1件)
       externalDocs:
@@ -395,7 +397,29 @@ paths:
               style: simple
       tags:
       - Employee
-  /employees/{employeeKey}{?updateDate}:
+  /employees/{employeeKey}:
+    delete:
+      description: 従業員のデータを削除する。(1件)
+      externalDocs:
+        description: 削除
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-delete
+      operationId: DeleteEmployee
+      parameters:
+      - description: 従業員識別キー（従業員コードが変更されても不変）
+        explode: false
+        in: path
+        name: employeeKey
+        required: true
+        schema:
+          example: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: This response has no content.
+      summary: "/employees/{employeeKey}"
+      tags:
+      - Employee
     put:
       description: |-
         従業員のデータを更新する。(1件)
@@ -445,28 +469,7 @@ paths:
                 example: application/json
                 type: string
               style: simple
-      tags:
-      - Employee
-  /employees/{employeeKey}:
-    delete:
-      description: 従業員のデータを削除する。(1件)
-      externalDocs:
-        description: 削除
-        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-delete
-      operationId: DeleteEmployee
-      parameters:
-      - description: 従業員識別キー（従業員コードが変更されても不変）
-        explode: false
-        in: path
-        name: employeeKey
-        required: true
-        schema:
-          example: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
-          type: string
-        style: simple
-      responses:
-        "204":
-          description: This response has no content.
+      summary: "/employees/{employeeKey}{?updateDate}"
       tags:
       - Employee
   /divisions:
@@ -1029,7 +1032,7 @@ paths:
               style: simple
       tags:
       - Attendance
-  /daily-workings/timerecord/{date}{?division,ondivision,additionalFields}:
+  /daily-workings/timerecord/{date}:
     get:
       description: 指定した年月日の日別打刻データを取得する。
       externalDocs:
@@ -1100,6 +1103,7 @@ paths:
                 example: application/json
                 type: string
               style: simple
+      summary: "/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}"
       tags:
       - Attendance
 components:

@@ -4,7 +4,7 @@ All URIs are relative to *https://api.kingtime.jp/v1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetAdministrators**](AdministratorApi.md#GetAdministrators) | **Get** /administrators{?additionalFields} | 
+[**GetAdministrators**](AdministratorApi.md#GetAdministrators) | **Get** /administrators | /administrators{?additionalFields}
 
 
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 > []GetAdministrators200ResponseInner GetAdministrators(ctx).AdditionalFields(additionalFields).Execute()
 
-
+/administrators{?additionalFields}
 
 
 

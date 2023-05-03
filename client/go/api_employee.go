@@ -34,7 +34,7 @@ func (r ApiDeleteEmployeeRequest) Execute() (*http.Response, error) {
 }
 
 /*
-DeleteEmployee Method for DeleteEmployee
+DeleteEmployee /employees/{employeeKey}
 
 従業員のデータを削除する。(1件)
 
@@ -246,7 +246,7 @@ func (r ApiGetEmployeeRequest) Execute() (*EmployeeResponse, *http.Response, err
 }
 
 /*
-GetEmployee Method for GetEmployee
+GetEmployee /employees/{employeeCode}{?date,includeResigner,additionalFields}
 
 指定した従業員のデータを取得する。
 
@@ -277,7 +277,7 @@ func (a *EmployeeApiService) GetEmployeeExecute(r ApiGetEmployeeRequest) (*Emplo
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/employees/{employeeCode}{?date,includeResigner,additionalFields}"
+	localVarPath := localBasePath + "/employees/{employeeCode}"
 	localVarPath = strings.Replace(localVarPath, "{"+"employeeCode"+"}", url.PathEscape(parameterValueToString(r.employeeCode, "employeeCode")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -495,7 +495,7 @@ func (r ApiGetEmployeesRequest) Execute() ([]EmployeeResponse, *http.Response, e
 }
 
 /*
-GetEmployees Method for GetEmployees
+GetEmployees /employees{?date,division,includeResigner,additionalFields}
 
 従業員データの一覧を取得する。
 
@@ -524,7 +524,7 @@ func (a *EmployeeApiService) GetEmployeesExecute(r ApiGetEmployeesRequest) ([]Em
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/employees{?date,division,includeResigner,additionalFields}"
+	localVarPath := localBasePath + "/employees"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -826,7 +826,7 @@ func (r ApiUpdateEmployeeRequest) Execute() (*EmployeeResponse, *http.Response, 
 }
 
 /*
-UpdateEmployee Method for UpdateEmployee
+UpdateEmployee /employees/{employeeKey}{?updateDate}
 
 従業員のデータを更新する。(1件)
 Request Bodyにて指定された項目のみ更新する。
@@ -860,7 +860,7 @@ func (a *EmployeeApiService) UpdateEmployeeExecute(r ApiUpdateEmployeeRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/employees/{employeeKey}{?updateDate}"
+	localVarPath := localBasePath + "/employees/{employeeKey}"
 	localVarPath = strings.Replace(localVarPath, "{"+"employeeKey"+"}", url.PathEscape(parameterValueToString(r.employeeKey, "employeeKey")), -1)
 
 	localVarHeaderParams := make(map[string]string)

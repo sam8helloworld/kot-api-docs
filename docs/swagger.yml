@@ -136,9 +136,10 @@ paths:
                   settings:
                     timeDisplayFormat: decimal
                     decimalTreatType: roundUp
-  '/administrators{?additionalFields}':
+  /administrators:
     get:
       operationId: GetAdministrators
+      summary: '/administrators{?additionalFields}'
       parameters:
         - $ref: '#/components/parameters/additionalFields_administrator'
       tags:
@@ -218,9 +219,54 @@ paths:
                         key: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4
                         lastName: 勤怠
                         firstName: 花子
-  '/employees{?date,division,includeResigner,additionalFields}':
+  '/employees/{employeeCode}':
+    get:
+      operationId: GetEmployee
+      summary: '/employees/{employeeCode}{?date,includeResigner,additionalFields}'
+      parameters:
+        - $ref: '#/components/parameters/employeeCode'
+        - $ref: '#/components/parameters/date'
+        - $ref: '#/components/parameters/includeResigner'
+        - $ref: '#/components/parameters/additionalFields_employee'
+      tags:
+        - Employee
+      description: 指定した従業員のデータを取得する。
+      externalDocs:
+        description: 従業員指定
+        url: 'https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-get-1'
+      responses:
+        '200':
+          description: ''
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/employee_response'
+                example:
+                  divisionCode: '1000'
+                  divisionName: 本社
+                  gender: male
+                  typeCode: '1'
+                  typeName: 正社員
+                  code: '1000'
+                  lastName: 勤怠
+                  firstName: 太郎
+                  key: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+                  emailAddresses:
+                    - kintaitarou@h-t.co.jp
+                  employeeGroups:
+                    - code: '0001'
+                      name: 人事部
+                    - code: '0002'
+                      name: 総務部
+  /employees:
     get:
       operationId: GetEmployees
+      summary: '/employees{?date,division,includeResigner,additionalFields}'
       parameters:
         - $ref: '#/components/parameters/date'
         - $ref: '#/components/parameters/division'
@@ -277,50 +323,6 @@ paths:
                     employeeGroups:
                       - code: '0003'
                         name: 営業部
-  '/employees/{employeeCode}{?date,includeResigner,additionalFields}':
-    get:
-      operationId: GetEmployee
-      parameters:
-        - $ref: '#/components/parameters/employeeCode'
-        - $ref: '#/components/parameters/date'
-        - $ref: '#/components/parameters/includeResigner'
-        - $ref: '#/components/parameters/additionalFields_employee'
-      tags:
-        - Employee
-      description: 指定した従業員のデータを取得する。
-      externalDocs:
-        description: 従業員指定
-        url: 'https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-get-1'
-      responses:
-        '200':
-          description: ''
-          headers:
-            Content-Type:
-              schema:
-                type: string
-                example: application/json
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/employee_response'
-                example:
-                  divisionCode: '1000'
-                  divisionName: 本社
-                  gender: male
-                  typeCode: '1'
-                  typeName: 正社員
-                  code: '1000'
-                  lastName: 勤怠
-                  firstName: 太郎
-                  key: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
-                  emailAddresses:
-                    - kintaitarou@h-t.co.jp
-                  employeeGroups:
-                    - code: '0001'
-                      name: 人事部
-                    - code: '0002'
-                      name: 総務部
-  /employees:
     post:
       operationId: RegisterEmployee
       tags:
@@ -395,9 +397,24 @@ paths:
                   key: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4
                   emailAddresses:
                     - kintaitarou@h-t.co.jp
-  '/employees/{employeeKey}{?updateDate}':
+  '/employees/{employeeKey}':
+    delete:
+      operationId: DeleteEmployee
+      summary: '/employees/{employeeKey}'
+      parameters:
+        - $ref: '#/components/parameters/employeeKey'
+      tags:
+        - Employee
+      description: 従業員のデータを削除する。(1件)
+      externalDocs:
+        description: 削除
+        url: 'https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-delete'
+      responses:
+        '204':
+          description: This response has no content.
     put:
       operationId: UpdateEmployee
+      summary: '/employees/{employeeKey}{?updateDate}'
       parameters:
         - $ref: '#/components/parameters/employeeKey'
         - $ref: '#/components/parameters/updateDate'
@@ -502,20 +519,6 @@ paths:
                   emailAddresses:
                     - kintaitarou@h-t.co.jp
                   allDayRegardingWorkInMinute: 480
-  '/employees/{employeeKey}':
-    delete:
-      operationId: DeleteEmployee
-      parameters:
-        - $ref: '#/components/parameters/employeeKey'
-      tags:
-        - Employee
-      description: 従業員のデータを削除する。(1件)
-      externalDocs:
-        description: 削除
-        url: 'https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-delete'
-      responses:
-        '204':
-          description: This response has no content.
   /divisions:
     get:
       operationId: GetDivisions
@@ -1053,9 +1056,10 @@ paths:
                             name: 休憩終了
                             divisionCode: '1000'
                             divisionName: 本社
-  '/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}':
+  '/daily-workings/timerecord/{date}':
     get:
       operationId: GetDailyWorkingTimerecord
+      summary: '/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}'
       parameters:
         - $ref: '#/components/parameters/date'
         - $ref: '#/components/parameters/division'

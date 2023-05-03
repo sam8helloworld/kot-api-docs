@@ -194,7 +194,7 @@ func (r ApiGetDailyWorkingTimerecordRequest) Execute() (*GetDailyWorkingTimereco
 }
 
 /*
-GetDailyWorkingTimerecord Method for GetDailyWorkingTimerecord
+GetDailyWorkingTimerecord /daily-workings/timerecord/{date}{?division,ondivision,additionalFields}
 
 指定した年月日の日別打刻データを取得する。
 
@@ -223,7 +223,7 @@ func (a *AttendanceApiService) GetDailyWorkingTimerecordExecute(r ApiGetDailyWor
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}"
+	localVarPath := localBasePath + "/daily-workings/timerecord/{date}"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

@@ -4,14 +4,14 @@ All URIs are relative to *https://api.kingtime.jp/v1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteEmployee**](EmployeeApi.md#DeleteEmployee) | **Delete** /employees/{employeeKey} | 
+[**DeleteEmployee**](EmployeeApi.md#DeleteEmployee) | **Delete** /employees/{employeeKey} | /employees/{employeeKey}
 [**GetDivisions**](EmployeeApi.md#GetDivisions) | **Get** /divisions | 
-[**GetEmployee**](EmployeeApi.md#GetEmployee) | **Get** /employees/{employeeCode}{?date,includeResigner,additionalFields} | 
+[**GetEmployee**](EmployeeApi.md#GetEmployee) | **Get** /employees/{employeeCode} | /employees/{employeeCode}{?date,includeResigner,additionalFields}
 [**GetEmployeeGroups**](EmployeeApi.md#GetEmployeeGroups) | **Get** /employee-groups | 
-[**GetEmployees**](EmployeeApi.md#GetEmployees) | **Get** /employees{?date,division,includeResigner,additionalFields} | 
+[**GetEmployees**](EmployeeApi.md#GetEmployees) | **Get** /employees | /employees{?date,division,includeResigner,additionalFields}
 [**GetWorkingTypes**](EmployeeApi.md#GetWorkingTypes) | **Get** /working-types | 
 [**RegisterEmployee**](EmployeeApi.md#RegisterEmployee) | **Post** /employees | 
-[**UpdateEmployee**](EmployeeApi.md#UpdateEmployee) | **Put** /employees/{employeeKey}{?updateDate} | 
+[**UpdateEmployee**](EmployeeApi.md#UpdateEmployee) | **Put** /employees/{employeeKey} | /employees/{employeeKey}{?updateDate}
 
 
 
@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 > DeleteEmployee(ctx, employeeKey).Execute()
 
-
+/employees/{employeeKey}
 
 
 
@@ -148,7 +148,7 @@ Other parameters are passed through a pointer to a apiGetDivisionsRequest struct
 
 > EmployeeResponse GetEmployee(ctx, employeeCode).Date(date).IncludeResigner(includeResigner).AdditionalFields(additionalFields).Execute()
 
-
+/employees/{employeeCode}{?date,includeResigner,additionalFields}
 
 
 
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 > []EmployeeResponse GetEmployees(ctx).Date(date).Division(division).IncludeResigner(includeResigner).AdditionalFields(additionalFields).Execute()
 
-
+/employees{?date,division,includeResigner,additionalFields}
 
 
 
@@ -491,7 +491,7 @@ Name | Type | Description  | Notes
 
 > EmployeeResponse UpdateEmployee(ctx, employeeKey).UpdateDate(updateDate).UpdateEmployeeRequest(updateEmployeeRequest).Execute()
 
-
+/employees/{employeeKey}{?updateDate}
 
 
 

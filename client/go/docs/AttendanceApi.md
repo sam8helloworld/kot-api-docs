@@ -5,7 +5,7 @@ All URIs are relative to *https://api.kingtime.jp/v1.0*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetDailyWorking**](AttendanceApi.md#GetDailyWorking) | **Get** /daily-workings/{date} | 
-[**GetDailyWorkingTimerecord**](AttendanceApi.md#GetDailyWorkingTimerecord) | **Get** /daily-workings/timerecord/{date}{?division,ondivision,additionalFields} | 
+[**GetDailyWorkingTimerecord**](AttendanceApi.md#GetDailyWorkingTimerecord) | **Get** /daily-workings/timerecord/{date} | /daily-workings/timerecord/{date}{?division,ondivision,additionalFields}
 [**GetDailyWorkingTimerecords**](AttendanceApi.md#GetDailyWorkingTimerecords) | **Get** /daily-workings/timerecord/ | 
 [**GetDailyWorkings**](AttendanceApi.md#GetDailyWorkings) | **Get** /daily-workings | 
 [**RegisterDailyWorkingTimerecord**](AttendanceApi.md#RegisterDailyWorkingTimerecord) | **Post** /daily-workings/timerecord/{employeeKey} | 
@@ -93,7 +93,7 @@ Name | Type | Description  | Notes
 
 > GetDailyWorkingTimerecord200Response GetDailyWorkingTimerecord(ctx).Date(date).Division(division).Ondivision(ondivision).AdditionalFields(additionalFields).Execute()
 
-
+/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}
 
 
 
