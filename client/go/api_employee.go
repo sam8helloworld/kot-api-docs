@@ -63,6 +63,98 @@ func (a *EmployeeApiService) DeleteEmployeeExecute(r ApiDeleteEmployeeRequest) (
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
+	localVarPath := localBasePath + "/employees/{employeeKey}{?updateDate}"
+	localVarPath = strings.Replace(localVarPath, "{"+"employeeKey"+"}", url.PathEscape(parameterValueToString(r.employeeKey, "employeeKey")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiDeleteEmployee_0Request struct {
+	ctx context.Context
+	ApiService *EmployeeApiService
+	employeeKey string
+}
+
+func (r ApiDeleteEmployee_0Request) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteEmployee_1Execute(r)
+}
+
+/*
+DeleteEmployee_0 Method for DeleteEmployee_0
+
+従業員のデータを削除する。(1件)
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param employeeKey 従業員識別キー（従業員コードが変更されても不変）
+ @return ApiDeleteEmployee_0Request
+*/
+func (a *EmployeeApiService) DeleteEmployee_1(ctx context.Context, employeeKey string) ApiDeleteEmployee_0Request {
+	return ApiDeleteEmployee_0Request{
+		ApiService: a,
+		ctx: ctx,
+		employeeKey: employeeKey,
+	}
+}
+
+// Execute executes the request
+func (a *EmployeeApiService) DeleteEmployee_1Execute(r ApiDeleteEmployee_0Request) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmployeeApiService.DeleteEmployee_1")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
 	localVarPath := localBasePath + "/employees/{employeeKey}"
 	localVarPath = strings.Replace(localVarPath, "{"+"employeeKey"+"}", url.PathEscape(parameterValueToString(r.employeeKey, "employeeKey")), -1)
 
@@ -277,7 +369,7 @@ func (a *EmployeeApiService) GetEmployeeExecute(r ApiGetEmployeeRequest) (*Emplo
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/employees/{employeeCode}"
+	localVarPath := localBasePath + "/employees/{employeeCode}{?date,includeResigner,additionalFields}"
 	localVarPath = strings.Replace(localVarPath, "{"+"employeeCode"+"}", url.PathEscape(parameterValueToString(r.employeeCode, "employeeCode")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -524,7 +616,7 @@ func (a *EmployeeApiService) GetEmployeesExecute(r ApiGetEmployeesRequest) ([]Em
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/employees"
+	localVarPath := localBasePath + "/employees{?date,division,includeResigner,additionalFields}"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -765,130 +857,6 @@ func (a *EmployeeApiService) RegisterEmployeeExecute(r ApiRegisterEmployeeReques
 	}
 	// body params
 	localVarPostBody = r.employeeRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateEmployeeRequest struct {
-	ctx context.Context
-	ApiService *EmployeeApiService
-	employeeKey string
-	updateDate *string
-	updateEmployeeRequest *UpdateEmployeeRequest
-}
-
-// 所属、雇用区分を更新したい年月日
-func (r ApiUpdateEmployeeRequest) UpdateDate(updateDate string) ApiUpdateEmployeeRequest {
-	r.updateDate = &updateDate
-	return r
-}
-
-func (r ApiUpdateEmployeeRequest) UpdateEmployeeRequest(updateEmployeeRequest UpdateEmployeeRequest) ApiUpdateEmployeeRequest {
-	r.updateEmployeeRequest = &updateEmployeeRequest
-	return r
-}
-
-func (r ApiUpdateEmployeeRequest) Execute() (*EmployeeResponse, *http.Response, error) {
-	return r.ApiService.UpdateEmployeeExecute(r)
-}
-
-/*
-UpdateEmployee Method for UpdateEmployee
-
-従業員のデータを更新する。(1件)
-Request Bodyにて指定された項目のみ更新する。
-項目が指定され、値が無いまたは空文字列の場合は、該当項目をNULLで更新する。
-レスポンスには、AdditionalFieldを含むすべての従業員データを含める。
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param employeeKey 従業員識別キー（従業員コードが変更されても不変）
- @return ApiUpdateEmployeeRequest
-*/
-func (a *EmployeeApiService) UpdateEmployee(ctx context.Context, employeeKey string) ApiUpdateEmployeeRequest {
-	return ApiUpdateEmployeeRequest{
-		ApiService: a,
-		ctx: ctx,
-		employeeKey: employeeKey,
-	}
-}
-
-// Execute executes the request
-//  @return EmployeeResponse
-func (a *EmployeeApiService) UpdateEmployeeExecute(r ApiUpdateEmployeeRequest) (*EmployeeResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmployeeResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmployeeApiService.UpdateEmployee")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/employees/{employeeKey}"
-	localVarPath = strings.Replace(localVarPath, "{"+"employeeKey"+"}", url.PathEscape(parameterValueToString(r.employeeKey, "employeeKey")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.updateDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "updateDate", r.updateDate, "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.updateEmployeeRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

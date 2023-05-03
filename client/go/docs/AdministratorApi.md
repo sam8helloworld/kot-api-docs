@@ -4,7 +4,7 @@ All URIs are relative to *https://api.kingtime.jp/v1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetAdministrators**](AdministratorApi.md#GetAdministrators) | **Get** /administrators | 
+[**GetAdministrators**](AdministratorApi.md#GetAdministrators) | **Get** /administrators{?additionalFields} | 
 
 
 

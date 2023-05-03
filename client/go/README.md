@@ -77,21 +77,21 @@ All URIs are relative to *https://api.kingtime.jp/v1.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AdministratorApi* | [**GetAdministrators**](docs/AdministratorApi.md#getadministrators) | **Get** /administrators | 
+*AdministratorApi* | [**GetAdministrators**](docs/AdministratorApi.md#getadministrators) | **Get** /administrators{?additionalFields} | 
 *AttendanceApi* | [**GetDailyWorking**](docs/AttendanceApi.md#getdailyworking) | **Get** /daily-workings/{date} | 
 *AttendanceApi* | [**GetDailyWorkingTimerecord**](docs/AttendanceApi.md#getdailyworkingtimerecord) | **Get** /daily-workings/timerecord/{date}{?division,ondivision,additionalFields} | 
 *AttendanceApi* | [**GetDailyWorkingTimerecords**](docs/AttendanceApi.md#getdailyworkingtimerecords) | **Get** /daily-workings/timerecord/ | 
 *AttendanceApi* | [**GetDailyWorkings**](docs/AttendanceApi.md#getdailyworkings) | **Get** /daily-workings | 
 *AttendanceApi* | [**RegisterDailyWorkingTimerecord**](docs/AttendanceApi.md#registerdailyworkingtimerecord) | **Post** /daily-workings/timerecord/{employeeKey} | 
 *CompanyApi* | [**GetCompany**](docs/CompanyApi.md#getcompany) | **Get** /company | 
-*EmployeeApi* | [**DeleteEmployee**](docs/EmployeeApi.md#deleteemployee) | **Delete** /employees/{employeeKey} | 
+*EmployeeApi* | [**DeleteEmployee**](docs/EmployeeApi.md#deleteemployee) | **Delete** /employees/{employeeKey}{?updateDate} | 
+*EmployeeApi* | [**DeleteEmployee_0**](docs/EmployeeApi.md#deleteemployee_0) | **Delete** /employees/{employeeKey} | 
 *EmployeeApi* | [**GetDivisions**](docs/EmployeeApi.md#getdivisions) | **Get** /divisions | 
-*EmployeeApi* | [**GetEmployee**](docs/EmployeeApi.md#getemployee) | **Get** /employees/{employeeCode} | 
+*EmployeeApi* | [**GetEmployee**](docs/EmployeeApi.md#getemployee) | **Get** /employees/{employeeCode}{?date,includeResigner,additionalFields} | 
 *EmployeeApi* | [**GetEmployeeGroups**](docs/EmployeeApi.md#getemployeegroups) | **Get** /employee-groups | 
-*EmployeeApi* | [**GetEmployees**](docs/EmployeeApi.md#getemployees) | **Get** /employees | 
+*EmployeeApi* | [**GetEmployees**](docs/EmployeeApi.md#getemployees) | **Get** /employees{?date,division,includeResigner,additionalFields} | 
 *EmployeeApi* | [**GetWorkingTypes**](docs/EmployeeApi.md#getworkingtypes) | **Get** /working-types | 
 *EmployeeApi* | [**RegisterEmployee**](docs/EmployeeApi.md#registeremployee) | **Post** /employees | 
-*EmployeeApi* | [**UpdateEmployee**](docs/EmployeeApi.md#updateemployee) | **Put** /employees/{employeeKey} | 
 *TokenApi* | [**GetAccessTokenAvailability**](docs/TokenApi.md#getaccesstokenavailability) | **Get** /tokens/{token}/available | 
 *TokenApi* | [**RefreshAccessToken**](docs/TokenApi.md#refreshaccesstoken) | **Post** /tokens/{token} | 
 *TokenApi* | [**SuspendAccessToken**](docs/TokenApi.md#suspendaccesstoken) | **Delete** /tokens/{token} | 
@@ -124,7 +124,6 @@ Class | Method | HTTP request | Description
  - [RefreshAccessToken201Response](docs/RefreshAccessToken201Response.md)
  - [RegisterDailyWorkingTimerecord201Response](docs/RegisterDailyWorkingTimerecord201Response.md)
  - [RegisterEmployee201Response](docs/RegisterEmployee201Response.md)
- - [UpdateEmployeeRequest](docs/UpdateEmployeeRequest.md)
  - [WorkingTypeResponse](docs/WorkingTypeResponse.md)
 
 

@@ -68,7 +68,7 @@ func (a *AdministratorApiService) GetAdministratorsExecute(r ApiGetAdministrator
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/administrators"
+	localVarPath := localBasePath + "/administrators{?additionalFields}"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
