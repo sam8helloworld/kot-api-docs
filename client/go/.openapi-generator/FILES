@@ -62,5 +62,4 @@ model_register_employee_201_response.go
 model_update_employee_request.go
 model_working_type_response.go
 response.go
-test/api_attendance_test.go
 utils.go
