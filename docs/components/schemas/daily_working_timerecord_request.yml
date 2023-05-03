@@ -1,0 +1,40 @@
+type: object
+required:
+  - time
+  - date
+properties:
+  time:
+    type: string
+    format: date-time
+    description: 打刻時間
+  code:
+    type: string
+    enum:
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "7"
+      - "8"
+    description: |-
+      打刻種別コード（1： 出勤　2： 退勤　3： 休憩開始　4： 休憩終了　7： 外出入　8： 外出戻）
+      省略時は、KING OF TIMEの処理に従って打刻種別を決定します。
+  divisionCode:
+    type: string
+    description: |-
+      打刻先所属コード
+      省略時は、該当従業員が所属している所属を打刻先所属として扱います。
+  date:
+    type: string
+    format: date
+    description: |-
+      勤務日
+      指定された勤務日に打刻データが紐づきます。
+  latitude:
+    type: number
+    format: double
+    description: 緯度
+  longitude:
+    type: number
+    format: double
+    description: 経度

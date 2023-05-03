@@ -61,7 +61,7 @@ type DailyWorkingResponse struct {
 	// 休暇みなし時間（分）
 	DiscretionaryVacation int32 `json:"discretionaryVacation"`
 	CustomDailyWorkings DailyWorkingResponseCustomDailyWorkings `json:"customDailyWorkings"`
-	CurrentDateEmployee *DailyWorkingResponseCurrentDateEmployee `json:"currentDateEmployee,omitempty"`
+	CurrentDateEmployee *GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee `json:"currentDateEmployee,omitempty"`
 }
 
 // NewDailyWorkingResponse instantiates a new DailyWorkingResponse object
@@ -641,9 +641,9 @@ func (o *DailyWorkingResponse) SetCustomDailyWorkings(v DailyWorkingResponseCust
 }
 
 // GetCurrentDateEmployee returns the CurrentDateEmployee field value if set, zero value otherwise.
-func (o *DailyWorkingResponse) GetCurrentDateEmployee() DailyWorkingResponseCurrentDateEmployee {
+func (o *DailyWorkingResponse) GetCurrentDateEmployee() GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee {
 	if o == nil || IsNil(o.CurrentDateEmployee) {
-		var ret DailyWorkingResponseCurrentDateEmployee
+		var ret GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee
 		return ret
 	}
 	return *o.CurrentDateEmployee
@@ -651,7 +651,7 @@ func (o *DailyWorkingResponse) GetCurrentDateEmployee() DailyWorkingResponseCurr
 
 // GetCurrentDateEmployeeOk returns a tuple with the CurrentDateEmployee field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DailyWorkingResponse) GetCurrentDateEmployeeOk() (*DailyWorkingResponseCurrentDateEmployee, bool) {
+func (o *DailyWorkingResponse) GetCurrentDateEmployeeOk() (*GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee, bool) {
 	if o == nil || IsNil(o.CurrentDateEmployee) {
 		return nil, false
 	}
@@ -667,8 +667,8 @@ func (o *DailyWorkingResponse) HasCurrentDateEmployee() bool {
 	return false
 }
 
-// SetCurrentDateEmployee gets a reference to the given DailyWorkingResponseCurrentDateEmployee and assigns it to the CurrentDateEmployee field.
-func (o *DailyWorkingResponse) SetCurrentDateEmployee(v DailyWorkingResponseCurrentDateEmployee) {
+// SetCurrentDateEmployee gets a reference to the given GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee and assigns it to the CurrentDateEmployee field.
+func (o *DailyWorkingResponse) SetCurrentDateEmployee(v GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee) {
 	o.CurrentDateEmployee = &v
 }
 

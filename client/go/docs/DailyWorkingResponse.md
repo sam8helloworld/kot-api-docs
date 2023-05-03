@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 **AutoBreakOff** | **NullableInt32** | 自動休憩無効（null： 休憩を無効化しない 1：　雇用区分休憩無効　2： スケジュール休憩無効　3： 全ての自動休憩無効） | 
 **DiscretionaryVacation** | **int32** | 休暇みなし時間（分） | 
 **CustomDailyWorkings** | [**DailyWorkingResponseCustomDailyWorkings**](DailyWorkingResponseCustomDailyWorkings.md) |  | 
-**CurrentDateEmployee** | Pointer to [**DailyWorkingResponseCurrentDateEmployee**](DailyWorkingResponseCurrentDateEmployee.md) |  | [optional] 
+**CurrentDateEmployee** | Pointer to [**GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee**](GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee.md) |  | [optional] 
 
 ## Methods
 
@@ -504,20 +504,20 @@ SetCustomDailyWorkings sets CustomDailyWorkings field to given value.
 
 ### GetCurrentDateEmployee
 
-`func (o *DailyWorkingResponse) GetCurrentDateEmployee() DailyWorkingResponseCurrentDateEmployee`
+`func (o *DailyWorkingResponse) GetCurrentDateEmployee() GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee`
 
 GetCurrentDateEmployee returns the CurrentDateEmployee field if non-nil, zero value otherwise.
 
 ### GetCurrentDateEmployeeOk
 
-`func (o *DailyWorkingResponse) GetCurrentDateEmployeeOk() (*DailyWorkingResponseCurrentDateEmployee, bool)`
+`func (o *DailyWorkingResponse) GetCurrentDateEmployeeOk() (*GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee, bool)`
 
 GetCurrentDateEmployeeOk returns a tuple with the CurrentDateEmployee field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCurrentDateEmployee
 
-`func (o *DailyWorkingResponse) SetCurrentDateEmployee(v DailyWorkingResponseCurrentDateEmployee)`
+`func (o *DailyWorkingResponse) SetCurrentDateEmployee(v GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee)`
 
 SetCurrentDateEmployee sets CurrentDateEmployee field to given value.
 

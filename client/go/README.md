@@ -79,7 +79,9 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AdministratorApi* | [**GetAdministrators**](docs/AdministratorApi.md#getadministrators) | **Get** /administrators | 
 *AttendanceApi* | [**GetDailyWorking**](docs/AttendanceApi.md#getdailyworking) | **Get** /daily-workings/{date} | 
+*AttendanceApi* | [**GetDailyWorkingTimerecords**](docs/AttendanceApi.md#getdailyworkingtimerecords) | **Get** /daily-workings/timerecord/ | 
 *AttendanceApi* | [**GetDailyWorkings**](docs/AttendanceApi.md#getdailyworkings) | **Get** /daily-workings | 
+*AttendanceApi* | [**RegisterDailyWorkingTimerecord**](docs/AttendanceApi.md#registerdailyworkingtimerecord) | **Post** /daily-workings/timerecord/{employeeKey} | 
 *CompanyApi* | [**GetCompany**](docs/CompanyApi.md#getcompany) | **Get** /company | 
 *EmployeeApi* | [**DeleteEmployee**](docs/EmployeeApi.md#deleteemployee) | **Delete** /employees/{employeeKey} | 
 *EmployeeApi* | [**GetDivisions**](docs/EmployeeApi.md#getdivisions) | **Get** /divisions | 
@@ -97,24 +99,28 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [DailyWorkingResponse](docs/DailyWorkingResponse.md)
- - [DailyWorkingResponseCurrentDateEmployee](docs/DailyWorkingResponseCurrentDateEmployee.md)
  - [DailyWorkingResponseCustomDailyWorkings](docs/DailyWorkingResponseCustomDailyWorkings.md)
  - [DailyWorkingResponseHolidaysObtained](docs/DailyWorkingResponseHolidaysObtained.md)
  - [DailyWorkingResponseHolidaysObtainedFulltimeHoliday](docs/DailyWorkingResponseHolidaysObtainedFulltimeHoliday.md)
  - [DailyWorkingResponseHolidaysObtainedHalfdayHolidays](docs/DailyWorkingResponseHolidaysObtainedHalfdayHolidays.md)
  - [DailyWorkingResponseHolidaysObtainedHourHolidays](docs/DailyWorkingResponseHolidaysObtainedHourHolidays.md)
+ - [DailyWorkingTimerecord](docs/DailyWorkingTimerecord.md)
+ - [DailyWorkingTimerecordRequest](docs/DailyWorkingTimerecordRequest.md)
  - [DivisionResponse](docs/DivisionResponse.md)
  - [EmployeeRequest](docs/EmployeeRequest.md)
  - [EmployeeResponse](docs/EmployeeResponse.md)
- - [EmployeeResponseEmployeeGroupsInner](docs/EmployeeResponseEmployeeGroupsInner.md)
  - [GetAccessTokenAvailability200Response](docs/GetAccessTokenAvailability200Response.md)
  - [GetAdministrators200ResponseInner](docs/GetAdministrators200ResponseInner.md)
  - [GetAdministrators200ResponseInnerAssociatedEmployeesInner](docs/GetAdministrators200ResponseInnerAssociatedEmployeesInner.md)
  - [GetCompany200Response](docs/GetCompany200Response.md)
  - [GetCompany200ResponseSettings](docs/GetCompany200ResponseSettings.md)
+ - [GetDailyWorkingTimerecords200ResponseInner](docs/GetDailyWorkingTimerecords200ResponseInner.md)
+ - [GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee](docs/GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee.md)
+ - [GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner](docs/GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner.md)
  - [GetEmployeeGroups200ResponseInner](docs/GetEmployeeGroups200ResponseInner.md)
  - [GetEmployeeGroups200ResponseInnerCategory](docs/GetEmployeeGroups200ResponseInnerCategory.md)
  - [RefreshAccessToken201Response](docs/RefreshAccessToken201Response.md)
+ - [RegisterDailyWorkingTimerecord201Response](docs/RegisterDailyWorkingTimerecord201Response.md)
  - [RegisterEmployee201Response](docs/RegisterEmployee201Response.md)
  - [UpdateEmployeeRequest](docs/UpdateEmployeeRequest.md)
  - [WorkingTypeResponse](docs/WorkingTypeResponse.md)
