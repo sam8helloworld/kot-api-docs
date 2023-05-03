@@ -1,7 +1,7 @@
 /tokens/{token}:
-  $ref: ./token/token.yml
+  $ref: ./tokens/{token}.yml
 /tokens/{token}/available:
-  $ref: ./token/token_available.yml
+  $ref: ./tokens/{token}_available.yml
 
 /company:
   $ref: ./company/company.yml
