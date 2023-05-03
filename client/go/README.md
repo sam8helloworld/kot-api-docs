@@ -79,7 +79,14 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AdministratorApi* | [**GetAdministrators**](docs/AdministratorApi.md#getadministrators) | **Get** /administrators | 
 *CompanyApi* | [**GetCompany**](docs/CompanyApi.md#getcompany) | **Get** /company | 
+*EmployeeApi* | [**DeleteEmployee**](docs/EmployeeApi.md#deleteemployee) | **Delete** /employees/{employeeKey} | 
+*EmployeeApi* | [**GetDivisions**](docs/EmployeeApi.md#getdivisions) | **Get** /divisions | 
+*EmployeeApi* | [**GetEmployee**](docs/EmployeeApi.md#getemployee) | **Get** /employees/{employeeCode} | 
+*EmployeeApi* | [**GetEmployeeGroups**](docs/EmployeeApi.md#getemployeegroups) | **Get** /employee-groups | 
 *EmployeeApi* | [**GetEmployees**](docs/EmployeeApi.md#getemployees) | **Get** /employees | 
+*EmployeeApi* | [**GetWorkingTypes**](docs/EmployeeApi.md#getworkingtypes) | **Get** /working-types | 
+*EmployeeApi* | [**RegisterEmployee**](docs/EmployeeApi.md#registeremployee) | **Post** /employees | 
+*EmployeeApi* | [**UpdateEmployee**](docs/EmployeeApi.md#updateemployee) | **Put** /employees/{employeeKey} | 
 *TokenApi* | [**GetAccessTokenAvailability**](docs/TokenApi.md#getaccesstokenavailability) | **Get** /tokens/{token}/available | 
 *TokenApi* | [**RefreshAccessToken**](docs/TokenApi.md#refreshaccesstoken) | **Post** /tokens/{token} | 
 *TokenApi* | [**SuspendAccessToken**](docs/TokenApi.md#suspendaccesstoken) | **Delete** /tokens/{token} | 
@@ -87,14 +94,21 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [DivisionResponse](docs/DivisionResponse.md)
+ - [EmployeeRequest](docs/EmployeeRequest.md)
+ - [EmployeeResponse](docs/EmployeeResponse.md)
+ - [EmployeeResponseEmployeeGroupsInner](docs/EmployeeResponseEmployeeGroupsInner.md)
  - [GetAccessTokenAvailability200Response](docs/GetAccessTokenAvailability200Response.md)
  - [GetAdministrators200ResponseInner](docs/GetAdministrators200ResponseInner.md)
  - [GetAdministrators200ResponseInnerAssociatedEmployeesInner](docs/GetAdministrators200ResponseInnerAssociatedEmployeesInner.md)
  - [GetCompany200Response](docs/GetCompany200Response.md)
  - [GetCompany200ResponseSettings](docs/GetCompany200ResponseSettings.md)
- - [GetEmployees200ResponseInner](docs/GetEmployees200ResponseInner.md)
- - [GetEmployees200ResponseInnerEmployeeGroupsInner](docs/GetEmployees200ResponseInnerEmployeeGroupsInner.md)
+ - [GetEmployeeGroups200ResponseInner](docs/GetEmployeeGroups200ResponseInner.md)
+ - [GetEmployeeGroups200ResponseInnerCategory](docs/GetEmployeeGroups200ResponseInnerCategory.md)
  - [RefreshAccessToken201Response](docs/RefreshAccessToken201Response.md)
+ - [RegisterEmployee201Response](docs/RegisterEmployee201Response.md)
+ - [UpdateEmployeeRequest](docs/UpdateEmployeeRequest.md)
+ - [WorkingTypeResponse](docs/WorkingTypeResponse.md)
 
 
 ## Documentation For Authorization

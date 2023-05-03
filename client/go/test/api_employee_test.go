@@ -35,7 +35,6 @@ func Test_openapi_EmployeeApiService(t *testing.T) {
 	apiClient := openapiclient.NewAPIClient(configuration)
 
 	t.Run("Test EmployeeApiService GetEmployees", func(t *testing.T) {
-
 		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
 		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
 		resp, httpRes, err := apiClient.EmployeeApi.GetEmployees(ctx).Date("2016-10-10").Division("1000").IncludeResigner(true).AdditionalFields([]string{"emailAddresses"}).Execute()
@@ -43,7 +42,95 @@ func Test_openapi_EmployeeApiService(t *testing.T) {
 		require.Nil(t, err)
 		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
-
 	})
 
+	t.Run("Test EmployeeApiService GetEmployee", func(t *testing.T) {
+		employeeCode := "10000"
+		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
+		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		resp, httpRes, err := apiClient.EmployeeApi.GetEmployee(ctx, employeeCode).Date("2016-10-10").IncludeResigner(true).AdditionalFields([]string{"emailAddresses"}).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+	})
+
+	t.Run("Test EmployeeApiService RegisterEmployee", func(t *testing.T) {
+		body := openapiclient.EmployeeRequest{
+			DivisionCode:   "1000",
+			Gender:         "male",
+			TypeCode:       "1",
+			Code:           "1000",
+			LastName:       "勤怠",
+			FirstName:      "太郎",
+			EmailAddresses: []string{"kintaitarou@h-t.co.jp"},
+		}
+		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
+		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		resp, httpRes, err := apiClient.EmployeeApi.RegisterEmployee(ctx).EmployeeRequest(body).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 201, httpRes.StatusCode)
+	})
+
+	t.Run("Test EmployeeApiService UpdateEmployee", func(t *testing.T) {
+		employeeKey := "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3"
+		body := openapiclient.UpdateEmployeeRequest{
+			DivisionCode:   openapiclient.PtrString("1000"),
+			Gender:         openapiclient.PtrString("male"),
+			TypeCode:       openapiclient.PtrString("1"),
+			Code:           openapiclient.PtrString("1000"),
+			LastName:       openapiclient.PtrString("勤怠"),
+			FirstName:      openapiclient.PtrString("太郎"),
+			EmailAddresses: []string{"kintaitarou@h-t.co.jp"},
+		}
+		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
+		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		resp, httpRes, err := apiClient.EmployeeApi.UpdateEmployee(ctx, employeeKey).UpdateDate("2016-05-01").UpdateEmployeeRequest(body).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+	})
+
+	t.Run("Test EmployeeApiService DeleteEmployee", func(t *testing.T) {
+		employeeKey := "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3"
+		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
+		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		httpRes, err := apiClient.EmployeeApi.DeleteEmployee(ctx, employeeKey).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 204, httpRes.StatusCode)
+	})
+
+	t.Run("Test EmployeeApiService GetDivisions", func(t *testing.T) {
+		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
+		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		resp, httpRes, err := apiClient.EmployeeApi.GetDivisions(ctx).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+	})
+
+	t.Run("Test EmployeeApiService GetWorkingTypes", func(t *testing.T) {
+		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
+		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		resp, httpRes, err := apiClient.EmployeeApi.GetWorkingTypes(ctx).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+	})
+
+	t.Run("Test EmployeeApiService GetEmployeeGroups", func(t *testing.T) {
+		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
+		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		resp, httpRes, err := apiClient.EmployeeApi.GetEmployeeGroups(ctx).AdditionalFields([]string{"category"}).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+	})
 }

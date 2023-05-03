@@ -276,7 +276,291 @@ paths:
                   - code: "0003"
                     name: 営業部
                 items:
-                  $ref: '#/components/schemas/GetEmployees_200_response_inner'
+                  $ref: '#/components/schemas/employee_response'
+                type: array
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Employee
+    post:
+      description: 従業員のデータを登録する。(1件)
+      externalDocs:
+        description: 登録
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-post
+      operationId: RegisterEmployee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/employee_request'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterEmployee_201_response'
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Employee
+  /employees/{employeeCode}:
+    get:
+      description: 指定した従業員のデータを取得する。
+      externalDocs:
+        description: 従業員指定
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-get-1
+      operationId: GetEmployee
+      parameters:
+      - description: 詳細を取得したい従業員コード
+        explode: false
+        in: path
+        name: employeeCode
+        required: true
+        schema:
+          example: "1000"
+          type: string
+        style: simple
+      - description: |-
+          指定された年月日時点での従業員のデータを表示
+          ・過去日は最大3年前まで
+          ・未来日は最大1年後まで
+        explode: true
+        in: query
+        name: date
+        required: false
+        schema:
+          description: defaultは当日
+          format: date
+          type: string
+        style: form
+      - description: 指定された年月日時点で退職済みの従業員を含む場合 True
+        explode: true
+        in: query
+        name: includeResigner
+        required: false
+        schema:
+          default: false
+          example: true
+          type: boolean
+        style: form
+      - description: 指定されたプロパティをレスポンスに追加
+        explode: false
+        in: query
+        name: additionalFields
+        required: false
+        schema:
+          example:
+          - emailAddresses
+          items:
+            enum:
+            - lastNamePhonetics
+            - firstNamePhonetics
+            - hiredDate
+            - birthDate
+            - resignationDate
+            - emailAddresses
+            - allDayRegardingWorkInMinute
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/employee_response'
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Employee
+  /employees/{employeeKey}:
+    delete:
+      description: 従業員のデータを削除する。(1件)
+      externalDocs:
+        description: 削除
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-delete
+      operationId: DeleteEmployee
+      parameters:
+      - description: 従業員識別キー（従業員コードが変更されても不変）
+        explode: false
+        in: path
+        name: employeeKey
+        required: true
+        schema:
+          example: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: This response has no content.
+      tags:
+      - Employee
+    put:
+      description: |-
+        従業員のデータを更新する。(1件)
+        Request Bodyにて指定された項目のみ更新する。
+        項目が指定され、値が無いまたは空文字列の場合は、該当項目をNULLで更新する。
+        レスポンスには、AdditionalFieldを含むすべての従業員データを含める。
+      externalDocs:
+        description: 更新
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-put
+      operationId: UpdateEmployee
+      parameters:
+      - description: 従業員識別キー（従業員コードが変更されても不変）
+        explode: false
+        in: path
+        name: employeeKey
+        required: true
+        schema:
+          example: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+          type: string
+        style: simple
+      - description: 所属、雇用区分を更新したい年月日
+        explode: true
+        in: query
+        name: updateDate
+        required: false
+        schema:
+          description: defaultは当日
+          format: date
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmployee_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/employee_response'
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Employee
+  /divisions:
+    get:
+      description: 所属データの一覧を取得する。
+      externalDocs:
+        description: 一覧
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E6%89%80%E5%B1%9E%E3%83%87%E3%83%BC%E3%82%BF-get
+      operationId: GetDivisions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                - code: "1000"
+                  name: 本社
+                  dayBorderTime: 00:00
+                - code: "2000"
+                  name: 支社
+                  dayBorderTime: 05:00
+                items:
+                  $ref: '#/components/schemas/division_response'
+                type: array
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Employee
+  /working-types:
+    get:
+      description: 雇用区分データの一覧を取得する。
+      externalDocs:
+        description: 一覧
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E9%9B%87%E7%94%A8%E5%8C%BA%E5%88%86%E3%83%87%E3%83%BC%E3%82%BF-get
+      operationId: GetWorkingTypes
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                - code: "1"
+                  name: 正社員
+                items:
+                  $ref: '#/components/schemas/working_type_response'
+                type: array
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Employee
+  /employee-groups:
+    get:
+      description: |-
+        従業員グループのデータを取得する。
+        ※対象企業が従業員グループ機能を利用できない場合にはデータを取得できません。
+      externalDocs:
+        description: 一覧
+        url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%87%E3%83%BC%E3%82%BF-get
+      operationId: GetEmployeeGroups
+      parameters:
+      - description: 指定されたプロパティをレスポンスに追加
+        explode: false
+        in: query
+        name: additionalFields
+        required: false
+        schema:
+          example:
+          - category
+          items:
+            enum:
+            - category
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                - code: "0001"
+                  name: 人事部
+                  category:
+                    code: KEIKAN
+                    name: 経営管理本部
+                items:
+                  $ref: '#/components/schemas/GetEmployeeGroups_200_response_inner'
                 type: array
           description: ""
           headers:
@@ -300,7 +584,7 @@ components:
         example: 8j9f7v4893y58rvt7nyfq2893n75tr78937n83
         type: string
       style: simple
-    additionalFields_get_administrators:
+    additionalFields_administrator:
       description: 指定されたプロパティをレスポンスに追加
       explode: false
       in: query
@@ -316,7 +600,7 @@ components:
           type: string
         type: array
       style: form
-    additionalFields_get_employees:
+    additionalFields_employee:
       description: 指定されたプロパティをレスポンスに追加
       explode: false
       in: query
@@ -372,7 +656,257 @@ components:
         example: true
         type: boolean
       style: form
+    employeeCode:
+      description: 詳細を取得したい従業員コード
+      explode: false
+      in: path
+      name: employeeCode
+      required: true
+      schema:
+        example: "1000"
+        type: string
+      style: simple
+    employeeKey:
+      description: 従業員識別キー（従業員コードが変更されても不変）
+      explode: false
+      in: path
+      name: employeeKey
+      required: true
+      schema:
+        example: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+        type: string
+      style: simple
+    updateDate:
+      description: 所属、雇用区分を更新したい年月日
+      explode: true
+      in: query
+      name: updateDate
+      required: false
+      schema:
+        description: defaultは当日
+        format: date
+        type: string
+      style: form
+    additionalFields_employee-groups:
+      description: 指定されたプロパティをレスポンスに追加
+      explode: false
+      in: query
+      name: additionalFields
+      required: false
+      schema:
+        example:
+        - category
+        items:
+          enum:
+          - category
+          type: string
+        type: array
+      style: form
   schemas:
+    employee_response:
+      example:
+        lastName: lastName
+        code: code
+        gender: gender
+        divisionName: divisionName
+        typeName: typeName
+        firstNamePhonetics: firstNamePhonetics
+        allDayRegardingWorkInMinute: 480
+        lastNamePhonetics: lastNamePhonetics
+        birthDate: 2000-01-23
+        resignationDate: 2000-01-23
+        typeCode: typeCode
+        divisionCode: divisionCode
+        firstName: firstName
+        emailAddresses:
+        - emailAddresses
+        - emailAddresses
+        hiredDate: 2000-01-23
+        key: key
+        employeeGroups:
+        - code: code
+          name: name
+        - code: code
+          name: name
+      properties:
+        divisionCode:
+          description: 所属コード
+          type: string
+        divisionName:
+          description: 所属名
+          type: string
+        gender:
+          description: 性別（male： 男性　female： 女性）
+          type: string
+        typeCode:
+          description: 雇用区分コード
+          type: string
+        typeName:
+          description: 雇用区分名
+          type: string
+        code:
+          description: 従業員コード
+          type: string
+        key:
+          description: 従業員識別キー（従業員コードが変更されても不変）
+          type: string
+        lastName:
+          description: 姓
+          type: string
+        firstName:
+          description: 名
+          type: string
+        employeeGroups:
+          description: 従業員グループ情報
+          items:
+            $ref: '#/components/schemas/employee_response_employeeGroups_inner'
+          type: array
+        lastNamePhonetics:
+          description: 姓（カナ）
+          type: string
+        firstNamePhonetics:
+          description: 名（カナ）
+          type: string
+        hiredDate:
+          description: 入社年月日
+          format: date
+          type: string
+        birthDate:
+          description: 生年月日
+          format: date
+          type: string
+        resignationDate:
+          description: 退職年月日
+          format: date
+          type: string
+        emailAddresses:
+          description: メールアドレス
+          items:
+            format: email
+            type: string
+          type: array
+        allDayRegardingWorkInMinute:
+          description: 日の契約労働時間
+          example: 480
+          type: integer
+      required:
+      - code
+      - divisionCode
+      - divisionName
+      - employeeGroups
+      - firstName
+      - gender
+      - key
+      - lastName
+      - typeCode
+      - typeName
+      type: object
+    employee_request:
+      properties:
+        divisionCode:
+          description: 所属コード
+          type: string
+        gender:
+          description: 性別（male： 男性　female： 女性）
+          type: string
+        typeCode:
+          description: 雇用区分コード
+          type: string
+        code:
+          description: 従業員コード
+          type: string
+        lastName:
+          description: 姓
+          type: string
+        firstName:
+          description: 名
+          type: string
+        lastNamePhonetics:
+          description: 姓（カナ）
+          type: string
+        firstNamePhonetics:
+          description: 名（カナ）
+          type: string
+        hiredDate:
+          description: 入社年月日
+          format: date
+          type: string
+        birthDate:
+          description: 生年月日
+          format: date
+          type: string
+        resignationDate:
+          description: 退職年月日
+          format: date
+          type: string
+        emailAddresses:
+          description: メールアドレス
+          items:
+            format: email
+            type: string
+          type: array
+        allDayRegardingWorkInMinute:
+          description: 日の契約労働時間
+          example: 480
+          type: integer
+      required:
+      - code
+      - divisionCode
+      - firstName
+      - gender
+      - lastName
+      - typeCode
+      type: object
+    division_response:
+      properties:
+        code:
+          description: 所属コード
+          type: string
+        name:
+          description: 所属名
+          type: string
+        dayBorderTime:
+          description: 所属名
+          pattern: "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$"
+          type: string
+      required:
+      - code
+      - dayBorderTime
+      - name
+      type: object
+    working_type_response:
+      properties:
+        code:
+          description: 雇用区分コード
+          type: string
+        name:
+          description: 雇用区分名
+          type: string
+      required:
+      - code
+      - dayBorderTime
+      - name
+      type: object
+    RefreshAccessToken_201_response:
+      example:
+        token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      properties:
+        token:
+          description: refreshed access token
+          example: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          type: string
+      required:
+      - token
+      type: object
+    GetAccessTokenAvailability_200_response:
+      example:
+        available: true
+      properties:
+        available:
+          type: boolean
+      required:
+      - available
+      type: object
     GetCompany_200_response_settings:
       description: 企業設定情報
       properties:
@@ -422,6 +956,27 @@ components:
       - name
       - settings
       type: object
+    GetAdministrators_200_response_inner_associatedEmployees_inner:
+      description: 割当従業員
+      properties:
+        code:
+          description: 従業員コード
+          type: string
+        key:
+          description: 従業員識別キー（従業員コードが変更されても不変）
+          type: string
+        lastName:
+          description: 姓
+          type: string
+        firstName:
+          description: 名
+          type: string
+      required:
+      - code
+      - firstName
+      - key
+      - lastName
+      type: object
     GetAdministrators_200_response_inner:
       properties:
         code:
@@ -446,13 +1001,20 @@ components:
       - key
       - name
       type: object
-    GetEmployees_200_response_inner:
+    RegisterEmployee_201_response:
+      example:
+        divisionCode: "1000"
+        gender: male
+        typeCode: "1"
+        code: "1000"
+        lastName: 勤怠
+        firstName: 太郎
+        key: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4
+        emailAddresses:
+        - kintaitarou@h-t.co.jp
       properties:
         divisionCode:
           description: 所属コード
-          type: string
-        divisionName:
-          description: 所属名
           type: string
         gender:
           description: 性別（male： 男性　female： 女性）
@@ -460,14 +1022,8 @@ components:
         typeCode:
           description: 雇用区分コード
           type: string
-        typeName:
-          description: 雇用区分名
-          type: string
         code:
           description: 従業員コード
-          type: string
-        key:
-          description: 従業員識別キー（従業員コードが変更されても不変）
           type: string
         lastName:
           description: 姓
@@ -475,11 +1031,47 @@ components:
         firstName:
           description: 名
           type: string
-        employeeGroups:
-          description: 従業員グループ情報
-          items:
-            $ref: '#/components/schemas/GetEmployees_200_response_inner_employeeGroups_inner'
-          type: array
+        key:
+          description: 従業員識別キー（従業員コードが変更されても不変）
+          type: string
+      required:
+      - code
+      - divisionCode
+      - firstName
+      - gender
+      - key
+      - lastName
+      - typeCode
+      type: object
+    UpdateEmployee_request:
+      example:
+        divisionCode: "1000"
+        gender: male
+        typeCode: "1"
+        code: "1000"
+        lastName: 勤怠
+        firstName: 太郎
+        emailAddresses:
+        - kintaitarou@h-t.co.jp
+      properties:
+        divisionCode:
+          description: 所属コード
+          type: string
+        gender:
+          description: 性別（male： 男性　female： 女性）
+          type: string
+        typeCode:
+          description: 雇用区分コード
+          type: string
+        code:
+          description: 従業員コード
+          type: string
+        lastName:
+          description: 姓
+          type: string
+        firstName:
+          description: 名
+          type: string
         lastNamePhonetics:
           description: 姓（カナ）
           type: string
@@ -508,28 +1100,38 @@ components:
           description: 日の契約労働時間
           example: 480
           type: integer
+      type: object
+    GetEmployeeGroups_200_response_inner_category:
+      description: 従業員グループカテゴリ
+      properties:
+        code:
+          description: 従業員グループカテゴリコード
+          type: string
+        name:
+          description: 従業員グループカテゴリ名
+          type: string
       required:
       - code
-      - divisionCode
-      - divisionName
-      - employeeGroups
-      - firstName
-      - gender
-      - key
-      - lastName
-      - typeCode
-      - typeName
+      - name
       type: object
-    GetAccessTokenAvailability_200_response:
-      example:
-        available: true
+    GetEmployeeGroups_200_response_inner:
       properties:
-        available:
-          type: boolean
+        code:
+          description: 従業員グループコード
+          type: string
+        name:
+          description: 従業員グループ名
+          type: string
+        category:
+          $ref: '#/components/schemas/GetEmployeeGroups_200_response_inner_category'
       required:
-      - available
+      - code
+      - name
       type: object
-    GetEmployees_200_response_inner_employeeGroups_inner:
+    employee_response_employeeGroups_inner:
+      example:
+        code: code
+        name: name
       properties:
         code:
           description: 従業員グループコード
@@ -540,38 +1142,6 @@ components:
       required:
       - code
       - name
-      type: object
-    RefreshAccessToken_201_response:
-      example:
-        token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-      properties:
-        token:
-          description: refreshed access token
-          example: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-          type: string
-      required:
-      - token
-      type: object
-    GetAdministrators_200_response_inner_associatedEmployees_inner:
-      description: 割当従業員
-      properties:
-        code:
-          description: 従業員コード
-          type: string
-        key:
-          description: 従業員識別キー（従業員コードが変更されても不変）
-          type: string
-        lastName:
-          description: 姓
-          type: string
-        firstName:
-          description: 名
-          type: string
-      required:
-      - code
-      - firstName
-      - key
-      - lastName
       type: object
   securitySchemes:
     Bearer:

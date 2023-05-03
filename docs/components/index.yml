@@ -1,16 +1,34 @@
 parameters:
   token:
     $ref: "./parameters/token.yml"
-  additionalFields_get_administrators:
-    $ref: "./parameters/additionalFields_get_administrators.yml"
-  additionalFields_get_employees:
-    $ref: "./parameters/additionalFields_get_employees.yml"
+  additionalFields_administrator:
+    $ref: "./parameters/additionalFields_administrator.yml"
+  additionalFields_employee:
+    $ref: "./parameters/additionalFields_employee.yml"
   date:
     $ref: "./parameters/date.yml"
   division:
     $ref: "./parameters/division.yml"
   includeResigner:
     $ref: "./parameters/includeResigner.yml"
+  employeeCode:
+    $ref: "./parameters/employeeCode.yml"
+  employeeKey:
+    $ref: "./parameters/employeeKey.yml"
+  updateDate:
+    $ref: "./parameters/updateDate.yml"
+  additionalFields_employee-groups:
+    $ref: "./parameters/additionalFields_employee-groups.yml"
+
+schemas:
+  employee_response:
+    $ref: "./schemas/employee_response.yml"
+  employee_request:
+    $ref: "./schemas/employee_request.yml"
+  division_response:
+    $ref: "./schemas/division_response.yml"
+  working_type_response:
+    $ref: "./schemas/working_type_response.yml"
 
 securitySchemes:
   Bearer:
