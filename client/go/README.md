@@ -79,7 +79,9 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AdministratorApi* | [**GetAdministrators**](docs/AdministratorApi.md#getadministrators) | **Get** /administrators | 
 *AttendanceApi* | [**GetDailyWorking**](docs/AttendanceApi.md#getdailyworking) | **Get** /daily-workings/{date} | 
+*AttendanceApi* | [**GetDailyWorkingTimerecord**](docs/AttendanceApi.md#getdailyworkingtimerecord) | **Get** /daily-workings/timerecord/{employeeKey} | 
 *AttendanceApi* | [**GetDailyWorkingTimerecords**](docs/AttendanceApi.md#getdailyworkingtimerecords) | **Get** /daily-workings/timerecord/ | 
+*AttendanceApi* | [**GetDailyWorkingTimerecords_0**](docs/AttendanceApi.md#getdailyworkingtimerecords_0) | **Get** /daily-workings/timerecord/{date}{?division,ondivision,additionalFields} | 
 *AttendanceApi* | [**GetDailyWorkings**](docs/AttendanceApi.md#getdailyworkings) | **Get** /daily-workings | 
 *AttendanceApi* | [**RegisterDailyWorkingTimerecord**](docs/AttendanceApi.md#registerdailyworkingtimerecord) | **Post** /daily-workings/timerecord/{employeeKey} | 
 *CompanyApi* | [**GetCompany**](docs/CompanyApi.md#getcompany) | **Get** /company | 
@@ -114,6 +116,7 @@ Class | Method | HTTP request | Description
  - [GetAdministrators200ResponseInnerAssociatedEmployeesInner](docs/GetAdministrators200ResponseInnerAssociatedEmployeesInner.md)
  - [GetCompany200Response](docs/GetCompany200Response.md)
  - [GetCompany200ResponseSettings](docs/GetCompany200ResponseSettings.md)
+ - [GetDailyWorkingTimerecord200Response](docs/GetDailyWorkingTimerecord200Response.md)
  - [GetDailyWorkingTimerecords200ResponseInner](docs/GetDailyWorkingTimerecords200ResponseInner.md)
  - [GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee](docs/GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee.md)
  - [GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner](docs/GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner.md)
