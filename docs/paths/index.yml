@@ -6,17 +6,13 @@
 /company:
   $ref: ./company/index.yml
 
-/administrators{?additionalFields}:
+/administrators:
   $ref: ./administrators/index.yml
 
-/employees{?date,division,includeResigner,additionalFields}:
-  $ref: ./employees/index{?date,division,includeResigner,additionalFields}.yml
-/employees/{employeeCode}{?date,includeResigner,additionalFields}:
-  $ref: ./employees/{employeeCode}{?date,includeResigner,additionalFields}.yml
+/employees/{employeeCode}:
+  $ref: ./employees/{employeeCode}.yml
 /employees:
   $ref: ./employees/index.yml
-/employees/{employeeKey}{?updateDate}:
-  $ref: ./employees/{employeeKey}{?updateDate}.yml
 /employees/{employeeKey}:
   $ref: ./employees/{employeeKey}.yml
 
@@ -37,5 +33,5 @@
   $ref: ./daily-workings/timerecord_{employeeKey}.yml
 /daily-workings/timerecord/:
   $ref: ./daily-workings/timerecord.yml
-/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}:
-  $ref: ./daily-workings/timerecord_{date}{?division,ondivision,additionalFields}.yml
+/daily-workings/timerecord/{date}:
+  $ref: ./daily-workings/timerecord_{date}.yml
