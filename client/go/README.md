@@ -79,9 +79,8 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AdministratorApi* | [**GetAdministrators**](docs/AdministratorApi.md#getadministrators) | **Get** /administrators | 
 *AttendanceApi* | [**GetDailyWorking**](docs/AttendanceApi.md#getdailyworking) | **Get** /daily-workings/{date} | 
-*AttendanceApi* | [**GetDailyWorkingTimerecord**](docs/AttendanceApi.md#getdailyworkingtimerecord) | **Get** /daily-workings/timerecord/{employeeKey} | 
+*AttendanceApi* | [**GetDailyWorkingTimerecord**](docs/AttendanceApi.md#getdailyworkingtimerecord) | **Get** /daily-workings/timerecord/{date}{?division,ondivision,additionalFields} | 
 *AttendanceApi* | [**GetDailyWorkingTimerecords**](docs/AttendanceApi.md#getdailyworkingtimerecords) | **Get** /daily-workings/timerecord/ | 
-*AttendanceApi* | [**GetDailyWorkingTimerecords_0**](docs/AttendanceApi.md#getdailyworkingtimerecords_0) | **Get** /daily-workings/timerecord/{date}{?division,ondivision,additionalFields} | 
 *AttendanceApi* | [**GetDailyWorkings**](docs/AttendanceApi.md#getdailyworkings) | **Get** /daily-workings | 
 *AttendanceApi* | [**RegisterDailyWorkingTimerecord**](docs/AttendanceApi.md#registerdailyworkingtimerecord) | **Post** /daily-workings/timerecord/{employeeKey} | 
 *CompanyApi* | [**GetCompany**](docs/CompanyApi.md#getcompany) | **Get** /company | 
