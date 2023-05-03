@@ -11,27 +11,37 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/sam8helloworld/kot-api-docs"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/sam8helloworld/kot-api-docs"
 )
 
 func Test_openapi_AttendanceApiService(t *testing.T) {
 
-	configuration := openapiclient.NewConfiguration()
+	configuration := &openapiclient.Configuration{
+		DefaultHeader: make(map[string]string),
+		UserAgent:     "OpenAPI-Generator/1.0.0/go",
+		Debug:         false,
+		Servers: openapiclient.ServerConfigurations{
+			{
+				URL:         "http://localhost:8001",
+				Description: "Mock server (uses example data)",
+			},
+		},
+		OperationServers: map[string]openapiclient.ServerConfigurations{},
+	}
 	apiClient := openapiclient.NewAPIClient(configuration)
 
 	t.Run("Test AttendanceApiService GetDailyWorkings", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.AttendanceApi.GetDailyWorkings(context.Background()).Execute()
+		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
+		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		resp, httpRes, err := apiClient.AttendanceApi.GetDailyWorkings(ctx).Division("1000").Ondivision(true).Start("2016-05-01").End("2016-05-01").AdditionalFields([]string{"currentDateEmployee"}).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
-
 	})
 
 }
