@@ -27,3 +27,5 @@
 
 /daily-workings:
   $ref: ./daily-working/daily-workings.yml
+/daily-workings/{date}:
+  $ref: ./daily-working/daily-working.yml
