@@ -4,11 +4,80 @@ All URIs are relative to *https://api.kingtime.jp/v1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**DeleteEmployee**](EmployeeApi.md#DeleteEmployee) | **Delete** /employees/{employeeKey} | 
 [**GetEmployee**](EmployeeApi.md#GetEmployee) | **Get** /employees/{employeeCode} | 
 [**GetEmployees**](EmployeeApi.md#GetEmployees) | **Get** /employees | 
 [**RegisterEmployee**](EmployeeApi.md#RegisterEmployee) | **Post** /employees | 
 [**UpdateEmployee**](EmployeeApi.md#UpdateEmployee) | **Put** /employees/{employeeKey} | 
 
+
+
+## DeleteEmployee
+
+> DeleteEmployee(ctx, employeeKey).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/sam8helloworld/kot-api-docs"
+)
+
+func main() {
+    employeeKey := "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3" // string | 従業員識別キー（従業員コードが変更されても不変）
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.EmployeeApi.DeleteEmployee(context.Background(), employeeKey).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EmployeeApi.DeleteEmployee``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**employeeKey** | **string** | 従業員識別キー（従業員コードが変更されても不変） | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteEmployeeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GetEmployee

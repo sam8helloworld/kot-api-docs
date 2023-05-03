@@ -79,6 +79,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AdministratorApi* | [**GetAdministrators**](docs/AdministratorApi.md#getadministrators) | **Get** /administrators | 
 *CompanyApi* | [**GetCompany**](docs/CompanyApi.md#getcompany) | **Get** /company | 
+*EmployeeApi* | [**DeleteEmployee**](docs/EmployeeApi.md#deleteemployee) | **Delete** /employees/{employeeKey} | 
 *EmployeeApi* | [**GetEmployee**](docs/EmployeeApi.md#getemployee) | **Get** /employees/{employeeCode} | 
 *EmployeeApi* | [**GetEmployees**](docs/EmployeeApi.md#getemployees) | **Get** /employees | 
 *EmployeeApi* | [**RegisterEmployee**](docs/EmployeeApi.md#registeremployee) | **Post** /employees | 

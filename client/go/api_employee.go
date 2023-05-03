@@ -23,6 +23,98 @@ import (
 // EmployeeApiService EmployeeApi service
 type EmployeeApiService service
 
+type ApiDeleteEmployeeRequest struct {
+	ctx context.Context
+	ApiService *EmployeeApiService
+	employeeKey string
+}
+
+func (r ApiDeleteEmployeeRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteEmployeeExecute(r)
+}
+
+/*
+DeleteEmployee Method for DeleteEmployee
+
+従業員のデータを削除する。(1件)
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param employeeKey 従業員識別キー（従業員コードが変更されても不変）
+ @return ApiDeleteEmployeeRequest
+*/
+func (a *EmployeeApiService) DeleteEmployee(ctx context.Context, employeeKey string) ApiDeleteEmployeeRequest {
+	return ApiDeleteEmployeeRequest{
+		ApiService: a,
+		ctx: ctx,
+		employeeKey: employeeKey,
+	}
+}
+
+// Execute executes the request
+func (a *EmployeeApiService) DeleteEmployeeExecute(r ApiDeleteEmployeeRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmployeeApiService.DeleteEmployee")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/employees/{employeeKey}"
+	localVarPath = strings.Replace(localVarPath, "{"+"employeeKey"+"}", url.PathEscape(parameterValueToString(r.employeeKey, "employeeKey")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiGetEmployeeRequest struct {
 	ctx context.Context
 	ApiService *EmployeeApiService
