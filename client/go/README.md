@@ -80,6 +80,7 @@ Class | Method | HTTP request | Description
 *AdministratorApi* | [**GetAdministrators**](docs/AdministratorApi.md#getadministrators) | **Get** /administrators | 
 *CompanyApi* | [**GetCompany**](docs/CompanyApi.md#getcompany) | **Get** /company | 
 *EmployeeApi* | [**DeleteEmployee**](docs/EmployeeApi.md#deleteemployee) | **Delete** /employees/{employeeKey} | 
+*EmployeeApi* | [**GetDivisions**](docs/EmployeeApi.md#getdivisions) | **Get** /divisions | 
 *EmployeeApi* | [**GetEmployee**](docs/EmployeeApi.md#getemployee) | **Get** /employees/{employeeCode} | 
 *EmployeeApi* | [**GetEmployees**](docs/EmployeeApi.md#getemployees) | **Get** /employees | 
 *EmployeeApi* | [**RegisterEmployee**](docs/EmployeeApi.md#registeremployee) | **Post** /employees | 
@@ -91,6 +92,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [DivisionResponse](docs/DivisionResponse.md)
  - [EmployeeRequest](docs/EmployeeRequest.md)
  - [EmployeeResponse](docs/EmployeeResponse.md)
  - [EmployeeResponseEmployeeGroupsInner](docs/EmployeeResponseEmployeeGroupsInner.md)

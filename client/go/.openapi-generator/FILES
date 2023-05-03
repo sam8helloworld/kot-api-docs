@@ -10,6 +10,7 @@ client.go
 configuration.go
 docs/AdministratorApi.md
 docs/CompanyApi.md
+docs/DivisionResponse.md
 docs/EmployeeApi.md
 docs/EmployeeRequest.md
 docs/EmployeeResponse.md
@@ -26,6 +27,7 @@ docs/UpdateEmployeeRequest.md
 git_push.sh
 go.mod
 go.sum
+model_division_response.go
 model_employee_request.go
 model_employee_response.go
 model_employee_response_employee_groups_inner.go

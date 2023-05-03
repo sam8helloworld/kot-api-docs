@@ -789,7 +789,7 @@ components:
       properties:
         code:
           type: string
-          desctiption: 所属コード
+          description: 所属コード
         name:
           type: string
           description: 所属名
