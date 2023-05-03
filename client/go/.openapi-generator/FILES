@@ -18,6 +18,7 @@ docs/DailyWorkingResponseHolidaysObtained.md
 docs/DailyWorkingResponseHolidaysObtainedFulltimeHoliday.md
 docs/DailyWorkingResponseHolidaysObtainedHalfdayHolidays.md
 docs/DailyWorkingResponseHolidaysObtainedHourHolidays.md
+docs/DailyWorkingTimerecord.md
 docs/DailyWorkingTimerecordRequest.md
 docs/DivisionResponse.md
 docs/EmployeeApi.md
@@ -35,7 +36,6 @@ docs/GetEmployeeGroups200ResponseInner.md
 docs/GetEmployeeGroups200ResponseInnerCategory.md
 docs/RefreshAccessToken201Response.md
 docs/RegisterDailyWorkingTimerecord201Response.md
-docs/RegisterDailyWorkingTimerecord201ResponseTimeRecord.md
 docs/RegisterEmployee201Response.md
 docs/TokenApi.md
 docs/UpdateEmployeeRequest.md
@@ -49,6 +49,7 @@ model_daily_working_response_holidays_obtained.go
 model_daily_working_response_holidays_obtained_fulltime_holiday.go
 model_daily_working_response_holidays_obtained_halfday_holidays.go
 model_daily_working_response_holidays_obtained_hour_holidays.go
+model_daily_working_timerecord.go
 model_daily_working_timerecord_request.go
 model_division_response.go
 model_employee_request.go
@@ -65,7 +66,6 @@ model_get_employee_groups_200_response_inner.go
 model_get_employee_groups_200_response_inner_category.go
 model_refresh_access_token_201_response.go
 model_register_daily_working_timerecord_201_response.go
-model_register_daily_working_timerecord_201_response_time_record.go
 model_register_employee_201_response.go
 model_update_employee_request.go
 model_working_type_response.go

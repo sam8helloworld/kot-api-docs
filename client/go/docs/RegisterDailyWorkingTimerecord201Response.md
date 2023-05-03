@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Date** | **string** | 日時 | 
 **EmployeeKey** | **string** | 従業員識別キー（従業員コードが変更されても不変） | 
-**TimeRecord** | [**RegisterDailyWorkingTimerecord201ResponseTimeRecord**](RegisterDailyWorkingTimerecord201ResponseTimeRecord.md) |  | 
+**TimeRecord** | [**DailyWorkingTimerecord**](DailyWorkingTimerecord.md) |  | 
 
 ## Methods
 
 ### NewRegisterDailyWorkingTimerecord201Response
 
-`func NewRegisterDailyWorkingTimerecord201Response(date string, employeeKey string, timeRecord RegisterDailyWorkingTimerecord201ResponseTimeRecord, ) *RegisterDailyWorkingTimerecord201Response`
+`func NewRegisterDailyWorkingTimerecord201Response(date string, employeeKey string, timeRecord DailyWorkingTimerecord, ) *RegisterDailyWorkingTimerecord201Response`
 
 NewRegisterDailyWorkingTimerecord201Response instantiates a new RegisterDailyWorkingTimerecord201Response object
 This constructor will assign default values to properties that have it defined,
@@ -69,20 +69,20 @@ SetEmployeeKey sets EmployeeKey field to given value.
 
 ### GetTimeRecord
 
-`func (o *RegisterDailyWorkingTimerecord201Response) GetTimeRecord() RegisterDailyWorkingTimerecord201ResponseTimeRecord`
+`func (o *RegisterDailyWorkingTimerecord201Response) GetTimeRecord() DailyWorkingTimerecord`
 
 GetTimeRecord returns the TimeRecord field if non-nil, zero value otherwise.
 
 ### GetTimeRecordOk
 
-`func (o *RegisterDailyWorkingTimerecord201Response) GetTimeRecordOk() (*RegisterDailyWorkingTimerecord201ResponseTimeRecord, bool)`
+`func (o *RegisterDailyWorkingTimerecord201Response) GetTimeRecordOk() (*DailyWorkingTimerecord, bool)`
 
 GetTimeRecordOk returns a tuple with the TimeRecord field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTimeRecord
 
-`func (o *RegisterDailyWorkingTimerecord201Response) SetTimeRecord(v RegisterDailyWorkingTimerecord201ResponseTimeRecord)`
+`func (o *RegisterDailyWorkingTimerecord201Response) SetTimeRecord(v DailyWorkingTimerecord)`
 
 SetTimeRecord sets TimeRecord field to given value.
 

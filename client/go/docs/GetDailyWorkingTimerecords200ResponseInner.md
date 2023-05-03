@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Date** | **string** | 日時 | 
 **EmployeeKey** | **string** | 従業員識別キー（従業員コードが変更されても不変） | 
-**TimeRecord** | [**[]Object**](Object.md) | 打刻 | 
+**TimeRecord** | [**[]DailyWorkingTimerecord**](DailyWorkingTimerecord.md) | 打刻 | 
 **CurrentDateEmployee** | Pointer to [**GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee**](GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee.md) |  | [optional] 
 
 ## Methods
 
 ### NewGetDailyWorkingTimerecords200ResponseInner
 
-`func NewGetDailyWorkingTimerecords200ResponseInner(date string, employeeKey string, timeRecord []Object, ) *GetDailyWorkingTimerecords200ResponseInner`
+`func NewGetDailyWorkingTimerecords200ResponseInner(date string, employeeKey string, timeRecord []DailyWorkingTimerecord, ) *GetDailyWorkingTimerecords200ResponseInner`
 
 NewGetDailyWorkingTimerecords200ResponseInner instantiates a new GetDailyWorkingTimerecords200ResponseInner object
 This constructor will assign default values to properties that have it defined,
@@ -70,20 +70,20 @@ SetEmployeeKey sets EmployeeKey field to given value.
 
 ### GetTimeRecord
 
-`func (o *GetDailyWorkingTimerecords200ResponseInner) GetTimeRecord() []Object`
+`func (o *GetDailyWorkingTimerecords200ResponseInner) GetTimeRecord() []DailyWorkingTimerecord`
 
 GetTimeRecord returns the TimeRecord field if non-nil, zero value otherwise.
 
 ### GetTimeRecordOk
 
-`func (o *GetDailyWorkingTimerecords200ResponseInner) GetTimeRecordOk() (*[]Object, bool)`
+`func (o *GetDailyWorkingTimerecords200ResponseInner) GetTimeRecordOk() (*[]DailyWorkingTimerecord, bool)`
 
 GetTimeRecordOk returns a tuple with the TimeRecord field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTimeRecord
 
-`func (o *GetDailyWorkingTimerecords200ResponseInner) SetTimeRecord(v []Object)`
+`func (o *GetDailyWorkingTimerecords200ResponseInner) SetTimeRecord(v []DailyWorkingTimerecord)`
 
 SetTimeRecord sets TimeRecord field to given value.
 

@@ -24,7 +24,7 @@ type GetDailyWorkingTimerecords200ResponseInner struct {
 	// 従業員識別キー（従業員コードが変更されても不変）
 	EmployeeKey string `json:"employeeKey"`
 	// 打刻
-	TimeRecord []Object `json:"timeRecord"`
+	TimeRecord []DailyWorkingTimerecord `json:"timeRecord"`
 	CurrentDateEmployee *GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployee `json:"currentDateEmployee,omitempty"`
 }
 
@@ -32,7 +32,7 @@ type GetDailyWorkingTimerecords200ResponseInner struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetDailyWorkingTimerecords200ResponseInner(date string, employeeKey string, timeRecord []Object) *GetDailyWorkingTimerecords200ResponseInner {
+func NewGetDailyWorkingTimerecords200ResponseInner(date string, employeeKey string, timeRecord []DailyWorkingTimerecord) *GetDailyWorkingTimerecords200ResponseInner {
 	this := GetDailyWorkingTimerecords200ResponseInner{}
 	this.Date = date
 	this.EmployeeKey = employeeKey
@@ -97,9 +97,9 @@ func (o *GetDailyWorkingTimerecords200ResponseInner) SetEmployeeKey(v string) {
 }
 
 // GetTimeRecord returns the TimeRecord field value
-func (o *GetDailyWorkingTimerecords200ResponseInner) GetTimeRecord() []Object {
+func (o *GetDailyWorkingTimerecords200ResponseInner) GetTimeRecord() []DailyWorkingTimerecord {
 	if o == nil {
-		var ret []Object
+		var ret []DailyWorkingTimerecord
 		return ret
 	}
 
@@ -108,7 +108,7 @@ func (o *GetDailyWorkingTimerecords200ResponseInner) GetTimeRecord() []Object {
 
 // GetTimeRecordOk returns a tuple with the TimeRecord field value
 // and a boolean to check if the value has been set.
-func (o *GetDailyWorkingTimerecords200ResponseInner) GetTimeRecordOk() ([]Object, bool) {
+func (o *GetDailyWorkingTimerecords200ResponseInner) GetTimeRecordOk() ([]DailyWorkingTimerecord, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -116,7 +116,7 @@ func (o *GetDailyWorkingTimerecords200ResponseInner) GetTimeRecordOk() ([]Object
 }
 
 // SetTimeRecord sets field value
-func (o *GetDailyWorkingTimerecords200ResponseInner) SetTimeRecord(v []Object) {
+func (o *GetDailyWorkingTimerecords200ResponseInner) SetTimeRecord(v []DailyWorkingTimerecord) {
 	o.TimeRecord = v
 }
 

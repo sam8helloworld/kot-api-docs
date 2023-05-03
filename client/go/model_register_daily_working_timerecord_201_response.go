@@ -23,14 +23,14 @@ type RegisterDailyWorkingTimerecord201Response struct {
 	Date string `json:"date"`
 	// 従業員識別キー（従業員コードが変更されても不変）
 	EmployeeKey string `json:"employeeKey"`
-	TimeRecord RegisterDailyWorkingTimerecord201ResponseTimeRecord `json:"timeRecord"`
+	TimeRecord DailyWorkingTimerecord `json:"timeRecord"`
 }
 
 // NewRegisterDailyWorkingTimerecord201Response instantiates a new RegisterDailyWorkingTimerecord201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegisterDailyWorkingTimerecord201Response(date string, employeeKey string, timeRecord RegisterDailyWorkingTimerecord201ResponseTimeRecord) *RegisterDailyWorkingTimerecord201Response {
+func NewRegisterDailyWorkingTimerecord201Response(date string, employeeKey string, timeRecord DailyWorkingTimerecord) *RegisterDailyWorkingTimerecord201Response {
 	this := RegisterDailyWorkingTimerecord201Response{}
 	this.Date = date
 	this.EmployeeKey = employeeKey
@@ -95,9 +95,9 @@ func (o *RegisterDailyWorkingTimerecord201Response) SetEmployeeKey(v string) {
 }
 
 // GetTimeRecord returns the TimeRecord field value
-func (o *RegisterDailyWorkingTimerecord201Response) GetTimeRecord() RegisterDailyWorkingTimerecord201ResponseTimeRecord {
+func (o *RegisterDailyWorkingTimerecord201Response) GetTimeRecord() DailyWorkingTimerecord {
 	if o == nil {
-		var ret RegisterDailyWorkingTimerecord201ResponseTimeRecord
+		var ret DailyWorkingTimerecord
 		return ret
 	}
 
@@ -106,7 +106,7 @@ func (o *RegisterDailyWorkingTimerecord201Response) GetTimeRecord() RegisterDail
 
 // GetTimeRecordOk returns a tuple with the TimeRecord field value
 // and a boolean to check if the value has been set.
-func (o *RegisterDailyWorkingTimerecord201Response) GetTimeRecordOk() (*RegisterDailyWorkingTimerecord201ResponseTimeRecord, bool) {
+func (o *RegisterDailyWorkingTimerecord201Response) GetTimeRecordOk() (*DailyWorkingTimerecord, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -114,7 +114,7 @@ func (o *RegisterDailyWorkingTimerecord201Response) GetTimeRecordOk() (*Register
 }
 
 // SetTimeRecord sets field value
-func (o *RegisterDailyWorkingTimerecord201Response) SetTimeRecord(v RegisterDailyWorkingTimerecord201ResponseTimeRecord) {
+func (o *RegisterDailyWorkingTimerecord201Response) SetTimeRecord(v DailyWorkingTimerecord) {
 	o.TimeRecord = v
 }
 

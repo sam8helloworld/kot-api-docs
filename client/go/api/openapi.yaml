@@ -1624,6 +1624,57 @@ components:
       - date
       - time
       type: object
+    daily_working_timerecord:
+      description: 打刻
+      example:
+        divisionCode: divisionCode
+        code: "1"
+        latitude: 0.8008281904610115
+        name: name
+        divisionName: divisionName
+        time: 2000-01-23T04:56:07.000+00:00
+        longitude: 6.027456183070403
+      properties:
+        time:
+          description: 打刻時間
+          format: date-time
+          type: string
+        code:
+          description: 打刻種別コード
+          enum:
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "7"
+          - "8"
+          type: string
+        name:
+          description: 打刻種別名
+          type: string
+        divisionCode:
+          description: 打刻所属コード
+          type: string
+        divisionName:
+          description: 打刻所属名
+          type: string
+        latitude:
+          description: 緯度
+          format: double
+          type: number
+        longitude:
+          description: 経度
+          format: double
+          type: number
+      required:
+      - code
+      - divisionCode
+      - divisionName
+      - latitude
+      - longitude
+      - name
+      - time
+      type: object
     RefreshAccessToken_201_response:
       example:
         token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1865,57 +1916,6 @@ components:
       - code
       - name
       type: object
-    RegisterDailyWorkingTimerecord_201_response_timeRecord:
-      description: 打刻
-      example:
-        divisionCode: divisionCode
-        code: "1"
-        latitude: 0.8008281904610115
-        name: name
-        divisionName: divisionName
-        time: 2000-01-23T04:56:07.000+00:00
-        longitude: 6.027456183070403
-      properties:
-        time:
-          description: 打刻時間
-          format: date-time
-          type: string
-        code:
-          description: 打刻種別コード
-          enum:
-          - "1"
-          - "2"
-          - "3"
-          - "4"
-          - "7"
-          - "8"
-          type: string
-        name:
-          description: 打刻種別名
-          type: string
-        divisionCode:
-          description: 打刻所属コード
-          type: string
-        divisionName:
-          description: 打刻所属名
-          type: string
-        latitude:
-          description: 緯度
-          format: double
-          type: number
-        longitude:
-          description: 経度
-          format: double
-          type: number
-      required:
-      - code
-      - divisionCode
-      - divisionName
-      - latitude
-      - longitude
-      - name
-      - time
-      type: object
     RegisterDailyWorkingTimerecord_201_response:
       example:
         date: 2000-01-23
@@ -1937,7 +1937,7 @@ components:
           description: 従業員識別キー（従業員コードが変更されても不変）
           type: string
         timeRecord:
-          $ref: '#/components/schemas/RegisterDailyWorkingTimerecord_201_response_timeRecord'
+          $ref: '#/components/schemas/daily_working_timerecord'
       required:
       - date
       - employeeKey
@@ -2041,7 +2041,7 @@ components:
         timeRecord:
           description: 打刻
           items:
-            $ref: '#/paths/~1daily-workings~1timerecord~1%7BemployeeKey%7D/post/responses/201/content/application~1json/schema/properties/timeRecord'
+            $ref: '#/components/schemas/daily_working_timerecord'
           type: array
         currentDateEmployee:
           $ref: '#/components/schemas/GetDailyWorkingTimerecords_200_response_inner_currentDateEmployee'
