@@ -36,3 +36,6 @@ tags:
   - name: Attendance
     externalDocs:
       url: https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0
+  - name: Request
+    externalDocs:
+      url: https://developer.kingtime.jp/#%E7%94%B3%E8%AB%8B
