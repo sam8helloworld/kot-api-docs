@@ -65,4 +65,17 @@ func Test_openapi_AttendanceApiService(t *testing.T) {
 		require.NotNil(t, resp)
 		assert.Equal(t, 201, httpRes.StatusCode)
 	})
+
+	t.Run("Test AttendanceApiService GetDailyWorkingTimerecords", func(t *testing.T) {
+		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
+		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		resp, httpRes, err := apiClient.AttendanceApi.GetDailyWorkingTimerecords(ctx).
+			EmployeeKeys([]string{"8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3"}).
+			Division("1000").Ondivision(true).Start("2016-05-01").End("2016-05-01").
+			AdditionalFields([]string{"currentDateEmployee"}).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+	})
 }
