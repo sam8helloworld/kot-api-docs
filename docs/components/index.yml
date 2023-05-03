@@ -25,6 +25,8 @@ schemas:
     $ref: "./schemas/employee_request.yml"
   division_response:
     $ref: "./schemas/division_response.yml"
+  working_type_response:
+    $ref: "./schemas/working_type_response.yml"
 
 securitySchemes:
   Bearer:

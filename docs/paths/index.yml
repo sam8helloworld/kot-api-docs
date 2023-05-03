@@ -18,3 +18,6 @@
 
 /divisions:
   $ref: ./division/divisions.yml
+
+/working-types:
+  $ref: ./working-type/working-types.yml

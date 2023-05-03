@@ -1,0 +1,29 @@
+get:
+  operationId: GetWorkingTypes
+  tags:
+    - Employee
+  description: 雇用区分データの一覧を取得する。
+  externalDocs:
+    description: 一覧
+    url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E9%9B%87%E7%94%A8%E5%8C%BA%E5%88%86%E3%83%87%E3%83%BC%E3%82%BF-get
+  responses:
+    "200":
+      description: ""
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            example: application/json
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../components/schemas/working_type_response.yml"
+            example:
+              [
+                {
+                  "code": "1",
+                  "name": "正社員"
+                }
+              ]
