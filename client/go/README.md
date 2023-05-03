@@ -83,6 +83,7 @@ Class | Method | HTTP request | Description
 *EmployeeApi* | [**GetDivisions**](docs/EmployeeApi.md#getdivisions) | **Get** /divisions | 
 *EmployeeApi* | [**GetEmployee**](docs/EmployeeApi.md#getemployee) | **Get** /employees/{employeeCode} | 
 *EmployeeApi* | [**GetEmployees**](docs/EmployeeApi.md#getemployees) | **Get** /employees | 
+*EmployeeApi* | [**GetWorkingTypes**](docs/EmployeeApi.md#getworkingtypes) | **Get** /working-types | 
 *EmployeeApi* | [**RegisterEmployee**](docs/EmployeeApi.md#registeremployee) | **Post** /employees | 
 *EmployeeApi* | [**UpdateEmployee**](docs/EmployeeApi.md#updateemployee) | **Put** /employees/{employeeKey} | 
 *TokenApi* | [**GetAccessTokenAvailability**](docs/TokenApi.md#getaccesstokenavailability) | **Get** /tokens/{token}/available | 
@@ -104,6 +105,7 @@ Class | Method | HTTP request | Description
  - [RefreshAccessToken201Response](docs/RefreshAccessToken201Response.md)
  - [RegisterEmployee201Response](docs/RegisterEmployee201Response.md)
  - [UpdateEmployeeRequest](docs/UpdateEmployeeRequest.md)
+ - [WorkingTypeResponse](docs/WorkingTypeResponse.md)
 
 
 ## Documentation For Authorization

@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**GetDivisions**](EmployeeApi.md#GetDivisions) | **Get** /divisions | 
 [**GetEmployee**](EmployeeApi.md#GetEmployee) | **Get** /employees/{employeeCode} | 
 [**GetEmployees**](EmployeeApi.md#GetEmployees) | **Get** /employees | 
+[**GetWorkingTypes**](EmployeeApi.md#GetWorkingTypes) | **Get** /working-types | 
 [**RegisterEmployee**](EmployeeApi.md#RegisterEmployee) | **Post** /employees | 
 [**UpdateEmployee**](EmployeeApi.md#UpdateEmployee) | **Put** /employees/{employeeKey} | 
 
@@ -277,6 +278,67 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]EmployeeResponse**](EmployeeResponse.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetWorkingTypes
+
+> []WorkingTypeResponse GetWorkingTypes(ctx).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/sam8helloworld/kot-api-docs"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EmployeeApi.GetWorkingTypes(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EmployeeApi.GetWorkingTypes``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetWorkingTypes`: []WorkingTypeResponse
+    fmt.Fprintf(os.Stdout, "Response from `EmployeeApi.GetWorkingTypes`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWorkingTypesRequest struct via the builder pattern
+
+
+### Return type
+
+[**[]WorkingTypeResponse**](WorkingTypeResponse.md)
 
 ### Authorization
 
