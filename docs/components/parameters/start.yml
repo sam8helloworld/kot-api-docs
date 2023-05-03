@@ -1,0 +1,10 @@
+name: start
+in: query
+description: |-
+  取得したい期間の開始年月日
+  ・過去日は最大3年前まで
+schema:
+  type: string
+  format: date
+  description: defaultは当日
+  example: 2016-05-01

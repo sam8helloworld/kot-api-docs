@@ -1,0 +1,12 @@
+name: date
+in: path
+description: |-
+  詳細を取得したい年月日
+  ・過去日は最大3年前まで
+  ・未来日は最大1年後まで
+required: true
+schema:
+  type: string
+  format: date
+  description: defaultは当日
+  example: 2016-10-10

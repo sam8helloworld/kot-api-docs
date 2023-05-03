@@ -1,0 +1,10 @@
+name: ondivision
+in: query
+description: |-
+  ・true:所属に基づいた勤務データ
+  ・false:出勤先に基づいた勤務データ
+  ・divisionが指定されている場合のみ使用可能
+schema:
+  type: boolean
+  example: true
+  default: true

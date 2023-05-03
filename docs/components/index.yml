@@ -19,6 +19,16 @@ parameters:
     $ref: "./parameters/updateDate.yml"
   additionalFields_employee-groups:
     $ref: "./parameters/additionalFields_employee-groups.yml"
+  ondivision:
+    $ref: "./parameters/ondivision.yml"
+  start:
+    $ref: "./parameters/start.yml"
+  end:
+    $ref: "./parameters/end.yml"
+  additionalFields_daily-workings:
+    $ref: "./parameters/additionalFields_daily-workings.yml"
+  date_required:
+    $ref: "./parameters/date_required.yml"
 
 schemas:
   employee_response:
@@ -29,6 +39,8 @@ schemas:
     $ref: "./schemas/division_response.yml"
   working_type_response:
     $ref: "./schemas/working_type_response.yml"
+  daily_working_response:
+    $ref: "./schemas/daily_working_response.yml"
 
 securitySchemes:
   Bearer:

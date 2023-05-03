@@ -21,6 +21,9 @@ tags:
 - externalDocs:
     url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1
   name: Employee
+- externalDocs:
+    url: https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0
+  name: Attendance
 paths:
   /tokens/{token}:
     delete:
@@ -572,6 +575,233 @@ paths:
               style: simple
       tags:
       - Employee
+  /daily-workings:
+    get:
+      description: 日別勤務データの一覧を取得する。
+      externalDocs:
+        description: 一覧
+        url: https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0-%E6%97%A5%E5%88%A5%E5%8B%A4%E6%80%A0%E3%83%87%E3%83%BC%E3%82%BF-get
+      operationId: GetDailyWorkings
+      parameters:
+      - description: 所属コード
+        explode: true
+        in: query
+        name: division
+        required: false
+        schema:
+          example: "1000"
+          type: string
+        style: form
+      - description: |-
+          ・true:所属に基づいた勤務データ
+          ・false:出勤先に基づいた勤務データ
+          ・divisionが指定されている場合のみ使用可能
+        explode: true
+        in: query
+        name: ondivision
+        required: false
+        schema:
+          default: true
+          example: true
+          type: boolean
+        style: form
+      - description: |-
+          取得したい期間の開始年月日
+          ・過去日は最大3年前まで
+        explode: true
+        in: query
+        name: start
+        required: false
+        schema:
+          description: defaultは当日
+          format: date
+          type: string
+        style: form
+      - description: |-
+          取得したい期間の終了年月日
+          ・startとendは同時に指定
+          ・期間は最大62日
+          ・未来日は最大1年後まで
+        explode: true
+        in: query
+        name: end
+        required: false
+        schema:
+          description: defaultは当日
+          format: date
+          type: string
+        style: form
+      - description: 指定されたプロパティをレスポンスに追加
+        explode: false
+        in: query
+        name: additionalFields
+        required: false
+        schema:
+          example:
+          - currentDateEmployee
+          items:
+            enum:
+            - currentDateEmployee
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                - date: 2016-05-01
+                  dailyWorkings:
+                  - date: 2016-05-01
+                    employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+                    currentDateEmployee:
+                      divisionCode: "1000"
+                      divisionName: 本社
+                      gender: male
+                      typeCode: "1"
+                      typeName: 正社員
+                      code: "1000"
+                      lastName: 勤怠
+                      firstName: 太郎
+                      lastNamePhonetics: キンタイ
+                      firstNamePhonetics: タロウ
+                      employeeGroups:
+                      - code: "0001"
+                        name: 人事部
+                      - code: "0002"
+                        name: 総務部
+                    workPlaceDivisionCode: "1000"
+                    workPlaceDivisionName: 本社
+                    isClosing: true
+                    isHelp: false
+                    isError: false
+                    workdayTypeName: 平日
+                    assigned: 480
+                    unassigned: 135
+                    overtime: 135
+                    lateNight: 0
+                    lateNightUnassigned: 0
+                    lateNightOvertime: 0
+                    breakTime: 60
+                    late: 0
+                    earlyLeave: 0
+                    totalWork: 615
+                    holidaysObtained:
+                      fulltimeHoliday:
+                        code: 1
+                        name: 有休
+                      halfdayHolidays:
+                      - typeName: PM休
+                        code: 1
+                        name: 有休
+                      hourHolidays:
+                      - start: 2016-05-01T10:00:00+09:00
+                        end: 2016-05-01T11:00:00+09:00
+                        minutes: 60
+                        code: 1
+                        name: 有休
+                    autoBreakOff: 1
+                    discretionaryVacation: 0
+                    customDailyWorkings:
+                    - code: dCus1
+                      name: 日別カスタム1
+                      calculationUnitCode: 1
+                      calculationResult: 1
+                    - code: dCus2
+                      name: 日別カスタム2
+                      calculationUnitCode: 2
+                      calculationResult: 10
+                    - code: dCus3
+                      name: 日別カスタム3
+                      calculationUnitCode: 4
+                      calculationResult: 100
+                items:
+                  $ref: '#/components/schemas/daily_working_response'
+                type: array
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Attendance
+  /daily-workings/{date}:
+    get:
+      description: 指定した年月日の日別勤務データを取得する。
+      externalDocs:
+        description: 年月日指定
+        url: https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0-%E6%97%A5%E5%88%A5%E5%8B%A4%E6%80%A0%E3%83%87%E3%83%BC%E3%82%BF-get-1
+      operationId: GetDailyWorking
+      parameters:
+      - description: |-
+          詳細を取得したい年月日
+          ・過去日は最大3年前まで
+          ・未来日は最大1年後まで
+        explode: false
+        in: path
+        name: date
+        required: true
+        schema:
+          description: defaultは当日
+          format: date
+          type: string
+        style: simple
+      - description: 所属コード
+        explode: true
+        in: query
+        name: division
+        required: false
+        schema:
+          example: "1000"
+          type: string
+        style: form
+      - description: |-
+          ・true:所属に基づいた勤務データ
+          ・false:出勤先に基づいた勤務データ
+          ・divisionが指定されている場合のみ使用可能
+        explode: true
+        in: query
+        name: ondivision
+        required: false
+        schema:
+          default: true
+          example: true
+          type: boolean
+        style: form
+      - description: 指定されたプロパティをレスポンスに追加
+        explode: false
+        in: query
+        name: additionalFields
+        required: false
+        schema:
+          example:
+          - currentDateEmployee
+          items:
+            enum:
+            - currentDateEmployee
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/daily_working_response'
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      tags:
+      - Attendance
 components:
   parameters:
     token:
@@ -702,6 +932,77 @@ components:
           type: string
         type: array
       style: form
+    ondivision:
+      description: |-
+        ・true:所属に基づいた勤務データ
+        ・false:出勤先に基づいた勤務データ
+        ・divisionが指定されている場合のみ使用可能
+      explode: true
+      in: query
+      name: ondivision
+      required: false
+      schema:
+        default: true
+        example: true
+        type: boolean
+      style: form
+    start:
+      description: |-
+        取得したい期間の開始年月日
+        ・過去日は最大3年前まで
+      explode: true
+      in: query
+      name: start
+      required: false
+      schema:
+        description: defaultは当日
+        format: date
+        type: string
+      style: form
+    end:
+      description: |-
+        取得したい期間の終了年月日
+        ・startとendは同時に指定
+        ・期間は最大62日
+        ・未来日は最大1年後まで
+      explode: true
+      in: query
+      name: end
+      required: false
+      schema:
+        description: defaultは当日
+        format: date
+        type: string
+      style: form
+    additionalFields_daily-workings:
+      description: 指定されたプロパティをレスポンスに追加
+      explode: false
+      in: query
+      name: additionalFields
+      required: false
+      schema:
+        example:
+        - currentDateEmployee
+        items:
+          enum:
+          - currentDateEmployee
+          type: string
+        type: array
+      style: form
+    date_required:
+      description: |-
+        詳細を取得したい年月日
+        ・過去日は最大3年前まで
+        ・未来日は最大1年後まで
+      explode: false
+      in: path
+      name: date
+      required: true
+      schema:
+        description: defaultは当日
+        format: date
+        type: string
+      style: simple
   schemas:
     employee_response:
       example:
@@ -886,6 +1187,160 @@ components:
       - code
       - dayBorderTime
       - name
+      type: object
+    daily_working_response:
+      example:
+        date: 2000-01-23
+        lateNightOvertime: 2
+        autoBreakOff: 1
+        isHelp: true
+        employeeKey: employeeKey
+        unassigned: 6
+        lateNight: 5
+        discretionaryVacation: 6
+        totalWork: 2
+        holidaysObtained:
+          halfdayHolidays:
+            code: 7
+            typeName: typeName
+            name: name
+          fulltimeHoliday:
+            code: 4
+            name: name
+          hourHolidays:
+            code: 1
+            minutes: 1
+            start: 2000-01-23T04:56:07.000+00:00
+            name: name
+            end: 2000-01-23T04:56:07.000+00:00
+        isError: true
+        breakTime: 7
+        earlyLeave: 3
+        late: 9
+        customDailyWorkings:
+          calculationUnitCode: 7
+          code: code
+          calculationResult: 1
+          name: name
+        currentDateEmployee:
+          divisionCode: divisionCode
+          lastName: lastName
+          firstName: firstName
+          code: code
+          gender: no_selected
+          divisionName: divisionName
+          typeName: typeName
+          firstNamePhonetics: firstNamePhonetics
+          lastNamePhonetics: lastNamePhonetics
+          typeCode: typeCode
+          employeeGroups:
+          - code: code
+            name: name
+          - code: code
+            name: name
+        lateNightUnassigned: 5
+        overtime: 1
+        assigned: 0
+        workdayTypeName: workdayTypeName
+        isClosing: true
+        workPlaceDivisionName: workPlaceDivisionName
+        workPlaceDivisionCode: workPlaceDivisionCode
+      properties:
+        date:
+          description: 日時
+          format: date
+          type: string
+        employeeKey:
+          description: 従業員識別キー（従業員コードが変更されても不変）
+          type: string
+        workPlaceDivisionCode:
+          description: 出勤先所属コード
+          type: string
+        workPlaceDivisionName:
+          description: 出勤先所属名
+          type: string
+        isClosing:
+          description: 締め状況
+          type: boolean
+        isHelp:
+          description: ヘルプ勤務状況
+          type: boolean
+        isError:
+          description: エラー勤務状況
+          type: boolean
+        workdayTypeName:
+          description: 勤務日種別名
+          type: string
+        assigned:
+          description: 所定時間（分）
+          type: integer
+        unassigned:
+          description: 所定外時間（分）
+          type: integer
+        overtime:
+          description: 残業時間（分）
+          type: integer
+        lateNight:
+          description: 深夜時間（分）
+          type: integer
+        lateNightUnassigned:
+          description: 深夜所定外時間（分）
+          type: integer
+        lateNightOvertime:
+          description: 深夜残業時間（分）
+          type: integer
+        breakTime:
+          description: 休憩時間（分）
+          type: integer
+        late:
+          description: 遅刻時間（分）
+          type: integer
+        earlyLeave:
+          description: 早退時間（分）
+          type: integer
+        totalWork:
+          description: 労働合計時間（分）
+          type: integer
+        holidaysObtained:
+          $ref: '#/components/schemas/daily_working_response_holidaysObtained'
+        autoBreakOff:
+          description: 自動休憩無効（null： 休憩を無効化しない 1：　雇用区分休憩無効　2： スケジュール休憩無効　3： 全ての自動休憩無効）
+          enum:
+          - 1
+          - 2
+          - 3
+          - null
+          nullable: true
+          type: integer
+        discretionaryVacation:
+          description: 休暇みなし時間（分）
+          type: integer
+        customDailyWorkings:
+          $ref: '#/components/schemas/daily_working_response_customDailyWorkings'
+        currentDateEmployee:
+          $ref: '#/components/schemas/daily_working_response_currentDateEmployee'
+      required:
+      - assigned
+      - autoBreakOff
+      - breakTime
+      - customDailyWorkings
+      - date
+      - discretionaryVacation
+      - earlyLeave
+      - employeeKey
+      - holidaysObtained
+      - isClosing
+      - isError
+      - isHelp
+      - late
+      - lateNight
+      - lateNightOvertime
+      - lateNightUnassigned
+      - overtime
+      - totalWork
+      - unassigned
+      - workPlaceDivisionCode
+      - workdayTypeName
       type: object
     RefreshAccessToken_201_response:
       example:
@@ -1142,6 +1597,201 @@ components:
       required:
       - code
       - name
+      type: object
+    daily_working_response_holidaysObtained_fulltimeHoliday:
+      example:
+        code: 4
+        name: name
+      properties:
+        code:
+          description: 休暇区分コード
+          type: integer
+        name:
+          description: 休暇区分名
+          type: string
+      required:
+      - code
+      - name
+      type: object
+    daily_working_response_holidaysObtained_halfdayHolidays:
+      example:
+        code: 7
+        typeName: typeName
+        name: name
+      properties:
+        typeName:
+          description: 半休種別名
+          type: string
+        code:
+          description: 休暇区分コード
+          type: integer
+        name:
+          description: 休暇区分名
+          type: string
+      required:
+      - code
+      - name
+      - typeName
+      type: object
+    daily_working_response_holidaysObtained_hourHolidays:
+      example:
+        code: 1
+        minutes: 1
+        start: 2000-01-23T04:56:07.000+00:00
+        name: name
+        end: 2000-01-23T04:56:07.000+00:00
+      properties:
+        start:
+          description: 休暇開始時間
+          format: date-time
+          type: string
+        end:
+          description: 休暇終了時間
+          format: date-time
+          type: string
+        minutes:
+          description: 休暇取得時間
+          type: integer
+        code:
+          description: 休暇区分コード
+          type: integer
+        name:
+          description: 休暇区分名
+          type: string
+      required:
+      - code
+      - end
+      - minutes
+      - name
+      - start
+      type: object
+    daily_working_response_holidaysObtained:
+      description: 休暇取得
+      example:
+        halfdayHolidays:
+          code: 7
+          typeName: typeName
+          name: name
+        fulltimeHoliday:
+          code: 4
+          name: name
+        hourHolidays:
+          code: 1
+          minutes: 1
+          start: 2000-01-23T04:56:07.000+00:00
+          name: name
+          end: 2000-01-23T04:56:07.000+00:00
+      properties:
+        fulltimeHoliday:
+          $ref: '#/components/schemas/daily_working_response_holidaysObtained_fulltimeHoliday'
+        halfdayHolidays:
+          $ref: '#/components/schemas/daily_working_response_holidaysObtained_halfdayHolidays'
+        hourHolidays:
+          $ref: '#/components/schemas/daily_working_response_holidaysObtained_hourHolidays'
+      required:
+      - fulltimeHoliday
+      - halfdayHolidays
+      - hourHolidays
+      type: object
+    daily_working_response_customDailyWorkings:
+      example:
+        calculationUnitCode: 7
+        code: code
+        calculationResult: 1
+        name: name
+      properties:
+        code:
+          description: 日別カスタム表示コード
+          type: string
+        name:
+          description: 日別カスタム表示名
+          type: string
+        calculationUnitCode:
+          description: 計算単位コード（1： 日数　2： 時間　4： 数値）
+          enum:
+          - 1
+          - 2
+          - 4
+          type: integer
+        calculationResult:
+          description: 計算結果
+          type: integer
+      required:
+      - calculationResult
+      - calculationUnitCode
+      - code
+      - name
+      type: object
+    daily_working_response_currentDateEmployee:
+      description: 今日時点の従業員データ
+      example:
+        divisionCode: divisionCode
+        lastName: lastName
+        firstName: firstName
+        code: code
+        gender: no_selected
+        divisionName: divisionName
+        typeName: typeName
+        firstNamePhonetics: firstNamePhonetics
+        lastNamePhonetics: lastNamePhonetics
+        typeCode: typeCode
+        employeeGroups:
+        - code: code
+          name: name
+        - code: code
+          name: name
+      properties:
+        divisionCode:
+          description: 所属コード
+          type: string
+        divisionName:
+          description: 所属名
+          type: string
+        gender:
+          description: 性別（no_selected： 選択しない　male： 男性　female： 女性）
+          enum:
+          - no_selected
+          - male
+          - female
+          type: string
+        typeCode:
+          description: 雇用区分コード
+          type: string
+        typeName:
+          description: 雇用区分名
+          type: string
+        code:
+          description: 従業員コード
+          type: string
+        lastName:
+          description: 姓
+          type: string
+        firstName:
+          description: 名
+          type: string
+        lastNamePhonetics:
+          description: 姓（カナ）
+          type: string
+        firstNamePhonetics:
+          description: 名（カナ）
+          type: string
+        employeeGroups:
+          description: 従業員グループ情報
+          items:
+            $ref: '#/components/schemas/employee_response_employeeGroups_inner'
+          type: array
+      required:
+      - code
+      - divisionCode
+      - divisionName
+      - employeeGroups
+      - firstName
+      - firstNamePhonetics
+      - gender
+      - lastName
+      - lastNamePhonetics
+      - typeCode
+      - typeName
       type: object
   securitySchemes:
     Bearer:

@@ -1,0 +1,12 @@
+name: end
+in: query
+description: |-
+  取得したい期間の終了年月日
+  ・startとendは同時に指定
+  ・期間は最大62日
+  ・未来日は最大1年後まで
+schema:
+  type: string
+  format: date
+  description: defaultは当日
+  example: 2016-05-01

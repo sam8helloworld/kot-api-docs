@@ -78,6 +78,8 @@ All URIs are relative to *https://api.kingtime.jp/v1.0*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AdministratorApi* | [**GetAdministrators**](docs/AdministratorApi.md#getadministrators) | **Get** /administrators | 
+*AttendanceApi* | [**GetDailyWorking**](docs/AttendanceApi.md#getdailyworking) | **Get** /daily-workings/{date} | 
+*AttendanceApi* | [**GetDailyWorkings**](docs/AttendanceApi.md#getdailyworkings) | **Get** /daily-workings | 
 *CompanyApi* | [**GetCompany**](docs/CompanyApi.md#getcompany) | **Get** /company | 
 *EmployeeApi* | [**DeleteEmployee**](docs/EmployeeApi.md#deleteemployee) | **Delete** /employees/{employeeKey} | 
 *EmployeeApi* | [**GetDivisions**](docs/EmployeeApi.md#getdivisions) | **Get** /divisions | 
@@ -94,6 +96,13 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [DailyWorkingResponse](docs/DailyWorkingResponse.md)
+ - [DailyWorkingResponseCurrentDateEmployee](docs/DailyWorkingResponseCurrentDateEmployee.md)
+ - [DailyWorkingResponseCustomDailyWorkings](docs/DailyWorkingResponseCustomDailyWorkings.md)
+ - [DailyWorkingResponseHolidaysObtained](docs/DailyWorkingResponseHolidaysObtained.md)
+ - [DailyWorkingResponseHolidaysObtainedFulltimeHoliday](docs/DailyWorkingResponseHolidaysObtainedFulltimeHoliday.md)
+ - [DailyWorkingResponseHolidaysObtainedHalfdayHolidays](docs/DailyWorkingResponseHolidaysObtainedHalfdayHolidays.md)
+ - [DailyWorkingResponseHolidaysObtainedHourHolidays](docs/DailyWorkingResponseHolidaysObtainedHourHolidays.md)
  - [DivisionResponse](docs/DivisionResponse.md)
  - [EmployeeRequest](docs/EmployeeRequest.md)
  - [EmployeeResponse](docs/EmployeeResponse.md)

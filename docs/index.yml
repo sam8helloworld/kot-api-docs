@@ -33,3 +33,6 @@ tags:
   - name: Employee
     externalDocs:
       url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1
+  - name: Attendance
+    externalDocs:
+      url: https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0
