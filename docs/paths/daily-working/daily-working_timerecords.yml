@@ -26,7 +26,7 @@ get:
           schema:
             type: array
             items:
-              $ref: "../../components/schemas/daily_working_timerecord_response.yml"
+              $ref: "../../components/responses/GetDailyWorkingTimerecords.yml"
             example:
               [
                 {

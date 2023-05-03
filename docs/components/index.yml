@@ -45,8 +45,6 @@ schemas:
     $ref: "./schemas/daily_working_response.yml"
   daily_working_timerecord_request:
     $ref: "./schemas/daily_working_timerecord_request.yml"
-  daily_working_timerecord_response:
-    $ref: "./schemas/daily_working_timerecord_response.yml"
 
 securitySchemes:
   Bearer:

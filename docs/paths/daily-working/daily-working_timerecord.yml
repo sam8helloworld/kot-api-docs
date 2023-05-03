@@ -41,7 +41,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: "../../components/schemas/daily_working_timerecord_response.yml"
+            $ref: "../../components/responses/RegisterDailyWorkingTimerecord.yml"
           examples:
             exmaple1:
               value:
