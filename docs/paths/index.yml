@@ -26,12 +26,12 @@
   $ref: ./employee-group/employee-groups.yml
 
 /daily-workings:
-  $ref: ./daily-working/daily-workings.yml
+  $ref: ./daily-workings/index.yml
 /daily-workings/{date}:
-  $ref: ./daily-working/daily-working.yml
+  $ref: ./daily-workings/{date}.yml
 /daily-workings/timerecord/{employeeKey}:
-  $ref: ./daily-working/daily-working_timerecord.yml
+  $ref: ./daily-workings/timerecord_{employeeKey}.yml
 /daily-workings/timerecord/:
-  $ref: ./daily-working/daily-working_timerecords.yml
+  $ref: ./daily-workings/timerecord.yml
 /daily-workings/timerecord/{date}{?division,ondivision,additionalFields}:
-  $ref: ./daily-working/daily-working_timerecord.yml
+  $ref: ./daily-workings/timerecord_{date}.yml
