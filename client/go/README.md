@@ -81,11 +81,8 @@ Class | Method | HTTP request | Description
 *CompanyApi* | [**GetCompany**](docs/CompanyApi.md#getcompany) | **Get** /company | 
 *EmployeeApi* | [**GetEmployee**](docs/EmployeeApi.md#getemployee) | **Get** /employees/{employeeCode} | 
 *EmployeeApi* | [**GetEmployees**](docs/EmployeeApi.md#getemployees) | **Get** /employees | 
-*EmployeeApi* | [**GetEmployees_0**](docs/EmployeeApi.md#getemployees_0) | **Get** /employees/{employeeKey} | 
 *EmployeeApi* | [**RegisterEmployee**](docs/EmployeeApi.md#registeremployee) | **Post** /employees | 
-*EmployeeApi* | [**RegisterEmployee_0**](docs/EmployeeApi.md#registeremployee_0) | **Post** /employees/{employeeKey} | 
-*EmployeeApi* | [**UpdateEmployee**](docs/EmployeeApi.md#updateemployee) | **Put** /employees | 
-*EmployeeApi* | [**UpdateEmployee_0**](docs/EmployeeApi.md#updateemployee_0) | **Put** /employees/{employeeKey} | 
+*EmployeeApi* | [**UpdateEmployee**](docs/EmployeeApi.md#updateemployee) | **Put** /employees/{employeeKey} | 
 *TokenApi* | [**GetAccessTokenAvailability**](docs/TokenApi.md#getaccesstokenavailability) | **Get** /tokens/{token}/available | 
 *TokenApi* | [**RefreshAccessToken**](docs/TokenApi.md#refreshaccesstoken) | **Post** /tokens/{token} | 
 *TokenApi* | [**SuspendAccessToken**](docs/TokenApi.md#suspendaccesstoken) | **Delete** /tokens/{token} | 

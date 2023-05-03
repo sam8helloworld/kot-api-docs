@@ -351,6 +351,50 @@ paths:
                   key: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4
                   emailAddresses:
                     - kintaitarou@h-t.co.jp
+  '/employees/{employeeCode}':
+    get:
+      operationId: GetEmployee
+      parameters:
+        - $ref: '#/components/parameters/employeeCode'
+        - $ref: '#/components/parameters/date'
+        - $ref: '#/components/parameters/includeResigner'
+        - $ref: '#/components/parameters/additionalFields_employee'
+      tags:
+        - Employee
+      description: 指定した従業員のデータを取得する。
+      externalDocs:
+        description: 従業員指定
+        url: 'https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-get-1'
+      responses:
+        '200':
+          description: ''
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/employee_response'
+                example:
+                  divisionCode: '1000'
+                  divisionName: 本社
+                  gender: male
+                  typeCode: '1'
+                  typeName: 正社員
+                  code: '1000'
+                  lastName: 勤怠
+                  firstName: 太郎
+                  key: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+                  emailAddresses:
+                    - kintaitarou@h-t.co.jp
+                  employeeGroups:
+                    - code: '0001'
+                      name: 人事部
+                    - code: '0002'
+                      name: 総務部
+  '/employees/{employeeKey}':
     put:
       operationId: UpdateEmployee
       parameters:
@@ -457,51 +501,6 @@ paths:
                   emailAddresses:
                     - kintaitarou@h-t.co.jp
                   allDayRegardingWorkInMinute: 480
-  '/employees/{employeeCode}':
-    get:
-      operationId: GetEmployee
-      parameters:
-        - $ref: '#/components/parameters/employeeCode'
-        - $ref: '#/components/parameters/date'
-        - $ref: '#/components/parameters/includeResigner'
-        - $ref: '#/components/parameters/additionalFields_employee'
-      tags:
-        - Employee
-      description: 指定した従業員のデータを取得する。
-      externalDocs:
-        description: 従業員指定
-        url: 'https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-get-1'
-      responses:
-        '200':
-          description: ''
-          headers:
-            Content-Type:
-              schema:
-                type: string
-                example: application/json
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/employee_response'
-                example:
-                  divisionCode: '1000'
-                  divisionName: 本社
-                  gender: male
-                  typeCode: '1'
-                  typeName: 正社員
-                  code: '1000'
-                  lastName: 勤怠
-                  firstName: 太郎
-                  key: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
-                  emailAddresses:
-                    - kintaitarou@h-t.co.jp
-                  employeeGroups:
-                    - code: '0001'
-                      name: 人事部
-                    - code: '0002'
-                      name: 総務部
-  '/employees/{employeeKey}':
-    $ref: '#/paths/~1employees'
 components:
   parameters:
     token:

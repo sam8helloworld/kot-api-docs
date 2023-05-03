@@ -91,6 +91,6 @@ func Test_openapi_EmployeeApiService(t *testing.T) {
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
-		assert.Equal(t, 201, httpRes.StatusCode)
+		assert.Equal(t, 200, httpRes.StatusCode)
 	})
 }
