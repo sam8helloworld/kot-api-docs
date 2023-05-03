@@ -39,6 +39,7 @@ docs/RefreshAccessToken201Response.md
 docs/RegisterDailyWorkingTimerecord201Response.md
 docs/RegisterEmployee201Response.md
 docs/TokenApi.md
+docs/UpdateEmployeeRequest.md
 docs/WorkingTypeResponse.md
 git_push.sh
 go.mod
@@ -68,6 +69,7 @@ model_get_employee_groups_200_response_inner_category.go
 model_refresh_access_token_201_response.go
 model_register_daily_working_timerecord_201_response.go
 model_register_employee_201_response.go
+model_update_employee_request.go
 model_working_type_response.go
 response.go
 utils.go

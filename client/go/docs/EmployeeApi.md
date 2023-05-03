@@ -4,14 +4,14 @@ All URIs are relative to *https://api.kingtime.jp/v1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteEmployee**](EmployeeApi.md#DeleteEmployee) | **Delete** /employees/{employeeKey}{?updateDate} | 
-[**DeleteEmployee_0**](EmployeeApi.md#DeleteEmployee_0) | **Delete** /employees/{employeeKey} | 
+[**DeleteEmployee**](EmployeeApi.md#DeleteEmployee) | **Delete** /employees/{employeeKey} | 
 [**GetDivisions**](EmployeeApi.md#GetDivisions) | **Get** /divisions | 
 [**GetEmployee**](EmployeeApi.md#GetEmployee) | **Get** /employees/{employeeCode}{?date,includeResigner,additionalFields} | 
 [**GetEmployeeGroups**](EmployeeApi.md#GetEmployeeGroups) | **Get** /employee-groups | 
 [**GetEmployees**](EmployeeApi.md#GetEmployees) | **Get** /employees{?date,division,includeResigner,additionalFields} | 
 [**GetWorkingTypes**](EmployeeApi.md#GetWorkingTypes) | **Get** /working-types | 
 [**RegisterEmployee**](EmployeeApi.md#RegisterEmployee) | **Post** /employees | 
+[**UpdateEmployee**](EmployeeApi.md#UpdateEmployee) | **Put** /employees/{employeeKey}{?updateDate} | 
 
 
 
@@ -59,74 +59,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteEmployeeRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteEmployee_0
-
-> DeleteEmployee_0(ctx, employeeKey).Execute()
-
-
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/sam8helloworld/kot-api-docs"
-)
-
-func main() {
-    employeeKey := "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3" // string | 従業員識別キー（従業員コードが変更されても不変）
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.EmployeeApi.DeleteEmployee_0(context.Background(), employeeKey).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EmployeeApi.DeleteEmployee_0``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**employeeKey** | **string** | 従業員識別キー（従業員コードが変更されても不変） | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteEmployee_1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -540,6 +472,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RegisterEmployee201Response**](RegisterEmployee201Response.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateEmployee
+
+> EmployeeResponse UpdateEmployee(ctx, employeeKey).UpdateDate(updateDate).UpdateEmployeeRequest(updateEmployeeRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    "time"
+    openapiclient "github.com/sam8helloworld/kot-api-docs"
+)
+
+func main() {
+    employeeKey := "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3" // string | 従業員識別キー（従業員コードが変更されても不変）
+    updateDate := time.Now() // string | 所属、雇用区分を更新したい年月日 (optional)
+    updateEmployeeRequest := *openapiclient.NewUpdateEmployeeRequest() // UpdateEmployeeRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EmployeeApi.UpdateEmployee(context.Background(), employeeKey).UpdateDate(updateDate).UpdateEmployeeRequest(updateEmployeeRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EmployeeApi.UpdateEmployee``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateEmployee`: EmployeeResponse
+    fmt.Fprintf(os.Stdout, "Response from `EmployeeApi.UpdateEmployee`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**employeeKey** | **string** | 従業員識別キー（従業員コードが変更されても不変） | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateEmployeeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updateDate** | **string** | 所属、雇用区分を更新したい年月日 | 
+ **updateEmployeeRequest** | [**UpdateEmployeeRequest**](UpdateEmployeeRequest.md) |  | 
+
+### Return type
+
+[**EmployeeResponse**](EmployeeResponse.md)
 
 ### Authorization
 
