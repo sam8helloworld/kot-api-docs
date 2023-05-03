@@ -21,3 +21,6 @@
 
 /working-types:
   $ref: ./working-type/working-types.yml
+
+/employee-groups:
+  $ref: ./employee-group/employee-groups.yml

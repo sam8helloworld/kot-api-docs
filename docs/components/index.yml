@@ -17,6 +17,8 @@ parameters:
     $ref: "./parameters/employeeKey.yml"
   updateDate:
     $ref: "./parameters/updateDate.yml"
+  additionalFields_employee-groups:
+    $ref: "./parameters/additionalFields_employee-groups.yml"
 
 schemas:
   employee_response:

@@ -1,0 +1,60 @@
+get:
+  operationId: GetEmployeeGroups
+  parameters:
+    - $ref: "../../components/parameters/additionalFields_employee-groups.yml"
+  tags:
+    - Employee
+  description: |-
+    従業員グループのデータを取得する。
+    ※対象企業が従業員グループ機能を利用できない場合にはデータを取得できません。
+  externalDocs:
+    description: 一覧
+    url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%87%E3%83%BC%E3%82%BF-get
+  responses:
+    "200":
+      description: ""
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            example: application/json
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              required:
+                - code
+                - name
+              properties:
+                code:
+                  type: string
+                  description: 従業員グループコード
+                name:
+                  type: string
+                  description: 従業員グループ名
+                category:
+                  type: object
+                  description: 従業員グループカテゴリ
+                  required:
+                    - code
+                    - name
+                  properties:
+                    code:
+                      type: string
+                      description: 従業員グループカテゴリコード
+                    name:
+                      type: string
+                      description: 従業員グループカテゴリ名
+            example:
+              [
+                {
+                  "code": "0001",
+                  "name": "人事部",
+                  "category": {
+                    "code": "KEIKAN",
+                    "name": "経営管理本部"
+                  }
+                }
+              ]
