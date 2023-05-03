@@ -13,15 +13,17 @@ post:
       application/json:
         schema:
           $ref: "../../components/schemas/daily_working_timerecord_request.yml"
-          examples:
-            exmaple1:
+        examples:
+          exmaple1:
+            value: 
               {
                 "date": "2016-05-01",
                 "time": "2016-05-01T09:00:00+09:00",
                 "latitude": 35.6672237,
                 "longitude": 139.7422207
               }
-            exmaple2:
+          exmaple2:
+            value:
               {
                 "date": "2016-05-01",
                 "time": "2016-05-01T09:00:00+09:00",
@@ -40,8 +42,9 @@ post:
         application/json:
           schema:
             $ref: "../../components/schemas/daily_working_timerecord_response.yml"
-            examples:
-              exmaple1:
+          examples:
+            exmaple1:
+              value:
                 {
                   "date": "2016-05-01",
                   "employeeKey": "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
@@ -55,7 +58,8 @@ post:
                     "longitude": 139.7422207
                   }
                 }
-              exmaple2:
+            exmaple2:
+              value:
                 {
                   "date": "2016-05-01",
                   "employeeKey": "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
