@@ -16,7 +16,7 @@
 /employees:
   $ref: ./employees/index.yml
 /employees/{employeeKey}{?updateDate}:
-  $ref: ./employees/{employeeKey}.yml
+  $ref: ./employees/{employeeKey}{?updateDate}.yml
 /employees/{employeeKey}:
   $ref: ./employees/{employeeKey}.yml
 
