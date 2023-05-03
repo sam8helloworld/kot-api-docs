@@ -1,0 +1,112 @@
+put:
+  operationId: UpdateEmployee
+  parameters:
+    - $ref: "../../components/parameters/employeeKey.yml"
+    - $ref: "../../components/parameters/updateDate.yml"
+  tags:
+    - Employee
+  description: |-
+    従業員のデータを更新する。(1件)
+    Request Bodyにて指定された項目のみ更新する。
+    項目が指定され、値が無いまたは空文字列の場合は、該当項目をNULLで更新する。
+    レスポンスには、AdditionalFieldを含むすべての従業員データを含める。
+  externalDocs:
+    description: 更新
+    url: https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1-%E5%BE%93%E6%A5%AD%E5%93%A1%E3%83%87%E3%83%BC%E3%82%BF-put
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            divisionCode:
+              type: string
+              description: 所属コード
+            gender:
+              type: string
+              description: 性別（male： 男性　female： 女性）
+            typeCode:
+              type: string
+              description: 雇用区分コード
+            code:
+              type: string
+              description: 従業員コード
+            lastName:
+              type: string
+              description: 姓
+            firstName:
+              type: string
+              description: 名
+            lastNamePhonetics:
+              type: string
+              description: 姓（カナ）
+            firstNamePhonetics:
+              type: string
+              description: 名（カナ）
+            hiredDate:
+              type: string
+              format: date
+              description: 入社年月日
+            birthDate:
+              type: string
+              format: date
+              description: 生年月日
+            resignationDate:
+              type: string
+              format: date
+              description: 退職年月日
+            emailAddresses:
+              type: array
+              description: メールアドレス
+              items:
+                type: string
+                format: email
+            allDayRegardingWorkInMinute:
+              type: integer
+              description: 日の契約労働時間
+              example: 480
+          example:
+            {
+              "divisionCode": "1000",
+              "gender": "male",
+              "typeCode": "1",
+              "code": "1000",
+              "lastName": "勤怠",
+              "firstName": "太郎",
+              "emailAddresses": [
+                "kintaitarou@h-t.co.jp"
+              ]
+            }
+  responses:
+    "200":
+      description: ""
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            example: application/json
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/employee_response.yml"
+            example:
+              {
+                "divisionCode": "1000",
+                "divisionName": "本社",
+                "gender": "male",
+                "typeCode": "1",
+                "typeName": "正社員",
+                "code": "1000",
+                "lastName": "勤怠",
+                "firstName": "太郎",
+                "key": "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4",
+                "lastNamePhonetics": "キンタイ",
+                "firstNamePhonetics": "タロウ",
+                "birthDate": "1990-09-01",
+                "hiredDate": "2013-04-01",
+                "resignationDate": "2017-12-12",
+                "emailAddresses": [
+                  "kintaitarou@h-t.co.jp"
+                ],
+                "allDayRegardingWorkInMinute": 480
+              }

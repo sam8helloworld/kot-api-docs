@@ -14,4 +14,4 @@
 /employees/{employeeCode}:
   $ref: ./employee/employee.yml
 /employees/{employeeKey}:
-  $ref: ./employee/employees.yml
+  $ref: ./employee/employee_update.yml
