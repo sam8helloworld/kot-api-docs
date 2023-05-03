@@ -1136,7 +1136,7 @@ paths:
                             divisionCode: '1000'
                             divisionName: 本社
   '/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}':
-    $ref: '#/paths/~1daily-workings~1timerecord~1'
+    $ref: '#/paths/~1daily-workings~1timerecord~1%7BemployeeKey%7D'
 components:
   parameters:
     token:
