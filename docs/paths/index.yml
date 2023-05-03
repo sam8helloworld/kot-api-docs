@@ -38,4 +38,4 @@
 /daily-workings/timerecord/:
   $ref: ./daily-workings/timerecord.yml
 /daily-workings/timerecord/{date}{?division,ondivision,additionalFields}:
-  $ref: ./daily-workings/timerecord_{date}.yml
+  $ref: ./daily-workings/timerecord_{date}{?division,ondivision,additionalFields}.yml
