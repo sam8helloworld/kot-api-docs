@@ -1147,6 +1147,7 @@ paths:
         name: additionalFields
         required: false
         schema:
+          example: flow
           items:
             enum:
             - schedulePatternCode
@@ -1155,7 +1156,6 @@ paths:
             - workFixedEnd
             - note
             - flow
-            example: flow
             type: string
           type: array
         style: form
