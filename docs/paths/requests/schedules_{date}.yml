@@ -54,7 +54,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../components/responses/Getschedules.yml"
+            $ref: "../../components/responses/GetSchedules.yml"
             example:
               {
                 "year": 2018,
