@@ -1176,6 +1176,73 @@ paths:
       summary: "/requests/schedules/{date}{?administratorKey,additionalFields}"
       tags:
       - Request
+  /requests/overtimes/{date}:
+    get:
+      description: |-
+        指定した年月の時間外勤務申請データを取得する。
+        ※対象企業が時間外勤務申請を利用できない場合にはエラーとなります。
+      externalDocs:
+        description: 年月指定
+        url: https://developer.kingtime.jp/#%E7%94%B3%E8%AB%8B-%E6%99%82%E9%96%93%E5%A4%96%E5%8B%A4%E5%8B%99%E7%94%B3%E8%AB%8B%E3%83%87%E3%83%BC%E3%82%BF-get
+      operationId: GetOvertimes
+      parameters:
+      - description: |-
+          詳細を取得したい年月
+          ・過去日は最大3年前まで
+          ・未来日は最大1年後まで
+        explode: false
+        in: path
+        name: date
+        required: true
+        schema:
+          example: 2018-08
+          pattern: "\\d{4}-(0[1-9]|1[0-2])"
+          type: string
+        style: simple
+      - description: 管理者識別キー（管理者コードが変更されても不変）
+        explode: true
+        in: query
+        name: administratorKey
+        required: false
+        schema:
+          example: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222
+          type: string
+        style: form
+      - description: 指定されたプロパティをレスポンスに追加
+        explode: false
+        in: query
+        name: additionalFields
+        required: false
+        schema:
+          example: flow
+          items:
+            enum:
+            - schedulePatternCode
+            - schedulePatternName
+            - workFixedStart
+            - workFixedEnd
+            - note
+            - flow
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOvertimes_200_response'
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      summary: "/requests/overtimes/{date}{?administratorKey,additionalFields}"
+      tags:
+      - Request
 components:
   parameters:
     token:
@@ -2270,9 +2337,6 @@ components:
           type: string
         key:
           description: 識別キー（従業員 または 管理者）
-          enum:
-          - 従業員
-          - 管理者
           type: string
       required:
       - key
@@ -2604,6 +2668,195 @@ components:
       required:
       - month
       - scheduleRequests
+      - year
+      type: object
+    GetOvertimes_200_response_overtimeRequests_inner_applicant:
+      description: 申請者
+      properties:
+        type:
+          description: 種別（employee： 従業員　administrator： 管理者)
+          enum:
+          - employee
+          - administrator
+          type: string
+        key:
+          description: 識別キー（従業員 または 管理者）
+          type: string
+      required:
+      - key
+      - type
+      type: object
+    GetOvertimes_200_response_overtimeRequests_inner_requested:
+      description: 申請内容
+      properties:
+        isBeforeSchedule:
+          description: 勤務予定前の時間外申請か（true 予定前　false： 予定後）
+          type: boolean
+        start:
+          description: 開始時刻
+          format: date-time
+          type: string
+        end:
+          description: 終了時刻
+          format: date-time
+          type: string
+      required:
+      - end
+      - isBeforeSchedule
+      - start
+      type: object
+    GetOvertimes_200_response_overtimeRequests_inner_current:
+      description: 現在のスケジュール
+      properties:
+        isBeforeSchedule:
+          description: 勤務予定前の時間外申請か（true 予定前　false： 予定後）
+          type: boolean
+        start:
+          description: 開始時刻
+          format: date-time
+          type: string
+        end:
+          description: 終了時刻
+          format: date-time
+          type: string
+      required:
+      - end
+      - isBeforeSchedule
+      - start
+      type: object
+    GetOvertimes_200_response_overtimeRequests_inner_flow_inner:
+      properties:
+        level:
+          description: 承認フローレベル（１～５）
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          type: integer
+        administratorKeys:
+          description: 管理者識別キー（管理者コードが変更されても不変）
+          items:
+            type: string
+          type: array
+      required:
+      - administratorKeys
+      - level
+      type: object
+    GetOvertimes_200_response_overtimeRequests_inner:
+      properties:
+        date:
+          description: 対象日
+          format: date
+          type: string
+        requestedDate:
+          description: 申請日
+          format: date
+          type: string
+        employeeKey:
+          description: 従業員識別キー（従業員コードが変更されても不変）
+          type: string
+        requestKey:
+          description: 申請識別キー
+          type: string
+        applicant:
+          $ref: '#/components/schemas/GetOvertimes_200_response_overtimeRequests_inner_applicant'
+        status:
+          description: 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
+          enum:
+          - applying
+          - approved
+          - rejected
+          type: string
+        currentFlow:
+          description: 現在の承認フローレベル（１～５）
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          type: integer
+        lastModifiedAdministratorKey:
+          description: 最終更新管理者識別キー
+          type: string
+        message:
+          description: 申請メッセージ
+          type: string
+        adminComment:
+          description: 管理者コメント
+          type: string
+        requested:
+          $ref: '#/components/schemas/GetOvertimes_200_response_overtimeRequests_inner_requested'
+        current:
+          $ref: '#/components/schemas/GetOvertimes_200_response_overtimeRequests_inner_current'
+        flow:
+          description: 承認フロー
+          items:
+            $ref: '#/components/schemas/GetOvertimes_200_response_overtimeRequests_inner_flow_inner'
+          type: array
+      required:
+      - adminComment
+      - applicant
+      - current
+      - currentFlow
+      - date
+      - employeeKey
+      - lastModifiedAdministratorKey
+      - message
+      - requestKey
+      - requested
+      - requestedDate
+      - status
+      type: object
+    GetOvertimes_200_response:
+      example:
+        year: 2018
+        month: 8
+        overtimeRequests:
+        - date: 2018-08-01
+          requestedDate: 2018-08-10
+          employeeKey: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe2735215201
+          requestKey: 59d25f49d4dce8b6e6658cc6b5c3b89b34c617916f90f6e27e9a9fa6cca576a4
+          applicant:
+            type: employee
+            key: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe2735215201
+          status: applying
+          currentFlow: 2
+          flow:
+          - level: 1
+            administratorKeys:
+            - c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac6ff
+          - level: 2
+            administratorKeys:
+            - c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222
+          - level: 3
+            administratorKeys:
+            - c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac111
+          message: 申請いたします
+          adminComment: 第1承認者承認済
+          lastModifiedAdministratorKey: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac6ff
+          requested:
+            isBeforeSchedule: true
+            start: 2018-08-01T08:00+09:00
+            end: 2018-08-01T10:00+09:00
+          current:
+            isBeforeSchedule: true
+            start: 2018-08-01T09:00+09:00
+            end: 2018-08-01T10:00+09:00
+      properties:
+        year:
+          type: integer
+        month:
+          type: integer
+        overtimeRequests:
+          items:
+            $ref: '#/components/schemas/GetOvertimes_200_response_overtimeRequests_inner'
+          type: array
+      required:
+      - month
+      - overtimeRequests
       - year
       type: object
     daily_working_response_holidaysObtained_fulltimeHoliday:

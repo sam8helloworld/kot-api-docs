@@ -1336,9 +1336,6 @@ paths:
                                 - administrator
                             key:
                               type: string
-                              enum:
-                                - 従業員
-                                - 管理者
                               description: 識別キー（従業員 または 管理者）
                         status:
                           type: string
@@ -1646,6 +1643,241 @@ paths:
                             administratorKeys:
                               type: string
                               description: 管理者識別キー（管理者コードが変更されても不変）
+  '/requests/overtimes/{date}':
+    get:
+      operationId: GetOvertimes
+      summary: '/requests/overtimes/{date}{?administratorKey,additionalFields}'
+      parameters:
+        - name: date
+          in: path
+          required: true
+          description: |-
+            詳細を取得したい年月
+            ・過去日は最大3年前まで
+            ・未来日は最大1年後まで
+          schema:
+            type: string
+            pattern: '\d{4}-(0[1-9]|1[0-2])'
+            example: 2018-08
+        - name: administratorKey
+          in: query
+          description: 管理者識別キー（管理者コードが変更されても不変）
+          schema:
+            type: string
+            example: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222
+        - name: additionalFields
+          in: query
+          description: 指定されたプロパティをレスポンスに追加
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - schedulePatternCode
+                - schedulePatternName
+                - workFixedStart
+                - workFixedEnd
+                - note
+                - flow
+            example: flow
+      tags:
+        - Request
+      description: |-
+        指定した年月の時間外勤務申請データを取得する。
+        ※対象企業が時間外勤務申請を利用できない場合にはエラーとなります。
+      externalDocs:
+        description: 年月指定
+        url: 'https://developer.kingtime.jp/#%E7%94%B3%E8%AB%8B-%E6%99%82%E9%96%93%E5%A4%96%E5%8B%A4%E5%8B%99%E7%94%B3%E8%AB%8B%E3%83%87%E3%83%BC%E3%82%BF-get'
+      responses:
+        '200':
+          description: ''
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                example:
+                  year: 2018
+                  month: 8
+                  overtimeRequests:
+                    - date: '2018-08-01'
+                      requestedDate: '2018-08-10'
+                      employeeKey: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe2735215201
+                      requestKey: 59d25f49d4dce8b6e6658cc6b5c3b89b34c617916f90f6e27e9a9fa6cca576a4
+                      applicant:
+                        type: employee
+                        key: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe2735215201
+                      status: applying
+                      currentFlow: 2
+                      flow:
+                        - level: 1
+                          administratorKeys:
+                            - c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac6ff
+                        - level: 2
+                          administratorKeys:
+                            - c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222
+                        - level: 3
+                          administratorKeys:
+                            - c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac111
+                      message: 申請いたします
+                      adminComment: 第1承認者承認済
+                      lastModifiedAdministratorKey: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac6ff
+                      requested:
+                        isBeforeSchedule: true
+                        start: '2018-08-01T08:00+09:00'
+                        end: '2018-08-01T10:00+09:00'
+                      current:
+                        isBeforeSchedule: true
+                        start: '2018-08-01T09:00+09:00'
+                        end: '2018-08-01T10:00+09:00'
+                type: object
+                required:
+                  - year
+                  - month
+                  - overtimeRequests
+                properties:
+                  year:
+                    type: integer
+                  month:
+                    type: integer
+                  overtimeRequests:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - date
+                        - requestedDate
+                        - employeeKey
+                        - requestKey
+                        - applicant
+                        - status
+                        - currentFlow
+                        - lastModifiedAdministratorKey
+                        - message
+                        - adminComment
+                        - requested
+                        - current
+                      properties:
+                        date:
+                          type: string
+                          format: date
+                          description: 対象日
+                        requestedDate:
+                          type: string
+                          format: date
+                          description: 申請日
+                        employeeKey:
+                          type: string
+                          description: 従業員識別キー（従業員コードが変更されても不変）
+                        requestKey:
+                          type: string
+                          description: 申請識別キー
+                        applicant:
+                          type: object
+                          description: 申請者
+                          required:
+                            - type
+                            - key
+                          properties:
+                            type:
+                              type: string
+                              description: 種別（employee： 従業員　administrator： 管理者)
+                              enum:
+                                - employee
+                                - administrator
+                            key:
+                              type: string
+                              description: 識別キー（従業員 または 管理者）
+                        status:
+                          type: string
+                          description: 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
+                          enum:
+                            - applying
+                            - approved
+                            - rejected
+                        currentFlow:
+                          type: integer
+                          description: 現在の承認フローレベル（１～５）
+                          enum:
+                            - 1
+                            - 2
+                            - 3
+                            - 4
+                            - 5
+                        lastModifiedAdministratorKey:
+                          type: string
+                          description: 最終更新管理者識別キー
+                        message:
+                          type: string
+                          description: 申請メッセージ
+                        adminComment:
+                          type: string
+                          description: 管理者コメント
+                        requested:
+                          type: object
+                          description: 申請内容
+                          required:
+                            - isBeforeSchedule
+                            - start
+                            - end
+                          properties:
+                            isBeforeSchedule:
+                              type: boolean
+                              description: 勤務予定前の時間外申請か（true 予定前　false： 予定後）
+                            start:
+                              type: string
+                              format: date-time
+                              description: 開始時刻
+                            end:
+                              type: string
+                              format: date-time
+                              description: 終了時刻
+                        current:
+                          type: object
+                          description: 現在のスケジュール
+                          required:
+                            - isBeforeSchedule
+                            - start
+                            - end
+                          properties:
+                            isBeforeSchedule:
+                              type: boolean
+                              description: 勤務予定前の時間外申請か（true 予定前　false： 予定後）
+                            start:
+                              type: string
+                              format: date-time
+                              description: 開始時刻
+                            end:
+                              type: string
+                              format: date-time
+                              description: 終了時刻
+                        flow:
+                          type: array
+                          description: 承認フロー
+                          items:
+                            type: object
+                            required:
+                              - level
+                              - administratorKeys
+                            properties:
+                              level:
+                                type: integer
+                                description: 承認フローレベル（１～５）
+                                enum:
+                                  - 1
+                                  - 2
+                                  - 3
+                                  - 4
+                                  - 5
+                              administratorKeys:
+                                type: array
+                                description: 管理者識別キー（管理者コードが変更されても不変）
+                                items:
+                                  type: string
 components:
   parameters:
     token:

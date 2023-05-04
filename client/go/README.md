@@ -92,6 +92,7 @@ Class | Method | HTTP request | Description
 *EmployeeApi* | [**GetWorkingTypes**](docs/EmployeeApi.md#getworkingtypes) | **Get** /working-types | 
 *EmployeeApi* | [**RegisterEmployee**](docs/EmployeeApi.md#registeremployee) | **Post** /employees | 
 *EmployeeApi* | [**UpdateEmployee**](docs/EmployeeApi.md#updateemployee) | **Put** /employees/{employeeKey} | /employees/{employeeKey}{?updateDate}
+*RequestApi* | [**GetOvertimes**](docs/RequestApi.md#getovertimes) | **Get** /requests/overtimes/{date} | /requests/overtimes/{date}{?administratorKey,additionalFields}
 *RequestApi* | [**GetSchedules**](docs/RequestApi.md#getschedules) | **Get** /requests/schedules/{date} | /requests/schedules/{date}{?administratorKey,additionalFields}
 *TokenApi* | [**GetAccessTokenAvailability**](docs/TokenApi.md#getaccesstokenavailability) | **Get** /tokens/{token}/available | 
 *TokenApi* | [**RefreshAccessToken**](docs/TokenApi.md#refreshaccesstoken) | **Post** /tokens/{token} | 
@@ -122,6 +123,12 @@ Class | Method | HTTP request | Description
  - [GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner](docs/GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner.md)
  - [GetEmployeeGroups200ResponseInner](docs/GetEmployeeGroups200ResponseInner.md)
  - [GetEmployeeGroups200ResponseInnerCategory](docs/GetEmployeeGroups200ResponseInnerCategory.md)
+ - [GetOvertimes200Response](docs/GetOvertimes200Response.md)
+ - [GetOvertimes200ResponseOvertimeRequestsInner](docs/GetOvertimes200ResponseOvertimeRequestsInner.md)
+ - [GetOvertimes200ResponseOvertimeRequestsInnerApplicant](docs/GetOvertimes200ResponseOvertimeRequestsInnerApplicant.md)
+ - [GetOvertimes200ResponseOvertimeRequestsInnerCurrent](docs/GetOvertimes200ResponseOvertimeRequestsInnerCurrent.md)
+ - [GetOvertimes200ResponseOvertimeRequestsInnerFlowInner](docs/GetOvertimes200ResponseOvertimeRequestsInnerFlowInner.md)
+ - [GetOvertimes200ResponseOvertimeRequestsInnerRequested](docs/GetOvertimes200ResponseOvertimeRequestsInnerRequested.md)
  - [GetSchedules200Response](docs/GetSchedules200Response.md)
  - [GetSchedules200ResponseScheduleRequestsInner](docs/GetSchedules200ResponseScheduleRequestsInner.md)
  - [GetSchedules200ResponseScheduleRequestsInnerApplicant](docs/GetSchedules200ResponseScheduleRequestsInnerApplicant.md)
