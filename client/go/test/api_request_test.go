@@ -10,26 +10,25 @@ Testing RequestApiService
 package openapi
 
 import (
-	"context"
+	"testing"
+
+	openapiclient "github.com/sam8helloworld/kot-api-docs"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/sam8helloworld/kot-api-docs"
 )
 
 func Test_openapi_RequestApiService(t *testing.T) {
 
-	configuration := openapiclient.NewConfiguration()
+	configuration := configuration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
 	t.Run("Test RequestApiService GetSchedules", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var date string
-
-		resp, httpRes, err := apiClient.RequestApi.GetSchedules(context.Background(), date).Execute()
-
+		// FIXME: このテストだけ実行が終了しない
+		t.Skip()
+		date := "2018-08"
+		ctx := contextWithAuthorization()
+		resp, httpRes, err := apiClient.RequestApi.GetSchedules(ctx, date).AdministratorKey("c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222").
+			AdditionalFields([]string{"flow"}).Execute()
 		require.Nil(t, err)
 		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
