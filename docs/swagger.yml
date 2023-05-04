@@ -1380,10 +1380,12 @@ paths:
                             clockInSchedule:
                               type: string
                               format: date-time
+                              x-go-type: KotDate
                               description: 出勤予定時間
                             clockOutSchedule:
                               type: string
                               format: date-time
+                              x-go-type: KotDate
                               description: 退勤予定時間
                             breakSchedule:
                               type: integer
@@ -1401,10 +1403,12 @@ paths:
                                   start:
                                     type: string
                                     format: date-time
+                                    x-go-type: KotDate
                                     description: 休憩開始予定
                                   end:
                                     type: string
                                     format: date-time
+                                    x-go-type: KotDate
                                     description: 休憩終了予定
                             holidaysObtained:
                               type: object
@@ -1458,10 +1462,12 @@ paths:
                                       start:
                                         type: string
                                         format: date-time
+                                        x-go-type: KotDate
                                         description: 休暇開始予定
                                       end:
                                         type: string
                                         format: date-time
+                                        x-go-type: KotDate
                                         description: 休暇終了予定
                                       minutes:
                                         type: integer
@@ -1509,10 +1515,12 @@ paths:
                             clockInSchedule:
                               type: string
                               format: date-time
+                              x-go-type: KotDate
                               description: 出勤予定時間
                             clockOutSchedule:
                               type: string
                               format: date-time
+                              x-go-type: KotDate
                               description: 退勤予定時間
                             breakSchedule:
                               type: integer
@@ -1530,10 +1538,12 @@ paths:
                                   start:
                                     type: string
                                     format: date-time
+                                    x-go-type: KotDate
                                     description: 休憩開始予定
                                   end:
                                     type: string
                                     format: date-time
+                                    x-go-type: KotDate
                                     description: 休憩終了予定
                             holidaysObtained:
                               type: object
@@ -1587,10 +1597,12 @@ paths:
                                       start:
                                         type: string
                                         format: date-time
+                                        x-go-type: KotDate
                                         description: 休暇開始予定
                                       end:
                                         type: string
                                         format: date-time
+                                        x-go-type: KotDate
                                         description: 休暇終了予定
                                       minutes:
                                         type: integer
@@ -1630,10 +1642,12 @@ paths:
                         workFixedStart:
                           type: string
                           format: date-time
+                          x-go-type: KotDate
                           description: 勤務開始刻限
                         workFixedEnd:
                           type: string
                           format: date-time
+                          x-go-type: KotDate
                           description: 勤務終了刻限
                         note:
                           type: string
@@ -1849,10 +1863,12 @@ paths:
                             start:
                               type: string
                               format: date-time
+                              x-go-type: KotDate
                               description: 開始時刻
                             end:
                               type: string
                               format: date-time
+                              x-go-type: KotDate
                               description: 終了時刻
                         current:
                           type: object
@@ -1868,10 +1884,12 @@ paths:
                             start:
                               type: string
                               format: date-time
+                              x-go-type: KotDate
                               description: 開始時刻
                             end:
                               type: string
                               format: date-time
+                              x-go-type: KotDate
                               description: 終了時刻
                         flow:
                           type: array

@@ -22,7 +22,7 @@ type GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfda
 	// 半休種別名
 	TypeName string `json:"typeName"`
 	// 休暇区分コード
-	Code string `json:"code"`
+	Code int32 `json:"code"`
 	// 休暇区分名
 	Name string `json:"name"`
 }
@@ -31,7 +31,7 @@ type GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfda
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays(typeName string, code string, name string) *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays {
+func NewGetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays(typeName string, code int32, name string) *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays {
 	this := GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays{}
 	this.TypeName = typeName
 	this.Code = code
@@ -72,9 +72,9 @@ func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHa
 }
 
 // GetCode returns the Code field value
-func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays) GetCode() string {
+func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays) GetCode() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
@@ -83,7 +83,7 @@ func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHa
 
 // GetCodeOk returns a tuple with the Code field value
 // and a boolean to check if the value has been set.
-func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays) GetCodeOk() (*string, bool) {
+func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays) GetCodeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHa
 }
 
 // SetCode sets field value
-func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays) SetCode(v string) {
+func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays) SetCode(v int32) {
 	o.Code = v
 }
 

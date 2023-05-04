@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FulltimeHoliday** | [**DailyWorkingResponseHolidaysObtainedFulltimeHoliday**](DailyWorkingResponseHolidaysObtainedFulltimeHoliday.md) |  | 
-**HalfdayHolidays** | [**DailyWorkingResponseHolidaysObtainedHalfdayHolidays**](DailyWorkingResponseHolidaysObtainedHalfdayHolidays.md) |  | 
+**FulltimeHoliday** | [**GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday**](GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday.md) |  | 
+**HalfdayHolidays** | [**GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner**](GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner.md) |  | 
 **HourHolidays** | [**DailyWorkingResponseHolidaysObtainedHourHolidays**](DailyWorkingResponseHolidaysObtainedHourHolidays.md) |  | 
 
 ## Methods
 
 ### NewDailyWorkingResponseHolidaysObtained
 
-`func NewDailyWorkingResponseHolidaysObtained(fulltimeHoliday DailyWorkingResponseHolidaysObtainedFulltimeHoliday, halfdayHolidays DailyWorkingResponseHolidaysObtainedHalfdayHolidays, hourHolidays DailyWorkingResponseHolidaysObtainedHourHolidays, ) *DailyWorkingResponseHolidaysObtained`
+`func NewDailyWorkingResponseHolidaysObtained(fulltimeHoliday GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday, halfdayHolidays GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner, hourHolidays DailyWorkingResponseHolidaysObtainedHourHolidays, ) *DailyWorkingResponseHolidaysObtained`
 
 NewDailyWorkingResponseHolidaysObtained instantiates a new DailyWorkingResponseHolidaysObtained object
 This constructor will assign default values to properties that have it defined,
@@ -29,40 +29,40 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetFulltimeHoliday
 
-`func (o *DailyWorkingResponseHolidaysObtained) GetFulltimeHoliday() DailyWorkingResponseHolidaysObtainedFulltimeHoliday`
+`func (o *DailyWorkingResponseHolidaysObtained) GetFulltimeHoliday() GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday`
 
 GetFulltimeHoliday returns the FulltimeHoliday field if non-nil, zero value otherwise.
 
 ### GetFulltimeHolidayOk
 
-`func (o *DailyWorkingResponseHolidaysObtained) GetFulltimeHolidayOk() (*DailyWorkingResponseHolidaysObtainedFulltimeHoliday, bool)`
+`func (o *DailyWorkingResponseHolidaysObtained) GetFulltimeHolidayOk() (*GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday, bool)`
 
 GetFulltimeHolidayOk returns a tuple with the FulltimeHoliday field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFulltimeHoliday
 
-`func (o *DailyWorkingResponseHolidaysObtained) SetFulltimeHoliday(v DailyWorkingResponseHolidaysObtainedFulltimeHoliday)`
+`func (o *DailyWorkingResponseHolidaysObtained) SetFulltimeHoliday(v GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday)`
 
 SetFulltimeHoliday sets FulltimeHoliday field to given value.
 
 
 ### GetHalfdayHolidays
 
-`func (o *DailyWorkingResponseHolidaysObtained) GetHalfdayHolidays() DailyWorkingResponseHolidaysObtainedHalfdayHolidays`
+`func (o *DailyWorkingResponseHolidaysObtained) GetHalfdayHolidays() GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner`
 
 GetHalfdayHolidays returns the HalfdayHolidays field if non-nil, zero value otherwise.
 
 ### GetHalfdayHolidaysOk
 
-`func (o *DailyWorkingResponseHolidaysObtained) GetHalfdayHolidaysOk() (*DailyWorkingResponseHolidaysObtainedHalfdayHolidays, bool)`
+`func (o *DailyWorkingResponseHolidaysObtained) GetHalfdayHolidaysOk() (*GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner, bool)`
 
 GetHalfdayHolidaysOk returns a tuple with the HalfdayHolidays field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHalfdayHolidays
 
-`func (o *DailyWorkingResponseHolidaysObtained) SetHalfdayHolidays(v DailyWorkingResponseHolidaysObtainedHalfdayHolidays)`
+`func (o *DailyWorkingResponseHolidaysObtained) SetHalfdayHolidays(v GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner)`
 
 SetHalfdayHolidays sets HalfdayHolidays field to given value.
 

@@ -2342,25 +2342,30 @@ components:
       - key
       - type
       type: object
-    GetSchedules_200_response_scheduleRequests_inner_requested_startEndBreakSchedule:
+    GetSchedules_200_response_scheduleRequests_inner_requested_startEndBreakSchedule_inner:
       properties:
         start:
           description: 休憩開始予定
           format: date-time
           type: string
+          x-go-type: KotDate
         end:
           description: 休憩終了予定
           format: date-time
           type: string
+          x-go-type: KotDate
       required:
       - end
       - start
       type: object
     GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_fulltimeHoliday:
+      example:
+        code: 4
+        name: name
       properties:
         code:
           description: 休暇区分コード
-          type: string
+          type: integer
         name:
           description: 休暇区分名
           type: string
@@ -2368,14 +2373,18 @@ components:
       - code
       - name
       type: object
-    GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_halfdayHolidays:
+    GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_halfdayHolidays_inner:
+      example:
+        code: 7
+        typeName: typeName
+        name: name
       properties:
         typeName:
           description: 半休種別名
           type: string
         code:
           description: 休暇区分コード
-          type: string
+          type: integer
         name:
           description: 休暇区分名
           type: string
@@ -2384,23 +2393,25 @@ components:
       - name
       - typeName
       type: object
-    GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_hourHolidays:
+    GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_hourHolidays_inner:
       properties:
         start:
           description: 休暇開始予定
           format: date-time
           type: string
+          x-go-type: KotDate
         end:
           description: 休暇終了予定
           format: date-time
           type: string
+          x-go-type: KotDate
         minutes:
           description: 休暇取得時間
           format: int32
           type: integer
         code:
           description: 休暇区分コード
-          type: string
+          type: integer
         name:
           description: 休暇区分名
           type: string
@@ -2417,9 +2428,13 @@ components:
         fulltimeHoliday:
           $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_fulltimeHoliday'
         halfdayHolidays:
-          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_halfdayHolidays'
+          items:
+            $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_halfdayHolidays_inner'
+          type: array
         hourHolidays:
-          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_hourHolidays'
+          items:
+            $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_hourHolidays_inner'
+          type: array
       required:
       - fulltimeHoliday
       - halfdayHolidays
@@ -2431,16 +2446,21 @@ components:
           description: 出勤予定時間
           format: date-time
           type: string
+          x-go-type: KotDate
         clockOutSchedule:
           description: 退勤予定時間
           format: date-time
           type: string
+          x-go-type: KotDate
         breakSchedule:
           description: 休憩予定時間（分）
           format: int32
           type: integer
         startEndBreakSchedule:
-          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_startEndBreakSchedule'
+          description: 休憩開始終了予定
+          items:
+            $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_startEndBreakSchedule_inner'
+          type: array
         holidaysObtained:
           $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained'
         workDayTypeName:
@@ -2552,10 +2572,12 @@ components:
           description: 勤務開始刻限
           format: date-time
           type: string
+          x-go-type: KotDate
         workFixedEnd:
           description: 勤務終了刻限
           format: date-time
           type: string
+          x-go-type: KotDate
         note:
           description: 備考
           type: string
@@ -2700,10 +2722,12 @@ components:
           description: 開始時刻
           format: date-time
           type: string
+          x-go-type: KotDate
         end:
           description: 終了時刻
           format: date-time
           type: string
+          x-go-type: KotDate
       required:
       - end
       - isBeforeSchedule
@@ -2719,10 +2743,12 @@ components:
           description: 開始時刻
           format: date-time
           type: string
+          x-go-type: KotDate
         end:
           description: 終了時刻
           format: date-time
           type: string
+          x-go-type: KotDate
       required:
       - end
       - isBeforeSchedule
@@ -2843,41 +2869,6 @@ components:
       - overtimeRequests
       - year
       type: object
-    daily_working_response_holidaysObtained_fulltimeHoliday:
-      example:
-        code: 4
-        name: name
-      properties:
-        code:
-          description: 休暇区分コード
-          type: integer
-        name:
-          description: 休暇区分名
-          type: string
-      required:
-      - code
-      - name
-      type: object
-    daily_working_response_holidaysObtained_halfdayHolidays:
-      example:
-        code: 7
-        typeName: typeName
-        name: name
-      properties:
-        typeName:
-          description: 半休種別名
-          type: string
-        code:
-          description: 休暇区分コード
-          type: integer
-        name:
-          description: 休暇区分名
-          type: string
-      required:
-      - code
-      - name
-      - typeName
-      type: object
     daily_working_response_holidaysObtained_hourHolidays:
       example:
         code: 1
@@ -2928,9 +2919,9 @@ components:
           end: 2000-01-23T04:56:07.000+00:00
       properties:
         fulltimeHoliday:
-          $ref: '#/components/schemas/daily_working_response_holidaysObtained_fulltimeHoliday'
+          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_fulltimeHoliday'
         halfdayHolidays:
-          $ref: '#/components/schemas/daily_working_response_holidaysObtained_halfdayHolidays'
+          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_halfdayHolidays_inner'
         hourHolidays:
           $ref: '#/components/schemas/daily_working_response_holidaysObtained_hourHolidays'
       required:

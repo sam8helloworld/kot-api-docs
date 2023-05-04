@@ -7,14 +7,14 @@ Name | Type | Description | Notes
 **Start** | **time.Time** | 休暇開始予定 | 
 **End** | **time.Time** | 休暇終了予定 | 
 **Minutes** | **int32** | 休暇取得時間 | 
-**Code** | **string** | 休暇区分コード | 
+**Code** | **int32** | 休暇区分コード | 
 **Name** | **string** | 休暇区分名 | 
 
 ## Methods
 
 ### NewGetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays
 
-`func NewGetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays(start time.Time, end time.Time, minutes int32, code string, name string, ) *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays`
+`func NewGetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays(start time.Time, end time.Time, minutes int32, code int32, name string, ) *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays`
 
 NewGetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays instantiates a new GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays object
 This constructor will assign default values to properties that have it defined,
@@ -91,20 +91,20 @@ SetMinutes sets Minutes field to given value.
 
 ### GetCode
 
-`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays) GetCode() string`
+`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays) GetCode() int32`
 
 GetCode returns the Code field if non-nil, zero value otherwise.
 
 ### GetCodeOk
 
-`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays) GetCodeOk() (*string, bool)`
+`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays) GetCodeOk() (*int32, bool)`
 
 GetCodeOk returns a tuple with the Code field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCode
 
-`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays) SetCode(v string)`
+`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays) SetCode(v int32)`
 
 SetCode sets Code field to given value.
 

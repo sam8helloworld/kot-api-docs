@@ -95,10 +95,12 @@ properties:
             start:
               type: string
               format: date-time
+              x-go-type: KotDate
               description: 開始時刻
             end:
               type: string
               format: date-time
+              x-go-type: KotDate
               description: 終了時刻
         current:
           type: object
@@ -114,10 +116,12 @@ properties:
             start:
               type: string
               format: date-time
+              x-go-type: KotDate
               description: 開始時刻
             end:
               type: string
               format: date-time
+              x-go-type: KotDate
               description: 終了時刻
         flow:
           type: array

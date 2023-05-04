@@ -19,8 +19,8 @@ var _ MappedNullable = &DailyWorkingResponseHolidaysObtained{}
 
 // DailyWorkingResponseHolidaysObtained 休暇取得
 type DailyWorkingResponseHolidaysObtained struct {
-	FulltimeHoliday DailyWorkingResponseHolidaysObtainedFulltimeHoliday `json:"fulltimeHoliday"`
-	HalfdayHolidays DailyWorkingResponseHolidaysObtainedHalfdayHolidays `json:"halfdayHolidays"`
+	FulltimeHoliday GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday `json:"fulltimeHoliday"`
+	HalfdayHolidays GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner `json:"halfdayHolidays"`
 	HourHolidays DailyWorkingResponseHolidaysObtainedHourHolidays `json:"hourHolidays"`
 }
 
@@ -28,7 +28,7 @@ type DailyWorkingResponseHolidaysObtained struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDailyWorkingResponseHolidaysObtained(fulltimeHoliday DailyWorkingResponseHolidaysObtainedFulltimeHoliday, halfdayHolidays DailyWorkingResponseHolidaysObtainedHalfdayHolidays, hourHolidays DailyWorkingResponseHolidaysObtainedHourHolidays) *DailyWorkingResponseHolidaysObtained {
+func NewDailyWorkingResponseHolidaysObtained(fulltimeHoliday GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday, halfdayHolidays GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner, hourHolidays DailyWorkingResponseHolidaysObtainedHourHolidays) *DailyWorkingResponseHolidaysObtained {
 	this := DailyWorkingResponseHolidaysObtained{}
 	this.FulltimeHoliday = fulltimeHoliday
 	this.HalfdayHolidays = halfdayHolidays
@@ -45,9 +45,9 @@ func NewDailyWorkingResponseHolidaysObtainedWithDefaults() *DailyWorkingResponse
 }
 
 // GetFulltimeHoliday returns the FulltimeHoliday field value
-func (o *DailyWorkingResponseHolidaysObtained) GetFulltimeHoliday() DailyWorkingResponseHolidaysObtainedFulltimeHoliday {
+func (o *DailyWorkingResponseHolidaysObtained) GetFulltimeHoliday() GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday {
 	if o == nil {
-		var ret DailyWorkingResponseHolidaysObtainedFulltimeHoliday
+		var ret GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday
 		return ret
 	}
 
@@ -56,7 +56,7 @@ func (o *DailyWorkingResponseHolidaysObtained) GetFulltimeHoliday() DailyWorking
 
 // GetFulltimeHolidayOk returns a tuple with the FulltimeHoliday field value
 // and a boolean to check if the value has been set.
-func (o *DailyWorkingResponseHolidaysObtained) GetFulltimeHolidayOk() (*DailyWorkingResponseHolidaysObtainedFulltimeHoliday, bool) {
+func (o *DailyWorkingResponseHolidaysObtained) GetFulltimeHolidayOk() (*GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,14 +64,14 @@ func (o *DailyWorkingResponseHolidaysObtained) GetFulltimeHolidayOk() (*DailyWor
 }
 
 // SetFulltimeHoliday sets field value
-func (o *DailyWorkingResponseHolidaysObtained) SetFulltimeHoliday(v DailyWorkingResponseHolidaysObtainedFulltimeHoliday) {
+func (o *DailyWorkingResponseHolidaysObtained) SetFulltimeHoliday(v GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday) {
 	o.FulltimeHoliday = v
 }
 
 // GetHalfdayHolidays returns the HalfdayHolidays field value
-func (o *DailyWorkingResponseHolidaysObtained) GetHalfdayHolidays() DailyWorkingResponseHolidaysObtainedHalfdayHolidays {
+func (o *DailyWorkingResponseHolidaysObtained) GetHalfdayHolidays() GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner {
 	if o == nil {
-		var ret DailyWorkingResponseHolidaysObtainedHalfdayHolidays
+		var ret GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner
 		return ret
 	}
 
@@ -80,7 +80,7 @@ func (o *DailyWorkingResponseHolidaysObtained) GetHalfdayHolidays() DailyWorking
 
 // GetHalfdayHolidaysOk returns a tuple with the HalfdayHolidays field value
 // and a boolean to check if the value has been set.
-func (o *DailyWorkingResponseHolidaysObtained) GetHalfdayHolidaysOk() (*DailyWorkingResponseHolidaysObtainedHalfdayHolidays, bool) {
+func (o *DailyWorkingResponseHolidaysObtained) GetHalfdayHolidaysOk() (*GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,7 +88,7 @@ func (o *DailyWorkingResponseHolidaysObtained) GetHalfdayHolidaysOk() (*DailyWor
 }
 
 // SetHalfdayHolidays sets field value
-func (o *DailyWorkingResponseHolidaysObtained) SetHalfdayHolidays(v DailyWorkingResponseHolidaysObtainedHalfdayHolidays) {
+func (o *DailyWorkingResponseHolidaysObtained) SetHalfdayHolidays(v GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner) {
 	o.HalfdayHolidays = v
 }
 

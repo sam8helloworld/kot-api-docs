@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClockInSchedule** | **time.Time** | 出勤予定時間 | 
 **ClockOutSchedule** | **time.Time** | 退勤予定時間 | 
 **BreakSchedule** | **int32** | 休憩予定時間（分） | 
-**StartEndBreakSchedule** | [**GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakSchedule**](GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakSchedule.md) |  | 
+**StartEndBreakSchedule** | [**[]GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakScheduleInner**](GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakScheduleInner.md) | 休憩開始終了予定 | 
 **HolidaysObtained** | [**GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained**](GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained.md) |  | 
 **WorkDayTypeName** | **string** | 勤務日種別名 | 
 **OvertimeUpperLimit** | Pointer to **int32** | 残業上限時間（分） | [optional] 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewGetSchedules200ResponseScheduleRequestsInnerRequested
 
-`func NewGetSchedules200ResponseScheduleRequestsInnerRequested(clockInSchedule time.Time, clockOutSchedule time.Time, breakSchedule int32, startEndBreakSchedule GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakSchedule, holidaysObtained GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained, workDayTypeName string, workPlaceDivisionCode string, workPlaceDivisionName string, substitutionClockInName string, scheduleTypeName string, ) *GetSchedules200ResponseScheduleRequestsInnerRequested`
+`func NewGetSchedules200ResponseScheduleRequestsInnerRequested(clockInSchedule time.Time, clockOutSchedule time.Time, breakSchedule int32, startEndBreakSchedule []GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakScheduleInner, holidaysObtained GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained, workDayTypeName string, workPlaceDivisionCode string, workPlaceDivisionName string, substitutionClockInName string, scheduleTypeName string, ) *GetSchedules200ResponseScheduleRequestsInnerRequested`
 
 NewGetSchedules200ResponseScheduleRequestsInnerRequested instantiates a new GetSchedules200ResponseScheduleRequestsInnerRequested object
 This constructor will assign default values to properties that have it defined,
@@ -97,20 +97,20 @@ SetBreakSchedule sets BreakSchedule field to given value.
 
 ### GetStartEndBreakSchedule
 
-`func (o *GetSchedules200ResponseScheduleRequestsInnerRequested) GetStartEndBreakSchedule() GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakSchedule`
+`func (o *GetSchedules200ResponseScheduleRequestsInnerRequested) GetStartEndBreakSchedule() []GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakScheduleInner`
 
 GetStartEndBreakSchedule returns the StartEndBreakSchedule field if non-nil, zero value otherwise.
 
 ### GetStartEndBreakScheduleOk
 
-`func (o *GetSchedules200ResponseScheduleRequestsInnerRequested) GetStartEndBreakScheduleOk() (*GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakSchedule, bool)`
+`func (o *GetSchedules200ResponseScheduleRequestsInnerRequested) GetStartEndBreakScheduleOk() (*[]GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakScheduleInner, bool)`
 
 GetStartEndBreakScheduleOk returns a tuple with the StartEndBreakSchedule field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStartEndBreakSchedule
 
-`func (o *GetSchedules200ResponseScheduleRequestsInnerRequested) SetStartEndBreakSchedule(v GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakSchedule)`
+`func (o *GetSchedules200ResponseScheduleRequestsInnerRequested) SetStartEndBreakSchedule(v []GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakScheduleInner)`
 
 SetStartEndBreakSchedule sets StartEndBreakSchedule field to given value.
 

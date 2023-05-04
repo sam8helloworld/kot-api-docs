@@ -26,7 +26,8 @@ type GetSchedules200ResponseScheduleRequestsInnerRequested struct {
 	ClockOutSchedule time.Time `json:"clockOutSchedule"`
 	// 休憩予定時間（分）
 	BreakSchedule int32 `json:"breakSchedule"`
-	StartEndBreakSchedule GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakSchedule `json:"startEndBreakSchedule"`
+	// 休憩開始終了予定
+	StartEndBreakSchedule []GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakScheduleInner `json:"startEndBreakSchedule"`
 	HolidaysObtained GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained `json:"holidaysObtained"`
 	// 勤務日種別名
 	WorkDayTypeName string `json:"workDayTypeName"`
@@ -46,7 +47,7 @@ type GetSchedules200ResponseScheduleRequestsInnerRequested struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetSchedules200ResponseScheduleRequestsInnerRequested(clockInSchedule time.Time, clockOutSchedule time.Time, breakSchedule int32, startEndBreakSchedule GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakSchedule, holidaysObtained GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained, workDayTypeName string, workPlaceDivisionCode string, workPlaceDivisionName string, substitutionClockInName string, scheduleTypeName string) *GetSchedules200ResponseScheduleRequestsInnerRequested {
+func NewGetSchedules200ResponseScheduleRequestsInnerRequested(clockInSchedule time.Time, clockOutSchedule time.Time, breakSchedule int32, startEndBreakSchedule []GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakScheduleInner, holidaysObtained GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained, workDayTypeName string, workPlaceDivisionCode string, workPlaceDivisionName string, substitutionClockInName string, scheduleTypeName string) *GetSchedules200ResponseScheduleRequestsInnerRequested {
 	this := GetSchedules200ResponseScheduleRequestsInnerRequested{}
 	this.ClockInSchedule = clockInSchedule
 	this.ClockOutSchedule = clockOutSchedule
@@ -142,9 +143,9 @@ func (o *GetSchedules200ResponseScheduleRequestsInnerRequested) SetBreakSchedule
 }
 
 // GetStartEndBreakSchedule returns the StartEndBreakSchedule field value
-func (o *GetSchedules200ResponseScheduleRequestsInnerRequested) GetStartEndBreakSchedule() GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakSchedule {
+func (o *GetSchedules200ResponseScheduleRequestsInnerRequested) GetStartEndBreakSchedule() []GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakScheduleInner {
 	if o == nil {
-		var ret GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakSchedule
+		var ret []GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakScheduleInner
 		return ret
 	}
 
@@ -153,15 +154,15 @@ func (o *GetSchedules200ResponseScheduleRequestsInnerRequested) GetStartEndBreak
 
 // GetStartEndBreakScheduleOk returns a tuple with the StartEndBreakSchedule field value
 // and a boolean to check if the value has been set.
-func (o *GetSchedules200ResponseScheduleRequestsInnerRequested) GetStartEndBreakScheduleOk() (*GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakSchedule, bool) {
+func (o *GetSchedules200ResponseScheduleRequestsInnerRequested) GetStartEndBreakScheduleOk() ([]GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakScheduleInner, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.StartEndBreakSchedule, true
+	return o.StartEndBreakSchedule, true
 }
 
 // SetStartEndBreakSchedule sets field value
-func (o *GetSchedules200ResponseScheduleRequestsInnerRequested) SetStartEndBreakSchedule(v GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakSchedule) {
+func (o *GetSchedules200ResponseScheduleRequestsInnerRequested) SetStartEndBreakSchedule(v []GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakScheduleInner) {
 	o.StartEndBreakSchedule = v
 }
 

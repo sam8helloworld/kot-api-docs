@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FulltimeHoliday** | [**GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday**](GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday.md) |  | 
-**HalfdayHolidays** | [**GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays**](GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays.md) |  | 
-**HourHolidays** | [**GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays**](GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays.md) |  | 
+**HalfdayHolidays** | [**[]GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner**](GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner.md) |  | 
+**HourHolidays** | [**[]GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidaysInner**](GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidaysInner.md) |  | 
 
 ## Methods
 
 ### NewGetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained
 
-`func NewGetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained(fulltimeHoliday GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday, halfdayHolidays GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays, hourHolidays GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays, ) *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained`
+`func NewGetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained(fulltimeHoliday GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday, halfdayHolidays []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner, hourHolidays []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidaysInner, ) *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained`
 
 NewGetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained instantiates a new GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained object
 This constructor will assign default values to properties that have it defined,
@@ -49,40 +49,40 @@ SetFulltimeHoliday sets FulltimeHoliday field to given value.
 
 ### GetHalfdayHolidays
 
-`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHalfdayHolidays() GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays`
+`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHalfdayHolidays() []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner`
 
 GetHalfdayHolidays returns the HalfdayHolidays field if non-nil, zero value otherwise.
 
 ### GetHalfdayHolidaysOk
 
-`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHalfdayHolidaysOk() (*GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays, bool)`
+`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHalfdayHolidaysOk() (*[]GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner, bool)`
 
 GetHalfdayHolidaysOk returns a tuple with the HalfdayHolidays field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHalfdayHolidays
 
-`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) SetHalfdayHolidays(v GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays)`
+`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) SetHalfdayHolidays(v []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner)`
 
 SetHalfdayHolidays sets HalfdayHolidays field to given value.
 
 
 ### GetHourHolidays
 
-`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHourHolidays() GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays`
+`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHourHolidays() []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidaysInner`
 
 GetHourHolidays returns the HourHolidays field if non-nil, zero value otherwise.
 
 ### GetHourHolidaysOk
 
-`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHourHolidaysOk() (*GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays, bool)`
+`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHourHolidaysOk() (*[]GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidaysInner, bool)`
 
 GetHourHolidaysOk returns a tuple with the HourHolidays field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHourHolidays
 
-`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) SetHourHolidays(v GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays)`
+`func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) SetHourHolidays(v []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidaysInner)`
 
 SetHourHolidays sets HourHolidays field to given value.
 

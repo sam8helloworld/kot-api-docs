@@ -20,15 +20,15 @@ var _ MappedNullable = &GetSchedules200ResponseScheduleRequestsInnerRequestedHol
 // GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained 休暇取得
 type GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained struct {
 	FulltimeHoliday GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday `json:"fulltimeHoliday"`
-	HalfdayHolidays GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays `json:"halfdayHolidays"`
-	HourHolidays GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays `json:"hourHolidays"`
+	HalfdayHolidays []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner `json:"halfdayHolidays"`
+	HourHolidays []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidaysInner `json:"hourHolidays"`
 }
 
 // NewGetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained instantiates a new GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained(fulltimeHoliday GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday, halfdayHolidays GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays, hourHolidays GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays) *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained {
+func NewGetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained(fulltimeHoliday GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday, halfdayHolidays []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner, hourHolidays []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidaysInner) *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained {
 	this := GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained{}
 	this.FulltimeHoliday = fulltimeHoliday
 	this.HalfdayHolidays = halfdayHolidays
@@ -69,9 +69,9 @@ func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) 
 }
 
 // GetHalfdayHolidays returns the HalfdayHolidays field value
-func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHalfdayHolidays() GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays {
+func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHalfdayHolidays() []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner {
 	if o == nil {
-		var ret GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays
+		var ret []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner
 		return ret
 	}
 
@@ -80,22 +80,22 @@ func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) 
 
 // GetHalfdayHolidaysOk returns a tuple with the HalfdayHolidays field value
 // and a boolean to check if the value has been set.
-func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHalfdayHolidaysOk() (*GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays, bool) {
+func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHalfdayHolidaysOk() ([]GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.HalfdayHolidays, true
+	return o.HalfdayHolidays, true
 }
 
 // SetHalfdayHolidays sets field value
-func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) SetHalfdayHolidays(v GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays) {
+func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) SetHalfdayHolidays(v []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidaysInner) {
 	o.HalfdayHolidays = v
 }
 
 // GetHourHolidays returns the HourHolidays field value
-func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHourHolidays() GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays {
+func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHourHolidays() []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidaysInner {
 	if o == nil {
-		var ret GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays
+		var ret []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidaysInner
 		return ret
 	}
 
@@ -104,15 +104,15 @@ func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) 
 
 // GetHourHolidaysOk returns a tuple with the HourHolidays field value
 // and a boolean to check if the value has been set.
-func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHourHolidaysOk() (*GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays, bool) {
+func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) GetHourHolidaysOk() ([]GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidaysInner, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.HourHolidays, true
+	return o.HourHolidays, true
 }
 
 // SetHourHolidays sets field value
-func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) SetHourHolidays(v GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays) {
+func (o *GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained) SetHourHolidays(v []GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidaysInner) {
 	o.HourHolidays = v
 }
 
