@@ -23,11 +23,20 @@ func Test_openapi_RequestApiService(t *testing.T) {
 	apiClient := openapiclient.NewAPIClient(configuration)
 
 	t.Run("Test RequestApiService GetSchedules", func(t *testing.T) {
-		// FIXME: このテストだけ実行が終了しない
-		t.Skip()
 		date := "2018-08"
 		ctx := contextWithAuthorization()
 		resp, httpRes, err := apiClient.RequestApi.GetSchedules(ctx, date).AdministratorKey("c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222").
+			AdditionalFields([]string{"flow"}).Execute()
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RequestApiService GetOvertimes", func(t *testing.T) {
+		date := "2018-08"
+		ctx := contextWithAuthorization()
+		resp, httpRes, err := apiClient.RequestApi.GetOvertimes(ctx, date).AdministratorKey("c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222").
 			AdditionalFields([]string{"flow"}).Execute()
 		require.Nil(t, err)
 		require.NotNil(t, resp)
