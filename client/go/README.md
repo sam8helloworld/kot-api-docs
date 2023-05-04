@@ -92,6 +92,7 @@ Class | Method | HTTP request | Description
 *EmployeeApi* | [**GetWorkingTypes**](docs/EmployeeApi.md#getworkingtypes) | **Get** /working-types | 
 *EmployeeApi* | [**RegisterEmployee**](docs/EmployeeApi.md#registeremployee) | **Post** /employees | 
 *EmployeeApi* | [**UpdateEmployee**](docs/EmployeeApi.md#updateemployee) | **Put** /employees/{employeeKey} | /employees/{employeeKey}{?updateDate}
+*RequestApi* | [**GetSchedules**](docs/RequestApi.md#getschedules) | **Get** /requests/schedules/{date} | /requests/schedules/{date}{?administratorKey,additionalFields}
 *TokenApi* | [**GetAccessTokenAvailability**](docs/TokenApi.md#getaccesstokenavailability) | **Get** /tokens/{token}/available | 
 *TokenApi* | [**RefreshAccessToken**](docs/TokenApi.md#refreshaccesstoken) | **Post** /tokens/{token} | 
 *TokenApi* | [**SuspendAccessToken**](docs/TokenApi.md#suspendaccesstoken) | **Delete** /tokens/{token} | 
@@ -121,6 +122,16 @@ Class | Method | HTTP request | Description
  - [GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner](docs/GetDailyWorkingTimerecords200ResponseInnerCurrentDateEmployeeEmployeeGroupsInner.md)
  - [GetEmployeeGroups200ResponseInner](docs/GetEmployeeGroups200ResponseInner.md)
  - [GetEmployeeGroups200ResponseInnerCategory](docs/GetEmployeeGroups200ResponseInnerCategory.md)
+ - [GetSchedules200Response](docs/GetSchedules200Response.md)
+ - [GetSchedules200ResponseScheduleRequestsInner](docs/GetSchedules200ResponseScheduleRequestsInner.md)
+ - [GetSchedules200ResponseScheduleRequestsInnerApplicant](docs/GetSchedules200ResponseScheduleRequestsInnerApplicant.md)
+ - [GetSchedules200ResponseScheduleRequestsInnerFlow](docs/GetSchedules200ResponseScheduleRequestsInnerFlow.md)
+ - [GetSchedules200ResponseScheduleRequestsInnerRequested](docs/GetSchedules200ResponseScheduleRequestsInnerRequested.md)
+ - [GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained](docs/GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtained.md)
+ - [GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday](docs/GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedFulltimeHoliday.md)
+ - [GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays](docs/GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHalfdayHolidays.md)
+ - [GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays](docs/GetSchedules200ResponseScheduleRequestsInnerRequestedHolidaysObtainedHourHolidays.md)
+ - [GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakSchedule](docs/GetSchedules200ResponseScheduleRequestsInnerRequestedStartEndBreakSchedule.md)
  - [RefreshAccessToken201Response](docs/RefreshAccessToken201Response.md)
  - [RegisterDailyWorkingTimerecord201Response](docs/RegisterDailyWorkingTimerecord201Response.md)
  - [RegisterEmployee201Response](docs/RegisterEmployee201Response.md)
