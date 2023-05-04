@@ -10,7 +10,6 @@ Testing AttendanceApiService
 package openapi
 
 import (
-	"context"
 	"testing"
 
 	openapiclient "github.com/sam8helloworld/kot-api-docs"
@@ -20,23 +19,11 @@ import (
 
 func Test_openapi_AttendanceApiService(t *testing.T) {
 
-	configuration := &openapiclient.Configuration{
-		DefaultHeader: make(map[string]string),
-		UserAgent:     "OpenAPI-Generator/1.0.0/go",
-		Debug:         false,
-		Servers: openapiclient.ServerConfigurations{
-			{
-				URL:         "http://localhost:8001",
-				Description: "Mock server (uses example data)",
-			},
-		},
-		OperationServers: map[string]openapiclient.ServerConfigurations{},
-	}
+	configuration := configuration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
 	t.Run("Test AttendanceApiService GetDailyWorkings", func(t *testing.T) {
-		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
-		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		ctx := contextWithAuthorization()
 		resp, httpRes, err := apiClient.AttendanceApi.GetDailyWorkings(ctx).Division("1000").Ondivision(true).Start("2016-05-01").End("2016-05-01").AdditionalFields([]string{"currentDateEmployee"}).Execute()
 
 		require.Nil(t, err)
@@ -46,8 +33,7 @@ func Test_openapi_AttendanceApiService(t *testing.T) {
 
 	t.Run("Test AttendanceApiService GetDailyWorking", func(t *testing.T) {
 		date := "2016-05-01"
-		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
-		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		ctx := contextWithAuthorization()
 		resp, httpRes, err := apiClient.AttendanceApi.GetDailyWorking(ctx, date).Division("1000").Ondivision(true).AdditionalFields([]string{"currentDateEmployee"}).Execute()
 
 		require.Nil(t, err)
@@ -57,8 +43,7 @@ func Test_openapi_AttendanceApiService(t *testing.T) {
 
 	t.Run("Test AttendanceApiService RegisterDailyWorkingTimerecord", func(t *testing.T) {
 		employeeKey := "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3"
-		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
-		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		ctx := contextWithAuthorization()
 		resp, httpRes, err := apiClient.AttendanceApi.RegisterDailyWorkingTimerecord(ctx, employeeKey).Execute()
 
 		require.Nil(t, err)
@@ -67,8 +52,7 @@ func Test_openapi_AttendanceApiService(t *testing.T) {
 	})
 
 	t.Run("Test AttendanceApiService GetDailyWorkingTimerecords", func(t *testing.T) {
-		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
-		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		ctx := contextWithAuthorization()
 		resp, httpRes, err := apiClient.AttendanceApi.GetDailyWorkingTimerecords(ctx).
 			EmployeeKeys([]string{"8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3"}).
 			Division("1000").Ondivision(true).Start("2016-05-01").End("2016-05-01").
@@ -80,8 +64,7 @@ func Test_openapi_AttendanceApiService(t *testing.T) {
 	})
 
 	t.Run("Test AttendanceApiService GetDailyWorkingTimerecord", func(t *testing.T) {
-		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
-		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		ctx := contextWithAuthorization()
 		resp, httpRes, err := apiClient.AttendanceApi.GetDailyWorkingTimerecord(ctx).Date("2016-05-01").
 			Division("1000").Ondivision(true).AdditionalFields([]string{"currentDateEmployee"}).Execute()
 
