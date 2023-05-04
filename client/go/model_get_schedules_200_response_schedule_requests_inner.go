@@ -51,7 +51,8 @@ type GetSchedules200ResponseScheduleRequestsInner struct {
 	WorkFixedEnd *time.Time `json:"workFixedEnd,omitempty"`
 	// 備考
 	Note *string `json:"note,omitempty"`
-	Flow *GetSchedules200ResponseScheduleRequestsInnerFlow `json:"flow,omitempty"`
+	// 承認フロー
+	Flow []GetSchedules200ResponseScheduleRequestsInnerFlowInner `json:"flow,omitempty"`
 }
 
 // NewGetSchedules200ResponseScheduleRequestsInner instantiates a new GetSchedules200ResponseScheduleRequestsInner object
@@ -532,17 +533,17 @@ func (o *GetSchedules200ResponseScheduleRequestsInner) SetNote(v string) {
 }
 
 // GetFlow returns the Flow field value if set, zero value otherwise.
-func (o *GetSchedules200ResponseScheduleRequestsInner) GetFlow() GetSchedules200ResponseScheduleRequestsInnerFlow {
+func (o *GetSchedules200ResponseScheduleRequestsInner) GetFlow() []GetSchedules200ResponseScheduleRequestsInnerFlowInner {
 	if o == nil || IsNil(o.Flow) {
-		var ret GetSchedules200ResponseScheduleRequestsInnerFlow
+		var ret []GetSchedules200ResponseScheduleRequestsInnerFlowInner
 		return ret
 	}
-	return *o.Flow
+	return o.Flow
 }
 
 // GetFlowOk returns a tuple with the Flow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetSchedules200ResponseScheduleRequestsInner) GetFlowOk() (*GetSchedules200ResponseScheduleRequestsInnerFlow, bool) {
+func (o *GetSchedules200ResponseScheduleRequestsInner) GetFlowOk() ([]GetSchedules200ResponseScheduleRequestsInnerFlowInner, bool) {
 	if o == nil || IsNil(o.Flow) {
 		return nil, false
 	}
@@ -558,9 +559,9 @@ func (o *GetSchedules200ResponseScheduleRequestsInner) HasFlow() bool {
 	return false
 }
 
-// SetFlow gets a reference to the given GetSchedules200ResponseScheduleRequestsInnerFlow and assigns it to the Flow field.
-func (o *GetSchedules200ResponseScheduleRequestsInner) SetFlow(v GetSchedules200ResponseScheduleRequestsInnerFlow) {
-	o.Flow = &v
+// SetFlow gets a reference to the given []GetSchedules200ResponseScheduleRequestsInnerFlowInner and assigns it to the Flow field.
+func (o *GetSchedules200ResponseScheduleRequestsInner) SetFlow(v []GetSchedules200ResponseScheduleRequestsInnerFlowInner) {
+	o.Flow = v
 }
 
 func (o GetSchedules200ResponseScheduleRequestsInner) MarshalJSON() ([]byte, error) {

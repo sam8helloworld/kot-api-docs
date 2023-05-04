@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **WorkFixedStart** | Pointer to **time.Time** | 勤務開始刻限 | [optional] 
 **WorkFixedEnd** | Pointer to **time.Time** | 勤務終了刻限 | [optional] 
 **Note** | Pointer to **string** | 備考 | [optional] 
-**Flow** | Pointer to [**GetSchedules200ResponseScheduleRequestsInnerFlow**](GetSchedules200ResponseScheduleRequestsInnerFlow.md) |  | [optional] 
+**Flow** | Pointer to [**[]GetSchedules200ResponseScheduleRequestsInnerFlowInner**](GetSchedules200ResponseScheduleRequestsInnerFlowInner.md) | 承認フロー | [optional] 
 
 ## Methods
 
@@ -409,20 +409,20 @@ HasNote returns a boolean if a field has been set.
 
 ### GetFlow
 
-`func (o *GetSchedules200ResponseScheduleRequestsInner) GetFlow() GetSchedules200ResponseScheduleRequestsInnerFlow`
+`func (o *GetSchedules200ResponseScheduleRequestsInner) GetFlow() []GetSchedules200ResponseScheduleRequestsInnerFlowInner`
 
 GetFlow returns the Flow field if non-nil, zero value otherwise.
 
 ### GetFlowOk
 
-`func (o *GetSchedules200ResponseScheduleRequestsInner) GetFlowOk() (*GetSchedules200ResponseScheduleRequestsInnerFlow, bool)`
+`func (o *GetSchedules200ResponseScheduleRequestsInner) GetFlowOk() (*[]GetSchedules200ResponseScheduleRequestsInnerFlowInner, bool)`
 
 GetFlowOk returns a tuple with the Flow field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFlow
 
-`func (o *GetSchedules200ResponseScheduleRequestsInner) SetFlow(v GetSchedules200ResponseScheduleRequestsInnerFlow)`
+`func (o *GetSchedules200ResponseScheduleRequestsInner) SetFlow(v []GetSchedules200ResponseScheduleRequestsInnerFlowInner)`
 
 SetFlow sets Flow field to given value.
 

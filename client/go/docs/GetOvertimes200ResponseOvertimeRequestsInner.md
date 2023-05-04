@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **AdminComment** | **string** | 管理者コメント | 
 **Requested** | [**GetOvertimes200ResponseOvertimeRequestsInnerRequested**](GetOvertimes200ResponseOvertimeRequestsInnerRequested.md) |  | 
 **Current** | [**GetOvertimes200ResponseOvertimeRequestsInnerCurrent**](GetOvertimes200ResponseOvertimeRequestsInnerCurrent.md) |  | 
-**Flow** | Pointer to [**[]GetOvertimes200ResponseOvertimeRequestsInnerFlowInner**](GetOvertimes200ResponseOvertimeRequestsInnerFlowInner.md) | 承認フロー | [optional] 
+**Flow** | Pointer to [**[]GetSchedules200ResponseScheduleRequestsInnerFlowInner**](GetSchedules200ResponseScheduleRequestsInnerFlowInner.md) | 承認フロー | [optional] 
 
 ## Methods
 
@@ -279,20 +279,20 @@ SetCurrent sets Current field to given value.
 
 ### GetFlow
 
-`func (o *GetOvertimes200ResponseOvertimeRequestsInner) GetFlow() []GetOvertimes200ResponseOvertimeRequestsInnerFlowInner`
+`func (o *GetOvertimes200ResponseOvertimeRequestsInner) GetFlow() []GetSchedules200ResponseScheduleRequestsInnerFlowInner`
 
 GetFlow returns the Flow field if non-nil, zero value otherwise.
 
 ### GetFlowOk
 
-`func (o *GetOvertimes200ResponseOvertimeRequestsInner) GetFlowOk() (*[]GetOvertimes200ResponseOvertimeRequestsInnerFlowInner, bool)`
+`func (o *GetOvertimes200ResponseOvertimeRequestsInner) GetFlowOk() (*[]GetSchedules200ResponseScheduleRequestsInnerFlowInner, bool)`
 
 GetFlowOk returns a tuple with the Flow field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFlow
 
-`func (o *GetOvertimes200ResponseOvertimeRequestsInner) SetFlow(v []GetOvertimes200ResponseOvertimeRequestsInnerFlowInner)`
+`func (o *GetOvertimes200ResponseOvertimeRequestsInner) SetFlow(v []GetSchedules200ResponseScheduleRequestsInnerFlowInner)`
 
 SetFlow sets Flow field to given value.
 

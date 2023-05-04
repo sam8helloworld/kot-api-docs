@@ -41,7 +41,7 @@ type GetOvertimes200ResponseOvertimeRequestsInner struct {
 	Requested GetOvertimes200ResponseOvertimeRequestsInnerRequested `json:"requested"`
 	Current GetOvertimes200ResponseOvertimeRequestsInnerCurrent `json:"current"`
 	// 承認フロー
-	Flow []GetOvertimes200ResponseOvertimeRequestsInnerFlowInner `json:"flow,omitempty"`
+	Flow []GetSchedules200ResponseScheduleRequestsInnerFlowInner `json:"flow,omitempty"`
 }
 
 // NewGetOvertimes200ResponseOvertimeRequestsInner instantiates a new GetOvertimes200ResponseOvertimeRequestsInner object
@@ -362,9 +362,9 @@ func (o *GetOvertimes200ResponseOvertimeRequestsInner) SetCurrent(v GetOvertimes
 }
 
 // GetFlow returns the Flow field value if set, zero value otherwise.
-func (o *GetOvertimes200ResponseOvertimeRequestsInner) GetFlow() []GetOvertimes200ResponseOvertimeRequestsInnerFlowInner {
+func (o *GetOvertimes200ResponseOvertimeRequestsInner) GetFlow() []GetSchedules200ResponseScheduleRequestsInnerFlowInner {
 	if o == nil || IsNil(o.Flow) {
-		var ret []GetOvertimes200ResponseOvertimeRequestsInnerFlowInner
+		var ret []GetSchedules200ResponseScheduleRequestsInnerFlowInner
 		return ret
 	}
 	return o.Flow
@@ -372,7 +372,7 @@ func (o *GetOvertimes200ResponseOvertimeRequestsInner) GetFlow() []GetOvertimes2
 
 // GetFlowOk returns a tuple with the Flow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetOvertimes200ResponseOvertimeRequestsInner) GetFlowOk() ([]GetOvertimes200ResponseOvertimeRequestsInnerFlowInner, bool) {
+func (o *GetOvertimes200ResponseOvertimeRequestsInner) GetFlowOk() ([]GetSchedules200ResponseScheduleRequestsInnerFlowInner, bool) {
 	if o == nil || IsNil(o.Flow) {
 		return nil, false
 	}
@@ -388,8 +388,8 @@ func (o *GetOvertimes200ResponseOvertimeRequestsInner) HasFlow() bool {
 	return false
 }
 
-// SetFlow gets a reference to the given []GetOvertimes200ResponseOvertimeRequestsInnerFlowInner and assigns it to the Flow field.
-func (o *GetOvertimes200ResponseOvertimeRequestsInner) SetFlow(v []GetOvertimes200ResponseOvertimeRequestsInnerFlowInner) {
+// SetFlow gets a reference to the given []GetSchedules200ResponseScheduleRequestsInnerFlowInner and assigns it to the Flow field.
+func (o *GetOvertimes200ResponseOvertimeRequestsInner) SetFlow(v []GetSchedules200ResponseScheduleRequestsInnerFlowInner) {
 	o.Flow = v
 }
 

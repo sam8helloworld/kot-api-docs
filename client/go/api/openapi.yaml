@@ -2474,21 +2474,22 @@ components:
       - workPlaceDivisionCode
       - workPlaceDivisionName
       type: object
-    GetSchedules_200_response_scheduleRequests_inner_flow:
-      description: 承認フロー
+    GetSchedules_200_response_scheduleRequests_inner_flow_inner:
       properties:
         level:
           description: 承認フローレベル（１～５）
           enum:
-          - "1"
-          - "2"
-          - "3"
-          - "4"
-          - "5"
-          type: string
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          type: integer
         administratorKeys:
           description: 管理者識別キー（管理者コードが変更されても不変）
-          type: string
+          items:
+            type: string
+          type: array
       required:
       - administratorKeys
       - level
@@ -2559,7 +2560,10 @@ components:
           description: 備考
           type: string
         flow:
-          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_flow'
+          description: 承認フロー
+          items:
+            $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_flow_inner'
+          type: array
       required:
       - adminComment
       - applicant
@@ -2724,26 +2728,6 @@ components:
       - isBeforeSchedule
       - start
       type: object
-    GetOvertimes_200_response_overtimeRequests_inner_flow_inner:
-      properties:
-        level:
-          description: 承認フローレベル（１～５）
-          enum:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          type: integer
-        administratorKeys:
-          description: 管理者識別キー（管理者コードが変更されても不変）
-          items:
-            type: string
-          type: array
-      required:
-      - administratorKeys
-      - level
-      type: object
     GetOvertimes_200_response_overtimeRequests_inner:
       properties:
         date:
@@ -2794,7 +2778,7 @@ components:
         flow:
           description: 承認フロー
           items:
-            $ref: '#/components/schemas/GetOvertimes_200_response_overtimeRequests_inner_flow_inner'
+            $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_flow_inner'
           type: array
       required:
       - adminComment
