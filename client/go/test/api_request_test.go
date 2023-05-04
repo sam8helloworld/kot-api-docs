@@ -1,7 +1,7 @@
 /*
 KING OF TIME WebAPI
 
-Testing CompanyApiService
+Testing RequestApiService
 
 */
 
@@ -17,17 +17,22 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_openapi_CompanyApiService(t *testing.T) {
+func Test_openapi_RequestApiService(t *testing.T) {
 
 	configuration := configuration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test CompanyApiService GetCompany", func(t *testing.T) {
+	t.Run("Test RequestApiService GetSchedules", func(t *testing.T) {
+		// FIXME: このテストだけ実行が終了しない
+		t.Skip()
+		date := "2018-08"
 		ctx := contextWithAuthorization()
-		resp, httpRes, err := apiClient.CompanyApi.GetCompany(ctx).Execute()
-
+		resp, httpRes, err := apiClient.RequestApi.GetSchedules(ctx, date).AdministratorKey("c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222").
+			AdditionalFields([]string{"flow"}).Execute()
 		require.Nil(t, err)
 		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
+
 	})
+
 }

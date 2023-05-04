@@ -35,3 +35,6 @@
   $ref: ./daily-workings/timerecord.yml
 /daily-workings/timerecord/{date}:
   $ref: ./daily-workings/timerecord_{date}.yml
+
+/requests/schedules/{date}:
+  $ref: ./requests/schedules_{date}.yml

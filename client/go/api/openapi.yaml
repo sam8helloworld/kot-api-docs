@@ -24,6 +24,9 @@ tags:
 - externalDocs:
     url: https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0
   name: Attendance
+- externalDocs:
+    url: https://developer.kingtime.jp/#%E7%94%B3%E8%AB%8B
+  name: Request
 paths:
   /tokens/{token}:
     delete:
@@ -1106,6 +1109,73 @@ paths:
       summary: "/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}"
       tags:
       - Attendance
+  /requests/schedules/{date}:
+    get:
+      description: |-
+        指定した年月のスケジュール申請データを取得する。
+        ※対象企業がスケジュール申請を利用できない場合にはエラーとなります。
+      externalDocs:
+        description: 年月指定
+        url: https://developer.kingtime.jp/#%E7%94%B3%E8%AB%8B-%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E7%94%B3%E8%AB%8B%E3%83%87%E3%83%BC%E3%82%BF-get
+      operationId: GetSchedules
+      parameters:
+      - description: |-
+          詳細を取得したい年月
+          ・過去日は最大3年前まで
+          ・未来日は最大1年後まで
+        explode: false
+        in: path
+        name: date
+        required: true
+        schema:
+          example: 2018-08
+          pattern: "\\d{4}-(0[1-9]|1[0-2])"
+          type: string
+        style: simple
+      - description: 管理者識別キー（管理者コードが変更されても不変）
+        explode: true
+        in: query
+        name: administratorKey
+        required: false
+        schema:
+          example: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222
+          type: string
+        style: form
+      - description: 指定されたプロパティをレスポンスに追加
+        explode: false
+        in: query
+        name: additionalFields
+        required: false
+        schema:
+          example: flow
+          items:
+            enum:
+            - schedulePatternCode
+            - schedulePatternName
+            - workFixedStart
+            - workFixedEnd
+            - note
+            - flow
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSchedules_200_response'
+          description: ""
+          headers:
+            Content-Type:
+              explode: false
+              schema:
+                example: application/json
+                type: string
+              style: simple
+      summary: "/requests/schedules/{date}{?administratorKey,additionalFields}"
+      tags:
+      - Request
 components:
   parameters:
     token:
@@ -2189,6 +2259,352 @@ components:
       required:
       - dailyWorkings
       - date
+      type: object
+    GetSchedules_200_response_scheduleRequests_inner_applicant:
+      properties:
+        type:
+          description: 種別（employee： 従業員　administrator： 管理者)
+          enum:
+          - employee
+          - administrator
+          type: string
+        key:
+          description: 識別キー（従業員 または 管理者）
+          enum:
+          - 従業員
+          - 管理者
+          type: string
+      required:
+      - key
+      - type
+      type: object
+    GetSchedules_200_response_scheduleRequests_inner_requested_startEndBreakSchedule:
+      properties:
+        start:
+          description: 休憩開始予定
+          format: date-time
+          type: string
+        end:
+          description: 休憩終了予定
+          format: date-time
+          type: string
+      required:
+      - end
+      - start
+      type: object
+    GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_fulltimeHoliday:
+      properties:
+        code:
+          description: 休暇区分コード
+          type: string
+        name:
+          description: 休暇区分名
+          type: string
+      required:
+      - code
+      - name
+      type: object
+    GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_halfdayHolidays:
+      properties:
+        typeName:
+          description: 半休種別名
+          type: string
+        code:
+          description: 休暇区分コード
+          type: string
+        name:
+          description: 休暇区分名
+          type: string
+      required:
+      - code
+      - name
+      - typeName
+      type: object
+    GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_hourHolidays:
+      properties:
+        start:
+          description: 休暇開始予定
+          format: date-time
+          type: string
+        end:
+          description: 休暇終了予定
+          format: date-time
+          type: string
+        minutes:
+          description: 休暇取得時間
+          format: int32
+          type: integer
+        code:
+          description: 休暇区分コード
+          type: string
+        name:
+          description: 休暇区分名
+          type: string
+      required:
+      - code
+      - end
+      - minutes
+      - name
+      - start
+      type: object
+    GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained:
+      description: 休暇取得
+      properties:
+        fulltimeHoliday:
+          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_fulltimeHoliday'
+        halfdayHolidays:
+          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_halfdayHolidays'
+        hourHolidays:
+          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained_hourHolidays'
+      required:
+      - fulltimeHoliday
+      - halfdayHolidays
+      - hourHolidays
+      type: object
+    GetSchedules_200_response_scheduleRequests_inner_requested:
+      properties:
+        clockInSchedule:
+          description: 出勤予定時間
+          format: date-time
+          type: string
+        clockOutSchedule:
+          description: 退勤予定時間
+          format: date-time
+          type: string
+        breakSchedule:
+          description: 休憩予定時間（分）
+          format: int32
+          type: integer
+        startEndBreakSchedule:
+          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_startEndBreakSchedule'
+        holidaysObtained:
+          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested_holidaysObtained'
+        workDayTypeName:
+          description: 勤務日種別名
+          type: string
+        overtimeUpperLimit:
+          description: 残業上限時間（分）
+          format: int32
+          type: integer
+        workPlaceDivisionCode:
+          description: 出勤先所属コード
+          type: string
+        workPlaceDivisionName:
+          description: 出勤先所属名
+          type: string
+        substitutionClockInName:
+          description: 振替出勤
+          type: string
+        scheduleTypeName:
+          description: スケジュール種別
+          type: string
+      required:
+      - breakSchedule
+      - clockInSchedule
+      - clockOutSchedule
+      - holidaysObtained
+      - scheduleTypeName
+      - startEndBreakSchedule
+      - substitutionClockInName
+      - workDayTypeName
+      - workPlaceDivisionCode
+      - workPlaceDivisionName
+      type: object
+    GetSchedules_200_response_scheduleRequests_inner_flow:
+      description: 承認フロー
+      properties:
+        level:
+          description: 承認フローレベル（１～５）
+          enum:
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
+          type: string
+        administratorKeys:
+          description: 管理者識別キー（管理者コードが変更されても不変）
+          type: string
+      required:
+      - administratorKeys
+      - level
+      type: object
+    GetSchedules_200_response_scheduleRequests_inner:
+      properties:
+        date:
+          description: 対象日
+          format: date
+          type: string
+        requestedDate:
+          description: 申請日
+          format: date
+          type: string
+        employeeKey:
+          description: 従業員識別キー（従業員コードが変更されても不変）
+          type: string
+        requestKey:
+          description: 申請識別キー
+          type: string
+        applicant:
+          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_applicant'
+        status:
+          description: 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
+          enum:
+          - applying
+          - rejected
+          - approved
+          type: string
+        currentFlow:
+          description: 現在の承認フローレベル（１～５）
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          format: int32
+          type: integer
+        lastModifiedAdministratorKey:
+          description: 最終更新管理者識別キー
+          type: string
+        message:
+          description: 申請メッセージ
+          type: string
+        adminComment:
+          description: 管理者コメント
+          type: string
+        requested:
+          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested'
+        current:
+          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_requested'
+        schedulePatternCode:
+          description: スケジュールパターンコード
+          type: string
+        schedulePatternName:
+          description: スケジュールパターン名
+          type: string
+        workFixedStart:
+          description: 勤務開始刻限
+          format: date-time
+          type: string
+        workFixedEnd:
+          description: 勤務終了刻限
+          format: date-time
+          type: string
+        note:
+          description: 備考
+          type: string
+        flow:
+          $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner_flow'
+      required:
+      - adminComment
+      - applicant
+      - current
+      - currentFlow
+      - date
+      - employeeKey
+      - lastModifiedAdministratorKey
+      - message
+      - requestKey
+      - requested
+      - requestedDate
+      - status
+      type: object
+    GetSchedules_200_response:
+      example:
+        year: 2018
+        month: 8
+        scheduleRequests:
+        - date: 2018-08-01
+          requestedDate: 2018-08-10
+          employeeKey: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe2735215201
+          requestKey: 59d25f49d4dce8b6e6658cc6b5c3b89b34c617916f90f6e27e9a9fa6cca576a4
+          applicant:
+            type: employee
+            key: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe2735215201
+          status: applying
+          currentFlow: 2
+          flow:
+          - level: 1
+            administratorKeys:
+            - c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac6ff
+          - level: 2
+            administratorKeys:
+            - c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222
+          - level: 3
+            administratorKeys:
+            - c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac111
+          message: 申請いたします
+          adminComment: 第1承認者承認済
+          lastModifiedAdministratorKey: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac6ff
+          requested:
+            clockInSchedule: 2018-08-01T09:00+09:00
+            clockOutSchedule: 2018-08-01T18:00+09:00
+            breakSchedule: 60
+            startEndBreakSchedule:
+            - start: 2018-08-01T11:00+09:00
+              end: 2018-08-01T12:00+09:00
+            workDayTypeName: 平日
+            holidaysObtained:
+              fulltimeHoliday:
+                code: 1
+                name: 有休
+              halfdayHolidays:
+              - typeName: PM休
+                code: 1
+                name: 有休
+              hourHolidays:
+              - start: 2018-08-01T10:00+09:00
+                end: 2018-08-01T11:00+09:00
+                minutes: 60
+                code: 1
+                name: 有休
+            workPlaceDivisionCode: "1000"
+            workPlaceDivisionName: 本社
+            substitutionClockInName: 振休
+            scheduleTypeName: 通常勤務
+          current:
+            clockInSchedule: 2018-08-01T10:00+09:00
+            clockOutSchedule: 2018-08-01T20:00+09:00
+            breakSchedule: 60
+            startEndBreakSchedule:
+            - start: 2018-08-01T11:00+09:00
+              end: 2018-08-01T12:00+09:00
+            workDayTypeName: 平日
+            holidaysObtained:
+              fulltimeHoliday:
+                code: 1
+                name: 有休
+              halfdayHolidays:
+              - typeName: PM休
+                code: 1
+                name: 有休
+              hourHolidays:
+              - start: 2018-08-01T10:00+09:00
+                end: 2018-08-01T11:00+09:00
+                minutes: 60
+                code: 1
+                name: 有休
+            overtimeUpperLimit: 120
+            workPlaceDivisionCode: "1000"
+            workPlaceDivisionName: 本社
+            substitutionClockInName: 振休
+            scheduleTypeName: シフト
+      properties:
+        year:
+          format: int32
+          type: integer
+        month:
+          format: int32
+          type: integer
+        scheduleRequests:
+          items:
+            $ref: '#/components/schemas/GetSchedules_200_response_scheduleRequests_inner'
+          type: array
+      required:
+      - month
+      - scheduleRequests
+      - year
       type: object
     daily_working_response_holidaysObtained_fulltimeHoliday:
       example:

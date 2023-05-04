@@ -10,7 +10,6 @@ Testing TokenApiService
 package openapi
 
 import (
-	"context"
 	"testing"
 
 	openapiclient "github.com/sam8helloworld/kot-api-docs"
@@ -19,24 +18,12 @@ import (
 )
 
 func Test_openapi_TokenApiService(t *testing.T) {
-	configuration := &openapiclient.Configuration{
-		DefaultHeader: make(map[string]string),
-		UserAgent:     "OpenAPI-Generator/1.0.0/go",
-		Debug:         false,
-		Servers: openapiclient.ServerConfigurations{
-			{
-				URL:         "http://localhost:8001",
-				Description: "Mock server (uses example data)",
-			},
-		},
-		OperationServers: map[string]openapiclient.ServerConfigurations{},
-	}
+	configuration := configuration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
 	t.Run("Test TokenApiService GetAccessTokenAvailability", func(t *testing.T) {
 		token := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
-		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
-		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		ctx := contextWithAuthorization()
 		resp, httpRes, err := apiClient.TokenApi.GetAccessTokenAvailability(ctx, token).Execute()
 
 		require.Nil(t, err)
@@ -46,8 +33,7 @@ func Test_openapi_TokenApiService(t *testing.T) {
 
 	t.Run("Test TokenApiService RefreshAccessToken", func(t *testing.T) {
 		token := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
-		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
-		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		ctx := contextWithAuthorization()
 		resp, httpRes, err := apiClient.TokenApi.RefreshAccessToken(ctx, token).Execute()
 
 		require.Nil(t, err)
@@ -57,8 +43,7 @@ func Test_openapi_TokenApiService(t *testing.T) {
 
 	t.Run("Test TokenApiService SuspendAccessToken", func(t *testing.T) {
 		token := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
-		bearer := "8j9f7v4893y58rvt7nyfq2893n75tr78937n83"
-		ctx := context.WithValue(context.Background(), openapiclient.ContextAccessToken, bearer)
+		ctx := contextWithAuthorization()
 		httpRes, err := apiClient.TokenApi.SuspendAccessToken(ctx, token).Execute()
 
 		require.Nil(t, err)
