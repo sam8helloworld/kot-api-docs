@@ -28,7 +28,7 @@ type ApiGetSchedulesRequest struct {
 	ApiService *RequestApiService
 	date string
 	administratorKey *string
-	additionalFields *string
+	additionalFields *[]string
 }
 
 // 管理者識別キー（管理者コードが変更されても不変）
@@ -38,7 +38,7 @@ func (r ApiGetSchedulesRequest) AdministratorKey(administratorKey string) ApiGet
 }
 
 // 指定されたプロパティをレスポンスに追加
-func (r ApiGetSchedulesRequest) AdditionalFields(additionalFields string) ApiGetSchedulesRequest {
+func (r ApiGetSchedulesRequest) AdditionalFields(additionalFields []string) ApiGetSchedulesRequest {
 	r.additionalFields = &additionalFields
 	return r
 }
@@ -91,7 +91,7 @@ func (a *RequestApiService) GetSchedulesExecute(r ApiGetSchedulesRequest) (*GetS
 		parameterAddToHeaderOrQuery(localVarQueryParams, "administratorKey", r.administratorKey, "")
 	}
 	if r.additionalFields != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", r.additionalFields, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "additionalFields", r.additionalFields, "csv")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

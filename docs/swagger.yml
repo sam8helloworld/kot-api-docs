@@ -1169,15 +1169,17 @@ paths:
           description: 指定されたプロパティをレスポンスに追加
           explode: false
           schema:
-            type: string
-            enum:
-              - schedulePatternCode
-              - schedulePatternName
-              - workFixedStart
-              - workFixedEnd
-              - note
-              - flow
-            example: flow
+            type: array
+            items:
+              type: string
+              enum:
+                - schedulePatternCode
+                - schedulePatternName
+                - workFixedStart
+                - workFixedEnd
+                - note
+                - flow
+              example: flow
       tags:
         - Request
       description: |-

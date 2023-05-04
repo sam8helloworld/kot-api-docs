@@ -31,7 +31,7 @@ import (
 func main() {
     date := "2018-08" // string | 詳細を取得したい年月 ・過去日は最大3年前まで ・未来日は最大1年後まで
     administratorKey := "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222" // string | 管理者識別キー（管理者コードが変更されても不変） (optional)
-    additionalFields := "flow" // string | 指定されたプロパティをレスポンスに追加 (optional)
+    additionalFields := []string{"flow"} // []string | 指定されたプロパティをレスポンスに追加 (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **administratorKey** | **string** | 管理者識別キー（管理者コードが変更されても不変） | 
- **additionalFields** | **string** | 指定されたプロパティをレスポンスに追加 | 
+ **additionalFields** | **[]string** | 指定されたプロパティをレスポンスに追加 | 
 
 ### Return type
 

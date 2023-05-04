@@ -1147,15 +1147,17 @@ paths:
         name: additionalFields
         required: false
         schema:
-          enum:
-          - schedulePatternCode
-          - schedulePatternName
-          - workFixedStart
-          - workFixedEnd
-          - note
-          - flow
-          example: flow
-          type: string
+          items:
+            enum:
+            - schedulePatternCode
+            - schedulePatternName
+            - workFixedStart
+            - workFixedEnd
+            - note
+            - flow
+            example: flow
+            type: string
+          type: array
         style: form
       responses:
         "200":
