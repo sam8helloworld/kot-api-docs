@@ -56,9 +56,6 @@ properties:
                 - administrator
             key:
               type: string
-              enum:
-                - 従業員
-                - 管理者
               description: 識別キー（従業員 または 管理者）
         status:
           type: string

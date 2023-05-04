@@ -38,3 +38,5 @@
 
 /requests/schedules/{date}:
   $ref: ./requests/schedules_{date}.yml
+/requests/overtimes/{date}:
+  $ref: ./requests/overtimes_{date}.yml
