@@ -1939,18 +1939,7 @@ components:
           type: string
           description: 事業年度開始日
         settings:
-          type: object
-          description: 企業設定情報
-          required:
-            - timeDisplayFormat
-            - decimalTreatType
-          properties:
-            timeDisplayFormat:
-              type: string
-              description: 表示形式（decimal： 10進法　sexagesimal： 60進法）
-            decimalTreatType:
-              type: string
-              description: 10進表示の小数第3位の扱い（roundDown： 切下げ　roundUp： 切上げ　round： 四捨五入）
+          $ref: '#/components/schemas/GetCompanySettings'
       example:
         key: 1qazxsw23edc....
         code: cmp
@@ -1960,6 +1949,26 @@ components:
         settings:
           timeDisplayFormat: decimal
           decimalTreatType: roundUp
+    GetCompanySettings:
+      type: object
+      description: 企業設定情報
+      required:
+        - timeDisplayFormat
+        - decimalTreatType
+      properties:
+        timeDisplayFormat:
+          type: string
+          enum:
+            - decimal
+            - sexagesimal
+          description: 表示形式（decimal： 10進法　sexagesimal： 60進法）
+        decimalTreatType:
+          type: string
+          enum:
+            - roundDown
+            - roundUp
+            - round
+          description: 10進表示の小数第3位の扱い（roundDown： 切下げ　roundUp： 切上げ　round： 四捨五入）
     GetDailyWorkingTimerecords:
       type: object
       required:
