@@ -56,9 +56,6 @@ properties:
                 - administrator
             key:
               type: string
-              enum:
-                - 従業員
-                - 管理者
               description: 識別キー（従業員 または 管理者）
         status:
           type: string
@@ -103,29 +100,36 @@ properties:
             clockInSchedule:
               type: string
               format: date-time
+              x-go-type: KotDate
               description: 出勤予定時間
             clockOutSchedule:
               type: string
               format: date-time
+              x-go-type: KotDate
               description: 退勤予定時間
             breakSchedule:
               type: integer
               format: int32
               description: 休憩予定時間（分）
             startEndBreakSchedule:
-              type: object
-              required:
-                - start
-                - end
-              properties:
-                start:
-                  type: string
-                  format: date-time
-                  description: 休憩開始予定
-                end:
-                  type: string
-                  format: date-time
-                  description: 休憩終了予定
+              type: array
+              description: 休憩開始終了予定
+              items:
+                type: object
+                required:
+                  - start
+                  - end
+                properties:
+                  start:
+                    type: string
+                    format: date-time
+                    x-go-type: KotDate
+                    description: 休憩開始予定
+                  end:
+                    type: string
+                    format: date-time
+                    x-go-type: KotDate
+                    description: 休憩終了予定
             holidaysObtained:
               type: object
               description: 休暇取得
@@ -141,54 +145,60 @@ properties:
                     - name
                   properties:
                     code:
-                      type: string
+                      type: integer
                       description: 休暇区分コード
                     name:
                       type: string
                       description: 休暇区分名
                 halfdayHolidays:
-                  type: object
-                  required:
-                    - typeName
-                    - code
-                    - name
-                  properties:
-                    typeName:
-                      type: string
-                      description: 半休種別名
-                    code:
-                      type: string
-                      description: 休暇区分コード
-                    name:
-                      type: string
-                      description: 休暇区分名
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - typeName
+                      - code
+                      - name
+                    properties:
+                      typeName:
+                        type: string
+                        description: 半休種別名
+                      code:
+                        type: integer
+                        description: 休暇区分コード
+                      name:
+                        type: string
+                        description: 休暇区分名
                 hourHolidays:
-                  type: object
-                  required:
-                    - start
-                    - end
-                    - minutes
-                    - code
-                    - name
-                  properties:
-                    start:
-                      type: string
-                      format: date-time
-                      description: 休暇開始予定
-                    end:
-                      type: string
-                      format: date-time
-                      description: 休暇終了予定
-                    minutes:
-                      type: integer
-                      format: int32
-                      description: 休暇取得時間
-                    code:
-                      type: string
-                      description: 休暇区分コード
-                    name:
-                      type: string
-                      description: 休暇区分名
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - start
+                      - end
+                      - minutes
+                      - code
+                      - name
+                    properties:
+                      start:
+                        type: string
+                        format: date-time
+                        x-go-type: KotDate
+                        description: 休暇開始予定
+                      end:
+                        type: string
+                        format: date-time
+                        x-go-type: KotDate
+                        description: 休暇終了予定
+                      minutes:
+                        type: integer
+                        format: int32
+                        description: 休暇取得時間
+                      code:
+                        type: integer
+                        description: 休暇区分コード
+                      name:
+                        type: string
+                        description: 休暇区分名
             workDayTypeName:
               type: string
               description: 勤務日種別名
@@ -225,29 +235,36 @@ properties:
             clockInSchedule:
               type: string
               format: date-time
+              x-go-type: KotDate
               description: 出勤予定時間
             clockOutSchedule:
               type: string
               format: date-time
+              x-go-type: KotDate
               description: 退勤予定時間
             breakSchedule:
               type: integer
               format: int32
               description: 休憩予定時間（分）
             startEndBreakSchedule:
-              type: object
-              required:
-                - start
-                - end
-              properties:
-                start:
-                  type: string
-                  format: date-time
-                  description: 休憩開始予定
-                end:
-                  type: string
-                  format: date-time
-                  description: 休憩終了予定
+              type: array
+              description: 休憩開始終了予定
+              items:
+                type: object
+                required:
+                  - start
+                  - end
+                properties:
+                  start:
+                    type: string
+                    format: date-time
+                    x-go-type: KotDate
+                    description: 休憩開始予定
+                  end:
+                    type: string
+                    format: date-time
+                    x-go-type: KotDate
+                    description: 休憩終了予定
             holidaysObtained:
               type: object
               description: 休暇取得
@@ -263,54 +280,60 @@ properties:
                     - name
                   properties:
                     code:
-                      type: string
+                      type: integer
                       description: 休暇区分コード
                     name:
                       type: string
                       description: 休暇区分名
                 halfdayHolidays:
-                  type: object
-                  required:
-                    - typeName
-                    - code
-                    - name
-                  properties:
-                    typeName:
-                      type: string
-                      description: 半休種別名
-                    code:
-                      type: string
-                      description: 休暇区分コード
-                    name:
-                      type: string
-                      description: 休暇区分名
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - typeName
+                      - code
+                      - name
+                    properties:
+                      typeName:
+                        type: string
+                        description: 半休種別名
+                      code:
+                        type: integer
+                        description: 休暇区分コード
+                      name:
+                        type: string
+                        description: 休暇区分名
                 hourHolidays:
-                  type: object
-                  required:
-                    - start
-                    - end
-                    - minutes
-                    - code
-                    - name
-                  properties:
-                    start:
-                      type: string
-                      format: date-time
-                      description: 休暇開始予定
-                    end:
-                      type: string
-                      format: date-time
-                      description: 休暇終了予定
-                    minutes:
-                      type: integer
-                      format: int32
-                      description: 休暇取得時間
-                    code:
-                      type: string
-                      description: 休暇区分コード
-                    name:
-                      type: string
-                      description: 休暇区分名
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - start
+                      - end
+                      - minutes
+                      - code
+                      - name
+                    properties:
+                      start:
+                        type: string
+                        format: date-time
+                        x-go-type: KotDate
+                        description: 休暇開始予定
+                      end:
+                        type: string
+                        format: date-time
+                        x-go-type: KotDate
+                        description: 休暇終了予定
+                      minutes:
+                        type: integer
+                        format: int32
+                        description: 休暇取得時間
+                      code:
+                        type: integer
+                        description: 休暇区分コード
+                      name:
+                        type: string
+                        description: 休暇区分名
             workDayTypeName:
               type: string
               description: 勤務日種別名
@@ -339,30 +362,36 @@ properties:
         workFixedStart:
           type: string
           format: date-time
+          x-go-type: KotDate
           description: 勤務開始刻限
         workFixedEnd:
           type: string
           format: date-time
+          x-go-type: KotDate
           description: 勤務終了刻限
         note:
           type: string
           description: 備考
         flow:
-          type: object
+          type: array
           description: 承認フロー
-          required:
-            - level
-            - administratorKeys
-          properties:
-            level:
-              type: string
-              enum:
-                - "1"
-                - "2"
-                - "3"
-                - "4"
-                - "5"
-              description: 承認フローレベル（１～５）
-            administratorKeys:
-              type: string
-              description: 管理者識別キー（管理者コードが変更されても不変）
+          items:
+            type: object
+            required:
+              - level
+              - administratorKeys
+            properties:
+              level:
+                type: integer
+                description: 承認フローレベル（１～５）
+                enum:
+                  - 1
+                  - 2
+                  - 3
+                  - 4
+                  - 5
+              administratorKeys:
+                type: array
+                description: 管理者識別キー（管理者コードが変更されても不変）
+                items:
+                  type: string

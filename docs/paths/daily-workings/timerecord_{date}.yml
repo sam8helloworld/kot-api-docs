@@ -2,7 +2,7 @@ get:
   operationId: GetDailyWorkingTimerecord
   summary: /daily-workings/timerecord/{date}{?division,ondivision,additionalFields}
   parameters:
-    - $ref: "../../components/parameters/date.yml"
+    - $ref: "../../components/parameters/date_required.yml"
     - $ref: "../../components/parameters/division.yml"
     - $ref: "../../components/parameters/ondivision.yml"
     - $ref: "../../components/parameters/additionalFields_daily-workings.yml"

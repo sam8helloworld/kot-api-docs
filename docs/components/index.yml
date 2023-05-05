@@ -47,6 +47,14 @@ schemas:
     $ref: "./schemas/daily_working_timerecord_request.yml"
   daily_working_timerecord:
     $ref: "./schemas/daily_working_timerecord.yml"
+  GetDailyWorkingTimerecords:
+    $ref: "./responses/GetDailyWorkingTimerecords.yml"
+  GetOvertimes:
+    $ref: "./responses/GetOvertimes.yml"
+  GetSchedules:
+    $ref: "./responses/GetSchedules.yml"
+  RegisterDailyWorkingTimerecord:
+    $ref: "./responses/RegisterDailyWorkingTimerecord.yml"
 
 securitySchemes:
   Bearer:
