@@ -228,3 +228,56 @@ func TestGetEmployees(t *testing.T) {
 		t.Errorf("value mismatch (-want +got):\n%s", diff)
 	}
 }
+
+func TestGetEmployee(t *testing.T) {
+	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
+	if err != nil {
+		t.Fatalf("failed to securityprovider.NewSecurityProviderBearerToken: %v", err)
+	}
+	ctx := context.Background()
+	sut, err := kotclient.NewClientWithResponses("http://localhost:8001", kotclient.WithRequestEditorFn(bearerTokenProvider.Intercept))
+	if err != nil {
+		t.Fatalf("failed to kotclient.NewClient: %v", err)
+	}
+
+	queries := kotclient.GetEmployeeParams{
+		Date:             kotclient.Ptr(kotclient.Date{Time: time.Date(2016, 10, 10, 0, 0, 0, 0, time.UTC)}),
+		IncludeResigner:  kotclient.Ptr(true),
+		AdditionalFields: kotclient.Ptr(kotclient.AdditionalFieldsEmployee{"emailAddresses"}),
+	}
+	employeeCode := "1000"
+	got, err := sut.GetEmployeeWithResponse(ctx, employeeCode, kotclient.Ptr(queries))
+	if err != nil {
+		t.Fatalf("failed to sut.GetEmployeeWithResponse: %v", err)
+	}
+
+	if diff := cmp.Diff(200, got.StatusCode()); diff != "" {
+		t.Errorf("value is mismatch (-want +got):\n%s", diff)
+	}
+
+	want := kotclient.GetEmployee{
+		DivisionCode:   "1000",
+		DivisionName:   "本社",
+		Gender:         kotclient.GetEmployeeGenderMale,
+		TypeCode:       "1",
+		TypeName:       "正社員",
+		Code:           "1000",
+		LastName:       "勤怠",
+		FirstName:      "太郎",
+		Key:            "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+		EmailAddresses: kotclient.Ptr([]types.Email{"kintaitarou@h-t.co.jp"}),
+		EmployeeGroups: []kotclient.EmployeeGroup{
+			{
+				Code: "0001",
+				Name: "人事部",
+			},
+			{
+				Code: "0002",
+				Name: "総務部",
+			},
+		},
+	}
+	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON200); diff != "" {
+		t.Errorf("value mismatch (-want +got):\n%s", diff)
+	}
+}
