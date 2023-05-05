@@ -23,29 +23,4 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../components/schemas/employee_response.yml"
-            example:
-              {
-                "divisionCode": "1000",
-                "divisionName": "本社",
-                "gender": "male",
-                "typeCode": "1",
-                "typeName": "正社員",
-                "code": "1000",
-                "lastName": "勤怠",
-                "firstName": "太郎",
-                "key": "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
-                "emailAddresses": [
-                  "kintaitarou@h-t.co.jp"
-                ],
-                "employeeGroups": [
-                  {
-                    "code": "0001",
-                    "name": "人事部"
-                  },
-                  {
-                    "code": "0002",
-                    "name": "総務部"
-                  }
-                ]
-              }
+            $ref: "../../components/responses/GetEmployee.yml"

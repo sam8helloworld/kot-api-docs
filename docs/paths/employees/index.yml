@@ -25,54 +25,7 @@ get:
           schema:
             type: array
             items:
-              $ref: "../../components/schemas/employee_response.yml"
-            example:
-              [
-                {
-                  "divisionCode": "1000",
-                  "divisionName": "本社",
-                  "gender": "male",
-                  "typeCode": "1",
-                  "typeName": "正社員",
-                  "code": "1000",
-                  "lastName": "勤怠",
-                  "firstName": "太郎",
-                  "key": "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
-                  "emailAddresses": [
-                    "kintaitarou@h-t.co.jp"
-                  ],
-                  "employeeGroups": [
-                    {
-                      "code": "0001",
-                      "name": "人事部"
-                    },
-                    {
-                      "code": "0002",
-                      "name": "総務部"
-                    }
-                  ]
-                },
-                {
-                  "divisionCode": "1000",
-                  "divisionName": "本社",
-                  "gender": "female",
-                  "typeCode": "1",
-                  "typeName": "正社員",
-                  "code": "2000",
-                  "lastName": "勤怠",
-                  "firstName": "花子",
-                  "key": "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4",
-                  "emailAddresses": [
-                    "kintaihanako@h-t.co.jp"
-                  ],
-                  "employeeGroups": [
-                    {
-                      "code": "0003",
-                      "name": "営業部"
-                    }
-                  ]
-                }
-              ]
+              $ref: "../../components/responses/GetEmployees.yml"
 
 post:
   operationId: RegisterEmployee
@@ -110,47 +63,4 @@ post:
       content:
         application/json:
           schema:
-            type: object
-            required:
-              - divisionCode
-              - gender
-              - typeCode
-              - code
-              - lastName
-              - firstName
-              - key
-            properties:
-              divisionCode:
-                type: string
-                description: 所属コード
-              gender:
-                type: string
-                description: 性別（male： 男性　female： 女性）
-              typeCode:
-                type: string
-                description: 雇用区分コード
-              code:
-                type: string
-                description: 従業員コード
-              lastName:
-                type: string
-                description: 姓
-              firstName:
-                type: string
-                description: 名
-              key:
-                type: string
-                description: 従業員識別キー（従業員コードが変更されても不変）
-            example:
-              {
-                "divisionCode": "1000",
-                "gender": "male",
-                "typeCode": "1",
-                "code": "1000",
-                "lastName": "勤怠",
-                "firstName": "太郎",
-                "key": "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4",
-                "emailAddresses": [
-                  "kintaitarou@h-t.co.jp"
-                ]
-              }
+            $ref: "../../components/responses/RegisterEmployee.yml"

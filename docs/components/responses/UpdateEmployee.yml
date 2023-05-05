@@ -19,6 +19,9 @@ properties:
     description: 所属名
   gender:
     type: string
+    enum:
+      - male
+      - female
     description: 性別（male： 男性　female： 女性）
   typeCode:
     type: string
@@ -81,3 +84,24 @@ properties:
     type: integer
     description: 日の契約労働時間
     example: 480
+example:
+  {
+    "divisionCode": "1000",
+    "divisionName": "本社",
+    "gender": "male",
+    "typeCode": "1",
+    "typeName": "正社員",
+    "code": "1000",
+    "lastName": "勤怠",
+    "firstName": "太郎",
+    "key": "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4",
+    "lastNamePhonetics": "キンタイ",
+    "firstNamePhonetics": "タロウ",
+    "birthDate": "1990-09-01",
+    "hiredDate": "2013-04-01",
+    "resignationDate": "2017-12-12",
+    "emailAddresses": [
+      "kintaitarou@h-t.co.jp"
+    ],
+    "allDayRegardingWorkInMinute": 480
+  }
