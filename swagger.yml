@@ -268,16 +268,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/division_response'
-                example:
-                  - code: '1000'
-                    name: 本社
-                    dayBorderTime: '00:00'
-                  - code: '2000'
-                    name: 支社
-                    dayBorderTime: '05:00'
+                $ref: '#/components/schemas/GetDivisions'
   /working-types:
     get:
       operationId: GetWorkingTypes
@@ -328,38 +319,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  required:
-                    - code
-                    - name
-                  properties:
-                    code:
-                      type: string
-                      description: 従業員グループコード
-                    name:
-                      type: string
-                      description: 従業員グループ名
-                    category:
-                      type: object
-                      description: 従業員グループカテゴリ
-                      required:
-                        - code
-                        - name
-                      properties:
-                        code:
-                          type: string
-                          description: 従業員グループカテゴリコード
-                        name:
-                          type: string
-                          description: 従業員グループカテゴリ名
-                example:
-                  - code: '0001'
-                    name: 人事部
-                    category:
-                      code: KEIKAN
-                      name: 経営管理本部
+                $ref: '#/components/schemas/GetEmployeeGroups'
   /daily-workings:
     get:
       operationId: GetDailyWorkings
@@ -2149,6 +2109,61 @@ components:
             name: 人事部
           - code: '0002'
             name: 総務部
+    GetDivisions:
+      type: array
+      items:
+        $ref: '#/components/schemas/division_response'
+      example:
+        - code: '1000'
+          name: 本社
+          dayBorderTime: '00:00'
+        - code: '2000'
+          name: 支社
+          dayBorderTime: '05:00'
+    GetWorkingTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/working_type_response'
+      example:
+        - code: '1'
+          name: 正社員
+    GetEmployeeGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/GetEmployeeGroups_item'
+      example:
+        - code: '0001'
+          name: 人事部
+          category:
+            code: KEIKAN
+            name: 経営管理本部
+    GetEmployeeGroups_item:
+      type: object
+      required:
+        - code
+        - name
+      properties:
+        code:
+          type: string
+          description: 従業員グループコード
+        name:
+          type: string
+          description: 従業員グループ名
+        category:
+          $ref: '#/components/schemas/GetEmployeeGroups_item_category'
+    GetEmployeeGroups_item_category:
+      type: object
+      description: 従業員グループカテゴリ
+      required:
+        - code
+        - name
+      properties:
+        code:
+          type: string
+          description: 従業員グループカテゴリコード
+        name:
+          type: string
+          description: 従業員グループカテゴリ名
     GetDailyWorkingTimerecords:
       type: object
       required:
