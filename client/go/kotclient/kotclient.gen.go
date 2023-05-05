@@ -26,6 +26,75 @@ const (
 	BearerScopes = "Bearer.Scopes"
 )
 
+// Defines values for GetDailyWorkingTimerecordsCurrentDateEmployeeGender.
+const (
+	GetDailyWorkingTimerecordsCurrentDateEmployeeGenderFemale     GetDailyWorkingTimerecordsCurrentDateEmployeeGender = "female"
+	GetDailyWorkingTimerecordsCurrentDateEmployeeGenderMale       GetDailyWorkingTimerecordsCurrentDateEmployeeGender = "male"
+	GetDailyWorkingTimerecordsCurrentDateEmployeeGenderNoSelected GetDailyWorkingTimerecordsCurrentDateEmployeeGender = "no_selected"
+)
+
+// Defines values for GetOvertimesOvertimeRequestsApplicantType.
+const (
+	GetOvertimesOvertimeRequestsApplicantTypeAdministrator GetOvertimesOvertimeRequestsApplicantType = "administrator"
+	GetOvertimesOvertimeRequestsApplicantTypeEmployee      GetOvertimesOvertimeRequestsApplicantType = "employee"
+)
+
+// Defines values for GetOvertimesOvertimeRequestsCurrentFlow.
+const (
+	GetOvertimesOvertimeRequestsCurrentFlowN1 GetOvertimesOvertimeRequestsCurrentFlow = 1
+	GetOvertimesOvertimeRequestsCurrentFlowN2 GetOvertimesOvertimeRequestsCurrentFlow = 2
+	GetOvertimesOvertimeRequestsCurrentFlowN3 GetOvertimesOvertimeRequestsCurrentFlow = 3
+	GetOvertimesOvertimeRequestsCurrentFlowN4 GetOvertimesOvertimeRequestsCurrentFlow = 4
+	GetOvertimesOvertimeRequestsCurrentFlowN5 GetOvertimesOvertimeRequestsCurrentFlow = 5
+)
+
+// Defines values for GetOvertimesOvertimeRequestsFlowLevel.
+const (
+	GetOvertimesOvertimeRequestsFlowLevelN1 GetOvertimesOvertimeRequestsFlowLevel = 1
+	GetOvertimesOvertimeRequestsFlowLevelN2 GetOvertimesOvertimeRequestsFlowLevel = 2
+	GetOvertimesOvertimeRequestsFlowLevelN3 GetOvertimesOvertimeRequestsFlowLevel = 3
+	GetOvertimesOvertimeRequestsFlowLevelN4 GetOvertimesOvertimeRequestsFlowLevel = 4
+	GetOvertimesOvertimeRequestsFlowLevelN5 GetOvertimesOvertimeRequestsFlowLevel = 5
+)
+
+// Defines values for GetOvertimesOvertimeRequestsStatus.
+const (
+	GetOvertimesOvertimeRequestsStatusApplying GetOvertimesOvertimeRequestsStatus = "applying"
+	GetOvertimesOvertimeRequestsStatusApproved GetOvertimesOvertimeRequestsStatus = "approved"
+	GetOvertimesOvertimeRequestsStatusRejected GetOvertimesOvertimeRequestsStatus = "rejected"
+)
+
+// Defines values for GetSchedulesScheduleRequestsApplicantType.
+const (
+	GetSchedulesScheduleRequestsApplicantTypeAdministrator GetSchedulesScheduleRequestsApplicantType = "administrator"
+	GetSchedulesScheduleRequestsApplicantTypeEmployee      GetSchedulesScheduleRequestsApplicantType = "employee"
+)
+
+// Defines values for GetSchedulesScheduleRequestsCurrentFlow.
+const (
+	GetSchedulesScheduleRequestsCurrentFlowN1 GetSchedulesScheduleRequestsCurrentFlow = 1
+	GetSchedulesScheduleRequestsCurrentFlowN2 GetSchedulesScheduleRequestsCurrentFlow = 2
+	GetSchedulesScheduleRequestsCurrentFlowN3 GetSchedulesScheduleRequestsCurrentFlow = 3
+	GetSchedulesScheduleRequestsCurrentFlowN4 GetSchedulesScheduleRequestsCurrentFlow = 4
+	GetSchedulesScheduleRequestsCurrentFlowN5 GetSchedulesScheduleRequestsCurrentFlow = 5
+)
+
+// Defines values for GetSchedulesScheduleRequestsFlowLevel.
+const (
+	GetSchedulesScheduleRequestsFlowLevelN1 GetSchedulesScheduleRequestsFlowLevel = 1
+	GetSchedulesScheduleRequestsFlowLevelN2 GetSchedulesScheduleRequestsFlowLevel = 2
+	GetSchedulesScheduleRequestsFlowLevelN3 GetSchedulesScheduleRequestsFlowLevel = 3
+	GetSchedulesScheduleRequestsFlowLevelN4 GetSchedulesScheduleRequestsFlowLevel = 4
+	GetSchedulesScheduleRequestsFlowLevelN5 GetSchedulesScheduleRequestsFlowLevel = 5
+)
+
+// Defines values for GetSchedulesScheduleRequestsStatus.
+const (
+	GetSchedulesScheduleRequestsStatusApplying GetSchedulesScheduleRequestsStatus = "applying"
+	GetSchedulesScheduleRequestsStatusApproved GetSchedulesScheduleRequestsStatus = "approved"
+	GetSchedulesScheduleRequestsStatusRejected GetSchedulesScheduleRequestsStatus = "rejected"
+)
+
 // Defines values for DailyWorkingResponseAutoBreakOff.
 const (
 	DailyWorkingResponseAutoBreakOffN1 DailyWorkingResponseAutoBreakOff = 1
@@ -35,9 +104,9 @@ const (
 
 // Defines values for DailyWorkingResponseCurrentDateEmployeeGender.
 const (
-	Female     DailyWorkingResponseCurrentDateEmployeeGender = "female"
-	Male       DailyWorkingResponseCurrentDateEmployeeGender = "male"
-	NoSelected DailyWorkingResponseCurrentDateEmployeeGender = "no_selected"
+	DailyWorkingResponseCurrentDateEmployeeGenderFemale     DailyWorkingResponseCurrentDateEmployeeGender = "female"
+	DailyWorkingResponseCurrentDateEmployeeGenderMale       DailyWorkingResponseCurrentDateEmployeeGender = "male"
+	DailyWorkingResponseCurrentDateEmployeeGenderNoSelected DailyWorkingResponseCurrentDateEmployeeGender = "no_selected"
 )
 
 // Defines values for DailyWorkingResponseCustomDailyWorkingsCalculationUnitCode.
@@ -139,6 +208,388 @@ const (
 	GetSchedulesParamsAdditionalFieldsWorkFixedEnd        GetSchedulesParamsAdditionalFields = "workFixedEnd"
 	GetSchedulesParamsAdditionalFieldsWorkFixedStart      GetSchedulesParamsAdditionalFields = "workFixedStart"
 )
+
+// GetDailyWorkingTimerecords defines model for GetDailyWorkingTimerecords.
+type GetDailyWorkingTimerecords struct {
+	// CurrentDateEmployee 今日時点の従業員データ
+	CurrentDateEmployee *struct {
+		// Code 従業員コード
+		Code string `json:"code"`
+
+		// DivisionCode 所属コード
+		DivisionCode string `json:"divisionCode"`
+
+		// DivisionName 所属名
+		DivisionName string `json:"divisionName"`
+
+		// EmployeeGroups 従業員グループ情報
+		EmployeeGroups []struct {
+			// Code 従業員グループコード
+			Code string `json:"code"`
+
+			// Name 従業員グループ名
+			Name string `json:"name"`
+		} `json:"employeeGroups"`
+
+		// FirstName 名
+		FirstName string `json:"firstName"`
+
+		// FirstNamePhonetics 名（カナ）
+		FirstNamePhonetics string `json:"firstNamePhonetics"`
+
+		// Gender 性別（no_selected： 選択しない　male： 男性　female： 女性）
+		Gender GetDailyWorkingTimerecordsCurrentDateEmployeeGender `json:"gender"`
+
+		// LastName 姓
+		LastName string `json:"lastName"`
+
+		// LastNamePhonetics 姓（カナ）
+		LastNamePhonetics string `json:"lastNamePhonetics"`
+
+		// TypeCode 雇用区分コード
+		TypeCode string `json:"typeCode"`
+
+		// TypeName 雇用区分名
+		TypeName string `json:"typeName"`
+	} `json:"currentDateEmployee,omitempty"`
+
+	// Date 日時
+	Date openapi_types.Date `json:"date"`
+
+	// EmployeeKey 従業員識別キー（従業員コードが変更されても不変）
+	EmployeeKey string `json:"employeeKey"`
+
+	// TimeRecord 打刻
+	TimeRecord []DailyWorkingTimerecord `json:"timeRecord"`
+}
+
+// GetDailyWorkingTimerecordsCurrentDateEmployeeGender 性別（no_selected： 選択しない　male： 男性　female： 女性）
+type GetDailyWorkingTimerecordsCurrentDateEmployeeGender string
+
+// GetOvertimes defines model for GetOvertimes.
+type GetOvertimes struct {
+	Month            int `json:"month"`
+	OvertimeRequests []struct {
+		// AdminComment 管理者コメント
+		AdminComment string `json:"adminComment"`
+
+		// Applicant 申請者
+		Applicant struct {
+			// Key 識別キー（従業員 または 管理者）
+			Key string `json:"key"`
+
+			// Type 種別（employee： 従業員　administrator： 管理者)
+			Type GetOvertimesOvertimeRequestsApplicantType `json:"type"`
+		} `json:"applicant"`
+
+		// Current 現在のスケジュール
+		Current struct {
+			// End 終了時刻
+			End KotDate `json:"end"`
+
+			// IsBeforeSchedule 勤務予定前の時間外申請か（true 予定前　false： 予定後）
+			IsBeforeSchedule bool `json:"isBeforeSchedule"`
+
+			// Start 開始時刻
+			Start KotDate `json:"start"`
+		} `json:"current"`
+
+		// CurrentFlow 現在の承認フローレベル（１～５）
+		CurrentFlow GetOvertimesOvertimeRequestsCurrentFlow `json:"currentFlow"`
+
+		// Date 対象日
+		Date openapi_types.Date `json:"date"`
+
+		// EmployeeKey 従業員識別キー（従業員コードが変更されても不変）
+		EmployeeKey string `json:"employeeKey"`
+
+		// Flow 承認フロー
+		Flow *[]struct {
+			// AdministratorKeys 管理者識別キー（管理者コードが変更されても不変）
+			AdministratorKeys []string `json:"administratorKeys"`
+
+			// Level 承認フローレベル（１～５）
+			Level GetOvertimesOvertimeRequestsFlowLevel `json:"level"`
+		} `json:"flow,omitempty"`
+
+		// LastModifiedAdministratorKey 最終更新管理者識別キー
+		LastModifiedAdministratorKey string `json:"lastModifiedAdministratorKey"`
+
+		// Message 申請メッセージ
+		Message string `json:"message"`
+
+		// RequestKey 申請識別キー
+		RequestKey string `json:"requestKey"`
+
+		// Requested 申請内容
+		Requested struct {
+			// End 終了時刻
+			End KotDate `json:"end"`
+
+			// IsBeforeSchedule 勤務予定前の時間外申請か（true 予定前　false： 予定後）
+			IsBeforeSchedule bool `json:"isBeforeSchedule"`
+
+			// Start 開始時刻
+			Start KotDate `json:"start"`
+		} `json:"requested"`
+
+		// RequestedDate 申請日
+		RequestedDate openapi_types.Date `json:"requestedDate"`
+
+		// Status 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
+		Status GetOvertimesOvertimeRequestsStatus `json:"status"`
+	} `json:"overtimeRequests"`
+	Year int `json:"year"`
+}
+
+// GetOvertimesOvertimeRequestsApplicantType 種別（employee： 従業員　administrator： 管理者)
+type GetOvertimesOvertimeRequestsApplicantType string
+
+// GetOvertimesOvertimeRequestsCurrentFlow 現在の承認フローレベル（１～５）
+type GetOvertimesOvertimeRequestsCurrentFlow int
+
+// GetOvertimesOvertimeRequestsFlowLevel 承認フローレベル（１～５）
+type GetOvertimesOvertimeRequestsFlowLevel int
+
+// GetOvertimesOvertimeRequestsStatus 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
+type GetOvertimesOvertimeRequestsStatus string
+
+// GetSchedules defines model for GetSchedules.
+type GetSchedules struct {
+	Month            int32 `json:"month"`
+	ScheduleRequests []struct {
+		// AdminComment 管理者コメント
+		AdminComment string `json:"adminComment"`
+		Applicant    struct {
+			// Key 識別キー（従業員 または 管理者）
+			Key string `json:"key"`
+
+			// Type 種別（employee： 従業員　administrator： 管理者)
+			Type GetSchedulesScheduleRequestsApplicantType `json:"type"`
+		} `json:"applicant"`
+		Current struct {
+			// BreakSchedule 休憩予定時間（分）
+			BreakSchedule int32 `json:"breakSchedule"`
+
+			// ClockInSchedule 出勤予定時間
+			ClockInSchedule KotDate `json:"clockInSchedule"`
+
+			// ClockOutSchedule 退勤予定時間
+			ClockOutSchedule KotDate `json:"clockOutSchedule"`
+
+			// HolidaysObtained 休暇取得
+			HolidaysObtained struct {
+				FulltimeHoliday struct {
+					// Code 休暇区分コード
+					Code int `json:"code"`
+
+					// Name 休暇区分名
+					Name string `json:"name"`
+				} `json:"fulltimeHoliday"`
+				HalfdayHolidays []struct {
+					// Code 休暇区分コード
+					Code int `json:"code"`
+
+					// Name 休暇区分名
+					Name string `json:"name"`
+
+					// TypeName 半休種別名
+					TypeName string `json:"typeName"`
+				} `json:"halfdayHolidays"`
+				HourHolidays []struct {
+					// Code 休暇区分コード
+					Code int `json:"code"`
+
+					// End 休暇終了予定
+					End KotDate `json:"end"`
+
+					// Minutes 休暇取得時間
+					Minutes int32 `json:"minutes"`
+
+					// Name 休暇区分名
+					Name string `json:"name"`
+
+					// Start 休暇開始予定
+					Start KotDate `json:"start"`
+				} `json:"hourHolidays"`
+			} `json:"holidaysObtained"`
+
+			// OvertimeUpperLimit 残業上限時間（分）
+			OvertimeUpperLimit *int32 `json:"overtimeUpperLimit,omitempty"`
+
+			// ScheduleTypeName スケジュール種別
+			ScheduleTypeName string `json:"scheduleTypeName"`
+
+			// StartEndBreakSchedule 休憩開始終了予定
+			StartEndBreakSchedule []struct {
+				// End 休憩終了予定
+				End KotDate `json:"end"`
+
+				// Start 休憩開始予定
+				Start KotDate `json:"start"`
+			} `json:"startEndBreakSchedule"`
+
+			// SubstitutionClockInName 振替出勤
+			SubstitutionClockInName string `json:"substitutionClockInName"`
+
+			// WorkDayTypeName 勤務日種別名
+			WorkDayTypeName string `json:"workDayTypeName"`
+
+			// WorkPlaceDivisionCode 出勤先所属コード
+			WorkPlaceDivisionCode string `json:"workPlaceDivisionCode"`
+
+			// WorkPlaceDivisionName 出勤先所属名
+			WorkPlaceDivisionName string `json:"workPlaceDivisionName"`
+		} `json:"current"`
+
+		// CurrentFlow 現在の承認フローレベル（１～５）
+		CurrentFlow GetSchedulesScheduleRequestsCurrentFlow `json:"currentFlow"`
+
+		// Date 対象日
+		Date openapi_types.Date `json:"date"`
+
+		// EmployeeKey 従業員識別キー（従業員コードが変更されても不変）
+		EmployeeKey string `json:"employeeKey"`
+
+		// Flow 承認フロー
+		Flow *[]struct {
+			// AdministratorKeys 管理者識別キー（管理者コードが変更されても不変）
+			AdministratorKeys []string `json:"administratorKeys"`
+
+			// Level 承認フローレベル（１～５）
+			Level GetSchedulesScheduleRequestsFlowLevel `json:"level"`
+		} `json:"flow,omitempty"`
+
+		// LastModifiedAdministratorKey 最終更新管理者識別キー
+		LastModifiedAdministratorKey string `json:"lastModifiedAdministratorKey"`
+
+		// Message 申請メッセージ
+		Message string `json:"message"`
+
+		// Note 備考
+		Note *string `json:"note,omitempty"`
+
+		// RequestKey 申請識別キー
+		RequestKey string `json:"requestKey"`
+		Requested  struct {
+			// BreakSchedule 休憩予定時間（分）
+			BreakSchedule int32 `json:"breakSchedule"`
+
+			// ClockInSchedule 出勤予定時間
+			ClockInSchedule KotDate `json:"clockInSchedule"`
+
+			// ClockOutSchedule 退勤予定時間
+			ClockOutSchedule KotDate `json:"clockOutSchedule"`
+
+			// HolidaysObtained 休暇取得
+			HolidaysObtained struct {
+				FulltimeHoliday struct {
+					// Code 休暇区分コード
+					Code int `json:"code"`
+
+					// Name 休暇区分名
+					Name string `json:"name"`
+				} `json:"fulltimeHoliday"`
+				HalfdayHolidays []struct {
+					// Code 休暇区分コード
+					Code int `json:"code"`
+
+					// Name 休暇区分名
+					Name string `json:"name"`
+
+					// TypeName 半休種別名
+					TypeName string `json:"typeName"`
+				} `json:"halfdayHolidays"`
+				HourHolidays []struct {
+					// Code 休暇区分コード
+					Code int `json:"code"`
+
+					// End 休暇終了予定
+					End KotDate `json:"end"`
+
+					// Minutes 休暇取得時間
+					Minutes int32 `json:"minutes"`
+
+					// Name 休暇区分名
+					Name string `json:"name"`
+
+					// Start 休暇開始予定
+					Start KotDate `json:"start"`
+				} `json:"hourHolidays"`
+			} `json:"holidaysObtained"`
+
+			// OvertimeUpperLimit 残業上限時間（分）
+			OvertimeUpperLimit *int32 `json:"overtimeUpperLimit,omitempty"`
+
+			// ScheduleTypeName スケジュール種別
+			ScheduleTypeName string `json:"scheduleTypeName"`
+
+			// StartEndBreakSchedule 休憩開始終了予定
+			StartEndBreakSchedule []struct {
+				// End 休憩終了予定
+				End KotDate `json:"end"`
+
+				// Start 休憩開始予定
+				Start KotDate `json:"start"`
+			} `json:"startEndBreakSchedule"`
+
+			// SubstitutionClockInName 振替出勤
+			SubstitutionClockInName string `json:"substitutionClockInName"`
+
+			// WorkDayTypeName 勤務日種別名
+			WorkDayTypeName string `json:"workDayTypeName"`
+
+			// WorkPlaceDivisionCode 出勤先所属コード
+			WorkPlaceDivisionCode string `json:"workPlaceDivisionCode"`
+
+			// WorkPlaceDivisionName 出勤先所属名
+			WorkPlaceDivisionName string `json:"workPlaceDivisionName"`
+		} `json:"requested"`
+
+		// RequestedDate 申請日
+		RequestedDate openapi_types.Date `json:"requestedDate"`
+
+		// SchedulePatternCode スケジュールパターンコード
+		SchedulePatternCode *string `json:"schedulePatternCode,omitempty"`
+
+		// SchedulePatternName スケジュールパターン名
+		SchedulePatternName *string `json:"schedulePatternName,omitempty"`
+
+		// Status 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
+		Status GetSchedulesScheduleRequestsStatus `json:"status"`
+
+		// WorkFixedEnd 勤務終了刻限
+		WorkFixedEnd *KotDate `json:"workFixedEnd,omitempty"`
+
+		// WorkFixedStart 勤務開始刻限
+		WorkFixedStart *KotDate `json:"workFixedStart,omitempty"`
+	} `json:"scheduleRequests"`
+	Year int32 `json:"year"`
+}
+
+// GetSchedulesScheduleRequestsApplicantType 種別（employee： 従業員　administrator： 管理者)
+type GetSchedulesScheduleRequestsApplicantType string
+
+// GetSchedulesScheduleRequestsCurrentFlow 現在の承認フローレベル（１～５）
+type GetSchedulesScheduleRequestsCurrentFlow int32
+
+// GetSchedulesScheduleRequestsFlowLevel 承認フローレベル（１～５）
+type GetSchedulesScheduleRequestsFlowLevel int
+
+// GetSchedulesScheduleRequestsStatus 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
+type GetSchedulesScheduleRequestsStatus string
+
+// RegisterDailyWorkingTimerecord defines model for RegisterDailyWorkingTimerecord.
+type RegisterDailyWorkingTimerecord struct {
+	// Date 日時
+	Date openapi_types.Date `json:"date"`
+
+	// EmployeeKey 従業員識別キー（従業員コードが変更されても不変）
+	EmployeeKey string `json:"employeeKey"`
+
+	// TimeRecord 打刻
+	TimeRecord DailyWorkingTimerecord `json:"timeRecord"`
+}
 
 // DailyWorkingResponse defines model for daily_working_response.
 type DailyWorkingResponse struct {
@@ -2600,58 +3051,7 @@ func (r GetDailyWorkingsResponse) StatusCode() int {
 type GetDailyWorkingTimerecordsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]struct {
-		// CurrentDateEmployee 今日時点の従業員データ
-		CurrentDateEmployee *struct {
-			// Code 従業員コード
-			Code string `json:"code"`
-
-			// DivisionCode 所属コード
-			DivisionCode string `json:"divisionCode"`
-
-			// DivisionName 所属名
-			DivisionName string `json:"divisionName"`
-
-			// EmployeeGroups 従業員グループ情報
-			EmployeeGroups []struct {
-				// Code 従業員グループコード
-				Code string `json:"code"`
-
-				// Name 従業員グループ名
-				Name string `json:"name"`
-			} `json:"employeeGroups"`
-
-			// FirstName 名
-			FirstName string `json:"firstName"`
-
-			// FirstNamePhonetics 名（カナ）
-			FirstNamePhonetics string `json:"firstNamePhonetics"`
-
-			// Gender 性別（no_selected： 選択しない　male： 男性　female： 女性）
-			Gender N200CurrentDateEmployeeGender `json:"gender"`
-
-			// LastName 姓
-			LastName string `json:"lastName"`
-
-			// LastNamePhonetics 姓（カナ）
-			LastNamePhonetics string `json:"lastNamePhonetics"`
-
-			// TypeCode 雇用区分コード
-			TypeCode string `json:"typeCode"`
-
-			// TypeName 雇用区分名
-			TypeName string `json:"typeName"`
-		} `json:"currentDateEmployee,omitempty"`
-
-		// Date 日時
-		Date openapi_types.Date `json:"date"`
-
-		// EmployeeKey 従業員識別キー（従業員コードが変更されても不変）
-		EmployeeKey string `json:"employeeKey"`
-
-		// TimeRecord 打刻
-		TimeRecord []DailyWorkingTimerecord `json:"timeRecord"`
-	}
+	JSON200      *[]GetDailyWorkingTimerecords
 }
 
 // Status returns HTTPResponse.Status
@@ -2698,16 +3098,7 @@ func (r GetDailyWorkingTimerecordResponse) StatusCode() int {
 type RegisterDailyWorkingTimerecordResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON201      *struct {
-		// Date 日時
-		Date openapi_types.Date `json:"date"`
-
-		// EmployeeKey 従業員識別キー（従業員コードが変更されても不変）
-		EmployeeKey string `json:"employeeKey"`
-
-		// TimeRecord 打刻
-		TimeRecord DailyWorkingTimerecord `json:"timeRecord"`
-	}
+	JSON201      *RegisterDailyWorkingTimerecord
 }
 
 // Status returns HTTPResponse.Status
@@ -2940,80 +3331,7 @@ func (r UpdateEmployeeResponse) StatusCode() int {
 type GetOvertimesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
-		Month            int `json:"month"`
-		OvertimeRequests []struct {
-			// AdminComment 管理者コメント
-			AdminComment string `json:"adminComment"`
-
-			// Applicant 申請者
-			Applicant struct {
-				// Key 識別キー（従業員 または 管理者）
-				Key string `json:"key"`
-
-				// Type 種別（employee： 従業員　administrator： 管理者)
-				Type N200OvertimeRequestsApplicantType `json:"type"`
-			} `json:"applicant"`
-
-			// Current 現在のスケジュール
-			Current struct {
-				// End 終了時刻
-				End KotDate `json:"end"`
-
-				// IsBeforeSchedule 勤務予定前の時間外申請か（true 予定前　false： 予定後）
-				IsBeforeSchedule bool `json:"isBeforeSchedule"`
-
-				// Start 開始時刻
-				Start KotDate `json:"start"`
-			} `json:"current"`
-
-			// CurrentFlow 現在の承認フローレベル（１～５）
-			CurrentFlow N200OvertimeRequestsCurrentFlow `json:"currentFlow"`
-
-			// Date 対象日
-			Date openapi_types.Date `json:"date"`
-
-			// EmployeeKey 従業員識別キー（従業員コードが変更されても不変）
-			EmployeeKey string `json:"employeeKey"`
-
-			// Flow 承認フロー
-			Flow *[]struct {
-				// AdministratorKeys 管理者識別キー（管理者コードが変更されても不変）
-				AdministratorKeys []string `json:"administratorKeys"`
-
-				// Level 承認フローレベル（１～５）
-				Level N200OvertimeRequestsFlowLevel `json:"level"`
-			} `json:"flow,omitempty"`
-
-			// LastModifiedAdministratorKey 最終更新管理者識別キー
-			LastModifiedAdministratorKey string `json:"lastModifiedAdministratorKey"`
-
-			// Message 申請メッセージ
-			Message string `json:"message"`
-
-			// RequestKey 申請識別キー
-			RequestKey string `json:"requestKey"`
-
-			// Requested 申請内容
-			Requested struct {
-				// End 終了時刻
-				End KotDate `json:"end"`
-
-				// IsBeforeSchedule 勤務予定前の時間外申請か（true 予定前　false： 予定後）
-				IsBeforeSchedule bool `json:"isBeforeSchedule"`
-
-				// Start 開始時刻
-				Start KotDate `json:"start"`
-			} `json:"requested"`
-
-			// RequestedDate 申請日
-			RequestedDate openapi_types.Date `json:"requestedDate"`
-
-			// Status 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
-			Status N200OvertimeRequestsStatus `json:"status"`
-		} `json:"overtimeRequests"`
-		Year int `json:"year"`
-	}
+	JSON200      *GetOvertimes
 }
 
 // Status returns HTTPResponse.Status
@@ -3035,217 +3353,7 @@ func (r GetOvertimesResponse) StatusCode() int {
 type GetSchedulesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
-		Month            int32 `json:"month"`
-		ScheduleRequests []struct {
-			// AdminComment 管理者コメント
-			AdminComment string `json:"adminComment"`
-			Applicant    struct {
-				// Key 識別キー（従業員 または 管理者）
-				Key string `json:"key"`
-
-				// Type 種別（employee： 従業員　administrator： 管理者)
-				Type N200ScheduleRequestsApplicantType `json:"type"`
-			} `json:"applicant"`
-			Current struct {
-				// BreakSchedule 休憩予定時間（分）
-				BreakSchedule int32 `json:"breakSchedule"`
-
-				// ClockInSchedule 出勤予定時間
-				ClockInSchedule KotDate `json:"clockInSchedule"`
-
-				// ClockOutSchedule 退勤予定時間
-				ClockOutSchedule KotDate `json:"clockOutSchedule"`
-
-				// HolidaysObtained 休暇取得
-				HolidaysObtained struct {
-					FulltimeHoliday struct {
-						// Code 休暇区分コード
-						Code int `json:"code"`
-
-						// Name 休暇区分名
-						Name string `json:"name"`
-					} `json:"fulltimeHoliday"`
-					HalfdayHolidays []struct {
-						// Code 休暇区分コード
-						Code int `json:"code"`
-
-						// Name 休暇区分名
-						Name string `json:"name"`
-
-						// TypeName 半休種別名
-						TypeName string `json:"typeName"`
-					} `json:"halfdayHolidays"`
-					HourHolidays []struct {
-						// Code 休暇区分コード
-						Code int `json:"code"`
-
-						// End 休暇終了予定
-						End KotDate `json:"end"`
-
-						// Minutes 休暇取得時間
-						Minutes int32 `json:"minutes"`
-
-						// Name 休暇区分名
-						Name string `json:"name"`
-
-						// Start 休暇開始予定
-						Start KotDate `json:"start"`
-					} `json:"hourHolidays"`
-				} `json:"holidaysObtained"`
-
-				// OvertimeUpperLimit 残業上限時間（分）
-				OvertimeUpperLimit *int32 `json:"overtimeUpperLimit,omitempty"`
-
-				// ScheduleTypeName スケジュール種別
-				ScheduleTypeName string `json:"scheduleTypeName"`
-
-				// StartEndBreakSchedule 休憩開始終了予定
-				StartEndBreakSchedule []struct {
-					// End 休憩終了予定
-					End KotDate `json:"end"`
-
-					// Start 休憩開始予定
-					Start KotDate `json:"start"`
-				} `json:"startEndBreakSchedule"`
-
-				// SubstitutionClockInName 振替出勤
-				SubstitutionClockInName string `json:"substitutionClockInName"`
-
-				// WorkDayTypeName 勤務日種別名
-				WorkDayTypeName string `json:"workDayTypeName"`
-
-				// WorkPlaceDivisionCode 出勤先所属コード
-				WorkPlaceDivisionCode string `json:"workPlaceDivisionCode"`
-
-				// WorkPlaceDivisionName 出勤先所属名
-				WorkPlaceDivisionName string `json:"workPlaceDivisionName"`
-			} `json:"current"`
-
-			// CurrentFlow 現在の承認フローレベル（１～５）
-			CurrentFlow N200ScheduleRequestsCurrentFlow `json:"currentFlow"`
-
-			// Date 対象日
-			Date openapi_types.Date `json:"date"`
-
-			// EmployeeKey 従業員識別キー（従業員コードが変更されても不変）
-			EmployeeKey string `json:"employeeKey"`
-
-			// Flow 承認フロー
-			Flow *[]struct {
-				// AdministratorKeys 管理者識別キー（管理者コードが変更されても不変）
-				AdministratorKeys []string `json:"administratorKeys"`
-
-				// Level 承認フローレベル（１～５）
-				Level N200ScheduleRequestsFlowLevel `json:"level"`
-			} `json:"flow,omitempty"`
-
-			// LastModifiedAdministratorKey 最終更新管理者識別キー
-			LastModifiedAdministratorKey string `json:"lastModifiedAdministratorKey"`
-
-			// Message 申請メッセージ
-			Message string `json:"message"`
-
-			// Note 備考
-			Note *string `json:"note,omitempty"`
-
-			// RequestKey 申請識別キー
-			RequestKey string `json:"requestKey"`
-			Requested  struct {
-				// BreakSchedule 休憩予定時間（分）
-				BreakSchedule int32 `json:"breakSchedule"`
-
-				// ClockInSchedule 出勤予定時間
-				ClockInSchedule KotDate `json:"clockInSchedule"`
-
-				// ClockOutSchedule 退勤予定時間
-				ClockOutSchedule KotDate `json:"clockOutSchedule"`
-
-				// HolidaysObtained 休暇取得
-				HolidaysObtained struct {
-					FulltimeHoliday struct {
-						// Code 休暇区分コード
-						Code int `json:"code"`
-
-						// Name 休暇区分名
-						Name string `json:"name"`
-					} `json:"fulltimeHoliday"`
-					HalfdayHolidays []struct {
-						// Code 休暇区分コード
-						Code int `json:"code"`
-
-						// Name 休暇区分名
-						Name string `json:"name"`
-
-						// TypeName 半休種別名
-						TypeName string `json:"typeName"`
-					} `json:"halfdayHolidays"`
-					HourHolidays []struct {
-						// Code 休暇区分コード
-						Code int `json:"code"`
-
-						// End 休暇終了予定
-						End KotDate `json:"end"`
-
-						// Minutes 休暇取得時間
-						Minutes int32 `json:"minutes"`
-
-						// Name 休暇区分名
-						Name string `json:"name"`
-
-						// Start 休暇開始予定
-						Start KotDate `json:"start"`
-					} `json:"hourHolidays"`
-				} `json:"holidaysObtained"`
-
-				// OvertimeUpperLimit 残業上限時間（分）
-				OvertimeUpperLimit *int32 `json:"overtimeUpperLimit,omitempty"`
-
-				// ScheduleTypeName スケジュール種別
-				ScheduleTypeName string `json:"scheduleTypeName"`
-
-				// StartEndBreakSchedule 休憩開始終了予定
-				StartEndBreakSchedule []struct {
-					// End 休憩終了予定
-					End KotDate `json:"end"`
-
-					// Start 休憩開始予定
-					Start KotDate `json:"start"`
-				} `json:"startEndBreakSchedule"`
-
-				// SubstitutionClockInName 振替出勤
-				SubstitutionClockInName string `json:"substitutionClockInName"`
-
-				// WorkDayTypeName 勤務日種別名
-				WorkDayTypeName string `json:"workDayTypeName"`
-
-				// WorkPlaceDivisionCode 出勤先所属コード
-				WorkPlaceDivisionCode string `json:"workPlaceDivisionCode"`
-
-				// WorkPlaceDivisionName 出勤先所属名
-				WorkPlaceDivisionName string `json:"workPlaceDivisionName"`
-			} `json:"requested"`
-
-			// RequestedDate 申請日
-			RequestedDate openapi_types.Date `json:"requestedDate"`
-
-			// SchedulePatternCode スケジュールパターンコード
-			SchedulePatternCode *string `json:"schedulePatternCode,omitempty"`
-
-			// SchedulePatternName スケジュールパターン名
-			SchedulePatternName *string `json:"schedulePatternName,omitempty"`
-
-			// Status 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
-			Status N200ScheduleRequestsStatus `json:"status"`
-
-			// WorkFixedEnd 勤務終了刻限
-			WorkFixedEnd *KotDate `json:"workFixedEnd,omitempty"`
-
-			// WorkFixedStart 勤務開始刻限
-			WorkFixedStart *KotDate `json:"workFixedStart,omitempty"`
-		} `json:"scheduleRequests"`
-		Year int32 `json:"year"`
-	}
+	JSON200      *GetSchedules
 }
 
 // Status returns HTTPResponse.Status
@@ -3703,58 +3811,7 @@ func ParseGetDailyWorkingTimerecordsResponse(rsp *http.Response) (*GetDailyWorki
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest []struct {
-			// CurrentDateEmployee 今日時点の従業員データ
-			CurrentDateEmployee *struct {
-				// Code 従業員コード
-				Code string `json:"code"`
-
-				// DivisionCode 所属コード
-				DivisionCode string `json:"divisionCode"`
-
-				// DivisionName 所属名
-				DivisionName string `json:"divisionName"`
-
-				// EmployeeGroups 従業員グループ情報
-				EmployeeGroups []struct {
-					// Code 従業員グループコード
-					Code string `json:"code"`
-
-					// Name 従業員グループ名
-					Name string `json:"name"`
-				} `json:"employeeGroups"`
-
-				// FirstName 名
-				FirstName string `json:"firstName"`
-
-				// FirstNamePhonetics 名（カナ）
-				FirstNamePhonetics string `json:"firstNamePhonetics"`
-
-				// Gender 性別（no_selected： 選択しない　male： 男性　female： 女性）
-				Gender N200CurrentDateEmployeeGender `json:"gender"`
-
-				// LastName 姓
-				LastName string `json:"lastName"`
-
-				// LastNamePhonetics 姓（カナ）
-				LastNamePhonetics string `json:"lastNamePhonetics"`
-
-				// TypeCode 雇用区分コード
-				TypeCode string `json:"typeCode"`
-
-				// TypeName 雇用区分名
-				TypeName string `json:"typeName"`
-			} `json:"currentDateEmployee,omitempty"`
-
-			// Date 日時
-			Date openapi_types.Date `json:"date"`
-
-			// EmployeeKey 従業員識別キー（従業員コードが変更されても不変）
-			EmployeeKey string `json:"employeeKey"`
-
-			// TimeRecord 打刻
-			TimeRecord []DailyWorkingTimerecord `json:"timeRecord"`
-		}
+		var dest []GetDailyWorkingTimerecords
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -3809,16 +3866,7 @@ func ParseRegisterDailyWorkingTimerecordResponse(rsp *http.Response) (*RegisterD
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest struct {
-			// Date 日時
-			Date openapi_types.Date `json:"date"`
-
-			// EmployeeKey 従業員識別キー（従業員コードが変更されても不変）
-			EmployeeKey string `json:"employeeKey"`
-
-			// TimeRecord 打刻
-			TimeRecord DailyWorkingTimerecord `json:"timeRecord"`
-		}
+		var dest RegisterDailyWorkingTimerecord
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -4078,80 +4126,7 @@ func ParseGetOvertimesResponse(rsp *http.Response) (*GetOvertimesResponse, error
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Month            int `json:"month"`
-			OvertimeRequests []struct {
-				// AdminComment 管理者コメント
-				AdminComment string `json:"adminComment"`
-
-				// Applicant 申請者
-				Applicant struct {
-					// Key 識別キー（従業員 または 管理者）
-					Key string `json:"key"`
-
-					// Type 種別（employee： 従業員　administrator： 管理者)
-					Type N200OvertimeRequestsApplicantType `json:"type"`
-				} `json:"applicant"`
-
-				// Current 現在のスケジュール
-				Current struct {
-					// End 終了時刻
-					End KotDate `json:"end"`
-
-					// IsBeforeSchedule 勤務予定前の時間外申請か（true 予定前　false： 予定後）
-					IsBeforeSchedule bool `json:"isBeforeSchedule"`
-
-					// Start 開始時刻
-					Start KotDate `json:"start"`
-				} `json:"current"`
-
-				// CurrentFlow 現在の承認フローレベル（１～５）
-				CurrentFlow N200OvertimeRequestsCurrentFlow `json:"currentFlow"`
-
-				// Date 対象日
-				Date openapi_types.Date `json:"date"`
-
-				// EmployeeKey 従業員識別キー（従業員コードが変更されても不変）
-				EmployeeKey string `json:"employeeKey"`
-
-				// Flow 承認フロー
-				Flow *[]struct {
-					// AdministratorKeys 管理者識別キー（管理者コードが変更されても不変）
-					AdministratorKeys []string `json:"administratorKeys"`
-
-					// Level 承認フローレベル（１～５）
-					Level N200OvertimeRequestsFlowLevel `json:"level"`
-				} `json:"flow,omitempty"`
-
-				// LastModifiedAdministratorKey 最終更新管理者識別キー
-				LastModifiedAdministratorKey string `json:"lastModifiedAdministratorKey"`
-
-				// Message 申請メッセージ
-				Message string `json:"message"`
-
-				// RequestKey 申請識別キー
-				RequestKey string `json:"requestKey"`
-
-				// Requested 申請内容
-				Requested struct {
-					// End 終了時刻
-					End KotDate `json:"end"`
-
-					// IsBeforeSchedule 勤務予定前の時間外申請か（true 予定前　false： 予定後）
-					IsBeforeSchedule bool `json:"isBeforeSchedule"`
-
-					// Start 開始時刻
-					Start KotDate `json:"start"`
-				} `json:"requested"`
-
-				// RequestedDate 申請日
-				RequestedDate openapi_types.Date `json:"requestedDate"`
-
-				// Status 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
-				Status N200OvertimeRequestsStatus `json:"status"`
-			} `json:"overtimeRequests"`
-			Year int `json:"year"`
-		}
+		var dest GetOvertimes
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -4177,217 +4152,7 @@ func ParseGetSchedulesResponse(rsp *http.Response) (*GetSchedulesResponse, error
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Month            int32 `json:"month"`
-			ScheduleRequests []struct {
-				// AdminComment 管理者コメント
-				AdminComment string `json:"adminComment"`
-				Applicant    struct {
-					// Key 識別キー（従業員 または 管理者）
-					Key string `json:"key"`
-
-					// Type 種別（employee： 従業員　administrator： 管理者)
-					Type N200ScheduleRequestsApplicantType `json:"type"`
-				} `json:"applicant"`
-				Current struct {
-					// BreakSchedule 休憩予定時間（分）
-					BreakSchedule int32 `json:"breakSchedule"`
-
-					// ClockInSchedule 出勤予定時間
-					ClockInSchedule KotDate `json:"clockInSchedule"`
-
-					// ClockOutSchedule 退勤予定時間
-					ClockOutSchedule KotDate `json:"clockOutSchedule"`
-
-					// HolidaysObtained 休暇取得
-					HolidaysObtained struct {
-						FulltimeHoliday struct {
-							// Code 休暇区分コード
-							Code int `json:"code"`
-
-							// Name 休暇区分名
-							Name string `json:"name"`
-						} `json:"fulltimeHoliday"`
-						HalfdayHolidays []struct {
-							// Code 休暇区分コード
-							Code int `json:"code"`
-
-							// Name 休暇区分名
-							Name string `json:"name"`
-
-							// TypeName 半休種別名
-							TypeName string `json:"typeName"`
-						} `json:"halfdayHolidays"`
-						HourHolidays []struct {
-							// Code 休暇区分コード
-							Code int `json:"code"`
-
-							// End 休暇終了予定
-							End KotDate `json:"end"`
-
-							// Minutes 休暇取得時間
-							Minutes int32 `json:"minutes"`
-
-							// Name 休暇区分名
-							Name string `json:"name"`
-
-							// Start 休暇開始予定
-							Start KotDate `json:"start"`
-						} `json:"hourHolidays"`
-					} `json:"holidaysObtained"`
-
-					// OvertimeUpperLimit 残業上限時間（分）
-					OvertimeUpperLimit *int32 `json:"overtimeUpperLimit,omitempty"`
-
-					// ScheduleTypeName スケジュール種別
-					ScheduleTypeName string `json:"scheduleTypeName"`
-
-					// StartEndBreakSchedule 休憩開始終了予定
-					StartEndBreakSchedule []struct {
-						// End 休憩終了予定
-						End KotDate `json:"end"`
-
-						// Start 休憩開始予定
-						Start KotDate `json:"start"`
-					} `json:"startEndBreakSchedule"`
-
-					// SubstitutionClockInName 振替出勤
-					SubstitutionClockInName string `json:"substitutionClockInName"`
-
-					// WorkDayTypeName 勤務日種別名
-					WorkDayTypeName string `json:"workDayTypeName"`
-
-					// WorkPlaceDivisionCode 出勤先所属コード
-					WorkPlaceDivisionCode string `json:"workPlaceDivisionCode"`
-
-					// WorkPlaceDivisionName 出勤先所属名
-					WorkPlaceDivisionName string `json:"workPlaceDivisionName"`
-				} `json:"current"`
-
-				// CurrentFlow 現在の承認フローレベル（１～５）
-				CurrentFlow N200ScheduleRequestsCurrentFlow `json:"currentFlow"`
-
-				// Date 対象日
-				Date openapi_types.Date `json:"date"`
-
-				// EmployeeKey 従業員識別キー（従業員コードが変更されても不変）
-				EmployeeKey string `json:"employeeKey"`
-
-				// Flow 承認フロー
-				Flow *[]struct {
-					// AdministratorKeys 管理者識別キー（管理者コードが変更されても不変）
-					AdministratorKeys []string `json:"administratorKeys"`
-
-					// Level 承認フローレベル（１～５）
-					Level N200ScheduleRequestsFlowLevel `json:"level"`
-				} `json:"flow,omitempty"`
-
-				// LastModifiedAdministratorKey 最終更新管理者識別キー
-				LastModifiedAdministratorKey string `json:"lastModifiedAdministratorKey"`
-
-				// Message 申請メッセージ
-				Message string `json:"message"`
-
-				// Note 備考
-				Note *string `json:"note,omitempty"`
-
-				// RequestKey 申請識別キー
-				RequestKey string `json:"requestKey"`
-				Requested  struct {
-					// BreakSchedule 休憩予定時間（分）
-					BreakSchedule int32 `json:"breakSchedule"`
-
-					// ClockInSchedule 出勤予定時間
-					ClockInSchedule KotDate `json:"clockInSchedule"`
-
-					// ClockOutSchedule 退勤予定時間
-					ClockOutSchedule KotDate `json:"clockOutSchedule"`
-
-					// HolidaysObtained 休暇取得
-					HolidaysObtained struct {
-						FulltimeHoliday struct {
-							// Code 休暇区分コード
-							Code int `json:"code"`
-
-							// Name 休暇区分名
-							Name string `json:"name"`
-						} `json:"fulltimeHoliday"`
-						HalfdayHolidays []struct {
-							// Code 休暇区分コード
-							Code int `json:"code"`
-
-							// Name 休暇区分名
-							Name string `json:"name"`
-
-							// TypeName 半休種別名
-							TypeName string `json:"typeName"`
-						} `json:"halfdayHolidays"`
-						HourHolidays []struct {
-							// Code 休暇区分コード
-							Code int `json:"code"`
-
-							// End 休暇終了予定
-							End KotDate `json:"end"`
-
-							// Minutes 休暇取得時間
-							Minutes int32 `json:"minutes"`
-
-							// Name 休暇区分名
-							Name string `json:"name"`
-
-							// Start 休暇開始予定
-							Start KotDate `json:"start"`
-						} `json:"hourHolidays"`
-					} `json:"holidaysObtained"`
-
-					// OvertimeUpperLimit 残業上限時間（分）
-					OvertimeUpperLimit *int32 `json:"overtimeUpperLimit,omitempty"`
-
-					// ScheduleTypeName スケジュール種別
-					ScheduleTypeName string `json:"scheduleTypeName"`
-
-					// StartEndBreakSchedule 休憩開始終了予定
-					StartEndBreakSchedule []struct {
-						// End 休憩終了予定
-						End KotDate `json:"end"`
-
-						// Start 休憩開始予定
-						Start KotDate `json:"start"`
-					} `json:"startEndBreakSchedule"`
-
-					// SubstitutionClockInName 振替出勤
-					SubstitutionClockInName string `json:"substitutionClockInName"`
-
-					// WorkDayTypeName 勤務日種別名
-					WorkDayTypeName string `json:"workDayTypeName"`
-
-					// WorkPlaceDivisionCode 出勤先所属コード
-					WorkPlaceDivisionCode string `json:"workPlaceDivisionCode"`
-
-					// WorkPlaceDivisionName 出勤先所属名
-					WorkPlaceDivisionName string `json:"workPlaceDivisionName"`
-				} `json:"requested"`
-
-				// RequestedDate 申請日
-				RequestedDate openapi_types.Date `json:"requestedDate"`
-
-				// SchedulePatternCode スケジュールパターンコード
-				SchedulePatternCode *string `json:"schedulePatternCode,omitempty"`
-
-				// SchedulePatternName スケジュールパターン名
-				SchedulePatternName *string `json:"schedulePatternName,omitempty"`
-
-				// Status 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
-				Status N200ScheduleRequestsStatus `json:"status"`
-
-				// WorkFixedEnd 勤務終了刻限
-				WorkFixedEnd *KotDate `json:"workFixedEnd,omitempty"`
-
-				// WorkFixedStart 勤務開始刻限
-				WorkFixedStart *KotDate `json:"workFixedStart,omitempty"`
-			} `json:"scheduleRequests"`
-			Year int32 `json:"year"`
-		}
+		var dest GetSchedules
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -4500,140 +4265,132 @@ func ParseGetWorkingTypesResponse(rsp *http.Response) (*GetWorkingTypesResponse,
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"H4sIAAAAAAAC/+w9+3MTR5r/imp2VZXUyWZGkmXJV1c5G5xdKs9KyO3dgS81llr2BGmkzIwIPq+rNBIP",
-	"4UfCI+AAToDExgZiGxaSgDHwv9x4JPsn/wtX3T3v6ZFGsmwrWW1tVcR45uvur7/39/XXk1Qyl83neMBL",
-	"IjUwSeVZgc0CCQjoX2wqxUlcjmcz73IgkxI/Z1NZjudESWClnADfSAExKXB5+BI1QFVnL6prtxT5ulKa",
-	"VeQ7SnleKa8q5StK+YJS+kkpXVXKPyulF0r5e6X8FP6QH22/eaVO36VCFDibz+RSgBpIsxkRhCgOAvyy",
-	"AIQJKkTxbBZQA675UCFKTI6DLAunAs6y2XwGUAMnKVYUc0mOlUBqOJvP5CYAEKmREMVJIIvWBfhCFr4H",
-	"siyXGUylBCCKAELz+FCayMPhRUng+DFqynjACgI7QU1NhdyYSrFcZqLnq5xwmuPHxM5FVbIgCICXjrES",
-	"0JdMRJXHey1gBuifdyxOHGRBQkeGFaUP2Sz4eDzHA4lLQlhpTnA/HOcEkIJYo0LUKCdI49pvAYjcGM/C",
-	"6WhP3MSYyRxjJz4BY6yQ4vixv+WE08f5Dzi+IO0V9T1jQq6Q72SqZCUwlhMmyKRo+WNjJKQgdhstVH3x",
-	"rLpQqc4vVW+WanBZy4q8pr6+Vl1aVa/dU+Q1pXxRKW8qpTdK6er2vZXa4sYpXim/3JG/Vr9+WZ1fUuT1",
-	"6kJRXVyOqC+eqZfmFPm1Ii+jd6oLD6vfL1nfYeA7r2fxOxQZUylMFCZ27PNPgTRbyEiKvK6+uladX0L4",
-	"19BHhWkm1sPQPQx9gqYH0P//G9JnTsiykgnbgTsNV58L4MsCJFr3oNsPntaePVZKV9Vvbqiv5xV5HtKI",
-	"fM7AXrtxkmelcRdKzPlJQgEcOIq4M5yIBnCR1KWi+uQHpfQUEkr5kte+6t8TKZ+haZo0qs64RxGD+d4X",
-	"g4Cdk7Ij1ga9HoJ9z/M9MOGepjGd7dXv1MqSUlpVypu7mxX3NBV5Vl28VL39TGfQ+0qptPV8Tl28tLvZ",
-	"YBFwaF9roOKjMQBi0RibiIXp0XA8Fk0kkpFUOpZg4sloPB5nE/2pVP/oaDLGhmMsE++PRtLRWKKfZVIg",
-	"OhqhGmBA3D8UnOJD6uyGWrmolKYVeXl78WL1+mOrvMLyTf1mfbv86hSvE50iz9oF331FPqfIDyGt3H2m",
-	"Xq5ASSe/2Xr1pvbtCv7Yp2C3LdtDqO8Z31Zl0FjwA54gwhwcUl24s3PjmiKv1X4pbW1csAsyUWIFSZFX",
-	"AJ+CQuTybPVmSZEfYQxqYgx/rsmwWFj/tDWZD2e8F3lG9/XQTJPyjOOTmUIKfILMESC0oCl3isVt+bfq",
-	"84oiv7FpzdJV9fIjpVTEpBU4IRSAx8Kdk7AjAS3boD5jzZixtRWN5nIZwPJoSTneW0gr5ZfwuwFNWMuP",
-	"1DsbiryE2OCOOrOoztw0VD3aSTTqgHpxA/7xfMXHF/WZrTRTh9NIuLGshogWjIbGWEHU7J8hdm7MqMsz",
-	"TWl2jwXggQ+arqXcaUDYf/Xi/drlC+r66+0n2KyroJ1bV8pPyWoFw/GpUL5IpPvPROOJyERfXDgj9fMT",
-	"6S/D8USE7++ThP54ItLPx8lqo5CHKzlGtlUxrRblndsXIbVAwX9BKV2t3n5WvfHYbYV57INliIPdjCl9",
-	"OKwQoWP8ueYYfy4AMZ/jRbTqvJDLA0HiAI49iEgYpMj4WLtVvVnauXEN6s7KBWwUaONyvATGgAB1AluQ",
-	"ckMCYE9/lE4TzKaLD9WZ61ubV6oXHtTO3VOnX+xuVvhCJrO7eSuAHyulq/gv6uwNhGioKgPM7uYtpVi0",
-	"bocVilIshiEI6B+Vniil50p5CSn1R463IvAt9fwKEg1rpOnAZWluDxMKhyIjpFWOwhWe4LIE0sHQ/KCK",
-	"5N+7wb2ctkh+i6jXBSAVcuxikmiwEg1Tl0bX5R7Z6HWb254APmSzngDUy3OkT3V75i8ejrJlBY+V8iM0",
-	"h/lq+bx69wllsVKaRIYJqu66eOJ6iHCIy5uyirOTeFoaVJPAcqNfgKTktqwscQ7CHMjYJERGSJ/ublaU",
-	"0iOlPG0jUhPMGOBTRBOluKxWliDz5j4XQQYkJZCCrLUjP69O/2DwrVIsZtkMgH+pfftbtbisFItpoD9S",
-	"l55Wi8s2lqMs8KgQBd+E4g59Qgw+6FEhwuqWr1F1PqiHl+VrjfACH5CZxK4x6pAUfECeuRWEH2qyca2D",
-	"B40ttMzZMnZIJ0UDj1ZiC/kPujm4l0TUyYIo5bLHoDL6myVI62BYNpMsZFCQ7hMgInPLpURWKrW1+dov",
-	"l6s/LJAFqwnjM56TPDx4BEWd+27r1ZyxT7ubFahpAlDkXn+saxUszJViMYr+df2xWlx0KYooUVGQ5U91",
-	"fgm5oo+QvnqjlO/iAFcLIsgLVLNSiIy1EGE/SFvrEfFDiquxuQJJVkwKAIUphYn/YJOsRHQloG69dRE5",
-	"PQ8Ved6PkgWskJl4H7BniPN7sFMs+oJyQEEWF2LGcxkuxU6IH41KLEc0zTBOsE/hsgXShUxG4rLgrxiM",
-	"X/2owfSSYRbEkInS+n071OE4m0mn2AltFWLHLKOeEFfnprc2r9RW1tTKkh8cuEWyNzpyBWH/cEEM4uDP",
-	"ccgGM4yTrXsgnZFQlEXpE7E+5Row27g3Hu43/hI7200txbFhupONQ0j6KhvtngOIk0HdtO7YbhI9cOLR",
-	"TE6Ec3QttvbbXaUk16Z/rT6VKXeQAn47LAikxLJSWlHKD5TyJg641AXxV5DJkwI/3yGjeL4hhAxRfezI",
-	"59XKSz/iGX7/ITc2Ttjt6m9P1MWFpoB8dAYyE1HZYmBrM9Wl1aZAfsbX8a0xUORhq4s3/MDNec/Q99yk",
-	"nMRmoB1GEF3Tz9TynHq5sr1S8QOqwDeKHPhc11c54fTHGTYJjtX1Q43QoA+H1AXSQ1rbQXpIFAgsxU6c",
-	"8Bb6iNKr80v+5X5KT0VbcylkRFg53WA7k4Xd8wuZIR3bLlkoyMo8ZIIlcYY1AqKxr83UspIXwYhxhIm8",
-	"7D+yy0C2P60RLjhFASRzApEer6mVlz6DJvhlvJdWKtOdVYYKUWEqREWoEBWlQlQ/FaLiRDe1UWAFjtOG",
-	"8IoJxoOCoSUvFUhzqP22rm7ct6nCXGE0Y9GDfCE7qsm1HD/mBeaXWd9g+DqrqMNAIcpD9uHl70Glay/Z",
-	"/aL63rWBUCtWmiFRlPwHouTXkCPSpO63YjGm+607xSL+V8QMr2K7R/dltdAnMuuUYrEfwVi8AcGcX1KK",
-	"xbj5oFp5ibKgtQW5dn0J5eXWlaL83vEP/xL46N3AieMfDCvyGg72K/Ij9fU1Rf5Jke/b53u1+mQD5Wfm",
-	"UQLjplIstcZPRIvBEL+neGcOTf+LIj/CMzLLS+TZ2rPLKL80Z52UD6e1MU+7lZQLg9sP/qG+umbJJM/q",
-	"mbJ5I4Glw7jqhCqv4Neql56g9Jg5/c5m/X3mYLRlRC7U9qxOFiTZcuybnRjKCSkgnOAaBb/zrCQBAT79",
-	"n7feGThJMyMn6Z7EyN/DJ+meyMjbAyfpnj786M9NhIK8BX/dwI993iSs6caJt6yqVzhHigtBUbF0pfbs",
-	"HLY1jS03Ml/ROE1MvBj1fG7y+/aONR/XkH0PNU/iqDwk+E73cP5KKf2olC/hGkBrmsNYHoJENSzL6+Qc",
-	"gs8UgTs4ZhR6uqd1fqm2+LopejikTIKzKtXtBqNij6aWsufsRP0EAymjUC+N0ECkeKajuzLl4HKvBy6O",
-	"uune32O6tzNE9emDTsN0dUPnZq5Po4iZR/7aR1racMkn8qBpt8A3zvi24Ks5w30qRIkgWRA4aeLT5DjI",
-	"4oUMAVYg8fhRAaQAL3FsRgzkhACbTAJRDKBivEA6JwQGPz6uV7Gh8D0GYww6Lkl5XHnG8emcG7w1UBD4",
-	"Gxgd/Ph4QMyDJJfmcLgvACGIA0eOpMAZkIGo74X7Aj263i/yR+BInISK4gigqBB1Bgi4AJVieuleGsXJ",
-	"84Bn8xw1QEV66d4IdrzGERaO2M7VoUdjgJA/qK3dq12+sF087ziRohdx3lRKM1oQ4yx06djMsRyJ27ee",
-	"F7fvL1MhqiBkNGx5r/VPweH+4OBwcJCBPxJ0MB4LDseDcToY7+up87fgcCQYjwTj/dqPoaPoRzg49G4P",
-	"XB1GiYDQfTxFDVB/AdKgHQ8h23nEk5PUnwWQpgaoPx0xTy0eMV850uC84tQIkmKIpxBWwjSNuYmXAI/w",
-	"zebzGY0Ejnwh4rQ/qZhdZ0EKjaAx/gDlo4q9bhW8Wa2pnl+prjwwNpyaCk0STydapsLQNG2TOAOUuvhw",
-	"p/y1Mb02nHgwlQ+lzixWi3fRzLQZhN0z2J5+oq5eNmaQ7O9nI9HRSDjdlwIRejQWifSlmCjDpvqZ6Cib",
-	"jvUzkWQqzCTZRDwWT4A0SCbSINwf6QszfeFklDyDkZBjBniwRsAaTcbcDZR/fIjszR+U8hxivOdK+Sel",
-	"vIlG97AAiRs2ab7t0MGXbLG3ttZSNm/EdbpZQ1ZGdfSvH1uXjGJT7O5HFKWxt0LcCmNSjq1wT7b5rSDb",
-	"BwbkJowDvB8+fQ10vs42JBWixgGb0o6jH8VyuucE+ooomN0CnFCPjmyRQjbLClBKOJTv5DtOLTIFYbBj",
-	"UNZSNgVFjUBISBex/ISn1t7alKtLq9hbPEitHYUqN84Eh2PBwb7g4DH4AyrkvuBwX3CQDg4xPX5eakWP",
-	"H9VQ0i59O0mNFkSOB6L4X4AVPpVYQcI+CEVHj9AMZcj/ZDaPcrwiZCgxbEWJoRaYL9n/PSt+FY6AVLK3",
-	"t7fXFPN4pzB5i0CSzKP7SS7LZk4IgJUw8VFCrsCnPstTOHtwjBPzGXbiXcPfwR8grrALcY91uPZ6YwbO",
-	"5MUzdeO+Vh2EPCqfQR68kLriCuPILaRuo/PdlWa0Ah7NKof8CxUryt1FU7Y9IAy5sqqu3TLiMHZMuzfN",
-	"CYShd4r/0Ipd5TX18TfV649rP/8c2Xo1p8hrOIu1u1lBW30s9xWPAguVi1vPZxT5qlIsajRgPJ62PEYP",
-	"b9+uzq1sbXyrnl/yKt12E4+rNhiX0L76Ud38Znezoi0Lwkfzrz69rhSLIjjLjgFR/0tM+wtxVEKWyj6F",
-	"kBt3DWvHsKC3u4SIxEIeJG/ZXQLwA9QEumjXZRYW6u7+HUTZjiueHccAFXkNy+oDEPJ9wfhQcDCKxDYd",
-	"HKR74K9EPxTm8G9x/YftpVZEur3upVnPzDjDCL2FBu9aTjz6eBtXPvp4EfApP6816uTSVicyZT9/cNJ6",
-	"7A0lCOwn2BjbYa8Y7Xlsy+4R2oP5zqeaL1Vd+Lm2+NodpbI4mDSNVK2uLDc2tjZmdsorVg+Qpumw+Urt",
-	"t2/UmZvolREPx5QUK6bQ2YFVpXTfjLsN6Mdv3O4fMcBJIUX0FFlai9ao3QAq7DCjhlR19afa4mvocHkd",
-	"CzlJPAnCeJztYAxjJHW0IFoQ5j4dwWDUEWDTHsDDNuDhesDD3sC9oEdt0CP1oEfQluLKF8vBUM/yuQHa",
-	"fvyBdpxjaEdsgnQ+gXDoIKlvk764hUtbm1eIpf0nPd+2kdDHHyAAI85qeOvnqJLdeoSWYfAR2n+hEwOI",
-	"IY3adMjYztG0+nEbANoGYGrEXn2NzykbJdV68watPlr7Jy52pm1VyzSx/Jj2qCCmrRXATKTPVswbY/rs",
-	"FbnoBY/KWl0weVTJmhLKVflKqS+eQvuYTJK2AA1J+munk494HE0+VD/VcDwlCfAplk8CooFyxKzhO9LA",
-	"WHFVnHkaKwFrLwe9hm1eke9oLQyKMj5Ib2s8QhyjQ+ygWDCeCCYi2pOhob3aQScMpDdvEdk6pviwS7oW",
-	"lE8LqmsStdckIun4tqtuyMmfaFXyloxG0ztl1pVG+npjsf5wONJvqxNlIone/mg4HKb7zVwLKlSm9EJQ",
-	"W5+LhF3HWnId0N01spR4dhFkWRkPtcm999GJT98/mJXgImvbSvp0ayHutZJI03MzwmVmETcRe04LxRwz",
-	"urcxcZE4eUzGaRU1NgoceZZuK4xuK4xuK4xuK4x/klYYe+2XcGj9CKxGg+fRuhY8P8uRPVJjwYYHJi3z",
-	"6qykZwvO5CRc4ZS3S2n1CvXKvza6gWa7QTTQ4fqDPUwTHmHzIXJb891D9QgPzoPrOnBdB67rwHUduBYc",
-	"OFe+39nLq82a3zSUGncfJZgIqQZ9Aw6p+KmR5p98R9/PkKlDQnVLpJowLixiCNkYeWJRis3IsMaaXeZF",
-	"7ebLndl/GObFW8zWy1/fbmxk6DDxQBjIIZoaCAsuS+MTMMaJEhDaZG5YNQDW5+g07VAuNeFDlWs0h+9l",
-	"OJtl8xnAwN9n2ExBU+tupdOcRGwsy6HvgccO28a2Kh9igpIktnwMN2Xtm9uKUDGOLGM2dJhQzH7hfV+V",
-	"fQu63jBO9l/de9LI7wxPrazcRq5OXfmHcPlbU+x7duE70WXfk5/urF/rND+9yfo1H3561zuv4523UiPR",
-	"GTyhYbFOvSZOlRxOpebQMLIAjUr7PvjPQaZHsw7jNHqJCSaGWypMMBbf/lNuuoKyN5WhkMKxVIlhV899",
-	"IMz1XZ/9u2/X0Xe+63RcfXM6Iqpq3ouHiJFw2RqRJMlJr7oHPE/x/1d8iWtvtEp/eZachntwZ7v8CgKo",
-	"PKh9u4LuNZuzX/jzSJHXSUMt6x2obiulawfND55/09lAVwGDQ3YOiUDd0QLzDNsDhHs+eOrc/PYePdUv",
-	"wDONyveGj783+KElSvnLrHrjV3xiq7rwM45oNox51smJW4b0lbN9hK4MfKaUHzafCCfDaVce2AqzHTnh",
-	"P0Qqu4PkpR9J2Wn6u768alEWiS0Zqe22TZ13c7VioBpXvu7HCfwWE0L2w7onqdMcL7GcxAq5wr+P90i9",
-	"yVzvF3nIOQebO3Kmhvbx4L7fBJLLmmsLpsdZnj2dawLVluMI6o1fq0urJDwa7QYMPGo1KvvagMAnJv3a",
-	"t+52ZJ1yVNqQ0ZPvQFkTMhICDilRN0Fgkfshj4i/19W7rcX3mw/ot1nS1w/oG/hoNgjvz2N39ctsOfhM",
-	"zN/7kcJNSNsmhOJBsPJUR1VxNl9uuG891Dq/61mH9Z3EKOuMYLKX5W0mZOGCfEaTPUR10xFkexL2cO1y",
-	"jwiyRVK3lmxFdOLHQPdpyHeWcd6kTXPYNoyD2jWTpkVLxoOP9MKGFMgACfg3dNRL0zs3F5suZEBfHSLr",
-	"aMt08c4x9HzP7GPWKtioNOrGxIlxTgzorwXGWTHA5wIaIfdSjSkC7ZuXyVpowmLVL+m1beQp/hNsiwWg",
-	"pYdisPcddwTs3D1fu72Gb4l2wDjF63+0XzBdlNXioiLP1s7d09vv31Hk9dqDjeqNi+rqvFqZV+Q1Pe5r",
-	"dvvXoJWufvjZ++8r8rJrONyqSil/j4oPX2gx46I8aGcN48Jv+Kn8At9qS4jZaK/JPhUDns5hWu8FgvH+",
-	"GbpNuT0U3VhoW+5ubr5Wp2PM9uat7W7X7W4n/24n/z9SJ3+X9zP1z2p0QhNj8h1TstcxLDV5Lx7RO220",
-	"UO+jyGtYHKqLN7Q7EL99uv1opsk0MxlGwwSzfn8juiPooVKatt245Ke0qEmvsD+YiAaHIsHheHBwKBgf",
-	"wnVFCajShxPBREyrxR2Mwt9mgRH6kUi4v28lkaM3TyEkchwt3h48rT17bNmAeWS6ncNLhwbYyx35a/Xr",
-	"l0jFrVcXiurickR98Uy9hHP0y+id6sLD6vdL1ncY+M7rWfwOlPNwtDwrjZuxdI3ZzUgH7htDovswzcR7",
-	"6LjtyqBTp1KT0amet+iTTE9i5O/MSbonPPI2ifX3sYEpWtaXBSBMmOuydfXERX2kNe0hiBhLs8lwOOxn",
-	"rQ7jXinPK+VVpXwFJaJ/UkpX3Sb29ptX6vRdxB35DBK6egcf4mLtTqrHYtOZ3FdWba8f7oXvpgoZ8DHe",
-	"Vi2a5XiqRbG+ygmn3+XOgtSn2pWzxoNhdPcsn0P0hIYaaWg/tPMkWTbHS+PUQNxsSKR5WVpnNUgQR3PZ",
-	"LIJL1X7+maleerP9cG67eB7/qD6vUCF9PDx4OyLNNGOSiBlsMXq34Y1ImfxlHLwxOkNx4hBI5wTwqbYj",
-	"BpOaTaH0D9EnxnEdfYx34W4MhK318NoHrrLnNqwV7b2BcgsPIt22R46LpdOQrjJQ8FMDDOqLvg/DQMY2",
-	"hwnv1zAMw1iGiUB2gPbfB7kUl+ZAatApxAbagb4QlQWiyI6hlDRW4PI5pHG0ixDNTBQesy+RCvelo4lU",
-	"NJUE8dEYiMX64slkbLQvGRmNJ0Yj0WSM6U8wsXSCTsdAuB8k2ESajSWTbF9/jI2a8HBTtjaSe9xG7sYo",
-	"x+x0ztC4hZpUEDX7bQKJo5EQNQFYgRqAL7q8T02gTNa59NiUMJOeTeBtcqd+b/F7UPyXKyTj2yaWnC4q",
-	"3MPt4nlXqRUxS+OVnAkYIaOAMas6bRYI80D3au5uVnSJglwtw/MtFm0chFwzfZy3La0mgBlUsd/fMOLn",
-	"2nrPRItN4Dom/s1rdWFFkddQe8MnqLf/EnaUXSgl3khv3EWPew74uCsyRJ3tGcv1aA/fy+GmuFMk4idf",
-	"LLq1UVHXbiED0DTsdW6e2d2sQJ4JmG8Vi8h+QBet4oevZ227a7kC3eOyeuOa+r2u0rFtriWHbPfZ19lK",
-	"rNc8txOrdaV8HVlbm9DIKt9Uyo92Nyu7m1d2X/2wu3nd1uaECYVDkVA01DdCihJ53POKHCSfLvShHZxJ",
-	"EzHlQJB3vx6C7ttPe16fRMPok6Y4G6xrbxvvoFY8ZIiAEj8dg+prd9c6Foq1X0o4Ak7EL2mrDeVO1hNI",
-	"y5SV0kt8iwk5eGQqfw9l02AONnVPAqBeOK+uvehK146Urg4ziryDPiWebnV5ECN0ei/oAagXu5sV3TgL",
-	"4Be2nq8qxaIAvjBaWVV/OqfOPYPWRD4v5M5oDxHD21tWGWYeMp7Qq8gQxaAaWxOWyIiJDOdBQQurWG00",
-	"Y912VdWA/03eDdnNRitDmXaMH3mDzdvJRkINvRbSLF6Cedsx/Qo8Q6GT7zgFct3UvbYyZ4BVj3m0FmB1",
-	"m48txVg9wfwuwqw4KprQfxhHduL6kZ0+55GdwaH2xFt1CdeNt3bjrd146wHGW/WZ/27iregWDdMGRDdp",
-	"ZHLJ08d586F3fAq9+lFBIr8btr37+7iTwFgn08qFBCQsodsIdB39WT4PhPe5LCdRA0yYNgnG0sJfKf2G",
-	"/LWKDnuYTw3Zt+kkKXIYts6YNCnGOiloS4yKEicVIH0fxXuun9SYXcdLgxx2jHS/wF6vLugG5LsB+Y4M",
-	"yDcrD61ZpkbykIl35aEmDwlib6d4S33+HAcd/tiSb59yM0YAguOliMU4tMRt3ebJgSZruikZXykZxz2Z",
-	"dgZw3/94pXrhAQ614fgcRFvlAkaOD5pwiTeXP4xabVlH2GPo0S0lCSV57R2SJGzdeLx1EbvBrmAsQS77",
-	"OQynwfQqBrRsgteVoOb37eh04NIYk83dSrDv66nXc16dm97avILZ2A8y3B3kfV9mYNeL+4YkYogff44D",
-	"/ZgB9kj6hq6uR/FuJvMWGC3vrUe4H3+Jg/5tWLGDDKwRfhMZzdKEA6hTHrhZy0FEpBFIPqErfLM2U11a",
-	"3Xo+vXPzckvS3W1ouSrh3TFWxGOeO+g2ysg6Ce+og5I9WMmTFfQGyW1hhToEqE93fwnQj/DxNE7dob31",
-	"6u03ZiNM52a5TFhygq86v1RHqHqau2QrQT1f8XE4w8NEbgDSlwZ0GDMEYyPksKi8qJpgNLhx6oUerzV6",
-	"by+BVQ+p3MOHVOnWf3TrP/4p6j9QTsFNnqWb28XyAdSLdD3BrifY9QS7nmDXE+x6gl1PsOsJdj3Brie4",
-	"L6WphDIcH+JBKV9Bl7ltotqhOttMKuhpEr63Jjn8olqjktZSXzviQe1GwZIHE2Ihp1Ze7ty8vEch5yiY",
-	"8hgQS7s2DPhHLhpuqF/rVxG78q6dV0XsrPfdUxWxlDsNePHIJPpv3bZfzvrE0o9KaR265JBzK4hz15F0",
-	"0Qp+VXmhuvpjvWZ6Put1cVFt3FlUO/iu/iSiV/AOhu1/C+uXlhnFvY0AeTUD+7Qg5gGfGkwmgSiegLhq",
-	"un0SwnDbWoHpu4nn4t2VttVdm1eKMuqodUeRH6mXZxX5u+2VVQRquQ6Q2s2N7Xuzv7NN92p1mxaAOL4v",
-	"W95c51q72Y2BujZawNMFqQCLZhyQtCmbQuc/G/yvsXuOie1AJOK/BpLjrCAC6d8KUron3qg9qM4Hbpl2",
-	"hD3Dchl2FDs9dQ9GNGISeba6cEmdfqHIM7UfN7Yfzv3OCN3rEIKFxgcxsrgMJ020j97pPdC7bfucJ9Mc",
-	"BGq+64tIvQhIuyoK2U3eVzvYGkh12u0OiWBiCJ1EQYdUBuOoTdDR4NCgdkVZPNbKaRX9Ck+El324FsFy",
-	"v1LzLeiNe/Mm8qCDr1mCVh1IFgTIYHDtQ4AVgEANnESXBotAOEM+APSxkEsVkvAfAfxS4K2CCMRAhjsD",
-	"AilWYt92UQ6b52w0c4bpxWWV2rwm909omUFHjbOmQi2PFoUjxBkLncfQ+OiWvUE6OMRYRjuay+ZZfmIv",
-	"4/UHB4dRf83+YIJGnBIPxulgvM8yjM2l2ctgnkxsGWzYPBGyh3Hs9xFa12LeSbcnrNlPw1kG0F2OqZGp",
-	"/w8AAP//vk/FLL3dAAA=",
+	"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",
+	"AP//PC1SFCXSAAA=",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file
