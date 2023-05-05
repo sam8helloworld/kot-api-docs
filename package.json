@@ -6,7 +6,6 @@
   "scripts": {
     "validate": "swagger-cli validate ./docs/index.yml",
     "bundle": "swagger-cli bundle -t yaml -o ./docs/swagger.yml ./docs/index.yml",
-    "generate:go": "openapi-generator-cli generate -i ./docs/swagger.yml -g go -o ./client/go --git-repo-id kot-api-docs --git-user-id sam8helloworld",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
