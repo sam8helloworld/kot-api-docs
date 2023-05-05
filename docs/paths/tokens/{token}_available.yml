@@ -13,9 +13,4 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            required:
-              - available
-            properties:
-              available:
-                type: boolean
+            $ref: "../../components/responses/GetAccessTokenAvailability.yml"

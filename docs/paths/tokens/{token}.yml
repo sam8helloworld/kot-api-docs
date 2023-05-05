@@ -18,14 +18,7 @@ post:
       content:
         application/json:
           schema:
-            type: object
-            required:
-              - token
-            properties:
-              token:
-                type: string
-                description: refreshed access token
-                example: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            $ref: "../../components/responses/RefreshAccessToken.yml"
 delete:
   operationId: SuspendAccessToken
   parameters:
