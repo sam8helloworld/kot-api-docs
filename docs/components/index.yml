@@ -55,6 +55,12 @@ schemas:
     $ref: "./responses/GetCompany.yml"
   GetCompanySettings:
     $ref: "./responses/GetCompany_settings.yml"
+  GetAdministrators:
+    $ref: "./responses/GetAdministrators.yml"
+  GetAdministrators_item:
+    $ref: "./responses/GetAdministrators_item.yml"
+  GetAdministrators_associatedEmployee:
+    $ref: "./responses/GetAdministrators_associatedEmployee.yml"
   GetDailyWorkingTimerecords:
     $ref: "./responses/GetDailyWorkingTimerecords.yml"
   GetOvertimes:
