@@ -73,6 +73,8 @@ schemas:
     $ref: "./responses/GetEmployee.yml"
   GetDivisions:
     $ref: "./responses/GetDivisions.yml"
+  GetWorkingTypes:
+    $ref: "./responses/GetWorkingTypes.yml"
   GetDailyWorkingTimerecords:
     $ref: "./responses/GetDailyWorkingTimerecords.yml"
   GetOvertimes:

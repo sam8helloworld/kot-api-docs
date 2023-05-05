@@ -1,0 +1,10 @@
+type: array
+items:
+  $ref: "../../components/schemas/working_type_response.yml"
+example:
+  [
+    {
+      "code": "1",
+      "name": "正社員"
+    }
+  ]
