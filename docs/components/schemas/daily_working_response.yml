@@ -141,12 +141,10 @@ properties:
             description: 休暇区分名
   autoBreakOff:
     type: integer
-    nullable: true
     enum:
       - 1
       - 2
       - 3
-      - null
     description: 自動休憩無効（null： 休憩を無効化しない 1：　雇用区分休憩無効　2： スケジュール休憩無効　3： 全ての自動休憩無効）
   discretionaryVacation:
     type: integer
