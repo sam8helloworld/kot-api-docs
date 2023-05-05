@@ -23,9 +23,7 @@ get:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: "../../components/responses/GetEmployees.yml"
+            $ref: "../../components/responses/GetEmployees.yml"
 
 post:
   operationId: RegisterEmployee
