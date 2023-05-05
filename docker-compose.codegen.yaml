@@ -8,6 +8,6 @@ services:
     volumes:
       - ./docs/swagger.yml:/tmp/swagger.yml
       - ./oapiconfig.yaml:/tmp/oapiconfig.yaml
-      - ./client/go_v2:/tmp/go_v2
+      - ./client/go:/tmp/go
     command: |-
       oapi-codegen -config /tmp/oapiconfig.yaml /tmp/swagger.yml
