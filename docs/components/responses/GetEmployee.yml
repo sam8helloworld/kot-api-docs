@@ -1,15 +1,22 @@
 type: object
 required:
   - divisionCode
+  - divisionName
   - gender
   - typeCode
+  - typeName
   - code
+  - key
   - lastName
   - firstName
+  - employeeGroups
 properties:
   divisionCode:
     type: string
     description: 所属コード
+  divisionName:
+    type: string
+    description: 所属名
   gender:
     type: string
     enum:
@@ -19,15 +26,26 @@ properties:
   typeCode:
     type: string
     description: 雇用区分コード
+  typeName:
+    type: string
+    description: 雇用区分名
   code:
     type: string
     description: 従業員コード
+  key:
+    type: string
+    description: 従業員識別キー（従業員コードが変更されても不変）
   lastName:
     type: string
     description: 姓
   firstName:
     type: string
     description: 名
+  employeeGroups:
+    type: array
+    description: 従業員グループ情報
+    items:
+      $ref: "../../components/schemas/employee_group.yml"
   lastNamePhonetics:
     type: string
     description: 姓（カナ）
@@ -56,3 +74,28 @@ properties:
     type: integer
     description: 日の契約労働時間
     example: 480
+example:
+  {
+    "divisionCode": "1000",
+    "divisionName": "本社",
+    "gender": "male",
+    "typeCode": "1",
+    "typeName": "正社員",
+    "code": "1000",
+    "lastName": "勤怠",
+    "firstName": "太郎",
+    "key": "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+    "emailAddresses": [
+      "kintaitarou@h-t.co.jp"
+    ],
+    "employeeGroups": [
+      {
+        "code": "0001",
+        "name": "人事部"
+      },
+      {
+        "code": "0002",
+        "name": "総務部"
+      }
+    ]
+  }
