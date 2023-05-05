@@ -100,3 +100,56 @@ func TestGetCompany(t *testing.T) {
 		t.Errorf("value mismatch (-want +got):\n%s", diff)
 	}
 }
+
+func TestGetAdministrators(t *testing.T) {
+	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
+	if err != nil {
+		t.Fatalf("failed to securityprovider.NewSecurityProviderBearerToken: %v", err)
+	}
+	ctx := context.Background()
+	sut, err := kotclient.NewClientWithResponses("http://localhost:8001", kotclient.WithRequestEditorFn(bearerTokenProvider.Intercept))
+	if err != nil {
+		t.Fatalf("failed to kotclient.NewClient: %v", err)
+	}
+	queries := kotclient.GetAdministratorsParams{
+		AdditionalFields: kotclient.Ptr(kotclient.AdditionalFieldsAdministrator{"associatedEmployees"}),
+	}
+	got, err := sut.GetAdministratorsWithResponse(ctx, kotclient.Ptr(queries))
+	if err != nil {
+		t.Fatalf("failed to sut.GetAdministratorsWithResponse: %v", err)
+	}
+
+	if diff := cmp.Diff(200, got.StatusCode()); diff != "" {
+		t.Errorf("value is mismatch (-want +got):\n%s", diff)
+	}
+
+	want := []kotclient.GetAdministratorsItem{
+		{
+			Code: "admin",
+			Key:  "4888a97dd7bbc6a26a18743f4697a1de4b38b6ee646a9620b286499c3df6918c",
+			Name: "全権管理者",
+		},
+		{
+			Code: "2000",
+			Key:  "6713cd21ca98689efec9fe27352152c4c77a34b32f5de30b6335d141ad714baf",
+			Name: "エリアマネージャー",
+			AssociatedEmployees: kotclient.Ptr([]kotclient.GetAdministratorsAssociatedEmployee{
+				{
+					Code:      "1000",
+					Key:       "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+					LastName:  "勤怠",
+					FirstName: "太郎",
+				},
+				{
+					Code:      "2000",
+					Key:       "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4",
+					LastName:  "勤怠",
+					FirstName: "花子",
+				},
+			}),
+		},
+	}
+	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON200); diff != "" {
+		t.Errorf("value mismatch (-want +got):\n%s", diff)
+	}
+}
