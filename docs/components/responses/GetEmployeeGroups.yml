@@ -1,0 +1,14 @@
+type: array
+items:
+  $ref: "./GetEmployeeGroups_item.yml"
+example:
+  [
+    {
+      "code": "0001",
+      "name": "人事部",
+      "category": {
+        "code": "KEIKAN",
+        "name": "経営管理本部"
+      }
+    }
+  ]
