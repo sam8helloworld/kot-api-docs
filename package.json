@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/sam8helloworld/kot-api-docs#readme",
   "devDependencies": {
-    "@apidevtools/swagger-cli": "^4.0.4",
-    "@openapitools/openapi-generator-cli": "^2.6.0"
+    "@apidevtools/swagger-cli": "^4.0.4"
   }
 }
