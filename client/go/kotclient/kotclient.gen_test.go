@@ -29,9 +29,7 @@ func TestRefreshAccessToken(t *testing.T) {
 		t.Errorf("value is mismatch (-want +got):\n%s", diff)
 	}
 
-	want := struct {
-		Token string "json:\"token\""
-	}{
+	want := kotclient.RefreshAccessToken{
 		Token: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 	}
 	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON201); diff != "" {
