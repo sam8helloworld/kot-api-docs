@@ -75,6 +75,12 @@ schemas:
     $ref: "./responses/GetDivisions.yml"
   GetWorkingTypes:
     $ref: "./responses/GetWorkingTypes.yml"
+  GetEmployeeGroups:
+    $ref: "./responses/GetEmployeeGroups.yml"
+  GetEmployeeGroups_item:
+    $ref: "./responses/GetEmployeeGroups_item.yml"
+  GetEmployeeGroups_item_category:
+    $ref: "./responses/GetEmployeeGroups_item_category.yml"
   GetDailyWorkingTimerecords:
     $ref: "./responses/GetDailyWorkingTimerecords.yml"
   GetOvertimes:
