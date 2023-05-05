@@ -49,6 +49,8 @@ schemas:
     $ref: "./schemas/daily_working_timerecord.yml"
   RefreshAccessToken:
     $ref: "./responses/RefreshAccessToken.yml"
+  GetAccessTokenAvailability:
+    $ref: "./responses/GetAccessTokenAvailability.yml"
   GetDailyWorkingTimerecords:
     $ref: "./responses/GetDailyWorkingTimerecords.yml"
   GetOvertimes:
