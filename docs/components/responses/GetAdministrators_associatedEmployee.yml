@@ -1,0 +1,20 @@
+type: object
+description: 割当従業員
+required:
+  - code
+  - key
+  - lastName
+  - firstName
+properties:
+  code:
+    type: string
+    description: 従業員コード
+  key:
+    type: string
+    description: 従業員識別キー（従業員コードが変更されても不変）
+  lastName:
+    type: string
+    description: 姓
+  firstName:
+    type: string
+    description: 名
