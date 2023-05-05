@@ -1061,7 +1061,7 @@ paths:
       operationId: GetDailyWorkingTimerecord
       summary: '/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}'
       parameters:
-        - $ref: '#/components/parameters/date'
+        - $ref: '#/components/parameters/date_required'
         - $ref: '#/components/parameters/division'
         - $ref: '#/components/parameters/ondivision'
         - $ref: '#/components/parameters/additionalFields_daily-workings'
@@ -2412,12 +2412,10 @@ components:
                   description: 休暇区分名
         autoBreakOff:
           type: integer
-          nullable: true
           enum:
             - 1
             - 2
             - 3
-            - null
           description: 自動休憩無効（null： 休憩を無効化しない 1：　雇用区分休憩無効　2： スケジュール休憩無効　3： 全ての自動休憩無効）
         discretionaryVacation:
           type: integer
