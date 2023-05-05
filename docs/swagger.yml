@@ -1244,6 +1244,18 @@ components:
           type: integer
           description: 日の契約労働時間
           example: 480
+    employee_group:
+      type: object
+      required:
+        - code
+        - name
+      properties:
+        code:
+          type: string
+          description: 従業員グループコード
+        name:
+          type: string
+          description: 従業員グループ名
     division_response:
       type: object
       required:
@@ -2053,17 +2065,7 @@ components:
           type: array
           description: 従業員グループ情報
           items:
-            type: object
-            required:
-              - code
-              - name
-            properties:
-              code:
-                type: string
-                description: 従業員グループコード
-              name:
-                type: string
-                description: 従業員グループ名
+            $ref: '#/components/schemas/employee_group'
         lastNamePhonetics:
           type: string
           description: 姓（カナ）
