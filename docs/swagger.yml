@@ -57,12 +57,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - available
-                properties:
-                  available:
-                    type: boolean
+                $ref: '#/components/schemas/GetAccessTokenAvailability'
   /company:
     get:
       operationId: GetCompany
@@ -1956,6 +1951,13 @@ components:
           type: string
           description: refreshed access token
           example: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    GetAccessTokenAvailability:
+      type: object
+      required:
+        - available
+      properties:
+        available:
+          type: boolean
     GetDailyWorkingTimerecords:
       type: object
       required:
