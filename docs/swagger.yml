@@ -78,52 +78,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - key
-                  - code
-                  - name
-                  - host
-                  - businessYearStartDate
-                  - settings
-                properties:
-                  key:
-                    type: string
-                    description: 企業識別キー
-                  code:
-                    type: string
-                    description: 企業コード
-                  name:
-                    type: string
-                    description: 企業名
-                  host:
-                    type: string
-                    description: ホスト名
-                  businessYearStartDate:
-                    type: string
-                    description: 事業年度開始日
-                  settings:
-                    type: object
-                    description: 企業設定情報
-                    required:
-                      - timeDisplayFormat
-                      - decimalTreatType
-                    properties:
-                      timeDisplayFormat:
-                        type: string
-                        description: 表示形式（decimal： 10進法　sexagesimal： 60進法）
-                      decimalTreatType:
-                        type: string
-                        description: 10進表示の小数第3位の扱い（roundDown： 切下げ　roundUp： 切上げ　round： 四捨五入）
-                example:
-                  key: 1qazxsw23edc....
-                  code: cmp
-                  name: 企業名
-                  host: s2.kingtime.jp
-                  businessYearStartDate: 04/01
-                  settings:
-                    timeDisplayFormat: decimal
-                    decimalTreatType: roundUp
+                $ref: '#/components/schemas/GetCompany'
   /administrators:
     get:
       operationId: GetAdministrators
@@ -1958,6 +1913,62 @@ components:
       properties:
         available:
           type: boolean
+    GetCompany:
+      type: object
+      required:
+        - key
+        - code
+        - name
+        - host
+        - businessYearStartDate
+        - settings
+      properties:
+        key:
+          type: string
+          description: 企業識別キー
+        code:
+          type: string
+          description: 企業コード
+        name:
+          type: string
+          description: 企業名
+        host:
+          type: string
+          description: ホスト名
+        businessYearStartDate:
+          type: string
+          description: 事業年度開始日
+        settings:
+          $ref: '#/components/schemas/GetCompanySettings'
+      example:
+        key: 1qazxsw23edc....
+        code: cmp
+        name: 企業名
+        host: s2.kingtime.jp
+        businessYearStartDate: 04/01
+        settings:
+          timeDisplayFormat: decimal
+          decimalTreatType: roundUp
+    GetCompanySettings:
+      type: object
+      description: 企業設定情報
+      required:
+        - timeDisplayFormat
+        - decimalTreatType
+      properties:
+        timeDisplayFormat:
+          type: string
+          enum:
+            - decimal
+            - sexagesimal
+          description: 表示形式（decimal： 10進法　sexagesimal： 60進法）
+        decimalTreatType:
+          type: string
+          enum:
+            - roundDown
+            - roundUp
+            - round
+          description: 10進表示の小数第3位の扱い（roundDown： 切下げ　roundUp： 切上げ　round： 四捨五入）
     GetDailyWorkingTimerecords:
       type: object
       required:

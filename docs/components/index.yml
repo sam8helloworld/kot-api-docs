@@ -51,6 +51,10 @@ schemas:
     $ref: "./responses/RefreshAccessToken.yml"
   GetAccessTokenAvailability:
     $ref: "./responses/GetAccessTokenAvailability.yml"
+  GetCompany:
+    $ref: "./responses/GetCompany.yml"
+  GetCompanySettings:
+    $ref: "./responses/GetCompany_settings.yml"
   GetDailyWorkingTimerecords:
     $ref: "./responses/GetDailyWorkingTimerecords.yml"
   GetOvertimes:

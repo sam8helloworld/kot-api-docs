@@ -1,0 +1,38 @@
+type: object
+required:
+  - key
+  - code
+  - name
+  - host
+  - businessYearStartDate
+  - settings
+properties:
+  key:
+    type: string
+    description: 企業識別キー
+  code:
+    type: string
+    description: 企業コード
+  name:
+    type: string
+    description: 企業名
+  host:
+    type: string
+    description: ホスト名
+  businessYearStartDate:
+    type: string
+    description: 事業年度開始日
+  settings:
+    $ref: "./GetCompany_settings.yml"
+example:
+  {
+    "key": "1qazxsw23edc....",
+    "code": "cmp",
+    "name": "企業名",
+    "host": "s2.kingtime.jp",
+    "businessYearStartDate": "04/01",
+    "settings": {
+      "timeDisplayFormat": "decimal",
+      "decimalTreatType": "roundUp"
+    }
+  }
