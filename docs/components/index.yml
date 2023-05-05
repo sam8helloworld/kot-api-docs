@@ -35,6 +35,8 @@ parameters:
 schemas:
   employee_request:
     $ref: "./schemas/employee_request.yml"
+  employee_group:
+    $ref: "./schemas/employee_group.yml"
   division_response:
     $ref: "./schemas/division_response.yml"
   working_type_response:
