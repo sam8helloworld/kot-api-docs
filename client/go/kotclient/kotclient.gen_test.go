@@ -379,3 +379,24 @@ func TestUpdateEmployee(t *testing.T) {
 		t.Errorf("value mismatch (-want +got):\n%s", diff)
 	}
 }
+
+func TestDeleteEmployee(t *testing.T) {
+	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
+	if err != nil {
+		t.Fatalf("failed to securityprovider.NewSecurityProviderBearerToken: %v", err)
+	}
+	ctx := context.Background()
+	sut, err := kotclient.NewClientWithResponses("http://localhost:8001", kotclient.WithRequestEditorFn(bearerTokenProvider.Intercept))
+	if err != nil {
+		t.Fatalf("failed to kotclient.NewClient: %v", err)
+	}
+	employeeKey := "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3"
+	got, err := sut.DeleteEmployeeWithResponse(ctx, employeeKey)
+	if err != nil {
+		t.Fatalf("failed to sut.DeleteEmployeeWithResponse: %v", err)
+	}
+
+	if diff := cmp.Diff(204, got.StatusCode()); diff != "" {
+		t.Errorf("value is mismatch (-want +got):\n%s", diff)
+	}
+}
