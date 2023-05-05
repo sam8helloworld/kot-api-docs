@@ -1867,34 +1867,79 @@ components:
       type: object
       required:
         - divisionCode
+        - divisionName
         - gender
         - typeCode
+        - typeName
         - code
+        - key
         - lastName
         - firstName
-        - key
+        - employeeGroups
       properties:
         divisionCode:
           type: string
           description: 所属コード
+        divisionName:
+          type: string
+          description: 所属名
         gender:
           type: string
+          enum:
+            - male
+            - female
           description: 性別（male： 男性　female： 女性）
         typeCode:
           type: string
           description: 雇用区分コード
+        typeName:
+          type: string
+          description: 雇用区分名
         code:
           type: string
           description: 従業員コード
+        key:
+          type: string
+          description: 従業員識別キー（従業員コードが変更されても不変）
         lastName:
           type: string
           description: 姓
         firstName:
           type: string
           description: 名
-        key:
+        employeeGroups:
+          type: array
+          description: 従業員グループ情報
+          items:
+            $ref: '#/components/schemas/employee_group'
+        lastNamePhonetics:
           type: string
-          description: 従業員識別キー（従業員コードが変更されても不変）
+          description: 姓（カナ）
+        firstNamePhonetics:
+          type: string
+          description: 名（カナ）
+        hiredDate:
+          type: string
+          format: date
+          description: 入社年月日
+        birthDate:
+          type: string
+          format: date
+          description: 生年月日
+        resignationDate:
+          type: string
+          format: date
+          description: 退職年月日
+        emailAddresses:
+          type: array
+          description: メールアドレス
+          items:
+            type: string
+            format: email
+        allDayRegardingWorkInMinute:
+          type: integer
+          description: 日の契約労働時間
+          example: 480
       example:
         divisionCode: '1000'
         gender: male
