@@ -1,0 +1,16 @@
+type: array
+items:
+  $ref: "../../components/schemas/division_response.yml"
+example:
+  [
+    {
+      "code": "1000",
+      "name": "本社",
+      "dayBorderTime": "00:00"
+    },
+    {
+      "code": "2000",
+      "name": "支社",
+      "dayBorderTime": "05:00"
+    }
+  ]
