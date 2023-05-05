@@ -858,21 +858,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - date
-                  - employeeKey
-                  - timeRecord
-                properties:
-                  date:
-                    type: string
-                    format: date
-                    description: 日時
-                  employeeKey:
-                    type: string
-                    description: 従業員識別キー（従業員コードが変更されても不変）
-                  timeRecord:
-                    $ref: '#/components/schemas/daily_working_timerecord'
+                $ref: '#/components/schemas/RegisterDailyWorkingTimerecord'
               examples:
                 exmaple1:
                   value:
@@ -925,89 +911,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  required:
-                    - date
-                    - employeeKey
-                    - timeRecord
-                  properties:
-                    date:
-                      type: string
-                      format: date
-                      description: 日時
-                    employeeKey:
-                      type: string
-                      description: 従業員識別キー（従業員コードが変更されても不変）
-                    timeRecord:
-                      type: array
-                      description: 打刻
-                      items:
-                        $ref: '#/components/schemas/daily_working_timerecord'
-                    currentDateEmployee:
-                      type: object
-                      description: 今日時点の従業員データ
-                      required:
-                        - divisionCode
-                        - divisionName
-                        - gender
-                        - typeCode
-                        - typeName
-                        - code
-                        - lastName
-                        - firstName
-                        - lastNamePhonetics
-                        - firstNamePhonetics
-                        - employeeGroups
-                      properties:
-                        divisionCode:
-                          type: string
-                          description: 所属コード
-                        divisionName:
-                          type: string
-                          description: 所属名
-                        gender:
-                          type: string
-                          description: 性別（no_selected： 選択しない　male： 男性　female： 女性）
-                          enum:
-                            - no_selected
-                            - male
-                            - female
-                        typeCode:
-                          type: string
-                          description: 雇用区分コード
-                        typeName:
-                          type: string
-                          description: 雇用区分名
-                        code:
-                          type: string
-                          description: 従業員コード
-                        lastName:
-                          type: string
-                          description: 姓
-                        firstName:
-                          type: string
-                          description: 名
-                        lastNamePhonetics:
-                          type: string
-                          description: 姓（カナ）
-                        firstNamePhonetics:
-                          type: string
-                          description: 名（カナ）
-                        employeeGroups:
-                          type: array
-                          description: 従業員グループ情報
-                          items:
-                            type: object
-                            required:
-                              - code
-                              - name
-                            properties:
-                              code:
-                                type: string
-                                description: 従業員グループコード
-                              name:
-                                type: string
-                                description: 従業員グループ名
+                  $ref: '#/components/schemas/GetDailyWorkingTimerecords'
                 example:
                   - date: '2016-05-01'
                     dailyWorkings:
@@ -1061,7 +965,7 @@ paths:
       operationId: GetDailyWorkingTimerecord
       summary: '/daily-workings/timerecord/{date}{?division,ondivision,additionalFields}'
       parameters:
-        - $ref: '#/components/parameters/date'
+        - $ref: '#/components/parameters/date_required'
         - $ref: '#/components/parameters/division'
         - $ref: '#/components/parameters/ondivision'
         - $ref: '#/components/parameters/additionalFields_daily-workings'
@@ -1199,6 +1103,7 @@ paths:
           content:
             application/json:
               schema:
+                $ref: '#/components/schemas/GetSchedules'
                 example:
                   year: 2018
                   month: 8
@@ -1278,374 +1183,98 @@ paths:
                         workPlaceDivisionName: 本社
                         substitutionClockInName: 振休
                         scheduleTypeName: シフト
-                type: object
-                required:
-                  - year
-                  - month
-                  - scheduleRequests
-                properties:
-                  year:
-                    type: integer
-                    format: int32
-                  month:
-                    type: integer
-                    format: int32
-                  scheduleRequests:
-                    type: array
-                    items:
-                      type: object
-                      required:
-                        - date
-                        - requestedDate
-                        - employeeKey
-                        - requestKey
-                        - applicant
-                        - status
-                        - currentFlow
-                        - lastModifiedAdministratorKey
-                        - message
-                        - adminComment
-                        - requested
-                        - current
-                      properties:
-                        date:
-                          type: string
-                          format: date
-                          description: 対象日
-                        requestedDate:
-                          type: string
-                          format: date
-                          description: 申請日
-                        employeeKey:
-                          type: string
-                          description: 従業員識別キー（従業員コードが変更されても不変）
-                        requestKey:
-                          type: string
-                          description: 申請識別キー
-                        applicant:
-                          type: object
-                          required:
-                            - type
-                            - key
-                          properties:
-                            type:
-                              type: string
-                              description: 種別（employee： 従業員　administrator： 管理者)
-                              enum:
-                                - employee
-                                - administrator
-                            key:
-                              type: string
-                              enum:
-                                - 従業員
-                                - 管理者
-                              description: 識別キー（従業員 または 管理者）
-                        status:
-                          type: string
-                          description: 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
-                          enum:
-                            - applying
-                            - rejected
-                            - approved
-                        currentFlow:
-                          type: integer
-                          format: int32
-                          enum:
-                            - 1
-                            - 2
-                            - 3
-                            - 4
-                            - 5
-                          description: 現在の承認フローレベル（１～５）
-                        lastModifiedAdministratorKey:
-                          type: string
-                          description: 最終更新管理者識別キー
-                        message:
-                          type: string
-                          description: 申請メッセージ
-                        adminComment:
-                          type: string
-                          description: 管理者コメント
-                        requested:
-                          type: object
-                          required:
-                            - clockInSchedule
-                            - clockOutSchedule
-                            - breakSchedule
-                            - startEndBreakSchedule
-                            - holidaysObtained
-                            - workDayTypeName
-                            - workPlaceDivisionCode
-                            - workPlaceDivisionName
-                            - substitutionClockInName
-                            - scheduleTypeName
-                          properties:
-                            clockInSchedule:
-                              type: string
-                              format: date-time
-                              description: 出勤予定時間
-                            clockOutSchedule:
-                              type: string
-                              format: date-time
-                              description: 退勤予定時間
-                            breakSchedule:
-                              type: integer
-                              format: int32
-                              description: 休憩予定時間（分）
-                            startEndBreakSchedule:
-                              type: object
-                              required:
-                                - start
-                                - end
-                              properties:
-                                start:
-                                  type: string
-                                  format: date-time
-                                  description: 休憩開始予定
-                                end:
-                                  type: string
-                                  format: date-time
-                                  description: 休憩終了予定
-                            holidaysObtained:
-                              type: object
-                              description: 休暇取得
-                              required:
-                                - fulltimeHoliday
-                                - halfdayHolidays
-                                - hourHolidays
-                              properties:
-                                fulltimeHoliday:
-                                  type: object
-                                  required:
-                                    - code
-                                    - name
-                                  properties:
-                                    code:
-                                      type: string
-                                      description: 休暇区分コード
-                                    name:
-                                      type: string
-                                      description: 休暇区分名
-                                halfdayHolidays:
-                                  type: object
-                                  required:
-                                    - typeName
-                                    - code
-                                    - name
-                                  properties:
-                                    typeName:
-                                      type: string
-                                      description: 半休種別名
-                                    code:
-                                      type: string
-                                      description: 休暇区分コード
-                                    name:
-                                      type: string
-                                      description: 休暇区分名
-                                hourHolidays:
-                                  type: object
-                                  required:
-                                    - start
-                                    - end
-                                    - minutes
-                                    - code
-                                    - name
-                                  properties:
-                                    start:
-                                      type: string
-                                      format: date-time
-                                      description: 休暇開始予定
-                                    end:
-                                      type: string
-                                      format: date-time
-                                      description: 休暇終了予定
-                                    minutes:
-                                      type: integer
-                                      format: int32
-                                      description: 休暇取得時間
-                                    code:
-                                      type: string
-                                      description: 休暇区分コード
-                                    name:
-                                      type: string
-                                      description: 休暇区分名
-                            workDayTypeName:
-                              type: string
-                              description: 勤務日種別名
-                            overtimeUpperLimit:
-                              type: integer
-                              format: int32
-                              description: 残業上限時間（分）
-                            workPlaceDivisionCode:
-                              type: string
-                              description: 出勤先所属コード
-                            workPlaceDivisionName:
-                              type: string
-                              description: 出勤先所属名
-                            substitutionClockInName:
-                              type: string
-                              description: 振替出勤
-                            scheduleTypeName:
-                              type: string
-                              description: スケジュール種別
-                        current:
-                          type: object
-                          required:
-                            - clockInSchedule
-                            - clockOutSchedule
-                            - breakSchedule
-                            - startEndBreakSchedule
-                            - holidaysObtained
-                            - workDayTypeName
-                            - workPlaceDivisionCode
-                            - workPlaceDivisionName
-                            - substitutionClockInName
-                            - scheduleTypeName
-                          properties:
-                            clockInSchedule:
-                              type: string
-                              format: date-time
-                              description: 出勤予定時間
-                            clockOutSchedule:
-                              type: string
-                              format: date-time
-                              description: 退勤予定時間
-                            breakSchedule:
-                              type: integer
-                              format: int32
-                              description: 休憩予定時間（分）
-                            startEndBreakSchedule:
-                              type: object
-                              required:
-                                - start
-                                - end
-                              properties:
-                                start:
-                                  type: string
-                                  format: date-time
-                                  description: 休憩開始予定
-                                end:
-                                  type: string
-                                  format: date-time
-                                  description: 休憩終了予定
-                            holidaysObtained:
-                              type: object
-                              description: 休暇取得
-                              required:
-                                - fulltimeHoliday
-                                - halfdayHolidays
-                                - hourHolidays
-                              properties:
-                                fulltimeHoliday:
-                                  type: object
-                                  required:
-                                    - code
-                                    - name
-                                  properties:
-                                    code:
-                                      type: string
-                                      description: 休暇区分コード
-                                    name:
-                                      type: string
-                                      description: 休暇区分名
-                                halfdayHolidays:
-                                  type: object
-                                  required:
-                                    - typeName
-                                    - code
-                                    - name
-                                  properties:
-                                    typeName:
-                                      type: string
-                                      description: 半休種別名
-                                    code:
-                                      type: string
-                                      description: 休暇区分コード
-                                    name:
-                                      type: string
-                                      description: 休暇区分名
-                                hourHolidays:
-                                  type: object
-                                  required:
-                                    - start
-                                    - end
-                                    - minutes
-                                    - code
-                                    - name
-                                  properties:
-                                    start:
-                                      type: string
-                                      format: date-time
-                                      description: 休暇開始予定
-                                    end:
-                                      type: string
-                                      format: date-time
-                                      description: 休暇終了予定
-                                    minutes:
-                                      type: integer
-                                      format: int32
-                                      description: 休暇取得時間
-                                    code:
-                                      type: string
-                                      description: 休暇区分コード
-                                    name:
-                                      type: string
-                                      description: 休暇区分名
-                            workDayTypeName:
-                              type: string
-                              description: 勤務日種別名
-                            overtimeUpperLimit:
-                              type: integer
-                              format: int32
-                              description: 残業上限時間（分）
-                            workPlaceDivisionCode:
-                              type: string
-                              description: 出勤先所属コード
-                            workPlaceDivisionName:
-                              type: string
-                              description: 出勤先所属名
-                            substitutionClockInName:
-                              type: string
-                              description: 振替出勤
-                            scheduleTypeName:
-                              type: string
-                              description: スケジュール種別
-                        schedulePatternCode:
-                          type: string
-                          description: スケジュールパターンコード
-                        schedulePatternName:
-                          type: string
-                          description: スケジュールパターン名
-                        workFixedStart:
-                          type: string
-                          format: date-time
-                          description: 勤務開始刻限
-                        workFixedEnd:
-                          type: string
-                          format: date-time
-                          description: 勤務終了刻限
-                        note:
-                          type: string
-                          description: 備考
-                        flow:
-                          type: object
-                          description: 承認フロー
-                          required:
-                            - level
-                            - administratorKeys
-                          properties:
-                            level:
-                              type: string
-                              enum:
-                                - '1'
-                                - '2'
-                                - '3'
-                                - '4'
-                                - '5'
-                              description: 承認フローレベル（１～５）
-                            administratorKeys:
-                              type: string
-                              description: 管理者識別キー（管理者コードが変更されても不変）
+  '/requests/overtimes/{date}':
+    get:
+      operationId: GetOvertimes
+      summary: '/requests/overtimes/{date}{?administratorKey,additionalFields}'
+      parameters:
+        - name: date
+          in: path
+          required: true
+          description: |-
+            詳細を取得したい年月
+            ・過去日は最大3年前まで
+            ・未来日は最大1年後まで
+          schema:
+            type: string
+            pattern: '\d{4}-(0[1-9]|1[0-2])'
+            example: 2018-08
+        - name: administratorKey
+          in: query
+          description: 管理者識別キー（管理者コードが変更されても不変）
+          schema:
+            type: string
+            example: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222
+        - name: additionalFields
+          in: query
+          description: 指定されたプロパティをレスポンスに追加
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - schedulePatternCode
+                - schedulePatternName
+                - workFixedStart
+                - workFixedEnd
+                - note
+                - flow
+            example: flow
+      tags:
+        - Request
+      description: |-
+        指定した年月の時間外勤務申請データを取得する。
+        ※対象企業が時間外勤務申請を利用できない場合にはエラーとなります。
+      externalDocs:
+        description: 年月指定
+        url: 'https://developer.kingtime.jp/#%E7%94%B3%E8%AB%8B-%E6%99%82%E9%96%93%E5%A4%96%E5%8B%A4%E5%8B%99%E7%94%B3%E8%AB%8B%E3%83%87%E3%83%BC%E3%82%BF-get'
+      responses:
+        '200':
+          description: ''
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOvertimes'
+                example:
+                  year: 2018
+                  month: 8
+                  overtimeRequests:
+                    - date: '2018-08-01'
+                      requestedDate: '2018-08-10'
+                      employeeKey: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe2735215201
+                      requestKey: 59d25f49d4dce8b6e6658cc6b5c3b89b34c617916f90f6e27e9a9fa6cca576a4
+                      applicant:
+                        type: employee
+                        key: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe2735215201
+                      status: applying
+                      currentFlow: 2
+                      flow:
+                        - level: 1
+                          administratorKeys:
+                            - c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac6ff
+                        - level: 2
+                          administratorKeys:
+                            - c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222
+                        - level: 3
+                          administratorKeys:
+                            - c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac111
+                      message: 申請いたします
+                      adminComment: 第1承認者承認済
+                      lastModifiedAdministratorKey: c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac6ff
+                      requested:
+                        isBeforeSchedule: true
+                        start: '2018-08-01T08:00+09:00'
+                        end: '2018-08-01T10:00+09:00'
+                      current:
+                        isBeforeSchedule: true
+                        start: '2018-08-01T09:00+09:00'
+                        end: '2018-08-01T10:00+09:00'
 components:
   parameters:
     token:
@@ -2144,12 +1773,10 @@ components:
                   description: 休暇区分名
         autoBreakOff:
           type: integer
-          nullable: true
           enum:
             - 1
             - 2
             - 3
-            - null
           description: 自動休憩無効（null： 休憩を無効化しない 1：　雇用区分休憩無効　2： スケジュール休憩無効　3： 全ての自動休憩無効）
         discretionaryVacation:
           type: integer
@@ -2327,6 +1954,653 @@ components:
           type: number
           format: double
           description: 経度
+    GetDailyWorkingTimerecords:
+      type: object
+      required:
+        - date
+        - employeeKey
+        - timeRecord
+      properties:
+        date:
+          type: string
+          format: date
+          description: 日時
+        employeeKey:
+          type: string
+          description: 従業員識別キー（従業員コードが変更されても不変）
+        timeRecord:
+          type: array
+          description: 打刻
+          items:
+            $ref: '#/components/schemas/daily_working_timerecord'
+        currentDateEmployee:
+          type: object
+          description: 今日時点の従業員データ
+          required:
+            - divisionCode
+            - divisionName
+            - gender
+            - typeCode
+            - typeName
+            - code
+            - lastName
+            - firstName
+            - lastNamePhonetics
+            - firstNamePhonetics
+            - employeeGroups
+          properties:
+            divisionCode:
+              type: string
+              description: 所属コード
+            divisionName:
+              type: string
+              description: 所属名
+            gender:
+              type: string
+              description: 性別（no_selected： 選択しない　male： 男性　female： 女性）
+              enum:
+                - no_selected
+                - male
+                - female
+            typeCode:
+              type: string
+              description: 雇用区分コード
+            typeName:
+              type: string
+              description: 雇用区分名
+            code:
+              type: string
+              description: 従業員コード
+            lastName:
+              type: string
+              description: 姓
+            firstName:
+              type: string
+              description: 名
+            lastNamePhonetics:
+              type: string
+              description: 姓（カナ）
+            firstNamePhonetics:
+              type: string
+              description: 名（カナ）
+            employeeGroups:
+              type: array
+              description: 従業員グループ情報
+              items:
+                type: object
+                required:
+                  - code
+                  - name
+                properties:
+                  code:
+                    type: string
+                    description: 従業員グループコード
+                  name:
+                    type: string
+                    description: 従業員グループ名
+    GetOvertimes:
+      type: object
+      required:
+        - year
+        - month
+        - overtimeRequests
+      properties:
+        year:
+          type: integer
+        month:
+          type: integer
+        overtimeRequests:
+          type: array
+          items:
+            type: object
+            required:
+              - date
+              - requestedDate
+              - employeeKey
+              - requestKey
+              - applicant
+              - status
+              - currentFlow
+              - lastModifiedAdministratorKey
+              - message
+              - adminComment
+              - requested
+              - current
+            properties:
+              date:
+                type: string
+                format: date
+                description: 対象日
+              requestedDate:
+                type: string
+                format: date
+                description: 申請日
+              employeeKey:
+                type: string
+                description: 従業員識別キー（従業員コードが変更されても不変）
+              requestKey:
+                type: string
+                description: 申請識別キー
+              applicant:
+                type: object
+                description: 申請者
+                required:
+                  - type
+                  - key
+                properties:
+                  type:
+                    type: string
+                    description: 種別（employee： 従業員　administrator： 管理者)
+                    enum:
+                      - employee
+                      - administrator
+                  key:
+                    type: string
+                    description: 識別キー（従業員 または 管理者）
+              status:
+                type: string
+                description: 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
+                enum:
+                  - applying
+                  - approved
+                  - rejected
+              currentFlow:
+                type: integer
+                description: 現在の承認フローレベル（１～５）
+                enum:
+                  - 1
+                  - 2
+                  - 3
+                  - 4
+                  - 5
+              lastModifiedAdministratorKey:
+                type: string
+                description: 最終更新管理者識別キー
+              message:
+                type: string
+                description: 申請メッセージ
+              adminComment:
+                type: string
+                description: 管理者コメント
+              requested:
+                type: object
+                description: 申請内容
+                required:
+                  - isBeforeSchedule
+                  - start
+                  - end
+                properties:
+                  isBeforeSchedule:
+                    type: boolean
+                    description: 勤務予定前の時間外申請か（true 予定前　false： 予定後）
+                  start:
+                    type: string
+                    format: date-time
+                    x-go-type: KotDate
+                    description: 開始時刻
+                  end:
+                    type: string
+                    format: date-time
+                    x-go-type: KotDate
+                    description: 終了時刻
+              current:
+                type: object
+                description: 現在のスケジュール
+                required:
+                  - isBeforeSchedule
+                  - start
+                  - end
+                properties:
+                  isBeforeSchedule:
+                    type: boolean
+                    description: 勤務予定前の時間外申請か（true 予定前　false： 予定後）
+                  start:
+                    type: string
+                    format: date-time
+                    x-go-type: KotDate
+                    description: 開始時刻
+                  end:
+                    type: string
+                    format: date-time
+                    x-go-type: KotDate
+                    description: 終了時刻
+              flow:
+                type: array
+                description: 承認フロー
+                items:
+                  type: object
+                  required:
+                    - level
+                    - administratorKeys
+                  properties:
+                    level:
+                      type: integer
+                      description: 承認フローレベル（１～５）
+                      enum:
+                        - 1
+                        - 2
+                        - 3
+                        - 4
+                        - 5
+                    administratorKeys:
+                      type: array
+                      description: 管理者識別キー（管理者コードが変更されても不変）
+                      items:
+                        type: string
+    GetSchedules:
+      type: object
+      required:
+        - year
+        - month
+        - scheduleRequests
+      properties:
+        year:
+          type: integer
+          format: int32
+        month:
+          type: integer
+          format: int32
+        scheduleRequests:
+          type: array
+          items:
+            type: object
+            required:
+              - date
+              - requestedDate
+              - employeeKey
+              - requestKey
+              - applicant
+              - status
+              - currentFlow
+              - lastModifiedAdministratorKey
+              - message
+              - adminComment
+              - requested
+              - current
+            properties:
+              date:
+                type: string
+                format: date
+                description: 対象日
+              requestedDate:
+                type: string
+                format: date
+                description: 申請日
+              employeeKey:
+                type: string
+                description: 従業員識別キー（従業員コードが変更されても不変）
+              requestKey:
+                type: string
+                description: 申請識別キー
+              applicant:
+                type: object
+                required:
+                  - type
+                  - key
+                properties:
+                  type:
+                    type: string
+                    description: 種別（employee： 従業員　administrator： 管理者)
+                    enum:
+                      - employee
+                      - administrator
+                  key:
+                    type: string
+                    description: 識別キー（従業員 または 管理者）
+              status:
+                type: string
+                description: 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
+                enum:
+                  - applying
+                  - rejected
+                  - approved
+              currentFlow:
+                type: integer
+                format: int32
+                enum:
+                  - 1
+                  - 2
+                  - 3
+                  - 4
+                  - 5
+                description: 現在の承認フローレベル（１～５）
+              lastModifiedAdministratorKey:
+                type: string
+                description: 最終更新管理者識別キー
+              message:
+                type: string
+                description: 申請メッセージ
+              adminComment:
+                type: string
+                description: 管理者コメント
+              requested:
+                type: object
+                required:
+                  - clockInSchedule
+                  - clockOutSchedule
+                  - breakSchedule
+                  - startEndBreakSchedule
+                  - holidaysObtained
+                  - workDayTypeName
+                  - workPlaceDivisionCode
+                  - workPlaceDivisionName
+                  - substitutionClockInName
+                  - scheduleTypeName
+                properties:
+                  clockInSchedule:
+                    type: string
+                    format: date-time
+                    x-go-type: KotDate
+                    description: 出勤予定時間
+                  clockOutSchedule:
+                    type: string
+                    format: date-time
+                    x-go-type: KotDate
+                    description: 退勤予定時間
+                  breakSchedule:
+                    type: integer
+                    format: int32
+                    description: 休憩予定時間（分）
+                  startEndBreakSchedule:
+                    type: array
+                    description: 休憩開始終了予定
+                    items:
+                      type: object
+                      required:
+                        - start
+                        - end
+                      properties:
+                        start:
+                          type: string
+                          format: date-time
+                          x-go-type: KotDate
+                          description: 休憩開始予定
+                        end:
+                          type: string
+                          format: date-time
+                          x-go-type: KotDate
+                          description: 休憩終了予定
+                  holidaysObtained:
+                    type: object
+                    description: 休暇取得
+                    required:
+                      - fulltimeHoliday
+                      - halfdayHolidays
+                      - hourHolidays
+                    properties:
+                      fulltimeHoliday:
+                        type: object
+                        required:
+                          - code
+                          - name
+                        properties:
+                          code:
+                            type: integer
+                            description: 休暇区分コード
+                          name:
+                            type: string
+                            description: 休暇区分名
+                      halfdayHolidays:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                            - typeName
+                            - code
+                            - name
+                          properties:
+                            typeName:
+                              type: string
+                              description: 半休種別名
+                            code:
+                              type: integer
+                              description: 休暇区分コード
+                            name:
+                              type: string
+                              description: 休暇区分名
+                      hourHolidays:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                            - start
+                            - end
+                            - minutes
+                            - code
+                            - name
+                          properties:
+                            start:
+                              type: string
+                              format: date-time
+                              x-go-type: KotDate
+                              description: 休暇開始予定
+                            end:
+                              type: string
+                              format: date-time
+                              x-go-type: KotDate
+                              description: 休暇終了予定
+                            minutes:
+                              type: integer
+                              format: int32
+                              description: 休暇取得時間
+                            code:
+                              type: integer
+                              description: 休暇区分コード
+                            name:
+                              type: string
+                              description: 休暇区分名
+                  workDayTypeName:
+                    type: string
+                    description: 勤務日種別名
+                  overtimeUpperLimit:
+                    type: integer
+                    format: int32
+                    description: 残業上限時間（分）
+                  workPlaceDivisionCode:
+                    type: string
+                    description: 出勤先所属コード
+                  workPlaceDivisionName:
+                    type: string
+                    description: 出勤先所属名
+                  substitutionClockInName:
+                    type: string
+                    description: 振替出勤
+                  scheduleTypeName:
+                    type: string
+                    description: スケジュール種別
+              current:
+                type: object
+                required:
+                  - clockInSchedule
+                  - clockOutSchedule
+                  - breakSchedule
+                  - startEndBreakSchedule
+                  - holidaysObtained
+                  - workDayTypeName
+                  - workPlaceDivisionCode
+                  - workPlaceDivisionName
+                  - substitutionClockInName
+                  - scheduleTypeName
+                properties:
+                  clockInSchedule:
+                    type: string
+                    format: date-time
+                    x-go-type: KotDate
+                    description: 出勤予定時間
+                  clockOutSchedule:
+                    type: string
+                    format: date-time
+                    x-go-type: KotDate
+                    description: 退勤予定時間
+                  breakSchedule:
+                    type: integer
+                    format: int32
+                    description: 休憩予定時間（分）
+                  startEndBreakSchedule:
+                    type: array
+                    description: 休憩開始終了予定
+                    items:
+                      type: object
+                      required:
+                        - start
+                        - end
+                      properties:
+                        start:
+                          type: string
+                          format: date-time
+                          x-go-type: KotDate
+                          description: 休憩開始予定
+                        end:
+                          type: string
+                          format: date-time
+                          x-go-type: KotDate
+                          description: 休憩終了予定
+                  holidaysObtained:
+                    type: object
+                    description: 休暇取得
+                    required:
+                      - fulltimeHoliday
+                      - halfdayHolidays
+                      - hourHolidays
+                    properties:
+                      fulltimeHoliday:
+                        type: object
+                        required:
+                          - code
+                          - name
+                        properties:
+                          code:
+                            type: integer
+                            description: 休暇区分コード
+                          name:
+                            type: string
+                            description: 休暇区分名
+                      halfdayHolidays:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                            - typeName
+                            - code
+                            - name
+                          properties:
+                            typeName:
+                              type: string
+                              description: 半休種別名
+                            code:
+                              type: integer
+                              description: 休暇区分コード
+                            name:
+                              type: string
+                              description: 休暇区分名
+                      hourHolidays:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                            - start
+                            - end
+                            - minutes
+                            - code
+                            - name
+                          properties:
+                            start:
+                              type: string
+                              format: date-time
+                              x-go-type: KotDate
+                              description: 休暇開始予定
+                            end:
+                              type: string
+                              format: date-time
+                              x-go-type: KotDate
+                              description: 休暇終了予定
+                            minutes:
+                              type: integer
+                              format: int32
+                              description: 休暇取得時間
+                            code:
+                              type: integer
+                              description: 休暇区分コード
+                            name:
+                              type: string
+                              description: 休暇区分名
+                  workDayTypeName:
+                    type: string
+                    description: 勤務日種別名
+                  overtimeUpperLimit:
+                    type: integer
+                    format: int32
+                    description: 残業上限時間（分）
+                  workPlaceDivisionCode:
+                    type: string
+                    description: 出勤先所属コード
+                  workPlaceDivisionName:
+                    type: string
+                    description: 出勤先所属名
+                  substitutionClockInName:
+                    type: string
+                    description: 振替出勤
+                  scheduleTypeName:
+                    type: string
+                    description: スケジュール種別
+              schedulePatternCode:
+                type: string
+                description: スケジュールパターンコード
+              schedulePatternName:
+                type: string
+                description: スケジュールパターン名
+              workFixedStart:
+                type: string
+                format: date-time
+                x-go-type: KotDate
+                description: 勤務開始刻限
+              workFixedEnd:
+                type: string
+                format: date-time
+                x-go-type: KotDate
+                description: 勤務終了刻限
+              note:
+                type: string
+                description: 備考
+              flow:
+                type: array
+                description: 承認フロー
+                items:
+                  type: object
+                  required:
+                    - level
+                    - administratorKeys
+                  properties:
+                    level:
+                      type: integer
+                      description: 承認フローレベル（１～５）
+                      enum:
+                        - 1
+                        - 2
+                        - 3
+                        - 4
+                        - 5
+                    administratorKeys:
+                      type: array
+                      description: 管理者識別キー（管理者コードが変更されても不変）
+                      items:
+                        type: string
+    RegisterDailyWorkingTimerecord:
+      type: object
+      required:
+        - date
+        - employeeKey
+        - timeRecord
+      properties:
+        date:
+          type: string
+          format: date
+          description: 日時
+        employeeKey:
+          type: string
+          description: 従業員識別キー（従業員コードが変更されても不変）
+        timeRecord:
+          $ref: '#/components/schemas/daily_working_timerecord'
   securitySchemes:
     Bearer:
       type: http
