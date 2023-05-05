@@ -400,3 +400,40 @@ func TestDeleteEmployee(t *testing.T) {
 		t.Errorf("value is mismatch (-want +got):\n%s", diff)
 	}
 }
+
+func TestGetDivisions(t *testing.T) {
+	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
+	if err != nil {
+		t.Fatalf("failed to securityprovider.NewSecurityProviderBearerToken: %v", err)
+	}
+	ctx := context.Background()
+	sut, err := kotclient.NewClientWithResponses("http://localhost:8001", kotclient.WithRequestEditorFn(bearerTokenProvider.Intercept))
+	if err != nil {
+		t.Fatalf("failed to kotclient.NewClient: %v", err)
+	}
+
+	got, err := sut.GetDivisionsWithResponse(ctx)
+	if err != nil {
+		t.Fatalf("failed to sut.GetDivisionsWithResponse: %v", err)
+	}
+
+	if diff := cmp.Diff(200, got.StatusCode()); diff != "" {
+		t.Errorf("value is mismatch (-want +got):\n%s", diff)
+	}
+
+	want := []kotclient.DivisionResponse{
+		{
+			Code:          "1000",
+			Name:          "本社",
+			DayBorderTime: "00:00",
+		},
+		{
+			Code:          "2000",
+			Name:          "支社",
+			DayBorderTime: "05:00",
+		},
+	}
+	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON200); diff != "" {
+		t.Errorf("value mismatch (-want +got):\n%s", diff)
+	}
+}
