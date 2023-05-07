@@ -1,4 +1,15 @@
-$ref: "../../components/schemas/daily_working_response.yml"
+type: object
+required:
+  - date
+  - dailyWorkings
+properties:
+  date:
+    type: string
+    format: date
+  dailyWorkings:
+    type: array
+    items:
+      $ref: "../schemas/daily_working_response.yml"
 example:
   {
     "date": "2016-05-01",
