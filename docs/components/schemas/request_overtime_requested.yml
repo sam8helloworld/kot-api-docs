@@ -1,0 +1,20 @@
+type: object
+description: 申請内容
+required:
+  - isBeforeSchedule
+  - start
+  - end
+properties:
+  isBeforeSchedule:
+    type: boolean
+    description: 勤務予定前の時間外申請か（true 予定前　false： 予定後）
+  start:
+    type: string
+    format: date-time
+    x-go-type: KotDate
+    description: 開始時刻
+  end:
+    type: string
+    format: date-time
+    x-go-type: KotDate
+    description: 終了時刻

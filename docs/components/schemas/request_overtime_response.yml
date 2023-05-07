@@ -1,0 +1,65 @@
+type: object
+required:
+  - date
+  - requestedDate
+  - employeeKey
+  - requestKey
+  - applicant
+  - status
+  - currentFlow
+  - lastModifiedAdministratorKey
+  - message
+  - adminComment
+  - requested
+  - current
+properties:
+  date:
+    type: string
+    format: date
+    description: 対象日
+  requestedDate:
+    type: string
+    format: date
+    description: 申請日
+  employeeKey:
+    type: string
+    description: 従業員識別キー（従業員コードが変更されても不変）
+  requestKey:
+    type: string
+    description: 申請識別キー
+  applicant:
+    $ref: "../schemas/request_overtime_applicant.yml"
+  status:
+    type: string
+    description: 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
+    enum:
+      - applying
+      - approved
+      - rejected
+  currentFlow:
+    type: integer
+    description: 現在の承認フローレベル（１～５）
+    enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+  lastModifiedAdministratorKey:
+    type: string
+    description: 最終更新管理者識別キー
+  message:
+    type: string
+    description: 申請メッセージ
+  adminComment:
+    type: string
+    description: 管理者コメント
+  requested:
+    $ref: "../schemas/request_overtime_requested.yml"
+  current:
+    $ref: "../schemas/request_overtime_current.yml"
+  flow:
+    type: array
+    description: 承認フロー
+    items:
+      $ref: "../schemas/request_flow.yml"
