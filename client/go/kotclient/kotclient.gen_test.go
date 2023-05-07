@@ -754,6 +754,51 @@ func TestGetDailyWorking(t *testing.T) {
 	}
 }
 
+func TestRegisterDailyWorkingTimerecord(t *testing.T) {
+	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
+	if err != nil {
+		t.Fatalf("failed to securityprovider.NewSecurityProviderBearerToken: %v", err)
+	}
+	ctx := context.Background()
+	sut, err := kotclient.NewClientWithResponses("http://localhost:8001", kotclient.WithRequestEditorFn(bearerTokenProvider.Intercept))
+	if err != nil {
+		t.Fatalf("failed to kotclient.NewClient: %v", err)
+	}
+
+	employeeKey := "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3"
+	body := kotclient.DailyWorkingTimerecordRequest{
+		Date:      openapi_types.Date{Time: time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC)},
+		Time:      time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC),
+		Latitude:  kotclient.Ptr(35.6672237),
+		Longitude: kotclient.Ptr(139.7422207),
+	}
+	got, err := sut.RegisterDailyWorkingTimerecordWithResponse(ctx, employeeKey, body)
+	if err != nil {
+		t.Fatalf("failed to sut.RegisterDailyWorkingTimerecordWithResponse: %v", err)
+	}
+
+	if diff := cmp.Diff(201, got.StatusCode()); diff != "" {
+		t.Errorf("value is mismatch (-want +got):\n%s", diff)
+	}
+
+	want := kotclient.RegisterDailyWorkingTimerecord{
+		Date:        openapi_types.Date{Time: time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC)},
+		EmployeeKey: "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+		TimeRecord: kotclient.DailyWorkingTimerecord{
+			Time:         time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC),
+			Code:         "1",
+			Name:         "出勤",
+			DivisionName: "正社員",
+			DivisionCode: "1000",
+			Latitude:     35.6672237,
+			Longitude:    139.7422207,
+		},
+	}
+	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON201); diff != "" {
+		t.Errorf("value mismatch (-want +got):\n%s", diff)
+	}
+}
+
 func TestGetOvertime(t *testing.T) {
 	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
 	if err != nil {
