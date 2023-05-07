@@ -1,0 +1,17 @@
+type: object
+description: 休暇取得
+required:
+  - fulltimeHoliday
+  - halfdayHolidays
+  - hourHolidays
+properties:
+  fulltimeHoliday:
+    $ref: "./daily_working_fulltime_holiday.yml"
+  halfdayHolidays:
+    type: array
+    items:
+      $ref: "./daily_working_halfday_holiday.yml"
+  hourHolidays:
+    type: array
+    items:
+      $ref: "./daily_working_hour_holiday.yml"

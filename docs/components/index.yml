@@ -47,6 +47,18 @@ schemas:
     $ref: "./schemas/daily_working_timerecord_request.yml"
   daily_working_timerecord:
     $ref: "./schemas/daily_working_timerecord.yml"
+  daily_working_current_date_employee:
+    $ref: "./schemas/daily_working_current_date_employee.yml"
+  daily_working_custom_daily_working:
+    $ref: "./schemas/daily_working_custom_daily_working.yml"
+  daily_working_fulltime_holiday:
+    $ref: "./schemas/daily_working_fulltime_holiday.yml"
+  daily_working_halfday_holiday:
+    $ref: "./schemas/daily_working_halfday_holiday.yml"
+  daily_working_holidays_obtained:
+    $ref: "./schemas/daily_working_holidays_obtained.yml"
+  daily_working_hour_holiday:
+    $ref: "./schemas/daily_working_hour_holiday.yml"
   RefreshAccessToken:
     $ref: "./responses/RefreshAccessToken.yml"
   GetAccessTokenAvailability:
