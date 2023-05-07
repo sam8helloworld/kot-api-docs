@@ -40,3 +40,9 @@ properties:
     type: number
     format: double
     description: 経度
+  credentialCode:
+    type: integer
+    description: (注)レスポンス定義にはこのキーは存在しないが、例にはある
+  credentialName:
+    type: string
+    description: (注)レスポンス定義にはこのキーは存在しないが、例にはある

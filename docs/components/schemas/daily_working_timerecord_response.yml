@@ -7,12 +7,13 @@ properties:
   date:
     type: string
     format: date
-    description: 従業員識別キー（従業員コードが変更されても不変）
+    description: 日時
   employeeKey:
     type: string
-    description: 緯度
+    description: 従業員識別キー（従業員コードが変更されても不変）
   timeRecord:
     type: array
+    description: 打刻
     items:
       $ref: "../schemas/daily_working_timerecord.yml"
   currentDateEmployee:
