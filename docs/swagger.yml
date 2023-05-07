@@ -2120,6 +2120,18 @@ components:
                   calculationUnitCode: 4
                   calculationResult: 100
     GetDailyWorking:
+      type: object
+      required:
+        - date
+        - dailyWorkings
+      properties:
+        date:
+          type: string
+          format: date
+        dailyWorkings:
+          type: array
+          items:
+            $ref: '#/components/schemas/daily_working_response'
       example:
         date: '2016-05-01'
         dailyWorkings:
@@ -2186,103 +2198,6 @@ components:
                 name: 日別カスタム3
                 calculationUnitCode: 4
                 calculationResult: 100
-      type: object
-      required:
-        - date
-        - employeeKey
-        - workPlaceDivisionCode
-        - isClosing
-        - isHelp
-        - isError
-        - workdayTypeName
-        - assigned
-        - unassigned
-        - overtime
-        - lateNight
-        - lateNightUnassigned
-        - lateNightOvertime
-        - breakTime
-        - late
-        - earlyLeave
-        - totalWork
-        - holidaysObtained
-        - autoBreakOff
-        - discretionaryVacation
-        - customDailyWorkings
-      properties:
-        date:
-          description: 日時
-          type: string
-          format: date
-        employeeKey:
-          description: 従業員識別キー（従業員コードが変更されても不変）
-          type: string
-        workPlaceDivisionCode:
-          description: 出勤先所属コード
-          type: string
-        workPlaceDivisionName:
-          description: 出勤先所属名
-          type: string
-        isClosing:
-          description: 締め状況
-          type: boolean
-        isHelp:
-          description: ヘルプ勤務状況
-          type: boolean
-        isError:
-          description: エラー勤務状況
-          type: boolean
-        workdayTypeName:
-          description: 勤務日種別名
-          type: string
-        assigned:
-          description: 所定時間（分）
-          type: integer
-        unassigned:
-          description: 所定外時間（分）
-          type: integer
-        overtime:
-          description: 残業時間（分）
-          type: integer
-        lateNight:
-          description: 深夜時間（分）
-          type: integer
-        lateNightUnassigned:
-          description: 深夜所定外時間（分）
-          type: integer
-        lateNightOvertime:
-          description: 深夜残業時間（分）
-          type: integer
-        breakTime:
-          description: 休憩時間（分）
-          type: integer
-        late:
-          description: 遅刻時間（分）
-          type: integer
-        earlyLeave:
-          description: 早退時間（分）
-          type: integer
-        totalWork:
-          description: 労働合計時間（分）
-          type: integer
-        holidaysObtained:
-          $ref: '#/components/schemas/daily_working_holidays_obtained'
-        autoBreakOff:
-          type: integer
-          enum:
-            - 1
-            - 2
-            - 3
-          description: 自動休憩無効（null： 休憩を無効化しない 1：　雇用区分休憩無効　2： スケジュール休憩無効　3： 全ての自動休憩無効）
-        discretionaryVacation:
-          type: integer
-          description: 休暇みなし時間（分）
-        customDailyWorkings:
-          type: array
-          items:
-            $ref: '#/components/schemas/daily_working_custom_daily_working'
-        currentDateEmployee:
-          $ref: '#/components/schemas/daily_working_current_date_employee'
     GetDailyWorkingTimerecords:
       type: object
       required:
