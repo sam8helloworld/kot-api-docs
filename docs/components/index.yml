@@ -59,6 +59,8 @@ schemas:
     $ref: "./schemas/daily_working_holidays_obtained.yml"
   daily_working_hour_holiday:
     $ref: "./schemas/daily_working_hour_holiday.yml"
+  daily_working_timerecord_response:
+    $ref: "./schemas/daily_working_timerecord_response.yml"
   request_overtime_applicant:
     $ref: "./schemas/request_overtime_applicant.yml"
   request_overtime_requested:
