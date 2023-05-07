@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/deepmap/oapi-codegen/pkg/securityprovider"
-	"github.com/deepmap/oapi-codegen/pkg/types"
+	openapi_types "github.com/deepmap/oapi-codegen/pkg/types"
 	"github.com/google/go-cmp/cmp"
 	"github.com/sam8helloworld/kot-api-docs/kotclient"
 )
@@ -193,7 +193,7 @@ func TestGetEmployees(t *testing.T) {
 			LastName:       "勤怠",
 			FirstName:      "太郎",
 			Key:            "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
-			EmailAddresses: kotclient.Ptr([]types.Email{"kintaitarou@h-t.co.jp"}),
+			EmailAddresses: kotclient.Ptr([]openapi_types.Email{"kintaitarou@h-t.co.jp"}),
 			EmployeeGroups: []kotclient.EmployeeGroup{
 				{
 					Code: "0001",
@@ -215,7 +215,7 @@ func TestGetEmployees(t *testing.T) {
 			LastName:       "勤怠",
 			FirstName:      "花子",
 			Key:            "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4",
-			EmailAddresses: kotclient.Ptr([]types.Email{"kintaihanako@h-t.co.jp"}),
+			EmailAddresses: kotclient.Ptr([]openapi_types.Email{"kintaihanako@h-t.co.jp"}),
 			EmployeeGroups: []kotclient.EmployeeGroup{
 				{
 					Code: "0003",
@@ -265,7 +265,7 @@ func TestGetEmployee(t *testing.T) {
 		LastName:       "勤怠",
 		FirstName:      "太郎",
 		Key:            "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
-		EmailAddresses: kotclient.Ptr([]types.Email{"kintaitarou@h-t.co.jp"}),
+		EmailAddresses: kotclient.Ptr([]openapi_types.Email{"kintaitarou@h-t.co.jp"}),
 		EmployeeGroups: []kotclient.EmployeeGroup{
 			{
 				Code: "0001",
@@ -299,7 +299,7 @@ func TestRegisterEmployee(t *testing.T) {
 		Code:           "1000",
 		LastName:       "勤怠",
 		FirstName:      "太郎",
-		EmailAddresses: kotclient.Ptr([]types.Email{"kintaitarou@h-t.co.jp"}),
+		EmailAddresses: kotclient.Ptr([]openapi_types.Email{"kintaitarou@h-t.co.jp"}),
 	}
 	got, err := sut.RegisterEmployeeWithResponse(ctx, reqBody)
 	if err != nil {
@@ -318,7 +318,7 @@ func TestRegisterEmployee(t *testing.T) {
 		LastName:       "勤怠",
 		FirstName:      "太郎",
 		Key:            "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe27352152c4",
-		EmailAddresses: kotclient.Ptr([]types.Email{"kintaitarou@h-t.co.jp"}),
+		EmailAddresses: kotclient.Ptr([]openapi_types.Email{"kintaitarou@h-t.co.jp"}),
 	}
 	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON201); diff != "" {
 		t.Errorf("value mismatch (-want +got):\n%s", diff)
@@ -342,7 +342,7 @@ func TestUpdateEmployee(t *testing.T) {
 		Code:           "1000",
 		LastName:       "勤怠",
 		FirstName:      "太郎",
-		EmailAddresses: kotclient.Ptr([]types.Email{"kintaitarou@h-t.co.jp"}),
+		EmailAddresses: kotclient.Ptr([]openapi_types.Email{"kintaitarou@h-t.co.jp"}),
 	}
 	employeeKey := "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3"
 	queries := kotclient.UpdateEmployeeParams{
@@ -372,7 +372,7 @@ func TestUpdateEmployee(t *testing.T) {
 		BirthDate:                   kotclient.Ptr(kotclient.Date{Time: time.Date(1990, 9, 1, 0, 0, 0, 0, time.UTC)}),
 		HiredDate:                   kotclient.Ptr(kotclient.Date{Time: time.Date(2013, 4, 1, 0, 0, 0, 0, time.UTC)}),
 		ResignationDate:             kotclient.Ptr(kotclient.Date{Time: time.Date(2017, 12, 12, 0, 0, 0, 0, time.UTC)}),
-		EmailAddresses:              kotclient.Ptr([]types.Email{"kintaitarou@h-t.co.jp"}),
+		EmailAddresses:              kotclient.Ptr([]openapi_types.Email{"kintaitarou@h-t.co.jp"}),
 		AllDayRegardingWorkInMinute: kotclient.Ptr(480),
 	}
 	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON200); diff != "" {
@@ -500,6 +500,131 @@ func TestGetEmployeeGroups(t *testing.T) {
 				Code: "KEIKAN",
 				Name: "経営管理本部",
 			}),
+		},
+	}
+	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON200); diff != "" {
+		t.Errorf("value mismatch (-want +got):\n%s", diff)
+	}
+}
+
+func TestGetDailyWorkings(t *testing.T) {
+	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
+	if err != nil {
+		t.Fatalf("failed to securityprovider.NewSecurityProviderBearerToken: %v", err)
+	}
+	ctx := context.Background()
+	sut, err := kotclient.NewClientWithResponses("http://localhost:8001", kotclient.WithRequestEditorFn(bearerTokenProvider.Intercept))
+	if err != nil {
+		t.Fatalf("failed to kotclient.NewClient: %v", err)
+	}
+
+	queries := kotclient.Ptr(kotclient.GetDailyWorkingsParams{
+		Division:         kotclient.Ptr("1000"),
+		Ondivision:       kotclient.Ptr(true),
+		Start:            kotclient.Ptr(kotclient.Date{Time: time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC)}),
+		End:              kotclient.Ptr(kotclient.Date{Time: time.Date(2016, 5, 10, 0, 0, 0, 0, time.UTC)}),
+		AdditionalFields: kotclient.Ptr(kotclient.AdditionalFieldsEmployeeGroups{"currentDateEmployee"}),
+	})
+	got, err := sut.GetDailyWorkingsWithResponse(ctx, queries)
+	if err != nil {
+		t.Fatalf("failed to sut.GetDailyWorkingsWithResponse: %v", err)
+	}
+
+	if diff := cmp.Diff(200, got.StatusCode()); diff != "" {
+		t.Errorf("value is mismatch (-want +got):\n%s", diff)
+	}
+
+	want := kotclient.GetDailyWorkings{
+		{
+			Date: openapi_types.Date{Time: time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC)},
+			DailyWorkings: []kotclient.DailyWorkingResponse{
+				{
+					Assigned:     480,
+					AutoBreakOff: 1,
+					BreakTime:    60,
+					CurrentDateEmployee: kotclient.Ptr(kotclient.DailyWorkingCurrentDateEmployee{
+						Code:         "1000",
+						DivisionCode: "1000",
+						DivisionName: "本社",
+						EmployeeGroups: []kotclient.EmployeeGroup{
+							{
+								Code: "0001",
+								Name: "人事部",
+							},
+							{
+								Code: "0002",
+								Name: "総務部",
+							},
+						},
+						FirstName:          "太郎",
+						FirstNamePhonetics: "タロウ",
+						Gender:             "male",
+						LastName:           "勤怠",
+						LastNamePhonetics:  "キンタイ",
+						TypeCode:           "1",
+						TypeName:           "正社員",
+					}),
+					CustomDailyWorkings: []kotclient.DailyWorkingCustomDailyWorking{
+						{
+							CalculationResult:   1,
+							CalculationUnitCode: 1,
+							Code:                "dCus1",
+							Name:                "日別カスタム1",
+						},
+						{
+							CalculationResult:   10,
+							CalculationUnitCode: 2,
+							Code:                "dCus2",
+							Name:                "日別カスタム2",
+						},
+						{
+							CalculationResult:   100,
+							CalculationUnitCode: 4,
+							Code:                "dCus3",
+							Name:                "日別カスタム3",
+						},
+					},
+					Date:                  openapi_types.Date{Time: time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC)},
+					DiscretionaryVacation: 0,
+					EarlyLeave:            0,
+					EmployeeKey:           "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+					HolidaysObtained: kotclient.DailyWorkingHolidaysObtained{
+						FulltimeHoliday: kotclient.DailyWorkingFulltimeHoliday{
+							Code: 1,
+							Name: "有休",
+						},
+						HalfdayHolidays: []kotclient.DailyWorkingHalfdayHoliday{
+							{
+								TypeName: "PM休",
+								Code:     1,
+								Name:     "有休",
+							},
+						},
+						HourHolidays: []kotclient.DailyWorkingHourHoliday{
+							{
+								Start:   time.Date(2016, 5, 1, 10, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)),
+								End:     time.Date(2016, 5, 1, 11, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)),
+								Minutes: 60,
+								Code:    1,
+								Name:    "有休",
+							},
+						},
+					},
+					IsClosing:             true,
+					IsError:               false,
+					IsHelp:                false,
+					Late:                  0,
+					LateNight:             0,
+					LateNightOvertime:     0,
+					LateNightUnassigned:   0,
+					Overtime:              135,
+					TotalWork:             615,
+					Unassigned:            135,
+					WorkPlaceDivisionCode: "1000",
+					WorkPlaceDivisionName: kotclient.Ptr("本社"),
+					WorkdayTypeName:       "平日",
+				},
+			},
 		},
 	}
 	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON200); diff != "" {
