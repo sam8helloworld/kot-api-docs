@@ -41,21 +41,7 @@ properties:
           type: string
           description: 申請識別キー
         applicant:
-          type: object
-          description: 申請者
-          required:
-            - type
-            - key
-          properties:
-            type:
-              type: string
-              description: 種別（employee： 従業員　administrator： 管理者)
-              enum:
-                - employee
-                - administrator
-            key:
-              type: string
-              description: 識別キー（従業員 または 管理者）
+          $ref: "../schemas/request_overtime_applicant.yml"
         status:
           type: string
           description: 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
@@ -82,67 +68,63 @@ properties:
           type: string
           description: 管理者コメント
         requested:
-          type: object
-          description: 申請内容
-          required:
-            - isBeforeSchedule
-            - start
-            - end
-          properties:
-            isBeforeSchedule:
-              type: boolean
-              description: 勤務予定前の時間外申請か（true 予定前　false： 予定後）
-            start:
-              type: string
-              format: date-time
-              x-go-type: KotDate
-              description: 開始時刻
-            end:
-              type: string
-              format: date-time
-              x-go-type: KotDate
-              description: 終了時刻
+          $ref: "../schemas/request_overtime_requested.yml"
         current:
-          type: object
-          description: 現在のスケジュール
-          required:
-            - isBeforeSchedule
-            - start
-            - end
-          properties:
-            isBeforeSchedule:
-              type: boolean
-              description: 勤務予定前の時間外申請か（true 予定前　false： 予定後）
-            start:
-              type: string
-              format: date-time
-              x-go-type: KotDate
-              description: 開始時刻
-            end:
-              type: string
-              format: date-time
-              x-go-type: KotDate
-              description: 終了時刻
+          $ref: "../schemas/request_overtime_current.yml"
         flow:
           type: array
           description: 承認フロー
           items:
-            type: object
-            required:
-              - level
-              - administratorKeys
-            properties:
-              level:
-                type: integer
-                description: 承認フローレベル（１～５）
-                enum:
-                  - 1
-                  - 2
-                  - 3
-                  - 4
-                  - 5
-              administratorKeys:
-                type: array
-                description: 管理者識別キー（管理者コードが変更されても不変）
-                items:
-                  type: string
+            $ref: "../schemas/request_flow.yml"
+example:
+  {
+    "year": 2018,
+    "month": 8,
+    "overtimeRequests": [
+      {
+        "date": "2018-08-01",
+        "requestedDate": "2018-08-10",
+        "employeeKey": "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe2735215201",
+        "requestKey": "59d25f49d4dce8b6e6658cc6b5c3b89b34c617916f90f6e27e9a9fa6cca576a4",
+        "applicant": {
+          "type": "employee",
+          "key": "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe2735215201"
+        },
+        "status": "applying",
+        "currentFlow": 2,
+        "flow": [
+          {
+            "level": 1,
+            "administratorKeys": [
+              "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac6ff"
+            ]
+          },
+          {
+            "level": 2,
+            "administratorKeys": [
+              "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222"
+            ]
+          },
+          {
+            "level": 3,
+            "administratorKeys": [
+              "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac111"
+            ]
+          }
+        ],
+        "message": "申請いたします",
+        "adminComment": "第1承認者承認済",
+        "lastModifiedAdministratorKey": "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac6ff",
+        "requested": {
+          "isBeforeSchedule": true,
+          "start": "2018-08-01T08:00+09:00",
+          "end": "2018-08-01T10:00+09:00"
+        },
+        "current": {
+          "isBeforeSchedule": true,
+          "start": "2018-08-01T09:00+09:00",
+          "end": "2018-08-01T10:00+09:00"
+        }
+      }
+    ]
+  }

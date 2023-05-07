@@ -1,0 +1,19 @@
+type: object
+required:
+  - level
+  - administratorKeys
+properties:
+  level:
+    type: integer
+    description: 承認フローレベル（１～５）
+    enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+  administratorKeys:
+    type: array
+    description: 管理者識別キー（管理者コードが変更されても不変）
+    items:
+      type: string

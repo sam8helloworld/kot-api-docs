@@ -1,0 +1,15 @@
+type: object
+description: 申請者
+required:
+  - type
+  - key
+properties:
+  type:
+    type: string
+    description: 種別（employee： 従業員　administrator： 管理者)
+    enum:
+      - employee
+      - administrator
+  key:
+    type: string
+    description: 識別キー（従業員 または 管理者）

@@ -59,6 +59,14 @@ schemas:
     $ref: "./schemas/daily_working_holidays_obtained.yml"
   daily_working_hour_holiday:
     $ref: "./schemas/daily_working_hour_holiday.yml"
+  request_overtime_applicant:
+    $ref: "./schemas/request_overtime_applicant.yml"
+  request_overtime_requested:
+    $ref: "./schemas/request_overtime_requested.yml"
+  request_overtime_current:
+    $ref: "./schemas/request_overtime_current.yml"
+  request_flow:
+    $ref: "./schemas/request_flow.yml"
   RefreshAccessToken:
     $ref: "./responses/RefreshAccessToken.yml"
   GetAccessTokenAvailability:
