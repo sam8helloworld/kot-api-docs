@@ -1,0 +1,23 @@
+type: object
+required:
+  - code
+  - name
+  - calculationUnitCode
+  - calculationResult
+properties:
+  code:
+    type: string
+    description: 日別カスタム表示コード
+  name:
+    type: string
+    description: 日別カスタム表示名
+  calculationUnitCode:
+    type: integer
+    enum:
+      - 1
+      - 2
+      - 4
+    description: 計算単位コード（1： 日数　2： 時間　4： 数値）
+  calculationResult:
+    type: integer
+    description: 計算結果

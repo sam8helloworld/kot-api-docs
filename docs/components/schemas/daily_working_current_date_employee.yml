@@ -1,0 +1,54 @@
+type: object
+description: 今日時点の従業員データ
+required:
+  - divisionCode
+  - divisionName
+  - gender
+  - typeCode
+  - typeName
+  - code
+  - lastName
+  - firstName
+  - lastNamePhonetics
+  - firstNamePhonetics
+  - employeeGroups
+properties:
+  divisionCode:
+    type: string
+    description: 所属コード
+  divisionName:
+    type: string
+    description: 所属名
+  gender:
+    type: string
+    enum:
+      - no_selected
+      - male
+      - female
+    description: 性別（no_selected： 選択しない　male： 男性　female： 女性）
+  typeCode:
+    type: string
+    description: 雇用区分コード
+  typeName:
+    type: string
+    description: 雇用区分名
+  code:
+    type: string
+    description: 従業員コード
+  lastName:
+    type: string
+    description: 姓
+  firstName:
+    type: string
+    description: 名
+  lastNamePhonetics:
+    type: string
+    description: 姓（カナ）
+  firstNamePhonetics:
+    type: string
+    description: 名（カナ）
+  employeeGroups:
+    type: array
+    description: 従業員グループ情報
+    items:
+      $ref: "../schemas/employee_group.yml"

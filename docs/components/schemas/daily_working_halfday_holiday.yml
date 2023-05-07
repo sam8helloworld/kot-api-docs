@@ -1,0 +1,15 @@
+type: object
+required:
+  - typeName
+  - code
+  - name
+properties:
+  typeName:
+    type: string
+    description: 半休種別名
+  code:
+    type: integer
+    description: 休暇区分コード
+  name:
+    type: string
+    description: 休暇区分名

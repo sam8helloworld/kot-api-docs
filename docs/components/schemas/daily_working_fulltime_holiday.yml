@@ -1,0 +1,11 @@
+type: object
+required:
+  - code
+  - name
+properties:
+  code:
+    type: integer
+    description: 休暇区分コード
+  name:
+    type: string
+    description: 休暇区分名
