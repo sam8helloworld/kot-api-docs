@@ -753,3 +753,84 @@ func TestGetDailyWorking(t *testing.T) {
 		t.Errorf("value mismatch (-want +got):\n%s", diff)
 	}
 }
+
+func TestGetOvertime(t *testing.T) {
+	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
+	if err != nil {
+		t.Fatalf("failed to securityprovider.NewSecurityProviderBearerToken: %v", err)
+	}
+	ctx := context.Background()
+	sut, err := kotclient.NewClientWithResponses("http://localhost:8001", kotclient.WithRequestEditorFn(bearerTokenProvider.Intercept))
+	if err != nil {
+		t.Fatalf("failed to kotclient.NewClient: %v", err)
+	}
+
+	date := "2018-08"
+	queries := kotclient.Ptr(kotclient.GetOvertimeParams{
+		AdministratorKey: kotclient.Ptr("c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222"),
+		AdditionalFields: kotclient.Ptr([]kotclient.GetOvertimeParamsAdditionalFields{"flow"}),
+	})
+	got, err := sut.GetOvertimeWithResponse(ctx, date, queries)
+	if err != nil {
+		t.Fatalf("failed to sut.GetOvertimeWithResponse: %v", err)
+	}
+
+	if diff := cmp.Diff(200, got.StatusCode()); diff != "" {
+		t.Errorf("value is mismatch (-want +got):\n%s", diff)
+	}
+
+	want := kotclient.GetOvertime{
+		Year:  2018,
+		Month: 8,
+		OvertimeRequests: []kotclient.RequestOvertimeResponse{
+			{
+				Date:          openapi_types.Date{Time: time.Date(2018, 8, 1, 0, 0, 0, 0, time.UTC)},
+				RequestedDate: openapi_types.Date{Time: time.Date(2018, 8, 10, 0, 0, 0, 0, time.UTC)},
+				EmployeeKey:   "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe2735215201",
+				RequestKey:    "59d25f49d4dce8b6e6658cc6b5c3b89b34c617916f90f6e27e9a9fa6cca576a4",
+				Applicant: kotclient.RequestOvertimeApplicant{
+					Type: "employee",
+					Key:  "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe2735215201",
+				},
+				Status:      "applying",
+				CurrentFlow: 2,
+				Flow: kotclient.Ptr([]kotclient.RequestFlow{
+					{
+						Level: 1,
+						AdministratorKeys: []string{
+							"c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac6ff",
+						},
+					},
+					{
+						Level: 2,
+						AdministratorKeys: []string{
+							"c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222",
+						},
+					},
+					{
+						Level: 3,
+						AdministratorKeys: []string{
+							"c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac111",
+						},
+					},
+				}),
+				Message:                      "申請いたします",
+				AdminComment:                 "第1承認者承認済",
+				LastModifiedAdministratorKey: "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac6ff",
+				Requested: kotclient.RequestOvertimeRequested{
+					IsBeforeSchedule: true,
+					Start:            kotclient.KotDate{time.Date(2018, 8, 1, 8, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60))},
+					End:              kotclient.KotDate{time.Date(2018, 8, 1, 10, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60))},
+				},
+				Current: kotclient.RequestOvertimeCurrent{
+					IsBeforeSchedule: true,
+					Start:            kotclient.KotDate{time.Date(2018, 8, 1, 9, 0, 0, 0, time.FixedZone("+09:00", 9*60*60))},
+					End:              kotclient.KotDate{time.Date(2018, 8, 1, 10, 0, 0, 0, time.FixedZone("+09:00", 9*60*60))},
+				},
+			},
+		},
+	}
+	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON200); diff != "" {
+		t.Errorf("value mismatch (-want +got):\n%s", diff)
+	}
+}
