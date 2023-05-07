@@ -464,57 +464,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GetDailyWorkingTimerecords'
-                example:
-                  - date: '2016-05-01'
-                    dailyWorkings:
-                      - date: '2016-05-01'
-                        employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
-                        currentDateEmployee:
-                          divisionCode: '1000'
-                          divisionName: 本社
-                          gender: male
-                          typeCode: '1'
-                          typeName: 正社員
-                          code: '1000'
-                          lastName: 勤怠
-                          firstName: 太郎
-                          lastNamePhonetics: キンタイ
-                          firstNamePhonetics: タロウ
-                          employeeGroups:
-                            - code: '0001'
-                              name: 人事部
-                            - code: '0002'
-                              name: 総務部
-                        timeRecord:
-                          - time: '2016-05-01T09:00:00+09:00'
-                            code: '1'
-                            name: 出勤
-                            divisionCode: '1000'
-                            divisionName: 本社
-                            latitude: 35.6672237
-                            longitude: 139.7422207
-                          - time: '2015-05-01T18:00:00+09:00'
-                            code: '2'
-                            name: 退勤
-                            divisionCode: '1000'
-                            divisionName: 本社
-                            credentialCode: 300
-                            credentialName: KOTSL
-                            latitude: 35.6672237
-                            longitude: 139.7422207
-                          - time: '2016-05-01T10:00:00+09:00'
-                            code: '3'
-                            name: 休憩開始
-                            divisionCode: '1000'
-                            divisionName: 本社
-                          - time: '2016-05-01T11:00:00+09:00'
-                            code: '4'
-                            name: 休憩終了
-                            divisionCode: '1000'
-                            divisionName: 本社
+                $ref: '#/components/schemas/GetDailyWorkingTimerecords'
   '/daily-workings/timerecord/{date}':
     get:
       operationId: GetDailyWorkingTimerecord
@@ -1263,6 +1213,12 @@ components:
           type: number
           format: double
           description: 経度
+        credentialCode:
+          type: integer
+          description: (注)レスポンス定義にはこのキーは存在しないが、例にはある
+        credentialName:
+          type: string
+          description: (注)レスポンス定義にはこのキーは存在しないが、例にはある
     daily_working_current_date_employee:
       type: object
       description: 今日時点の従業員データ
@@ -1424,12 +1380,13 @@ components:
         date:
           type: string
           format: date
-          description: 従業員識別キー（従業員コードが変更されても不変）
+          description: 日時
         employeeKey:
           type: string
-          description: 緯度
+          description: 従業員識別キー（従業員コードが変更されても不変）
         timeRecord:
           type: array
+          description: 打刻
           items:
             $ref: '#/components/schemas/daily_working_timerecord'
         currentDateEmployee:
@@ -2343,6 +2300,54 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/daily_working_timerecord_response'
+      example:
+        - date: '2016-05-01'
+          dailyWorkings:
+            - date: '2016-05-01'
+              employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+              currentDateEmployee:
+                divisionCode: '1000'
+                divisionName: 本社
+                gender: male
+                typeCode: '1'
+                typeName: 正社員
+                code: '1000'
+                lastName: 勤怠
+                firstName: 太郎
+                lastNamePhonetics: キンタイ
+                firstNamePhonetics: タロウ
+                employeeGroups:
+                  - code: '0001'
+                    name: 人事部
+                  - code: '0002'
+                    name: 総務部
+              timeRecord:
+                - time: '2016-05-01T09:00:00+09:00'
+                  code: '1'
+                  name: 出勤
+                  divisionCode: '1000'
+                  divisionName: 本社
+                  latitude: 35.6672237
+                  longitude: 139.7422207
+                - time: '2015-05-01T18:00:00+09:00'
+                  code: '2'
+                  name: 退勤
+                  divisionCode: '1000'
+                  divisionName: 本社
+                  credentialCode: 300
+                  credentialName: KOTSL
+                  latitude: 35.6672237
+                  longitude: 139.7422207
+                - time: '2016-05-01T10:00:00+09:00'
+                  code: '3'
+                  name: 休憩開始
+                  divisionCode: '1000'
+                  divisionName: 本社
+                - time: '2016-05-01T11:00:00+09:00'
+                  code: '4'
+                  name: 休憩終了
+                  divisionCode: '1000'
+                  divisionName: 本社
     GetOvertime:
       type: object
       required:
