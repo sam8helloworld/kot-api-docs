@@ -1,0 +1,66 @@
+type: object
+required:
+  - year
+  - month
+  - overtimeRequests
+properties:
+  year:
+    type: integer
+  month:
+    type: integer
+  overtimeRequests:
+    type: array
+    items:
+      $ref: "../schemas/request_overtime_response.yml"
+example:
+  {
+    "year": 2018,
+    "month": 8,
+    "overtimeRequests": [
+      {
+        "date": "2018-08-01",
+        "requestedDate": "2018-08-10",
+        "employeeKey": "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe2735215201",
+        "requestKey": "59d25f49d4dce8b6e6658cc6b5c3b89b34c617916f90f6e27e9a9fa6cca576a4",
+        "applicant": {
+          "type": "employee",
+          "key": "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe2735215201"
+        },
+        "status": "applying",
+        "currentFlow": 2,
+        "flow": [
+          {
+            "level": 1,
+            "administratorKeys": [
+              "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac6ff"
+            ]
+          },
+          {
+            "level": 2,
+            "administratorKeys": [
+              "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac222"
+            ]
+          },
+          {
+            "level": 3,
+            "administratorKeys": [
+              "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac111"
+            ]
+          }
+        ],
+        "message": "申請いたします",
+        "adminComment": "第1承認者承認済",
+        "lastModifiedAdministratorKey": "c77a34b32f5de30b6335d141ad714baf6713cd21ca98689efec9fe273526fac6ff",
+        "requested": {
+          "isBeforeSchedule": true,
+          "start": "2018-08-01T08:00+09:00",
+          "end": "2018-08-01T10:00+09:00"
+        },
+        "current": {
+          "isBeforeSchedule": true,
+          "start": "2018-08-01T09:00+09:00",
+          "end": "2018-08-01T10:00+09:00"
+        }
+      }
+    ]
+  }

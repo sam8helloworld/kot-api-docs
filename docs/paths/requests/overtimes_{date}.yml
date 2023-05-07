@@ -1,5 +1,5 @@
 get:
-  operationId: GetOvertimes
+  operationId: GetOvertime
   summary: /requests/overtimes/{date}{?administratorKey,additionalFields}
   parameters:
     - name: date
@@ -54,4 +54,4 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../components/responses/GetOvertimes.yml"
+            $ref: "../../components/responses/GetOvertime.yml"
