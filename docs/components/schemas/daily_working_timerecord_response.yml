@@ -1,0 +1,19 @@
+type: object
+required:
+  - date
+  - employeeKey
+  - timeRecord
+properties:
+  date:
+    type: string
+    format: date
+    description: 従業員識別キー（従業員コードが変更されても不変）
+  employeeKey:
+    type: string
+    description: 緯度
+  timeRecord:
+    type: array
+    items:
+      $ref: "../schemas/daily_working_timerecord.yml"
+  currentDateEmployee:
+    $ref: "../schemas/daily_working_current_date_employee.yml"
