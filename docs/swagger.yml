@@ -740,7 +740,7 @@ paths:
                         scheduleTypeName: シフト
   '/requests/overtimes/{date}':
     get:
-      operationId: GetOvertimes
+      operationId: GetOvertime
       summary: '/requests/overtimes/{date}{?administratorKey,additionalFields}'
       parameters:
         - name: date
@@ -795,7 +795,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetOvertimes'
+                $ref: '#/components/schemas/GetOvertime'
 components:
   parameters:
     token:
@@ -1492,6 +1492,72 @@ components:
           description: 管理者識別キー（管理者コードが変更されても不変）
           items:
             type: string
+    request_overtime_response:
+      type: object
+      required:
+        - date
+        - requestedDate
+        - employeeKey
+        - requestKey
+        - applicant
+        - status
+        - currentFlow
+        - lastModifiedAdministratorKey
+        - message
+        - adminComment
+        - requested
+        - current
+      properties:
+        date:
+          type: string
+          format: date
+          description: 対象日
+        requestedDate:
+          type: string
+          format: date
+          description: 申請日
+        employeeKey:
+          type: string
+          description: 従業員識別キー（従業員コードが変更されても不変）
+        requestKey:
+          type: string
+          description: 申請識別キー
+        applicant:
+          $ref: '#/components/schemas/request_overtime_applicant'
+        status:
+          type: string
+          description: 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
+          enum:
+            - applying
+            - approved
+            - rejected
+        currentFlow:
+          type: integer
+          description: 現在の承認フローレベル（１～５）
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+        lastModifiedAdministratorKey:
+          type: string
+          description: 最終更新管理者識別キー
+        message:
+          type: string
+          description: 申請メッセージ
+        adminComment:
+          type: string
+          description: 管理者コメント
+        requested:
+          $ref: '#/components/schemas/request_overtime_requested'
+        current:
+          $ref: '#/components/schemas/request_overtime_current'
+        flow:
+          type: array
+          description: 承認フロー
+          items:
+            $ref: '#/components/schemas/request_flow'
     RefreshAccessToken:
       type: object
       required:
@@ -2326,7 +2392,7 @@ components:
                   name:
                     type: string
                     description: 従業員グループ名
-    GetOvertimes:
+    GetOvertime:
       type: object
       required:
         - year
@@ -2340,71 +2406,7 @@ components:
         overtimeRequests:
           type: array
           items:
-            type: object
-            required:
-              - date
-              - requestedDate
-              - employeeKey
-              - requestKey
-              - applicant
-              - status
-              - currentFlow
-              - lastModifiedAdministratorKey
-              - message
-              - adminComment
-              - requested
-              - current
-            properties:
-              date:
-                type: string
-                format: date
-                description: 対象日
-              requestedDate:
-                type: string
-                format: date
-                description: 申請日
-              employeeKey:
-                type: string
-                description: 従業員識別キー（従業員コードが変更されても不変）
-              requestKey:
-                type: string
-                description: 申請識別キー
-              applicant:
-                $ref: '#/components/schemas/request_overtime_applicant'
-              status:
-                type: string
-                description: 申請ステータス（applying 申請中　rejected： 棄却　approved： 承認）
-                enum:
-                  - applying
-                  - approved
-                  - rejected
-              currentFlow:
-                type: integer
-                description: 現在の承認フローレベル（１～５）
-                enum:
-                  - 1
-                  - 2
-                  - 3
-                  - 4
-                  - 5
-              lastModifiedAdministratorKey:
-                type: string
-                description: 最終更新管理者識別キー
-              message:
-                type: string
-                description: 申請メッセージ
-              adminComment:
-                type: string
-                description: 管理者コメント
-              requested:
-                $ref: '#/components/schemas/request_overtime_requested'
-              current:
-                $ref: '#/components/schemas/request_overtime_current'
-              flow:
-                type: array
-                description: 承認フロー
-                items:
-                  $ref: '#/components/schemas/request_flow'
+            $ref: '#/components/schemas/request_overtime_response'
       example:
         year: 2018
         month: 8
