@@ -346,75 +346,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/daily_working_response'
-                example:
-                  - date: '2016-05-01'
-                    dailyWorkings:
-                      - date: '2016-05-01'
-                        employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
-                        currentDateEmployee:
-                          divisionCode: '1000'
-                          divisionName: 本社
-                          gender: male
-                          typeCode: '1'
-                          typeName: 正社員
-                          code: '1000'
-                          lastName: 勤怠
-                          firstName: 太郎
-                          lastNamePhonetics: キンタイ
-                          firstNamePhonetics: タロウ
-                          employeeGroups:
-                            - code: '0001'
-                              name: 人事部
-                            - code: '0002'
-                              name: 総務部
-                        workPlaceDivisionCode: '1000'
-                        workPlaceDivisionName: 本社
-                        isClosing: true
-                        isHelp: false
-                        isError: false
-                        workdayTypeName: 平日
-                        assigned: 480
-                        unassigned: 135
-                        overtime: 135
-                        lateNight: 0
-                        lateNightUnassigned: 0
-                        lateNightOvertime: 0
-                        breakTime: 60
-                        late: 0
-                        earlyLeave: 0
-                        totalWork: 615
-                        holidaysObtained:
-                          fulltimeHoliday:
-                            code: 1
-                            name: 有休
-                          halfdayHolidays:
-                            - typeName: PM休
-                              code: 1
-                              name: 有休
-                          hourHolidays:
-                            - start: '2016-05-01T10:00:00+09:00'
-                              end: '2016-05-01T11:00:00+09:00'
-                              minutes: 60
-                              code: 1
-                              name: 有休
-                        autoBreakOff: 1
-                        discretionaryVacation: 0
-                        customDailyWorkings:
-                          - code: dCus1
-                            name: 日別カスタム1
-                            calculationUnitCode: 1
-                            calculationResult: 1
-                          - code: dCus2
-                            name: 日別カスタム2
-                            calculationUnitCode: 2
-                            calculationResult: 10
-                          - code: dCus3
-                            name: 日別カスタム3
-                            calculationUnitCode: 4
-                            calculationResult: 100
+                $ref: '#/components/schemas/GetDailyWorkings'
   '/daily-workings/{date}':
     get:
       operationId: GetDailyWorking
@@ -440,73 +372,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/daily_working_response'
-                example:
-                  date: '2016-05-01'
-                  dailyWorkings:
-                    - date: '2016-05-01'
-                      employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
-                      currentDateEmployee:
-                        divisionCode: '1000'
-                        divisionName: 本社
-                        gender: male
-                        typeCode: '1'
-                        typeName: 正社員
-                        code: '1000'
-                        lastName: 勤怠
-                        firstName: 太郎
-                        lastNamePhonetics: キンタイ
-                        firstNamePhonetics: タロウ
-                        employeeGroups:
-                          - code: '0001'
-                            name: 人事部
-                          - code: '0002'
-                            name: 総務部
-                      workPlaceDivisionCode: '1000'
-                      workPlaceDivisionName: 本社
-                      isClosing: true
-                      isHelp: false
-                      isError: false
-                      workdayTypeName: 平日
-                      assigned: 480
-                      unassigned: 135
-                      overtime: 135
-                      lateNight: 0
-                      lateNightUnassigned: 0
-                      lateNightOvertime: 0
-                      breakTime: 60
-                      late: 0
-                      earlyLeave: 0
-                      totalWork: 615
-                      holidaysObtained:
-                        fulltimeHoliday:
-                          code: 1
-                          name: 有休
-                        halfdayHolidays:
-                          - typeName: PM休
-                            code: 1
-                            name: 有休
-                        hourHolidays:
-                          - start: '2016-05-01T10:00:00+09:00'
-                            end: '2016-05-01T11:00:00+09:00'
-                            minutes: 60
-                            code: 1
-                            name: 有休
-                      autoBreakOff: 1
-                      discretionaryVacation: 0
-                      customDailyWorkings:
-                        - code: dCus1
-                          name: 日別カスタム1
-                          calculationUnitCode: 1
-                          calculationResult: 1
-                        - code: dCus2
-                          name: 日別カスタム2
-                          calculationUnitCode: 2
-                          calculationResult: 10
-                        - code: dCus3
-                          name: 日別カスタム3
-                          calculationUnitCode: 4
-                          calculationResult: 100
+                $ref: '#/components/schemas/GetDailyWorking'
   '/daily-workings/timerecord/{employeeKey}':
     post:
       operationId: RegisterDailyWorkingTimerecord
@@ -1330,67 +1196,7 @@ components:
           description: 労働合計時間（分）
           type: integer
         holidaysObtained:
-          description: 休暇取得
-          type: object
-          required:
-            - fulltimeHoliday
-            - halfdayHolidays
-            - hourHolidays
-          properties:
-            fulltimeHoliday:
-              type: object
-              required:
-                - code
-                - name
-              properties:
-                code:
-                  type: integer
-                  description: 休暇区分コード
-                name:
-                  type: string
-                  description: 休暇区分名
-            halfdayHolidays:
-              type: object
-              required:
-                - typeName
-                - code
-                - name
-              properties:
-                typeName:
-                  type: string
-                  description: 半休種別名
-                code:
-                  type: integer
-                  description: 休暇区分コード
-                name:
-                  type: string
-                  description: 休暇区分名
-            hourHolidays:
-              type: object
-              required:
-                - start
-                - end
-                - minutes
-                - code
-                - name
-              properties:
-                start:
-                  type: string
-                  format: date-time
-                  description: 休暇開始時間
-                end:
-                  type: string
-                  format: date-time
-                  description: 休暇終了時間
-                minutes:
-                  type: integer
-                  description: 休暇取得時間
-                code:
-                  type: integer
-                  description: 休暇区分コード
-                name:
-                  type: string
-                  description: 休暇区分名
+          $ref: '#/components/schemas/daily_working_holidays_obtained'
         autoBreakOff:
           type: integer
           enum:
@@ -1402,94 +1208,11 @@ components:
           type: integer
           description: 休暇みなし時間（分）
         customDailyWorkings:
-          type: object
-          required:
-            - code
-            - name
-            - calculationUnitCode
-            - calculationResult
-          properties:
-            code:
-              type: string
-              description: 日別カスタム表示コード
-            name:
-              type: string
-              description: 日別カスタム表示名
-            calculationUnitCode:
-              type: integer
-              enum:
-                - 1
-                - 2
-                - 4
-              description: 計算単位コード（1： 日数　2： 時間　4： 数値）
-            calculationResult:
-              type: integer
-              description: 計算結果
+          type: array
+          items:
+            $ref: '#/components/schemas/daily_working_custom_daily_working'
         currentDateEmployee:
-          type: object
-          description: 今日時点の従業員データ
-          required:
-            - divisionCode
-            - divisionName
-            - gender
-            - typeCode
-            - typeName
-            - code
-            - lastName
-            - firstName
-            - lastNamePhonetics
-            - firstNamePhonetics
-            - employeeGroups
-          properties:
-            divisionCode:
-              type: string
-              description: 所属コード
-            divisionName:
-              type: string
-              description: 所属名
-            gender:
-              type: string
-              enum:
-                - no_selected
-                - male
-                - female
-              description: 性別（no_selected： 選択しない　male： 男性　female： 女性）
-            typeCode:
-              type: string
-              description: 雇用区分コード
-            typeName:
-              type: string
-              description: 雇用区分名
-            code:
-              type: string
-              description: 従業員コード
-            lastName:
-              type: string
-              description: 姓
-            firstName:
-              type: string
-              description: 名
-            lastNamePhonetics:
-              type: string
-              description: 姓（カナ）
-            firstNamePhonetics:
-              type: string
-              description: 名（カナ）
-            employeeGroups:
-              type: array
-              description: 従業員グループ情報
-              items:
-                type: object
-                required:
-                  - code
-                  - name
-                properties:
-                  code:
-                    type: string
-                    description: 従業員グループコード
-                  name:
-                    type: string
-                    description: 従業員グループ名
+          $ref: '#/components/schemas/daily_working_current_date_employee'
     daily_working_timerecord_request:
       type: object
       required:
@@ -1574,6 +1297,157 @@ components:
           type: number
           format: double
           description: 経度
+    daily_working_current_date_employee:
+      type: object
+      description: 今日時点の従業員データ
+      required:
+        - divisionCode
+        - divisionName
+        - gender
+        - typeCode
+        - typeName
+        - code
+        - lastName
+        - firstName
+        - lastNamePhonetics
+        - firstNamePhonetics
+        - employeeGroups
+      properties:
+        divisionCode:
+          type: string
+          description: 所属コード
+        divisionName:
+          type: string
+          description: 所属名
+        gender:
+          type: string
+          enum:
+            - no_selected
+            - male
+            - female
+          description: 性別（no_selected： 選択しない　male： 男性　female： 女性）
+        typeCode:
+          type: string
+          description: 雇用区分コード
+        typeName:
+          type: string
+          description: 雇用区分名
+        code:
+          type: string
+          description: 従業員コード
+        lastName:
+          type: string
+          description: 姓
+        firstName:
+          type: string
+          description: 名
+        lastNamePhonetics:
+          type: string
+          description: 姓（カナ）
+        firstNamePhonetics:
+          type: string
+          description: 名（カナ）
+        employeeGroups:
+          type: array
+          description: 従業員グループ情報
+          items:
+            $ref: '#/components/schemas/employee_group'
+    daily_working_custom_daily_working:
+      type: object
+      required:
+        - code
+        - name
+        - calculationUnitCode
+        - calculationResult
+      properties:
+        code:
+          type: string
+          description: 日別カスタム表示コード
+        name:
+          type: string
+          description: 日別カスタム表示名
+        calculationUnitCode:
+          type: integer
+          enum:
+            - 1
+            - 2
+            - 4
+          description: 計算単位コード（1： 日数　2： 時間　4： 数値）
+        calculationResult:
+          type: integer
+          description: 計算結果
+    daily_working_fulltime_holiday:
+      type: object
+      required:
+        - code
+        - name
+      properties:
+        code:
+          type: integer
+          description: 休暇区分コード
+        name:
+          type: string
+          description: 休暇区分名
+    daily_working_halfday_holiday:
+      type: object
+      required:
+        - typeName
+        - code
+        - name
+      properties:
+        typeName:
+          type: string
+          description: 半休種別名
+        code:
+          type: integer
+          description: 休暇区分コード
+        name:
+          type: string
+          description: 休暇区分名
+    daily_working_holidays_obtained:
+      type: object
+      description: 休暇取得
+      required:
+        - fulltimeHoliday
+        - halfdayHolidays
+        - hourHolidays
+      properties:
+        fulltimeHoliday:
+          $ref: '#/components/schemas/daily_working_fulltime_holiday'
+        halfdayHolidays:
+          type: array
+          items:
+            $ref: '#/components/schemas/daily_working_halfday_holiday'
+        hourHolidays:
+          type: array
+          items:
+            $ref: '#/components/schemas/daily_working_hour_holiday'
+    daily_working_hour_holiday:
+      type: object
+      required:
+        - start
+        - end
+        - minutes
+        - code
+        - name
+      properties:
+        start:
+          type: string
+          format: date-time
+          description: 休暇開始時間
+        end:
+          type: string
+          format: date-time
+          description: 休暇終了時間
+        minutes:
+          type: integer
+          description: 休暇取得時間
+        code:
+          type: integer
+          description: 休暇区分コード
+        name:
+          type: string
+          description: 休暇区分名
     RefreshAccessToken:
       type: object
       required:
@@ -2164,6 +2038,166 @@ components:
         name:
           type: string
           description: 従業員グループカテゴリ名
+    GetDailyWorkings:
+      type: array
+      items:
+        type: object
+        required:
+          - date
+          - dailyWorkings
+        properties:
+          date:
+            type: string
+            format: date
+          dailyWorkings:
+            type: array
+            items:
+              $ref: '#/components/schemas/daily_working_response'
+      example:
+        - date: '2016-05-01'
+          dailyWorkings:
+            - date: '2016-05-01'
+              employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+              currentDateEmployee:
+                divisionCode: '1000'
+                divisionName: 本社
+                gender: male
+                typeCode: '1'
+                typeName: 正社員
+                code: '1000'
+                lastName: 勤怠
+                firstName: 太郎
+                lastNamePhonetics: キンタイ
+                firstNamePhonetics: タロウ
+                employeeGroups:
+                  - code: '0001'
+                    name: 人事部
+                  - code: '0002'
+                    name: 総務部
+              workPlaceDivisionCode: '1000'
+              workPlaceDivisionName: 本社
+              isClosing: true
+              isHelp: false
+              isError: false
+              workdayTypeName: 平日
+              assigned: 480
+              unassigned: 135
+              overtime: 135
+              lateNight: 0
+              lateNightUnassigned: 0
+              lateNightOvertime: 0
+              breakTime: 60
+              late: 0
+              earlyLeave: 0
+              totalWork: 615
+              holidaysObtained:
+                fulltimeHoliday:
+                  code: 1
+                  name: 有休
+                halfdayHolidays:
+                  - typeName: PM休
+                    code: 1
+                    name: 有休
+                hourHolidays:
+                  - start: '2016-05-01T10:00:00+09:00'
+                    end: '2016-05-01T11:00:00+09:00'
+                    minutes: 60
+                    code: 1
+                    name: 有休
+              autoBreakOff: 1
+              discretionaryVacation: 0
+              customDailyWorkings:
+                - code: dCus1
+                  name: 日別カスタム1
+                  calculationUnitCode: 1
+                  calculationResult: 1
+                - code: dCus2
+                  name: 日別カスタム2
+                  calculationUnitCode: 2
+                  calculationResult: 10
+                - code: dCus3
+                  name: 日別カスタム3
+                  calculationUnitCode: 4
+                  calculationResult: 100
+    GetDailyWorking:
+      type: object
+      required:
+        - date
+        - dailyWorkings
+      properties:
+        date:
+          type: string
+          format: date
+        dailyWorkings:
+          type: array
+          items:
+            $ref: '#/components/schemas/daily_working_response'
+      example:
+        date: '2016-05-01'
+        dailyWorkings:
+          - date: '2016-05-01'
+            employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+            currentDateEmployee:
+              divisionCode: '1000'
+              divisionName: 本社
+              gender: male
+              typeCode: '1'
+              typeName: 正社員
+              code: '1000'
+              lastName: 勤怠
+              firstName: 太郎
+              lastNamePhonetics: キンタイ
+              firstNamePhonetics: タロウ
+              employeeGroups:
+                - code: '0001'
+                  name: 人事部
+                - code: '0002'
+                  name: 総務部
+            workPlaceDivisionCode: '1000'
+            workPlaceDivisionName: 本社
+            isClosing: true
+            isHelp: false
+            isError: false
+            workdayTypeName: 平日
+            assigned: 480
+            unassigned: 135
+            overtime: 135
+            lateNight: 0
+            lateNightUnassigned: 0
+            lateNightOvertime: 0
+            breakTime: 60
+            late: 0
+            earlyLeave: 0
+            totalWork: 615
+            holidaysObtained:
+              fulltimeHoliday:
+                code: 1
+                name: 有休
+              halfdayHolidays:
+                - typeName: PM休
+                  code: 1
+                  name: 有休
+              hourHolidays:
+                - start: '2016-05-01T10:00:00+09:00'
+                  end: '2016-05-01T11:00:00+09:00'
+                  minutes: 60
+                  code: 1
+                  name: 有休
+            autoBreakOff: 1
+            discretionaryVacation: 0
+            customDailyWorkings:
+              - code: dCus1
+                name: 日別カスタム1
+                calculationUnitCode: 1
+                calculationResult: 1
+              - code: dCus2
+                name: 日別カスタム2
+                calculationUnitCode: 2
+                calculationResult: 10
+              - code: dCus3
+                name: 日別カスタム3
+                calculationUnitCode: 4
+                calculationResult: 100
     GetDailyWorkingTimerecords:
       type: object
       required:
