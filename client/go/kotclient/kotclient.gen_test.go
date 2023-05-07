@@ -631,3 +631,125 @@ func TestGetDailyWorkings(t *testing.T) {
 		t.Errorf("value mismatch (-want +got):\n%s", diff)
 	}
 }
+
+func TestGetDailyWorking(t *testing.T) {
+	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
+	if err != nil {
+		t.Fatalf("failed to securityprovider.NewSecurityProviderBearerToken: %v", err)
+	}
+	ctx := context.Background()
+	sut, err := kotclient.NewClientWithResponses("http://localhost:8001", kotclient.WithRequestEditorFn(bearerTokenProvider.Intercept))
+	if err != nil {
+		t.Fatalf("failed to kotclient.NewClient: %v", err)
+	}
+
+	date := openapi_types.Date{Time: time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC)}
+	queries := kotclient.Ptr(kotclient.GetDailyWorkingParams{
+		Division:         kotclient.Ptr("1000"),
+		Ondivision:       kotclient.Ptr(true),
+		AdditionalFields: kotclient.Ptr(kotclient.AdditionalFieldsEmployeeGroups{"currentDateEmployee"}),
+	})
+	got, err := sut.GetDailyWorkingWithResponse(ctx, date, queries)
+	if err != nil {
+		t.Fatalf("failed to sut.GetDailyWorkingWithResponse: %v", err)
+	}
+
+	if diff := cmp.Diff(200, got.StatusCode()); diff != "" {
+		t.Errorf("value is mismatch (-want +got):\n%s", diff)
+	}
+
+	want := kotclient.GetDailyWorking{
+		Date: openapi_types.Date{Time: time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC)},
+		DailyWorkings: []kotclient.DailyWorkingResponse{
+			{
+				Assigned:     480,
+				AutoBreakOff: 1,
+				BreakTime:    60,
+				CurrentDateEmployee: kotclient.Ptr(kotclient.DailyWorkingCurrentDateEmployee{
+					Code:         "1000",
+					DivisionCode: "1000",
+					DivisionName: "本社",
+					EmployeeGroups: []kotclient.EmployeeGroup{
+						{
+							Code: "0001",
+							Name: "人事部",
+						},
+						{
+							Code: "0002",
+							Name: "総務部",
+						},
+					},
+					FirstName:          "太郎",
+					FirstNamePhonetics: "タロウ",
+					Gender:             "male",
+					LastName:           "勤怠",
+					LastNamePhonetics:  "キンタイ",
+					TypeCode:           "1",
+					TypeName:           "正社員",
+				}),
+				CustomDailyWorkings: []kotclient.DailyWorkingCustomDailyWorking{
+					{
+						CalculationResult:   1,
+						CalculationUnitCode: 1,
+						Code:                "dCus1",
+						Name:                "日別カスタム1",
+					},
+					{
+						CalculationResult:   10,
+						CalculationUnitCode: 2,
+						Code:                "dCus2",
+						Name:                "日別カスタム2",
+					},
+					{
+						CalculationResult:   100,
+						CalculationUnitCode: 4,
+						Code:                "dCus3",
+						Name:                "日別カスタム3",
+					},
+				},
+				Date:                  openapi_types.Date{Time: time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC)},
+				DiscretionaryVacation: 0,
+				EarlyLeave:            0,
+				EmployeeKey:           "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+				HolidaysObtained: kotclient.DailyWorkingHolidaysObtained{
+					FulltimeHoliday: kotclient.DailyWorkingFulltimeHoliday{
+						Code: 1,
+						Name: "有休",
+					},
+					HalfdayHolidays: []kotclient.DailyWorkingHalfdayHoliday{
+						{
+							TypeName: "PM休",
+							Code:     1,
+							Name:     "有休",
+						},
+					},
+					HourHolidays: []kotclient.DailyWorkingHourHoliday{
+						{
+							Start:   time.Date(2016, 5, 1, 10, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)),
+							End:     time.Date(2016, 5, 1, 11, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)),
+							Minutes: 60,
+							Code:    1,
+							Name:    "有休",
+						},
+					},
+				},
+				IsClosing:             true,
+				IsError:               false,
+				IsHelp:                false,
+				Late:                  0,
+				LateNight:             0,
+				LateNightOvertime:     0,
+				LateNightUnassigned:   0,
+				Overtime:              135,
+				TotalWork:             615,
+				Unassigned:            135,
+				WorkPlaceDivisionCode: "1000",
+				WorkPlaceDivisionName: kotclient.Ptr("本社"),
+				WorkdayTypeName:       "平日",
+			},
+		},
+	}
+	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON200); diff != "" {
+		t.Errorf("value mismatch (-want +got):\n%s", diff)
+	}
+}
