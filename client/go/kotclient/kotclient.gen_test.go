@@ -294,7 +294,7 @@ func TestRegisterEmployee(t *testing.T) {
 	}
 	reqBody := kotclient.EmployeeRequest{
 		DivisionCode:   "1000",
-		Gender:         kotclient.Male,
+		Gender:         kotclient.EmployeeRequestGenderMale,
 		TypeCode:       "1",
 		Code:           "1000",
 		LastName:       "勤怠",
@@ -337,7 +337,7 @@ func TestUpdateEmployee(t *testing.T) {
 	}
 	reqBody := kotclient.EmployeeRequest{
 		DivisionCode:   "1000",
-		Gender:         kotclient.Male,
+		Gender:         kotclient.EmployeeRequestGenderMale,
 		TypeCode:       "1",
 		Code:           "1000",
 		LastName:       "勤怠",
@@ -795,6 +795,107 @@ func TestRegisterDailyWorkingTimerecord(t *testing.T) {
 		},
 	}
 	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON201); diff != "" {
+		t.Errorf("value mismatch (-want +got):\n%s", diff)
+	}
+}
+
+func TestGetDailyWorkingTimerecords(t *testing.T) {
+	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
+	if err != nil {
+		t.Fatalf("failed to securityprovider.NewSecurityProviderBearerToken: %v", err)
+	}
+	ctx := context.Background()
+	sut, err := kotclient.NewClientWithResponses("http://localhost:8001", kotclient.WithRequestEditorFn(bearerTokenProvider.Intercept))
+	if err != nil {
+		t.Fatalf("failed to kotclient.NewClient: %v", err)
+	}
+
+	queries := kotclient.Ptr(kotclient.GetDailyWorkingTimerecordsParams{
+		EmployeeKeys: kotclient.Ptr([]string{"8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3"}),
+		Division:     kotclient.Ptr("1000"),
+		Ondivision:   kotclient.Ptr(true),
+		Start:        kotclient.Ptr(openapi_types.Date{Time: time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC)}),
+		End:          kotclient.Ptr(openapi_types.Date{Time: time.Date(2016, 5, 10, 0, 0, 0, 0, time.UTC)}),
+	})
+	got, err := sut.GetDailyWorkingTimerecordsWithResponse(ctx, queries)
+	if err != nil {
+		t.Fatalf("failed to sut.GetDailyWorkingTimerecordsWithResponse: %v", err)
+	}
+
+	if diff := cmp.Diff(200, got.StatusCode()); diff != "" {
+		t.Errorf("value is mismatch (-want +got):\n%s", diff)
+	}
+
+	want := kotclient.GetDailyWorkingTimerecords{
+		{
+			Date: openapi_types.Date{Time: time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC)},
+			DailyWorkings: []kotclient.DailyWorkingTimerecordResponse{
+				{
+					Date:        openapi_types.Date{Time: time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC)},
+					EmployeeKey: "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+					CurrentDateEmployee: kotclient.Ptr(kotclient.DailyWorkingCurrentDateEmployee{
+						Code:               "1000",
+						DivisionCode:       "1000",
+						DivisionName:       "本社",
+						Gender:             kotclient.DailyWorkingCurrentDateEmployeeGenderMale,
+						TypeCode:           "1",
+						TypeName:           "正社員",
+						LastName:           "勤怠",
+						FirstName:          "太郎",
+						LastNamePhonetics:  "キンタイ",
+						FirstNamePhonetics: "タロウ",
+						EmployeeGroups: []kotclient.EmployeeGroup{
+							{
+								Code: "0001",
+								Name: "人事部",
+							},
+							{
+								Code: "0002",
+								Name: "総務部",
+							},
+						},
+					}),
+					TimeRecord: []kotclient.DailyWorkingTimerecord{
+						{
+							Time:         time.Date(2016, 5, 1, 9, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)),
+							Code:         "1",
+							Name:         "出勤",
+							DivisionName: "本社",
+							DivisionCode: "1000",
+							Latitude:     35.6672237,
+							Longitude:    139.7422207,
+						},
+						{
+							Time:           time.Date(2015, 5, 1, 18, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)),
+							Code:           "2",
+							Name:           "退勤",
+							DivisionName:   "本社",
+							CredentialCode: kotclient.Ptr(300),
+							CredentialName: kotclient.Ptr("KOTSL"),
+							DivisionCode:   "1000",
+							Latitude:       35.6672237,
+							Longitude:      139.7422207,
+						},
+						{
+							Time:         time.Date(2016, 5, 1, 10, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)),
+							Code:         "3",
+							Name:         "休憩開始",
+							DivisionName: "本社",
+							DivisionCode: "1000",
+						},
+						{
+							Time:         time.Date(2016, 5, 1, 11, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)),
+							Code:         "4",
+							Name:         "休憩終了",
+							DivisionName: "本社",
+							DivisionCode: "1000",
+						},
+					},
+				},
+			},
+		},
+	}
+	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON200); diff != "" {
 		t.Errorf("value mismatch (-want +got):\n%s", diff)
 	}
 }
