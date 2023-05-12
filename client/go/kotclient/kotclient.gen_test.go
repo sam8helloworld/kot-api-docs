@@ -920,7 +920,7 @@ func TestGetDailyWorkingCosts(t *testing.T) {
 	})
 	got, err := sut.GetDailyWorkingCostsWithResponse(ctx, queries)
 	if err != nil {
-		t.Fatalf("failed to sut.GetDailyWorkingCostWithResponse: %v", err)
+		t.Fatalf("failed to sut.GetDailyWorkingCostsWithResponse: %v", err)
 	}
 
 	if diff := cmp.Diff(200, got.StatusCode()); diff != "" {
@@ -959,6 +959,70 @@ func TestGetDailyWorkingCosts(t *testing.T) {
 					LaborCostEstimate:     8000,
 					TransportationExpense: 1000,
 				},
+			},
+		},
+	}
+	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON200); diff != "" {
+		t.Errorf("value mismatch (-want +got):\n%s", diff)
+	}
+}
+
+func TestGetDailyWorkingCost(t *testing.T) {
+	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
+	if err != nil {
+		t.Fatalf("failed to securityprovider.NewSecurityProviderBearerToken: %v", err)
+	}
+	ctx := context.Background()
+	sut, err := kotclient.NewClientWithResponses("http://localhost:8001", kotclient.WithRequestEditorFn(bearerTokenProvider.Intercept))
+	if err != nil {
+		t.Fatalf("failed to kotclient.NewClient: %v", err)
+	}
+
+	date := openapi_types.Date{Time: time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC)}
+	queries := kotclient.Ptr(kotclient.GetDailyWorkingCostParams{
+		Division:         kotclient.Ptr("1000"),
+		Ondivision:       kotclient.Ptr(true),
+		AdditionalFields: kotclient.Ptr([]string{"currentDateEmployee"}),
+	})
+	got, err := sut.GetDailyWorkingCostWithResponse(ctx, date, queries)
+	if err != nil {
+		t.Fatalf("failed to sut.GetDailyWorkingCostWithResponse: %v", err)
+	}
+
+	if diff := cmp.Diff(200, got.StatusCode()); diff != "" {
+		t.Errorf("value is mismatch (-want +got):\n%s", diff)
+	}
+
+	want := kotclient.GetDailyWorkingCost{
+		Date: openapi_types.Date{Time: time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC)},
+		DailyWorkings: []kotclient.DailyWorkingCostResponse{
+			{
+				Date:        openapi_types.Date{Time: time.Date(2016, 5, 1, 0, 0, 0, 0, time.UTC)},
+				EmployeeKey: "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+				CurrentDateEmployee: kotclient.Ptr(kotclient.DailyWorkingCurrentDateEmployee{
+					Code:               "1000",
+					DivisionCode:       "1000",
+					DivisionName:       "本社",
+					Gender:             kotclient.DailyWorkingCurrentDateEmployeeGenderMale,
+					TypeCode:           "1",
+					TypeName:           "正社員",
+					LastName:           "勤怠",
+					FirstName:          "太郎",
+					LastNamePhonetics:  "キンタイ",
+					FirstNamePhonetics: "タロウ",
+					EmployeeGroups: []kotclient.EmployeeGroup{
+						{
+							Code: "0001",
+							Name: "人事部",
+						},
+						{
+							Code: "0002",
+							Name: "総務部",
+						},
+					},
+				}),
+				LaborCostEstimate:     8000,
+				TransportationExpense: 1000,
 			},
 		},
 	}
