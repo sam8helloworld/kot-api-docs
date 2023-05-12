@@ -1,5 +1,5 @@
 get:
-  operationId: GetDailyWorkingCost
+  operationId: GetDailyWorkingCosts
   summary: /daily-workings/cost{?division,ondivision,start,end,additionalFields}
   parameters:
     - $ref: "../../components/parameters/division.yml"
@@ -24,4 +24,4 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../components/responses/GetDailyWorkingCost.yml"
+            $ref: "../../components/responses/GetDailyWorkingCosts.yml"
