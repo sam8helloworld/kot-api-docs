@@ -6,6 +6,8 @@ info:
 servers:
   - url: 'https://api.kingtime.jp/v1.0'
     description: Production server (uses live data)
+  - url: 'http://localhost:8001'
+    description: Local server (uses mock data)
 paths:
   '/tokens/{token}':
     post:
