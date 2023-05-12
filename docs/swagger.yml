@@ -581,6 +581,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetDailyWorkingCosts'
+  '/daily-workings/cost/{date}':
+    get:
+      operationId: GetDailyWorkingCost
+      summary: '/daily-workings/cost/{date}{?division,ondivision,additionalFields}'
+      parameters:
+        - $ref: '#/components/parameters/date_required'
+        - $ref: '#/components/parameters/division'
+        - $ref: '#/components/parameters/ondivision'
+        - $ref: '#/components/parameters/additionalFields_daily-workings'
+      tags:
+        - Attendance
+      description: 指定した年月日の日別費用データを取得する。
+      externalDocs:
+        description: 年月日指定
+        url: 'https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0-%E6%97%A5%E5%88%A5%E8%B2%BB%E7%94%A8%E3%83%87%E3%83%BC%E3%82%BF-get-1'
+      responses:
+        '200':
+          description: ''
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDailyWorkingCost'
   '/requests/schedules/{date}':
     get:
       operationId: GetSchedules
@@ -2439,6 +2466,42 @@ components:
                     name: 総務部
               laborCostEstimate: 8000
               transportationExpense: 1000
+    GetDailyWorkingCost:
+      type: object
+      required:
+        - date
+        - dailyWorkings
+      properties:
+        date:
+          type: string
+          format: date
+        dailyWorkings:
+          type: array
+          items:
+            $ref: '#/components/schemas/daily_working_cost_response'
+      example:
+        date: '2016-05-01'
+        dailyWorkings:
+          - date: '2016-05-01'
+            employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+            currentDateEmployee:
+              divisionCode: '1000'
+              divisionName: 本社
+              gender: male
+              typeCode: '1'
+              typeName: 正社員
+              code: '1000'
+              lastName: 勤怠
+              firstName: 太郎
+              lastNamePhonetics: キンタイ
+              firstNamePhonetics: タロウ
+              employeeGroups:
+                - code: '0001'
+                  name: 人事部
+                - code: '0002'
+                  name: 総務部
+            laborCostEstimate: 8000
+            transportationExpense: 1000
     GetOvertime:
       type: object
       required:
