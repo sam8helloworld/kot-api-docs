@@ -553,6 +553,34 @@ paths:
                           name: 休憩終了
                           divisionCode: '1000'
                           divisionName: 本社
+  /daily-workings/cost:
+    get:
+      operationId: GetDailyWorkingCosts
+      summary: '/daily-workings/cost{?division,ondivision,start,end,additionalFields}'
+      parameters:
+        - $ref: '#/components/parameters/division'
+        - $ref: '#/components/parameters/ondivision'
+        - $ref: '#/components/parameters/start'
+        - $ref: '#/components/parameters/end'
+        - $ref: '#/components/parameters/additionalFields_daily-workings'
+      tags:
+        - Attendance
+      description: 日別費用データの一覧を取得する。
+      externalDocs:
+        description: 一覧
+        url: 'https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0-%E6%97%A5%E5%88%A5%E8%B2%BB%E7%94%A8%E3%83%87%E3%83%BC%E3%82%BF-get'
+      responses:
+        '200':
+          description: ''
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDailyWorkingCosts'
   '/requests/schedules/{date}':
     get:
       operationId: GetSchedules
@@ -1537,6 +1565,29 @@ components:
           description: 承認フロー
           items:
             $ref: '#/components/schemas/request_flow'
+    daily_working_cost_response:
+      type: object
+      required:
+        - date
+        - employeeKey
+        - laborCostEstimate
+        - transportationExpense
+      properties:
+        date:
+          type: string
+          format: date
+          description: 日時
+        employeeKey:
+          type: string
+          description: 従業員識別キー（従業員コードが変更されても不変）
+        laborCostEstimate:
+          type: integer
+          description: 人件費概算
+        transportationExpense:
+          type: integer
+          description: 交通費
+        currentDateEmployee:
+          $ref: '#/components/schemas/daily_working_current_date_employee'
     RefreshAccessToken:
       type: object
       required:
@@ -2350,6 +2401,44 @@ components:
                   name: 休憩終了
                   divisionCode: '1000'
                   divisionName: 本社
+    GetDailyWorkingCosts:
+      type: array
+      items:
+        type: object
+        required:
+          - date
+          - dailyWorkings
+        properties:
+          date:
+            type: string
+            format: date
+          dailyWorkings:
+            type: array
+            items:
+              $ref: '#/components/schemas/daily_working_cost_response'
+      example:
+        - date: '2016-05-01'
+          dailyWorkings:
+            - date: '2016-05-01'
+              employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+              currentDateEmployee:
+                divisionCode: '1000'
+                divisionName: 本社
+                gender: male
+                typeCode: '1'
+                typeName: 正社員
+                code: '1000'
+                lastName: 勤怠
+                firstName: 太郎
+                lastNamePhonetics: キンタイ
+                firstNamePhonetics: タロウ
+                employeeGroups:
+                  - code: '0001'
+                    name: 人事部
+                  - code: '0002'
+                    name: 総務部
+              laborCostEstimate: 8000
+              transportationExpense: 1000
     GetOvertime:
       type: object
       required:
