@@ -614,8 +614,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/date_required'
         - $ref: '#/components/parameters/division'
-        - $ref: '#/components/parameters/ondivision'
-        - $ref: '#/components/parameters/additionalFields_daily-workings'
+        - $ref: '#/components/parameters/additionalFields_monthly-workings'
       tags:
         - Attendance
       description: 指定した年月の月別勤務データを取得する。
@@ -1012,6 +1011,22 @@ components:
           type: string
         example:
           - 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+    additionalFields_monthly-workings:
+      name: additionalFields
+      in: query
+      description: 指定されたプロパティをレスポンスに追加
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+            - weeklyWork
+            - variationalWork
+            - isConfirmation
+            - currentDateEmployee
+        example:
+          - currentDateEmployee
   schemas:
     employee_request:
       type: object
