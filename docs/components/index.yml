@@ -71,6 +71,8 @@ schemas:
     $ref: "./schemas/request_flow.yml"
   request_overtime_response:
     $ref: "./schemas/request_overtime_response.yml"
+  daily_working_cost_response:
+    $ref: "./schemas/daily_working_cost_response.yml"
   RefreshAccessToken:
     $ref: "./responses/RefreshAccessToken.yml"
   GetAccessTokenAvailability:
@@ -111,6 +113,8 @@ schemas:
     $ref: "./responses/GetDailyWorking.yml"
   GetDailyWorkingTimerecords:
     $ref: "./responses/GetDailyWorkingTimerecords.yml"
+  GetDailyWorkingCost:
+    $ref: "./responses/GetDailyWorkingCost.yml"
   GetOvertime:
     $ref: "./responses/GetOvertime.yml"
   GetSchedules:

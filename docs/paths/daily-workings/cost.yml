@@ -1,0 +1,27 @@
+get:
+  operationId: GetDailyWorkingCost
+  summary: /daily-workings/cost{?division,ondivision,start,end,additionalFields}
+  parameters:
+    - $ref: "../../components/parameters/division.yml"
+    - $ref: "../../components/parameters/ondivision.yml"
+    - $ref: "../../components/parameters/start.yml"
+    - $ref: "../../components/parameters/end.yml"
+    - $ref: "../../components/parameters/additionalFields_daily-workings.yml"
+  tags:
+    - Attendance
+  description: 日別費用データの一覧を取得する。
+  externalDocs:
+    description: 一覧
+    url: https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0-%E6%97%A5%E5%88%A5%E8%B2%BB%E7%94%A8%E3%83%87%E3%83%BC%E3%82%BF-get
+  responses:
+    "200":
+      description: ""
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            example: application/json
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/responses/GetDailyWorkingCost.yml"
