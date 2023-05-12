@@ -115,6 +115,8 @@ schemas:
     $ref: "./responses/GetDailyWorkingTimerecords.yml"
   GetDailyWorkingCosts:
     $ref: "./responses/GetDailyWorkingCosts.yml"
+  GetDailyWorkingCost:
+    $ref: "./responses/GetDailyWorkingCost.yml"
   GetOvertime:
     $ref: "./responses/GetOvertime.yml"
   GetSchedules:

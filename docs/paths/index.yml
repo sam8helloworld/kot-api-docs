@@ -37,6 +37,8 @@
   $ref: ./daily-workings/timerecord_{date}.yml
 /daily-workings/cost:
   $ref: ./daily-workings/cost.yml
+/daily-workings/cost/{date}:
+  $ref: ./daily-workings/cost_{date}.yml
 
 /requests/schedules/{date}:
   $ref: ./requests/schedules_{date}.yml
