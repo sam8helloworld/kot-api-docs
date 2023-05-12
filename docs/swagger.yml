@@ -555,7 +555,7 @@ paths:
                           divisionName: 本社
   /daily-workings/cost:
     get:
-      operationId: GetDailyWorkingCost
+      operationId: GetDailyWorkingCosts
       summary: '/daily-workings/cost{?division,ondivision,start,end,additionalFields}'
       parameters:
         - $ref: '#/components/parameters/division'
@@ -580,7 +580,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetDailyWorkingCost'
+                $ref: '#/components/schemas/GetDailyWorkingCosts'
   '/requests/schedules/{date}':
     get:
       operationId: GetSchedules
@@ -2401,7 +2401,7 @@ components:
                   name: 休憩終了
                   divisionCode: '1000'
                   divisionName: 本社
-    GetDailyWorkingCost:
+    GetDailyWorkingCosts:
       type: array
       items:
         type: object
