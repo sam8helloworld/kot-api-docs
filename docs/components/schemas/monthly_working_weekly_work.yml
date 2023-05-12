@@ -1,0 +1,20 @@
+type: object
+description: 週の残業時間
+required:
+  - overtime
+  - nightOvertime
+  - generalHolidayOvertime
+  - generalHolidayNightOvertime
+properties:
+  overtime:
+    description: 残業時間（分）
+    type: integer
+  nightOvertime:
+    description: 深夜残業時間（分）
+    type: integer
+  generalHolidayOvertime:
+    description: 法定外休日残業時間（分）
+    type: integer
+  generalHolidayNightOvertime:
+    description: 法定外休日深夜残業時間（分）
+    type: integer

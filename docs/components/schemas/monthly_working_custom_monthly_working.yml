@@ -1,0 +1,23 @@
+type: object
+required:
+  - code
+  - name
+  - calculationUnitCode
+  - calculationUnitName
+  - calculationResult
+properties:
+  code:
+    description: 月別カスタム表示コード
+    type: string
+  name:
+    description: 月別カスタム表示名
+    type: string
+  calculationUnitCode:
+    description: 計算単位コード
+    type: integer
+  calculationUnitName:
+    description: 計算単位名
+    type: string
+  calculationResult:
+    description: 計算結果
+    type: integer
