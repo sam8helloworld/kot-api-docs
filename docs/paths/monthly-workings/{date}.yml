@@ -3,8 +3,7 @@ get:
   parameters:
     - $ref: "../../components/parameters/date_required.yml"
     - $ref: "../../components/parameters/division.yml"
-    - $ref: "../../components/parameters/ondivision.yml"
-    - $ref: "../../components/parameters/additionalFields_daily-workings.yml"
+    - $ref: "../../components/parameters/additionalFields_monthly-workings.yml"
   tags:
     - Attendance
   description: 指定した年月の月別勤務データを取得する。

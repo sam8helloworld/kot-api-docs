@@ -1,0 +1,15 @@
+name: additionalFields
+in: query
+description: 指定されたプロパティをレスポンスに追加
+explode: false
+schema:
+  type: array
+  items:
+    type: string
+    enum:
+      - weeklyWork
+      - variationalWork
+      - isConfirmation
+      - currentDateEmployee
+  example:
+    - currentDateEmployee

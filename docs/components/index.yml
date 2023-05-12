@@ -31,6 +31,8 @@ parameters:
     $ref: "./parameters/date_required.yml"
   employeeKeys:
     $ref: "./parameters/employeeKeys.yml"
+  additionalFields_monthly-workings:
+    $ref: "./parameters/additionalFields_monthly-workings.yml"
 
 schemas:
   employee_request:
