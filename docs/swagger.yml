@@ -2873,7 +2873,7 @@ components:
           - weekdayWorkingCount
           - lateCount
           - earlyLeaveCount
-          - workingdayCount
+          - workingDayCount
           - weekdayWorkingdayCount
           - absentdayCount
           - holidaysObtained
@@ -2925,7 +2925,7 @@ components:
           earlyLeaveCount:
             description: 早退回数
             type: integer
-          workingdayCount:
+          workingDayCount:
             description: 総勤務日数
             type: integer
           weekdayWorkingdayCount:
