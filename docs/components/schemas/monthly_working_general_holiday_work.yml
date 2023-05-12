@@ -1,0 +1,36 @@
+type: object
+description: 法定外休日労働
+required:
+  - normal
+  - night
+  - overtime
+  - nightOvertime
+  - extra
+  - nightExtra
+  - count
+  - dayCount
+properties:
+  normal:
+    description: 所定労働時間（分）
+    type: integer
+  night:
+    description: 深夜労働時間（分）
+    type: integer
+  overtime:
+    description: 残業時間（分）
+    type: integer
+  nightOvertime:
+    description: 深夜残業時間（分）
+    type: integer
+  extra:
+    description: 所定外時間（分）
+    type: integer
+  nightExtra:
+    description: 深夜所定外時間（分）
+    type: integer
+  count:
+    description: 勤務回数
+    type: integer
+  dayCount:
+    description: 勤務日数
+    type: integer

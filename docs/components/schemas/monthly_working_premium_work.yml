@@ -1,0 +1,20 @@
+type: object
+description: 割増労働
+required:
+  - overtime1
+  - nightOvertime1
+  - overtime2
+  - nightOvertime2
+properties:
+  overtime1:
+    description: 残業時間１（分）
+    type: integer
+  nightOvertime1:
+    description: 深夜残業時間１（分）
+    type: integer
+  overtime2:
+    description: 残業時間２（分）
+    type: integer
+  nightOvertime2:
+    description: 深夜残業時間２（分）
+    type: integer

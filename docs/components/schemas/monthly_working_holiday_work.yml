@@ -1,0 +1,28 @@
+type: object
+description: 休日労働
+required:
+  - normal
+  - night
+  - overtime
+  - nightOvertime
+  - extra
+  - nightExtra
+properties:
+  normal:
+    description: 所定労働時間（分）
+    type: integer
+  night:
+    description: 深夜労働時間（分）
+    type: integer
+  overtime:
+    description: 残業時間（分）
+    type: integer
+  nightOvertime:
+    description: 深夜残業時間（分）
+    type: integer
+  extra:
+    description: 所定外時間（分）
+    type: integer
+  nightExtra:
+    description: 深夜所定外時間（分）
+    type: integer

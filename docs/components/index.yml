@@ -61,6 +61,24 @@ schemas:
     $ref: "./schemas/daily_working_hour_holiday.yml"
   daily_working_timerecord_response:
     $ref: "./schemas/daily_working_timerecord_response.yml"
+  monthly_working_holiday_obtained:
+    $ref: "./schemas/monthly_working_holiday_obtained.yml"
+  monthly_working_holiday_work:
+    $ref: "./schemas/monthly_working_holiday_work.yml"
+  monthly_working_premium_work:
+    $ref: "./schemas/monthly_working_premium_work.yml"
+  monthly_working_legal_holiday_work:
+    $ref: "./schemas/monthly_working_legal_holiday_work.yml"
+  monthly_working_general_holiday_work:
+    $ref: "./schemas/monthly_working_general_holiday_work.yml"
+  monthly_working_custom_monthly_working:
+    $ref: "./schemas/monthly_working_custom_monthly_working.yml"
+  monthly_working_weekly_work:
+    $ref: "./schemas/monthly_working_weekly_work.yml"
+  monthly_working_variational_work:
+    $ref: "./schemas/monthly_working_variational_work.yml"
+  monthly_working_current_date_employee:
+    $ref: "./schemas/monthly_working_current_date_employee.yml"
   request_overtime_applicant:
     $ref: "./schemas/request_overtime_applicant.yml"
   request_overtime_requested:
@@ -117,6 +135,8 @@ schemas:
     $ref: "./responses/GetDailyWorkingCosts.yml"
   GetDailyWorkingCost:
     $ref: "./responses/GetDailyWorkingCost.yml"
+  GetMonthlyWorking:
+    $ref: "./responses/GetMonthlyWorking.yml"
   GetOvertime:
     $ref: "./responses/GetOvertime.yml"
   GetSchedules:

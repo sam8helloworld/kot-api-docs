@@ -1,0 +1,69 @@
+type: object
+description: 変形労働
+required:
+  - yearlyOvertime
+  - yearlyNightOvertime
+  - monthlyOvertime
+  - monthlyNightOvertime
+  - weeklyOvertime
+  - weeklyNightOvertime
+  - monthlyLegalHolidayOvertime
+  - monthlyLegalHolidayNightOvertime
+  - weeklyLegalHolidayOvertime
+  - weeklyLegalHolidayNightOvertime
+  - yearlyGeneralHolidayOvertime
+  - yearlyGeneralHolidayNightOvertime
+  - monthlyGeneralHolidayOvertime
+  - monthlyGeneralHolidayNightOvertime
+  - weeklyGeneralHolidayOvertime
+  - weeklyGeneralHolidayNightOvertime
+properties:
+  yearlyOvertime:
+    description: 年の残業時間（分）
+    type: integer
+  yearlyNightOvertime:
+    description: 年の深夜残業時間（分）
+    type: integer
+  monthlyOvertime:
+    description: 月の残業時間（分）
+    type: integer
+  monthlyNightOvertime:
+    description: 月の深夜残業時間（分）
+    type: integer
+  weeklyOvertime:
+    description: 週の残業時間（分）
+    type: integer
+  weeklyNightOvertime:
+    description: 週の深夜残業時間（分）
+    type: integer
+  monthlyLegalHolidayOvertime:
+    description: 月の法定休日残業時間（分）
+    type: integer
+  monthlyLegalHolidayNightOvertime:
+    description: 月の法定休日深夜残業時間（分）
+    type: integer
+  weeklyLegalHolidayOvertime:
+    description: 週の法定休日残業時間（分）
+    type: integer
+  weeklyLegalHolidayNightOvertime:
+    description: 週の法定休日深夜残業時間（分）
+    type: integer
+  yearlyGeneralHolidayOvertime:
+    description: 年の法定外休日残業時間（分）
+    type: integer
+  yearlyGeneralHolidayNightOvertime:
+    description: 年の法定外休日深夜残業時間（分）
+    type: integer
+  monthlyGeneralHolidayOvertime:
+    description: 月の法定外休日残業時間（分）
+    type: integer
+  monthlyGeneralHolidayNightOvertime:
+    description: 月の法定外休日深夜残業時間（分）
+    type: integer
+  weeklyGeneralHolidayOvertime:
+    description: 週の法定外休日残業時間（分）
+    type: integer
+  weeklyGeneralHolidayNightOvertime:
+    description: 週の法定外休日深夜残業時間（分）
+    type: integer
+  

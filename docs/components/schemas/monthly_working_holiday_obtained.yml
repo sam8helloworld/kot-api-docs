@@ -1,0 +1,22 @@
+type: object
+required:
+  - dayCount
+  - minutes
+  - code
+  - name
+properties:
+  dayCount:
+    description: 休暇取得日数
+    type: integer
+  minutes:
+    description: 時間休暇取得時間（分）
+    type: integer
+  code:
+    description: 休暇区分コード（1 または 2 の休暇はデフォルトで設定されている休暇）
+    type: string
+    enum:
+      - 1
+      - 2
+  name:
+    description: 休暇区分名
+    type: string

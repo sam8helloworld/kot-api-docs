@@ -1,0 +1,139 @@
+type: object
+required:
+  - year
+  - month
+  - employeeKey
+  - startDate
+  - endDate
+  - workingCount
+  - weekdayWorkingCount
+  - lateCount
+  - earlyLeaveCount
+  - workingdayCount
+  - weekdayWorkingdayCount
+  - absentdayCount
+  - holidaysObtained
+  - assigned
+  - unassigned
+  - overtime
+  - night
+  - nightUnassigned
+  - nightOvertime
+  - breakSum
+  - late
+  - earlyLeave
+  - holidayWork
+  - premiumWork
+  - legalHolidayWork
+  - generalHolidayWork
+  - bind
+  - regarding
+  - isClosing
+  - customMonthlyWorkings
+  - intervalShortageCount
+properties:
+  year:
+    description: 年
+    type: integer
+  month:
+    description: 月
+    type: integer
+  employeeKey:
+    description: 従業員識別キー（従業員コードが変更されても不変）
+    type: string
+  startDate:
+    description: 集計開始日
+    type: string
+    format: date
+  endDate:
+    description: 集計終了日
+    type: string
+    format: date
+  workingCount:
+    description: 総勤務回数
+    type: integer
+  weekdayWorkingCount:
+    description: 平日勤務回数
+    type: integer
+  lateCount:
+    description: 遅刻回数
+    type: integer
+  earlyLeaveCount:
+    description: 早退回数
+    type: integer
+  workingdayCount:
+    description: 総勤務日数
+    type: integer
+  weekdayWorkingdayCount:
+    description: 平日勤務日数
+    type: integer
+  absentdayCount:
+    description: 欠勤日数
+    type: integer
+  holidaysObtained:
+    type: array
+    description: 休暇取得
+    items:
+      $ref: "../schemas/monthly_working_holiday_obtained.yml"
+  assigned:
+    description: 所定時間（分）
+    type: integer
+  unassigned:
+    description: 所定外時間（分）
+    type: integer
+  overtime:
+    description: 残業時間（分）
+    type: integer
+  night:
+    description: 深夜労働時間（分）
+    type: integer
+  nightUnassigned:
+    description: 深夜所定外時間（分）
+    type: integer
+  nightOvertime:
+    description: 深夜残業時間（分）
+    type: integer
+  breakSum:
+    description: 休憩時間（分）
+    type: integer
+  late:
+    description: 遅刻時間（分）
+    type: integer
+  earlyLeave:
+    description: 早退時間（分）
+    type: integer
+  holidayWork:
+    $ref: "../schemas/monthly_working_holiday_work.yml"
+  premiumWork:
+    $ref: "../schemas/monthly_working_premium_work.yml"
+  legalHolidayWork:
+    $ref: "../schemas/monthly_working_legal_holiday_work.yml"
+  generalHolidayWork:
+    $ref: "../schemas/monthly_working_general_holiday_work.yml"
+  bind:
+    description: 拘束時間（分）
+    type: integer
+  regarding:
+    description: 休暇みなし時間（分）
+    type: integer
+  isClosing:
+    description: 締め状況
+    type: boolean
+  customMonthlyWorkings:
+    type: array
+    description: 月別カスタム勤怠項目
+    items:
+      $ref: "../schemas/monthly_working_custom_monthly_working.yml"
+  intervalShortageCount:
+    description: インターバル不足回数
+    type: integer
+  weeklyWork:
+    $ref: "../schemas/monthly_working_weekly_work.yml"
+  variationalWork:
+    $ref: "../schemas/monthly_working_variational_work.yml"
+  isConfirmation:
+    description: 確認状況
+    type: boolean
+  currentDateEmployee:
+    description: 今日時点の従業員データ
+    $ref: "../schemas/monthly_working_current_date_employee.yml"
