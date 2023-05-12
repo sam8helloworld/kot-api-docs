@@ -1031,6 +1031,148 @@ func TestGetDailyWorkingCost(t *testing.T) {
 	}
 }
 
+func TestGetMonthlyWorking(t *testing.T) {
+	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
+	if err != nil {
+		t.Fatalf("failed to securityprovider.NewSecurityProviderBearerToken: %v", err)
+	}
+	ctx := context.Background()
+	sut, err := kotclient.NewClientWithResponses("http://localhost:8001", kotclient.WithRequestEditorFn(bearerTokenProvider.Intercept))
+	if err != nil {
+		t.Fatalf("failed to kotclient.NewClient: %v", err)
+	}
+
+	date := openapi_types.Date{Time: time.Date(2016, 6, 1, 0, 0, 0, 0, time.UTC)}
+	queries := kotclient.Ptr(kotclient.GetMonthlyWorkingParams{
+		Division:         kotclient.Ptr("1000"),
+		AdditionalFields: kotclient.Ptr([]string{"currentDateEmployee"}),
+	})
+	got, err := sut.GetMonthlyWorkingWithResponse(ctx, date, queries)
+	if err != nil {
+		t.Fatalf("failed to sut.GetMonthlyWorkingWithResponse: %v", err)
+	}
+
+	if diff := cmp.Diff(200, got.StatusCode()); diff != "" {
+		t.Errorf("value is mismatch (-want +got):\n%s", diff)
+	}
+
+	want := kotclient.GetMonthlyWorking{
+		{
+			Year:        2016,
+			Month:       6,
+			EmployeeKey: "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+			CurrentDateEmployee: kotclient.Ptr(kotclient.MonthlyWorkingCurrentDateEmployee{
+				DivisionCode:       "1000",
+				DivisionName:       "本社",
+				Gender:             kotclient.Male,
+				TypeCode:           "1",
+				TypeName:           "正社員",
+				Code:               "1000",
+				LastName:           "勤怠",
+				FirstName:          "太郎",
+				LastNamePhonetics:  "キンタイ",
+				FirstNamePhonetics: "タロウ",
+				EmployeeGroups: []kotclient.EmployeeGroup{
+					{
+						Code: "0001",
+						Name: "人事部",
+					},
+					{
+						Code: "0002",
+						Name: "総務部",
+					},
+				},
+			}),
+			StartDate:              openapi_types.Date{Time: time.Date(2016, 6, 1, 0, 0, 0, 0, time.UTC)},
+			EndDate:                openapi_types.Date{Time: time.Date(2016, 6, 21, 0, 0, 0, 0, time.UTC)},
+			WorkingCount:           14,
+			WeekdayWorkingCount:    14,
+			LateCount:              0,
+			EarlyLeaveCount:        0,
+			WorkingDayCount:        14,
+			WeekdayWorkingdayCount: 14,
+			AbsentdayCount:         0,
+			HolidaysObtained: []kotclient.MonthlyWorkingHolidayObtained{
+				{
+					DayCount: 0,
+					Minutes:  0,
+					Code:     1,
+					Name:     "有休",
+				},
+			},
+			Assigned:      0,
+			Unassigned:    0,
+			Overtime:      0,
+			Night:         0,
+			NightOvertime: 0,
+			BreakSum:      840,
+			Late:          0,
+			EarlyLeave:    0,
+			HolidayWork: kotclient.MonthlyWorkingHolidayWork{
+				Normal:        0,
+				Night:         0,
+				Overtime:      0,
+				NightOvertime: 0,
+				Extra:         0,
+			},
+			PremiumWork: kotclient.MonthlyWorkingPremiumWork{
+				Overtime1:      0,
+				NightOvertime1: 0,
+				Overtime2:      0,
+				NightOvertime2: 0,
+			},
+			LegalHolidayWork: kotclient.MonthlyWorkingLegalHolidayWork{
+				Normal:        0,
+				Night:         0,
+				Overtime:      0,
+				NightOvertime: 0,
+				Extra:         0,
+				Count:         0,
+				DayCount:      0,
+			},
+			GeneralHolidayWork: kotclient.MonthlyWorkingGeneralHolidayWork{
+				Normal:        0,
+				Night:         0,
+				Overtime:      0,
+				NightOvertime: 0,
+				Extra:         0,
+				Count:         0,
+				DayCount:      0,
+			},
+			Bind:      0,
+			Regarding: 0,
+			IsClosing: false,
+			CustomMonthlyWorkings: []kotclient.MonthlyWorkingCustomMonthlyWorking{
+				{
+					Code:                "mCus3",
+					Name:                "月別カスタム1",
+					CalculationUnitCode: 1,
+					CalculationUnitName: "日",
+					CalculationResult:   1,
+				},
+				{
+					Code:                "mCus2",
+					Name:                "月別カスタム2",
+					CalculationUnitCode: 2,
+					CalculationUnitName: "時間",
+					CalculationResult:   10,
+				},
+				{
+					Code:                "mCus3",
+					Name:                "月別カスタム3",
+					CalculationUnitCode: 4,
+					CalculationUnitName: "数値",
+					CalculationResult:   100,
+				},
+			},
+			IntervalShortageCount: 1,
+		},
+	}
+	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON200); diff != "" {
+		t.Errorf("value mismatch (-want +got):\n%s", diff)
+	}
+}
+
 func TestGetOvertime(t *testing.T) {
 	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
 	if err != nil {
