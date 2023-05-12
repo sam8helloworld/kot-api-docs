@@ -13,7 +13,7 @@ properties:
     type: integer
   code:
     description: 休暇区分コード（1 または 2 の休暇はデフォルトで設定されている休暇）
-    type: string
+    type: integer
     enum:
       - 1
       - 2
