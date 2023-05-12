@@ -608,6 +608,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetDailyWorkingCost'
+  '/monthly-workings/{date}':
+    get:
+      operationId: GetMonthlyWorking
+      parameters:
+        - $ref: '#/components/parameters/date_required'
+        - $ref: '#/components/parameters/division'
+        - $ref: '#/components/parameters/ondivision'
+        - $ref: '#/components/parameters/additionalFields_daily-workings'
+      tags:
+        - Attendance
+      description: 指定した年月の月別勤務データを取得する。
+      externalDocs:
+        description: 年月指定
+        url: 'https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0-%E6%9C%88%E5%88%A5%E5%8B%A4%E6%80%A0%E3%83%87%E3%83%BC%E3%82%BF-get'
+      responses:
+        '200':
+          description: ''
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMonthlyWorking'
   '/requests/schedules/{date}':
     get:
       operationId: GetSchedules
@@ -1448,6 +1474,322 @@ components:
             $ref: '#/components/schemas/daily_working_timerecord'
         currentDateEmployee:
           $ref: '#/components/schemas/daily_working_current_date_employee'
+    monthly_working_holiday_obtained:
+      type: object
+      required:
+        - dayCount
+        - minutes
+        - code
+        - name
+      properties:
+        dayCount:
+          description: 休暇取得日数
+          type: integer
+        minutes:
+          description: 時間休暇取得時間（分）
+          type: integer
+        code:
+          description: 休暇区分コード（1 または 2 の休暇はデフォルトで設定されている休暇）
+          type: string
+          enum:
+            - 1
+            - 2
+        name:
+          description: 休暇区分名
+          type: string
+    monthly_working_holiday_work:
+      type: object
+      description: 休日労働
+      required:
+        - normal
+        - night
+        - overtime
+        - nightOvertime
+        - extra
+        - nightExtra
+      properties:
+        normal:
+          description: 所定労働時間（分）
+          type: integer
+        night:
+          description: 深夜労働時間（分）
+          type: integer
+        overtime:
+          description: 残業時間（分）
+          type: integer
+        nightOvertime:
+          description: 深夜残業時間（分）
+          type: integer
+        extra:
+          description: 所定外時間（分）
+          type: integer
+        nightExtra:
+          description: 深夜所定外時間（分）
+          type: integer
+    monthly_working_premium_work:
+      type: object
+      description: 割増労働
+      required:
+        - overtime1
+        - nightOvertime1
+        - overtime2
+        - nightOvertime2
+      properties:
+        overtime1:
+          description: 残業時間１（分）
+          type: integer
+        nightOvertime1:
+          description: 深夜残業時間１（分）
+          type: integer
+        overtime2:
+          description: 残業時間２（分）
+          type: integer
+        nightOvertime2:
+          description: 深夜残業時間２（分）
+          type: integer
+    monthly_working_legal_holiday_work:
+      type: object
+      description: 法定休日労働
+      required:
+        - normal
+        - night
+        - overtime
+        - nightOvertime
+        - extra
+        - nightExtra
+        - count
+        - dayCount
+      properties:
+        normal:
+          description: 所定労働時間（分）
+          type: integer
+        night:
+          description: 深夜労働時間（分）
+          type: integer
+        overtime:
+          description: 残業時間（分）
+          type: integer
+        nightOvertime:
+          description: 深夜残業時間（分）
+          type: integer
+        extra:
+          description: 所定外時間（分）
+          type: integer
+        nightExtra:
+          description: 深夜所定外時間（分）
+          type: integer
+        count:
+          description: 勤務回数
+          type: integer
+        dayCount:
+          description: 勤務日数
+          type: integer
+    monthly_working_general_holiday_work:
+      type: object
+      description: 法定外休日労働
+      required:
+        - normal
+        - night
+        - overtime
+        - nightOvertime
+        - extra
+        - nightExtra
+        - count
+        - dayCount
+      properties:
+        normal:
+          description: 所定労働時間（分）
+          type: integer
+        night:
+          description: 深夜労働時間（分）
+          type: integer
+        overtime:
+          description: 残業時間（分）
+          type: integer
+        nightOvertime:
+          description: 深夜残業時間（分）
+          type: integer
+        extra:
+          description: 所定外時間（分）
+          type: integer
+        nightExtra:
+          description: 深夜所定外時間（分）
+          type: integer
+        count:
+          description: 勤務回数
+          type: integer
+        dayCount:
+          description: 勤務日数
+          type: integer
+    monthly_working_custom_monthly_working:
+      type: object
+      required:
+        - code
+        - name
+        - calculationUnitCode
+        - calculationUnitName
+        - calculationResult
+      properties:
+        code:
+          description: 月別カスタム表示コード
+          type: string
+        name:
+          description: 月別カスタム表示名
+          type: string
+        calculationUnitCode:
+          description: 計算単位コード
+          type: integer
+        calculationUnitName:
+          description: 計算単位名
+          type: string
+        calculationResult:
+          description: 計算結果
+          type: integer
+    monthly_working_weekly_work:
+      type: object
+      description: 週の残業時間
+      required:
+        - overtime
+        - nightOvertime
+        - generalHolidayOvertime
+        - generalHolidayNightOvertime
+      properties:
+        overtime:
+          description: 残業時間（分）
+          type: integer
+        nightOvertime:
+          description: 深夜残業時間（分）
+          type: integer
+        generalHolidayOvertime:
+          description: 法定外休日残業時間（分）
+          type: integer
+        generalHolidayNightOvertime:
+          description: 法定外休日深夜残業時間（分）
+          type: integer
+    monthly_working_variational_work:
+      type: object
+      description: 変形労働
+      required:
+        - yearlyOvertime
+        - yearlyNightOvertime
+        - monthlyOvertime
+        - monthlyNightOvertime
+        - weeklyOvertime
+        - weeklyNightOvertime
+        - monthlyLegalHolidayOvertime
+        - monthlyLegalHolidayNightOvertime
+        - weeklyLegalHolidayOvertime
+        - weeklyLegalHolidayNightOvertime
+        - yearlyGeneralHolidayOvertime
+        - yearlyGeneralHolidayNightOvertime
+        - monthlyGeneralHolidayOvertime
+        - monthlyGeneralHolidayNightOvertime
+        - weeklyGeneralHolidayOvertime
+        - weeklyGeneralHolidayNightOvertime
+      properties:
+        yearlyOvertime:
+          description: 年の残業時間（分）
+          type: integer
+        yearlyNightOvertime:
+          description: 年の深夜残業時間（分）
+          type: integer
+        monthlyOvertime:
+          description: 月の残業時間（分）
+          type: integer
+        monthlyNightOvertime:
+          description: 月の深夜残業時間（分）
+          type: integer
+        weeklyOvertime:
+          description: 週の残業時間（分）
+          type: integer
+        weeklyNightOvertime:
+          description: 週の深夜残業時間（分）
+          type: integer
+        monthlyLegalHolidayOvertime:
+          description: 月の法定休日残業時間（分）
+          type: integer
+        monthlyLegalHolidayNightOvertime:
+          description: 月の法定休日深夜残業時間（分）
+          type: integer
+        weeklyLegalHolidayOvertime:
+          description: 週の法定休日残業時間（分）
+          type: integer
+        weeklyLegalHolidayNightOvertime:
+          description: 週の法定休日深夜残業時間（分）
+          type: integer
+        yearlyGeneralHolidayOvertime:
+          description: 年の法定外休日残業時間（分）
+          type: integer
+        yearlyGeneralHolidayNightOvertime:
+          description: 年の法定外休日深夜残業時間（分）
+          type: integer
+        monthlyGeneralHolidayOvertime:
+          description: 月の法定外休日残業時間（分）
+          type: integer
+        monthlyGeneralHolidayNightOvertime:
+          description: 月の法定外休日深夜残業時間（分）
+          type: integer
+        weeklyGeneralHolidayOvertime:
+          description: 週の法定外休日残業時間（分）
+          type: integer
+        weeklyGeneralHolidayNightOvertime:
+          description: 週の法定外休日深夜残業時間（分）
+          type: integer
+    monthly_working_current_date_employee:
+      type: object
+      description: 今日時点の従業員データ
+      required:
+        - divisionCode
+        - divisionName
+        - gender
+        - typeCode
+        - typeName
+        - code
+        - lastName
+        - firstName
+        - lastNamePhonetics
+        - firstNamePhonetics
+        - employeeGroups
+      properties:
+        divisionCode:
+          type: string
+          description: 所属コード
+        divisionName:
+          type: string
+          description: 所属名
+        gender:
+          type: string
+          enum:
+            - no_selected
+            - male
+            - female
+          description: 性別（no_selected： 選択しない　male： 男性　female： 女性）
+        typeCode:
+          type: string
+          description: 雇用区分コード
+        typeName:
+          type: string
+          description: 雇用区分名
+        code:
+          type: string
+          description: 従業員コード
+        lastName:
+          type: string
+          description: 姓
+        firstName:
+          type: string
+          description: 名
+        lastNamePhonetics:
+          type: string
+          description: 姓（カナ）
+        firstNamePhonetics:
+          type: string
+          description: 名（カナ）
+        employeeGroups:
+          type: array
+          description: 従業員グループ情報
+          items:
+            $ref: '#/components/schemas/employee_group'
     request_overtime_applicant:
       type: object
       description: 申請者
@@ -2502,6 +2844,237 @@ components:
                   name: 総務部
             laborCostEstimate: 8000
             transportationExpense: 1000
+    GetMonthlyWorking:
+      type: array
+      items:
+        type: object
+        required:
+          - year
+          - month
+          - employeeKey
+          - startDate
+          - endDate
+          - workingCount
+          - weekdayWorkingCount
+          - lateCount
+          - earlyLeaveCount
+          - workingdayCount
+          - weekdayWorkingdayCount
+          - absentdayCount
+          - holidaysObtained
+          - assigned
+          - unassigned
+          - overtime
+          - night
+          - nightUnassigned
+          - nightOvertime
+          - breakSum
+          - late
+          - earlyLeave
+          - holidayWork
+          - premiumWork
+          - legalHolidayWork
+          - generalHolidayWork
+          - bind
+          - regarding
+          - isClosing
+          - customMonthlyWorkings
+          - intervalShortageCount
+        properties:
+          year:
+            description: 年
+            type: integer
+          month:
+            description: 月
+            type: integer
+          employeeKey:
+            description: 従業員識別キー（従業員コードが変更されても不変）
+            type: string
+          startDate:
+            description: 集計開始日
+            type: string
+            format: date
+          endDate:
+            description: 集計終了日
+            type: string
+            format: date
+          workingCount:
+            description: 総勤務回数
+            type: integer
+          weekdayWorkingCount:
+            description: 平日勤務回数
+            type: integer
+          lateCount:
+            description: 遅刻回数
+            type: integer
+          earlyLeaveCount:
+            description: 早退回数
+            type: integer
+          workingdayCount:
+            description: 総勤務日数
+            type: integer
+          weekdayWorkingdayCount:
+            description: 平日勤務日数
+            type: integer
+          absentdayCount:
+            description: 欠勤日数
+            type: integer
+          holidaysObtained:
+            type: array
+            description: 休暇取得
+            items:
+              $ref: '#/components/schemas/monthly_working_holiday_obtained'
+          assigned:
+            description: 所定時間（分）
+            type: integer
+          unassigned:
+            description: 所定外時間（分）
+            type: integer
+          overtime:
+            description: 残業時間（分）
+            type: integer
+          night:
+            description: 深夜労働時間（分）
+            type: integer
+          nightUnassigned:
+            description: 深夜所定外時間（分）
+            type: integer
+          nightOvertime:
+            description: 深夜残業時間（分）
+            type: integer
+          breakSum:
+            description: 休憩時間（分）
+            type: integer
+          late:
+            description: 遅刻時間（分）
+            type: integer
+          earlyLeave:
+            description: 早退時間（分）
+            type: integer
+          holidayWork:
+            $ref: '#/components/schemas/monthly_working_holiday_work'
+          premiumWork:
+            $ref: '#/components/schemas/monthly_working_premium_work'
+          legalHolidayWork:
+            $ref: '#/components/schemas/monthly_working_legal_holiday_work'
+          generalHolidayWork:
+            $ref: '#/components/schemas/monthly_working_general_holiday_work'
+          bind:
+            description: 拘束時間（分）
+            type: integer
+          regarding:
+            description: 休暇みなし時間（分）
+            type: integer
+          isClosing:
+            description: 締め状況
+            type: boolean
+          customMonthlyWorkings:
+            type: array
+            description: 月別カスタム勤怠項目
+            items:
+              $ref: '#/components/schemas/monthly_working_custom_monthly_working'
+          intervalShortageCount:
+            description: インターバル不足回数
+            type: integer
+          weeklyWork:
+            $ref: '#/components/schemas/monthly_working_weekly_work'
+          variationalWork:
+            $ref: '#/components/schemas/monthly_working_variational_work'
+          isConfirmation:
+            description: 確認状況
+            type: boolean
+          currentDateEmployee:
+            description: 今日時点の従業員データ
+            $ref: '#/components/schemas/monthly_working_current_date_employee'
+      example:
+        - year: 2016
+          month: 6
+          employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+          currentEmployee:
+            divisionCode: '1000'
+            divisionName: 本社
+            gender: male
+            typeCode: '1'
+            typeName: 正社員
+            code: '1000'
+            lastName: 勤怠
+            firstName: 太郎
+            lastNamePhonetics: キンタイ
+            firstNamePhonetics: タロウ
+            employeeGroups:
+              - code: '0001'
+                name: 人事部
+              - code: '0002'
+                name: 総務部
+          startDate: '2016-06-01'
+          endDate: '2016-06-21'
+          workingCount: 14
+          weekdayWorkingCount: 14
+          lateCount: 0
+          earlyLeaveCount: 0
+          workingDayCount: 14
+          weekdayWorkingdayCount: 14
+          absentdayCount: 0
+          holidaysObtained:
+            - dayCount: 0
+              minutes: 0
+              code: 1
+              name: 有休
+          assigned: 0
+          unassigned: 0
+          overtime: 0
+          night: 0
+          nightOvertime: 0
+          breakSum: 840
+          late: 0
+          earlyLeave: 0
+          holidayWork:
+            normal: 0
+            night: 0
+            overtime: 0
+            nightOvertime: 0
+            extra: 0
+          premiumWork:
+            overtime1: 0
+            nightOvertime1: 0
+            overtime2: 0
+            nightOvertime2: 0
+          legalHolidayWork:
+            normal: 0
+            night: 0
+            overtime: 0
+            nightOvertime: 0
+            extra: 0
+            count: 0
+            dayCount: 0
+          generalHolidayWork:
+            normal: 0
+            night: 0
+            overtime: 0
+            nightOvertime: 0
+            extra: 0
+            count: 0
+            dayCount: 0
+          bind: 0
+          regarding: 0
+          isClosing: false
+          customMonthlyWorkings:
+            - code: mCus3
+              name: 月別カスタム1
+              calculationUnitCode: 1
+              calculationUnitName: 日
+              calculationResult: 1
+            - code: mCus2
+              name: 月別カスタム2
+              calculationUnitCode: 2
+              calculationUnitName: 時間
+              calculationResult: 10
+            - code: mCus3
+              name: 月別カスタム3
+              calculationUnitCode: 4
+              calculationUnitName: 数値
+              calculationResult: 100
+          intervalShortageCount: 1
     GetOvertime:
       type: object
       required:

@@ -141,6 +141,19 @@ const (
 	EmployeeRequestGenderMale   EmployeeRequestGender = "male"
 )
 
+// Defines values for MonthlyWorkingCurrentDateEmployeeGender.
+const (
+	Female     MonthlyWorkingCurrentDateEmployeeGender = "female"
+	Male       MonthlyWorkingCurrentDateEmployeeGender = "male"
+	NoSelected MonthlyWorkingCurrentDateEmployeeGender = "no_selected"
+)
+
+// Defines values for MonthlyWorkingHolidayObtainedCode.
+const (
+	MonthlyWorkingHolidayObtainedCodeN1 MonthlyWorkingHolidayObtainedCode = "1"
+	MonthlyWorkingHolidayObtainedCodeN2 MonthlyWorkingHolidayObtainedCode = "2"
+)
+
 // Defines values for RequestFlowLevel.
 const (
 	RequestFlowLevelN1 RequestFlowLevel = 1
@@ -158,11 +171,11 @@ const (
 
 // Defines values for RequestOvertimeResponseCurrentFlow.
 const (
-	RequestOvertimeResponseCurrentFlowN1 RequestOvertimeResponseCurrentFlow = 1
-	RequestOvertimeResponseCurrentFlowN2 RequestOvertimeResponseCurrentFlow = 2
-	RequestOvertimeResponseCurrentFlowN3 RequestOvertimeResponseCurrentFlow = 3
-	RequestOvertimeResponseCurrentFlowN4 RequestOvertimeResponseCurrentFlow = 4
-	RequestOvertimeResponseCurrentFlowN5 RequestOvertimeResponseCurrentFlow = 5
+	N1 RequestOvertimeResponseCurrentFlow = 1
+	N2 RequestOvertimeResponseCurrentFlow = 2
+	N3 RequestOvertimeResponseCurrentFlow = 3
+	N4 RequestOvertimeResponseCurrentFlow = 4
+	N5 RequestOvertimeResponseCurrentFlow = 5
 )
 
 // Defines values for RequestOvertimeResponseStatus.
@@ -233,6 +246,11 @@ const (
 	HiredDate                   GetEmployeeParamsAdditionalFields = "hiredDate"
 	LastNamePhonetics           GetEmployeeParamsAdditionalFields = "lastNamePhonetics"
 	ResignationDate             GetEmployeeParamsAdditionalFields = "resignationDate"
+)
+
+// Defines values for GetMonthlyWorkingParamsAdditionalFields.
+const (
+	CurrentDateEmployee GetMonthlyWorkingParamsAdditionalFields = "currentDateEmployee"
 )
 
 // Defines values for GetOvertimeParamsAdditionalFields.
@@ -504,6 +522,114 @@ type GetEmployeesItem struct {
 
 // GetEmployeesItemGender 性別（male： 男性　female： 女性）
 type GetEmployeesItemGender string
+
+// GetMonthlyWorking defines model for GetMonthlyWorking.
+type GetMonthlyWorking = []struct {
+	// AbsentdayCount 欠勤日数
+	AbsentdayCount int `json:"absentdayCount"`
+
+	// Assigned 所定時間（分）
+	Assigned int `json:"assigned"`
+
+	// Bind 拘束時間（分）
+	Bind int `json:"bind"`
+
+	// BreakSum 休憩時間（分）
+	BreakSum int `json:"breakSum"`
+
+	// CurrentDateEmployee 今日時点の従業員データ
+	CurrentDateEmployee *MonthlyWorkingCurrentDateEmployee `json:"currentDateEmployee,omitempty"`
+
+	// CustomMonthlyWorkings 月別カスタム勤怠項目
+	CustomMonthlyWorkings []MonthlyWorkingCustomMonthlyWorking `json:"customMonthlyWorkings"`
+
+	// EarlyLeave 早退時間（分）
+	EarlyLeave int `json:"earlyLeave"`
+
+	// EarlyLeaveCount 早退回数
+	EarlyLeaveCount int `json:"earlyLeaveCount"`
+
+	// EmployeeKey 従業員識別キー（従業員コードが変更されても不変）
+	EmployeeKey string `json:"employeeKey"`
+
+	// EndDate 集計終了日
+	EndDate openapi_types.Date `json:"endDate"`
+
+	// GeneralHolidayWork 法定外休日労働
+	GeneralHolidayWork MonthlyWorkingGeneralHolidayWork `json:"generalHolidayWork"`
+
+	// HolidayWork 休日労働
+	HolidayWork MonthlyWorkingHolidayWork `json:"holidayWork"`
+
+	// HolidaysObtained 休暇取得
+	HolidaysObtained []MonthlyWorkingHolidayObtained `json:"holidaysObtained"`
+
+	// IntervalShortageCount インターバル不足回数
+	IntervalShortageCount int `json:"intervalShortageCount"`
+
+	// IsClosing 締め状況
+	IsClosing bool `json:"isClosing"`
+
+	// IsConfirmation 確認状況
+	IsConfirmation *bool `json:"isConfirmation,omitempty"`
+
+	// Late 遅刻時間（分）
+	Late int `json:"late"`
+
+	// LateCount 遅刻回数
+	LateCount int `json:"lateCount"`
+
+	// LegalHolidayWork 法定休日労働
+	LegalHolidayWork MonthlyWorkingLegalHolidayWork `json:"legalHolidayWork"`
+
+	// Month 月
+	Month int `json:"month"`
+
+	// Night 深夜労働時間（分）
+	Night int `json:"night"`
+
+	// NightOvertime 深夜残業時間（分）
+	NightOvertime int `json:"nightOvertime"`
+
+	// NightUnassigned 深夜所定外時間（分）
+	NightUnassigned int `json:"nightUnassigned"`
+
+	// Overtime 残業時間（分）
+	Overtime int `json:"overtime"`
+
+	// PremiumWork 割増労働
+	PremiumWork MonthlyWorkingPremiumWork `json:"premiumWork"`
+
+	// Regarding 休暇みなし時間（分）
+	Regarding int `json:"regarding"`
+
+	// StartDate 集計開始日
+	StartDate openapi_types.Date `json:"startDate"`
+
+	// Unassigned 所定外時間（分）
+	Unassigned int `json:"unassigned"`
+
+	// VariationalWork 変形労働
+	VariationalWork *MonthlyWorkingVariationalWork `json:"variationalWork,omitempty"`
+
+	// WeekdayWorkingCount 平日勤務回数
+	WeekdayWorkingCount int `json:"weekdayWorkingCount"`
+
+	// WeekdayWorkingdayCount 平日勤務日数
+	WeekdayWorkingdayCount int `json:"weekdayWorkingdayCount"`
+
+	// WeeklyWork 週の残業時間
+	WeeklyWork *MonthlyWorkingWeeklyWork `json:"weeklyWork,omitempty"`
+
+	// WorkingCount 総勤務回数
+	WorkingCount int `json:"workingCount"`
+
+	// WorkingdayCount 総勤務日数
+	WorkingdayCount int `json:"workingdayCount"`
+
+	// Year 年
+	Year int `json:"year"`
+}
 
 // GetOvertime defines model for GetOvertime.
 type GetOvertime struct {
@@ -1211,6 +1337,237 @@ type EmployeeRequest struct {
 // EmployeeRequestGender 性別（male： 男性　female： 女性）
 type EmployeeRequestGender string
 
+// MonthlyWorkingCurrentDateEmployee 今日時点の従業員データ
+type MonthlyWorkingCurrentDateEmployee struct {
+	// Code 従業員コード
+	Code string `json:"code"`
+
+	// DivisionCode 所属コード
+	DivisionCode string `json:"divisionCode"`
+
+	// DivisionName 所属名
+	DivisionName string `json:"divisionName"`
+
+	// EmployeeGroups 従業員グループ情報
+	EmployeeGroups []EmployeeGroup `json:"employeeGroups"`
+
+	// FirstName 名
+	FirstName string `json:"firstName"`
+
+	// FirstNamePhonetics 名（カナ）
+	FirstNamePhonetics string `json:"firstNamePhonetics"`
+
+	// Gender 性別（no_selected： 選択しない　male： 男性　female： 女性）
+	Gender MonthlyWorkingCurrentDateEmployeeGender `json:"gender"`
+
+	// LastName 姓
+	LastName string `json:"lastName"`
+
+	// LastNamePhonetics 姓（カナ）
+	LastNamePhonetics string `json:"lastNamePhonetics"`
+
+	// TypeCode 雇用区分コード
+	TypeCode string `json:"typeCode"`
+
+	// TypeName 雇用区分名
+	TypeName string `json:"typeName"`
+}
+
+// MonthlyWorkingCurrentDateEmployeeGender 性別（no_selected： 選択しない　male： 男性　female： 女性）
+type MonthlyWorkingCurrentDateEmployeeGender string
+
+// MonthlyWorkingCustomMonthlyWorking defines model for monthly_working_custom_monthly_working.
+type MonthlyWorkingCustomMonthlyWorking struct {
+	// CalculationResult 計算結果
+	CalculationResult int `json:"calculationResult"`
+
+	// CalculationUnitCode 計算単位コード
+	CalculationUnitCode int `json:"calculationUnitCode"`
+
+	// CalculationUnitName 計算単位名
+	CalculationUnitName string `json:"calculationUnitName"`
+
+	// Code 月別カスタム表示コード
+	Code string `json:"code"`
+
+	// Name 月別カスタム表示名
+	Name string `json:"name"`
+}
+
+// MonthlyWorkingGeneralHolidayWork 法定外休日労働
+type MonthlyWorkingGeneralHolidayWork struct {
+	// Count 勤務回数
+	Count int `json:"count"`
+
+	// DayCount 勤務日数
+	DayCount int `json:"dayCount"`
+
+	// Extra 所定外時間（分）
+	Extra int `json:"extra"`
+
+	// Night 深夜労働時間（分）
+	Night int `json:"night"`
+
+	// NightExtra 深夜所定外時間（分）
+	NightExtra int `json:"nightExtra"`
+
+	// NightOvertime 深夜残業時間（分）
+	NightOvertime int `json:"nightOvertime"`
+
+	// Normal 所定労働時間（分）
+	Normal int `json:"normal"`
+
+	// Overtime 残業時間（分）
+	Overtime int `json:"overtime"`
+}
+
+// MonthlyWorkingHolidayObtained defines model for monthly_working_holiday_obtained.
+type MonthlyWorkingHolidayObtained struct {
+	// Code 休暇区分コード（1 または 2 の休暇はデフォルトで設定されている休暇）
+	Code MonthlyWorkingHolidayObtainedCode `json:"code"`
+
+	// DayCount 休暇取得日数
+	DayCount int `json:"dayCount"`
+
+	// Minutes 時間休暇取得時間（分）
+	Minutes int `json:"minutes"`
+
+	// Name 休暇区分名
+	Name string `json:"name"`
+}
+
+// MonthlyWorkingHolidayObtainedCode 休暇区分コード（1 または 2 の休暇はデフォルトで設定されている休暇）
+type MonthlyWorkingHolidayObtainedCode string
+
+// MonthlyWorkingHolidayWork 休日労働
+type MonthlyWorkingHolidayWork struct {
+	// Extra 所定外時間（分）
+	Extra int `json:"extra"`
+
+	// Night 深夜労働時間（分）
+	Night int `json:"night"`
+
+	// NightExtra 深夜所定外時間（分）
+	NightExtra int `json:"nightExtra"`
+
+	// NightOvertime 深夜残業時間（分）
+	NightOvertime int `json:"nightOvertime"`
+
+	// Normal 所定労働時間（分）
+	Normal int `json:"normal"`
+
+	// Overtime 残業時間（分）
+	Overtime int `json:"overtime"`
+}
+
+// MonthlyWorkingLegalHolidayWork 法定休日労働
+type MonthlyWorkingLegalHolidayWork struct {
+	// Count 勤務回数
+	Count int `json:"count"`
+
+	// DayCount 勤務日数
+	DayCount int `json:"dayCount"`
+
+	// Extra 所定外時間（分）
+	Extra int `json:"extra"`
+
+	// Night 深夜労働時間（分）
+	Night int `json:"night"`
+
+	// NightExtra 深夜所定外時間（分）
+	NightExtra int `json:"nightExtra"`
+
+	// NightOvertime 深夜残業時間（分）
+	NightOvertime int `json:"nightOvertime"`
+
+	// Normal 所定労働時間（分）
+	Normal int `json:"normal"`
+
+	// Overtime 残業時間（分）
+	Overtime int `json:"overtime"`
+}
+
+// MonthlyWorkingPremiumWork 割増労働
+type MonthlyWorkingPremiumWork struct {
+	// NightOvertime1 深夜残業時間１（分）
+	NightOvertime1 int `json:"nightOvertime1"`
+
+	// NightOvertime2 深夜残業時間２（分）
+	NightOvertime2 int `json:"nightOvertime2"`
+
+	// Overtime1 残業時間１（分）
+	Overtime1 int `json:"overtime1"`
+
+	// Overtime2 残業時間２（分）
+	Overtime2 int `json:"overtime2"`
+}
+
+// MonthlyWorkingVariationalWork 変形労働
+type MonthlyWorkingVariationalWork struct {
+	// MonthlyGeneralHolidayNightOvertime 月の法定外休日深夜残業時間（分）
+	MonthlyGeneralHolidayNightOvertime int `json:"monthlyGeneralHolidayNightOvertime"`
+
+	// MonthlyGeneralHolidayOvertime 月の法定外休日残業時間（分）
+	MonthlyGeneralHolidayOvertime int `json:"monthlyGeneralHolidayOvertime"`
+
+	// MonthlyLegalHolidayNightOvertime 月の法定休日深夜残業時間（分）
+	MonthlyLegalHolidayNightOvertime int `json:"monthlyLegalHolidayNightOvertime"`
+
+	// MonthlyLegalHolidayOvertime 月の法定休日残業時間（分）
+	MonthlyLegalHolidayOvertime int `json:"monthlyLegalHolidayOvertime"`
+
+	// MonthlyNightOvertime 月の深夜残業時間（分）
+	MonthlyNightOvertime int `json:"monthlyNightOvertime"`
+
+	// MonthlyOvertime 月の残業時間（分）
+	MonthlyOvertime int `json:"monthlyOvertime"`
+
+	// WeeklyGeneralHolidayNightOvertime 週の法定外休日深夜残業時間（分）
+	WeeklyGeneralHolidayNightOvertime int `json:"weeklyGeneralHolidayNightOvertime"`
+
+	// WeeklyGeneralHolidayOvertime 週の法定外休日残業時間（分）
+	WeeklyGeneralHolidayOvertime int `json:"weeklyGeneralHolidayOvertime"`
+
+	// WeeklyLegalHolidayNightOvertime 週の法定休日深夜残業時間（分）
+	WeeklyLegalHolidayNightOvertime int `json:"weeklyLegalHolidayNightOvertime"`
+
+	// WeeklyLegalHolidayOvertime 週の法定休日残業時間（分）
+	WeeklyLegalHolidayOvertime int `json:"weeklyLegalHolidayOvertime"`
+
+	// WeeklyNightOvertime 週の深夜残業時間（分）
+	WeeklyNightOvertime int `json:"weeklyNightOvertime"`
+
+	// WeeklyOvertime 週の残業時間（分）
+	WeeklyOvertime int `json:"weeklyOvertime"`
+
+	// YearlyGeneralHolidayNightOvertime 年の法定外休日深夜残業時間（分）
+	YearlyGeneralHolidayNightOvertime int `json:"yearlyGeneralHolidayNightOvertime"`
+
+	// YearlyGeneralHolidayOvertime 年の法定外休日残業時間（分）
+	YearlyGeneralHolidayOvertime int `json:"yearlyGeneralHolidayOvertime"`
+
+	// YearlyNightOvertime 年の深夜残業時間（分）
+	YearlyNightOvertime int `json:"yearlyNightOvertime"`
+
+	// YearlyOvertime 年の残業時間（分）
+	YearlyOvertime int `json:"yearlyOvertime"`
+}
+
+// MonthlyWorkingWeeklyWork 週の残業時間
+type MonthlyWorkingWeeklyWork struct {
+	// GeneralHolidayNightOvertime 法定外休日深夜残業時間（分）
+	GeneralHolidayNightOvertime int `json:"generalHolidayNightOvertime"`
+
+	// GeneralHolidayOvertime 法定外休日残業時間（分）
+	GeneralHolidayOvertime int `json:"generalHolidayOvertime"`
+
+	// NightOvertime 深夜残業時間（分）
+	NightOvertime int `json:"nightOvertime"`
+
+	// Overtime 残業時間（分）
+	Overtime int `json:"overtime"`
+}
+
 // RequestFlow defines model for request_flow.
 type RequestFlow struct {
 	// AdministratorKeys 管理者識別キー（管理者コードが変更されても不変）
@@ -1562,6 +1919,23 @@ type UpdateEmployeeParams struct {
 	UpdateDate *UpdateDate `form:"updateDate,omitempty" json:"updateDate,omitempty"`
 }
 
+// GetMonthlyWorkingParams defines parameters for GetMonthlyWorking.
+type GetMonthlyWorkingParams struct {
+	// Division 所属コード
+	Division *Division `form:"division,omitempty" json:"division,omitempty"`
+
+	// Ondivision ・true:所属に基づいた勤務データ
+	// ・false:出勤先に基づいた勤務データ
+	// ・divisionが指定されている場合のみ使用可能
+	Ondivision *Ondivision `form:"ondivision,omitempty" json:"ondivision,omitempty"`
+
+	// AdditionalFields 指定されたプロパティをレスポンスに追加
+	AdditionalFields *AdditionalFieldsDailyWorkings `form:"additionalFields,omitempty" json:"additionalFields,omitempty"`
+}
+
+// GetMonthlyWorkingParamsAdditionalFields defines parameters for GetMonthlyWorking.
+type GetMonthlyWorkingParamsAdditionalFields string
+
 // GetOvertimeParams defines parameters for GetOvertime.
 type GetOvertimeParams struct {
 	// AdministratorKey 管理者識別キー（管理者コードが変更されても不変）
@@ -1721,6 +2095,9 @@ type ClientInterface interface {
 	UpdateEmployeeWithBody(ctx context.Context, employeeKey EmployeeKey, params *UpdateEmployeeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	UpdateEmployee(ctx context.Context, employeeKey EmployeeKey, params *UpdateEmployeeParams, body UpdateEmployeeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetMonthlyWorking request
+	GetMonthlyWorking(ctx context.Context, date DateRequired, params *GetMonthlyWorkingParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetOvertime request
 	GetOvertime(ctx context.Context, date string, params *GetOvertimeParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -1959,6 +2336,18 @@ func (c *Client) UpdateEmployeeWithBody(ctx context.Context, employeeKey Employe
 
 func (c *Client) UpdateEmployee(ctx context.Context, employeeKey EmployeeKey, params *UpdateEmployeeParams, body UpdateEmployeeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateEmployeeRequest(c.Server, employeeKey, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetMonthlyWorking(ctx context.Context, date DateRequired, params *GetMonthlyWorkingParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetMonthlyWorkingRequest(c.Server, date, params)
 	if err != nil {
 		return nil, err
 	}
@@ -3165,6 +3554,92 @@ func NewUpdateEmployeeRequestWithBody(server string, employeeKey EmployeeKey, pa
 	return req, nil
 }
 
+// NewGetMonthlyWorkingRequest generates requests for GetMonthlyWorking
+func NewGetMonthlyWorkingRequest(server string, date DateRequired, params *GetMonthlyWorkingParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "date", runtime.ParamLocationPath, date)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/monthly-workings/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Division != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "division", runtime.ParamLocationQuery, *params.Division); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Ondivision != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "ondivision", runtime.ParamLocationQuery, *params.Ondivision); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.AdditionalFields != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", false, "additionalFields", runtime.ParamLocationQuery, *params.AdditionalFields); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewGetOvertimeRequest generates requests for GetOvertime
 func NewGetOvertimeRequest(server string, date string, params *GetOvertimeParams) (*http.Request, error) {
 	var err error
@@ -3530,6 +4005,9 @@ type ClientWithResponsesInterface interface {
 	UpdateEmployeeWithBodyWithResponse(ctx context.Context, employeeKey EmployeeKey, params *UpdateEmployeeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateEmployeeResponse, error)
 
 	UpdateEmployeeWithResponse(ctx context.Context, employeeKey EmployeeKey, params *UpdateEmployeeParams, body UpdateEmployeeJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateEmployeeResponse, error)
+
+	// GetMonthlyWorking request
+	GetMonthlyWorkingWithResponse(ctx context.Context, date DateRequired, params *GetMonthlyWorkingParams, reqEditors ...RequestEditorFn) (*GetMonthlyWorkingResponse, error)
 
 	// GetOvertime request
 	GetOvertimeWithResponse(ctx context.Context, date string, params *GetOvertimeParams, reqEditors ...RequestEditorFn) (*GetOvertimeResponse, error)
@@ -3904,6 +4382,28 @@ func (r UpdateEmployeeResponse) StatusCode() int {
 	return 0
 }
 
+type GetMonthlyWorkingResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *GetMonthlyWorking
+}
+
+// Status returns HTTPResponse.Status
+func (r GetMonthlyWorkingResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetMonthlyWorkingResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type GetOvertimeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -4201,6 +4701,15 @@ func (c *ClientWithResponses) UpdateEmployeeWithResponse(ctx context.Context, em
 		return nil, err
 	}
 	return ParseUpdateEmployeeResponse(rsp)
+}
+
+// GetMonthlyWorkingWithResponse request returning *GetMonthlyWorkingResponse
+func (c *ClientWithResponses) GetMonthlyWorkingWithResponse(ctx context.Context, date DateRequired, params *GetMonthlyWorkingParams, reqEditors ...RequestEditorFn) (*GetMonthlyWorkingResponse, error) {
+	rsp, err := c.GetMonthlyWorking(ctx, date, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetMonthlyWorkingResponse(rsp)
 }
 
 // GetOvertimeWithResponse request returning *GetOvertimeResponse
@@ -4666,6 +5175,32 @@ func ParseUpdateEmployeeResponse(rsp *http.Response) (*UpdateEmployeeResponse, e
 	return response, nil
 }
 
+// ParseGetMonthlyWorkingResponse parses an HTTP response from a GetMonthlyWorkingWithResponse call
+func ParseGetMonthlyWorkingResponse(rsp *http.Response) (*GetMonthlyWorkingResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetMonthlyWorkingResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GetMonthlyWorking
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseGetOvertimeResponse parses an HTTP response from a GetOvertimeWithResponse call
 func ParseGetOvertimeResponse(rsp *http.Response) (*GetOvertimeResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -4815,155 +5350,177 @@ func ParseGetWorkingTypesResponse(rsp *http.Response) (*GetWorkingTypesResponse,
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
-	"NhY2wQEBAA==",
+	"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",
+	"QTUBAA==",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file
