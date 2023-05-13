@@ -1,5 +1,5 @@
 get:
-  operationId: GetMonthlyWorkingCost
+  operationId: GetMonthlyWorkingHolidayRemained
   summary: /monthly-workings/holiday-remained/{employeeTypeCode}/{date}{?additionalFields}
   parameters:
     - $ref: "../../components/parameters/employeeTypeCode_in_path.yml"
