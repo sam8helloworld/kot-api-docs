@@ -1,0 +1,35 @@
+type: object
+required:
+  - code
+  - name
+  - granted
+  - obtained
+  - remained
+  - expired
+properties:
+  code:
+    type: integer
+    description: 休暇区分コード
+  name:
+    type: string
+    description: 休暇区分名
+  granted:
+    type: array
+    description: 付与一覧
+    items:
+      $ref: "../schemas/yearly_working_employee_holiday_granted.yml"
+  obtained:
+    type: array
+    description: 取得一覧
+    items:
+      $ref: "../schemas/yearly_working_employee_holiday_obtained.yml"
+  remained:
+    type: array
+    description: 繰越一覧
+    items:
+      $ref: "../schemas/yearly_working_employee_holiday_remained.yml"
+  expired:
+    type: array
+    description: 失効一覧
+    items:
+      $ref: "../schemas/yearly_working_employee_holiday_expired.yml"

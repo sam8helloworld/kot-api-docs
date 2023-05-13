@@ -1,0 +1,21 @@
+type: object
+required:
+  - date
+  - days
+  - minutes
+  - effectivePeriod
+properties:
+  date:
+    type: string
+    format: date
+    description: 付与日
+  days:
+    type: integer
+    description: 付与日数
+  minutes:
+    type: integer
+    description: 付与時間(分)
+  effectivePeriod:
+    type: string
+    format: date
+    description: 有効期限

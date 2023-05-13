@@ -1,0 +1,16 @@
+type: object
+required:
+  - date
+  - days
+  - minutes
+properties:
+  date:
+    type: string
+    format: date
+    description: 失効日
+  days:
+    type: integer
+    description: 失効日数
+  minutes:
+    type: integer
+    description: 失効時間(分)

@@ -47,6 +47,9 @@
 /monthly-workings/holiday-remained/{employeeTypeCode}/{date}:
   $ref: ./monthly-workings/holiday-remained_{employeeTypeCode}_{date}.yml
 
+/yearly-workings/holidays/{employeeTypeCode}/{year}:
+  $ref: ./yearly-workings/holidays_{employeeTypeCode}_{year}.yml
+
 /requests/schedules/{date}:
   $ref: ./requests/schedules_{date}.yml
 /requests/overtimes/{date}:

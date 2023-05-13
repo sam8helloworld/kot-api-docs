@@ -1,0 +1,7 @@
+name: year
+in: path
+required: true
+description: 詳細を取得したい年度
+schema:
+  type: integer
+  example: 2019

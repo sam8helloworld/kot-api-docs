@@ -1,0 +1,16 @@
+type: object
+required:
+  - date
+  - days
+  - minutes
+properties:
+  date:
+    type: string
+    format: date
+    description: 取得日
+  days:
+    type: integer
+    description: 取得日数
+  minutes:
+    type: integer
+    description: 取得時間(分)
