@@ -1200,9 +1200,31 @@ func TestGetMonthlyWorkingCost(t *testing.T) {
 
 	want := []kotclient.MonthlyWorkingCostResponse{
 		{
-			Year:                  2016,
-			Month:                 6,
-			EmployeeKey:           "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+			Year:        2016,
+			Month:       6,
+			EmployeeKey: "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+			CurrentDateEmployee: kotclient.Ptr(kotclient.MonthlyWorkingCurrentDateEmployee{
+				DivisionCode:       "1000",
+				DivisionName:       "本社",
+				Gender:             kotclient.Male,
+				TypeCode:           "1",
+				TypeName:           "正社員",
+				Code:               "1000",
+				LastName:           "勤怠",
+				FirstName:          "太郎",
+				LastNamePhonetics:  "キンタイ",
+				FirstNamePhonetics: "タロウ",
+				EmployeeGroups: []kotclient.EmployeeGroup{
+					{
+						Code: "0001",
+						Name: "人事部",
+					},
+					{
+						Code: "0002",
+						Name: "総務部",
+					},
+				},
+			}),
 			StartDate:             openapi_types.Date{Time: time.Date(2016, 6, 1, 0, 0, 0, 0, time.UTC)},
 			EndDate:               openapi_types.Date{Time: time.Date(2016, 6, 30, 0, 0, 0, 0, time.UTC)},
 			LaborCostEstimate:     200000,
