@@ -37,6 +37,8 @@ parameters:
     $ref: "./parameters/date_year_month_in_path.yml"
   additionalFields_monthly-workings-cost:
     $ref: "./parameters/additionalFields_monthly-workings-cost.yml"
+  employeeTypeCode_in_path:
+    $ref: "./parameters/employeeTypeCode_in_path.yml"
 
 schemas:
   employee_request:
@@ -87,6 +89,10 @@ schemas:
     $ref: "./schemas/monthly_working_current_date_employee.yml"
   monthly_working_cost_response:
     $ref: "./schemas/monthly_working_cost_response.yml"
+  monthly_working_holiday_remained_response:
+    $ref: "./schemas/monthly_working_holiday_remained_response.yml"
+  monthly_working_holiday_remained_holiday_remained:
+    $ref: "./schemas/monthly_working_holiday_remained_holiday_remained.yml"
   request_overtime_applicant:
     $ref: "./schemas/request_overtime_applicant.yml"
   request_overtime_requested:
@@ -145,6 +151,8 @@ schemas:
     $ref: "./responses/GetDailyWorkingCost.yml"
   GetMonthlyWorking:
     $ref: "./responses/GetMonthlyWorking.yml"
+  GetMonthlyWorkingHolidayRemained:
+    $ref: "./responses/GetMonthlyWorkingHolidayRemained.yml"
   GetOvertime:
     $ref: "./responses/GetOvertime.yml"
   GetSchedules:

@@ -1,0 +1,7 @@
+name: employeeTypeCode
+in: path
+required: true
+description: 詳細を取得したい雇用区分コード
+schema:
+  type: integer
+  example: 1000
