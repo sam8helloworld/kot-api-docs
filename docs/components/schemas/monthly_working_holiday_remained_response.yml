@@ -19,3 +19,5 @@ properties:
     type: array
     items:
       $ref: "../schemas/monthly_working_holiday_remained_holiday_remained.yml"
+  currentDateEmployee:
+    $ref: "../schemas/monthly_working_current_date_employee.yml"
