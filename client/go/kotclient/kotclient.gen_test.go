@@ -1064,7 +1064,7 @@ func TestGetMonthlyWorking(t *testing.T) {
 			CurrentDateEmployee: kotclient.Ptr(kotclient.MonthlyWorkingCurrentDateEmployee{
 				DivisionCode:       "1000",
 				DivisionName:       "本社",
-				Gender:             kotclient.Male,
+				Gender:             kotclient.MonthlyWorkingCurrentDateEmployeeGenderMale,
 				TypeCode:           "1",
 				TypeName:           "正社員",
 				Code:               "1000",
@@ -1206,7 +1206,7 @@ func TestGetMonthlyWorkingCost(t *testing.T) {
 			CurrentDateEmployee: kotclient.Ptr(kotclient.MonthlyWorkingCurrentDateEmployee{
 				DivisionCode:       "1000",
 				DivisionName:       "本社",
-				Gender:             kotclient.Male,
+				Gender:             kotclient.MonthlyWorkingCurrentDateEmployeeGenderMale,
 				TypeCode:           "1",
 				TypeName:           "正社員",
 				Code:               "1000",
@@ -1269,7 +1269,7 @@ func TestGetMonthlyWorkingHolidayRemained(t *testing.T) {
 			CurrentDateEmployee: kotclient.Ptr(kotclient.MonthlyWorkingCurrentDateEmployee{
 				DivisionCode:       "1000",
 				DivisionName:       "本社",
-				Gender:             kotclient.Male,
+				Gender:             kotclient.MonthlyWorkingCurrentDateEmployeeGenderMale,
 				TypeCode:           "1",
 				TypeName:           "正社員",
 				Code:               "1000",
@@ -1300,6 +1300,159 @@ func TestGetMonthlyWorkingHolidayRemained(t *testing.T) {
 					Minutes: 0,
 					Code:    2,
 					Name:    "代休",
+				},
+			},
+		},
+	}
+	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON200); diff != "" {
+		t.Errorf("value mismatch (-want +got):\n%s", diff)
+	}
+}
+
+func TestGetYearlyWorkingHoliday(t *testing.T) {
+	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
+	if err != nil {
+		t.Fatalf("failed to securityprovider.NewSecurityProviderBearerToken: %v", err)
+	}
+	ctx := context.Background()
+	sut, err := kotclient.NewClientWithResponses("http://localhost:8001", kotclient.WithRequestEditorFn(bearerTokenProvider.Intercept))
+	if err != nil {
+		t.Fatalf("failed to kotclient.NewClient: %v", err)
+	}
+
+	employeeTypeCode := 1000
+	year := 2019
+	queries := kotclient.Ptr(kotclient.GetYearlyWorkingHolidayParams{
+		AdditionalFields: kotclient.Ptr([]string{"currentDateEmployee"}),
+	})
+	got, err := sut.GetYearlyWorkingHolidayWithResponse(ctx, employeeTypeCode, year, queries)
+	if err != nil {
+		t.Fatalf("failed to sut.GetYearlyWorkingHolidayWithResponse: %v", err)
+	}
+
+	if diff := cmp.Diff(200, got.StatusCode()); diff != "" {
+		t.Errorf("value is mismatch (-want +got):\n%s", diff)
+	}
+
+	want := kotclient.GetYearlyWorkingHoliday{
+		Year:      "2019",
+		StartDate: openapi_types.Date{Time: time.Date(2019, 1, 1, 0, 0, 0, 0, time.UTC)},
+		EndDate:   openapi_types.Date{Time: time.Date(2019, 12, 31, 0, 0, 0, 0, time.UTC)},
+		CloseDate: 30,
+		Employees: []kotclient.YearlyWorkingEmployee{
+			{
+				EmployeeKey: "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+				CurrentDateEmployee: kotclient.Ptr(kotclient.YearlyWorkingCurrentDateEmployee{
+					DivisionCode:       "1000",
+					DivisionName:       "本社",
+					Gender:             kotclient.YearlyWorkingCurrentDateEmployeeGenderMale,
+					TypeCode:           "1",
+					TypeName:           "正社員",
+					Code:               "1000",
+					LastName:           "勤怠",
+					FirstName:          "太郎",
+					LastNamePhonetics:  "キンタイ",
+					FirstNamePhonetics: "タロウ",
+					EmployeeGroups: []kotclient.EmployeeGroup{
+						{
+							Code: "0001",
+							Name: "人事部",
+						},
+						{
+							Code: "0002",
+							Name: "総務部",
+						},
+					},
+				}),
+				Holidays: []kotclient.YearlyWorkingEmployeeHoliday{
+					{
+						Code: 1,
+						Name: "有休",
+						Granted: []kotclient.YearlyWorkingEmployeeHolidayGranted{
+							{
+								Date:            openapi_types.Date{Time: time.Date(2019, 1, 1, 0, 0, 0, 0, time.UTC)},
+								Days:            5,
+								Minutes:         120,
+								EffectivePeriod: openapi_types.Date{Time: time.Date(2019, 4, 1, 0, 0, 0, 0, time.UTC)},
+							},
+							{
+								Date:            openapi_types.Date{Time: time.Date(2019, 4, 1, 0, 0, 0, 0, time.UTC)},
+								Minutes:         180,
+								EffectivePeriod: openapi_types.Date{Time: time.Date(2019, 7, 1, 0, 0, 0, 0, time.UTC)},
+							},
+						},
+						Obtained: []kotclient.YearlyWorkingEmployeeHolidayObtained{
+							{
+								Date: openapi_types.Date{Time: time.Date(2019, 2, 2, 0, 0, 0, 0, time.UTC)},
+								Days: 1,
+							},
+							{
+								Date:    openapi_types.Date{Time: time.Date(2019, 5, 10, 0, 0, 0, 0, time.UTC)},
+								Minutes: 180,
+							},
+						},
+						Remained: []kotclient.YearlyWorkingEmployeeHolidayRemained{
+							{
+								Date:    openapi_types.Date{Time: time.Date(2019, 4, 1, 0, 0, 0, 0, time.UTC)},
+								Days:    2,
+								Minutes: 120,
+							},
+						},
+						Expired: []kotclient.YearlyWorkingEmployeeHolidayExpired{
+							{
+								Date: openapi_types.Date{Time: time.Date(2019, 6, 1, 0, 0, 0, 0, time.UTC)},
+								Days: 2,
+							},
+							{
+								Date:    openapi_types.Date{Time: time.Date(2019, 3, 1, 0, 0, 0, 0, time.UTC)},
+								Minutes: 120,
+							},
+						},
+					},
+					{
+						Code: 2,
+						Name: "代休",
+						Granted: []kotclient.YearlyWorkingEmployeeHolidayGranted{
+							{
+								Date:            openapi_types.Date{Time: time.Date(2019, 1, 1, 0, 0, 0, 0, time.UTC)},
+								Days:            5,
+								Minutes:         120,
+								EffectivePeriod: openapi_types.Date{Time: time.Date(2019, 4, 1, 0, 0, 0, 0, time.UTC)},
+							},
+							{
+								Date:            openapi_types.Date{Time: time.Date(2019, 4, 1, 0, 0, 0, 0, time.UTC)},
+								Minutes:         180,
+								EffectivePeriod: openapi_types.Date{Time: time.Date(2019, 7, 1, 0, 0, 0, 0, time.UTC)},
+							},
+						},
+						Obtained: []kotclient.YearlyWorkingEmployeeHolidayObtained{
+							{
+								Date: openapi_types.Date{Time: time.Date(2019, 2, 2, 0, 0, 0, 0, time.UTC)},
+								Days: 1,
+							},
+							{
+								Date:    openapi_types.Date{Time: time.Date(2019, 5, 10, 0, 0, 0, 0, time.UTC)},
+								Minutes: 180,
+							},
+						},
+						Remained: []kotclient.YearlyWorkingEmployeeHolidayRemained{
+							{
+								Date:    openapi_types.Date{Time: time.Date(2019, 4, 1, 0, 0, 0, 0, time.UTC)},
+								Days:    2,
+								Minutes: 120,
+							},
+						},
+						Expired: []kotclient.YearlyWorkingEmployeeHolidayExpired{
+							{
+								Date: openapi_types.Date{Time: time.Date(2019, 6, 1, 0, 0, 0, 0, time.UTC)},
+								Days: 2,
+							},
+							{
+								Date:    openapi_types.Date{Time: time.Date(2019, 3, 1, 0, 0, 0, 0, time.UTC)},
+								Minutes: 120,
+							},
+						},
+					},
 				},
 			},
 		},
