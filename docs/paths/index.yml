@@ -42,6 +42,8 @@
 
 /monthly-workings/{date}:
   $ref: ./monthly-workings/{date}.yml
+/monthly-workings/cost/{date}:
+  $ref: ./monthly-workings/cost_{date}.yml
 
 /requests/schedules/{date}:
   $ref: ./requests/schedules_{date}.yml

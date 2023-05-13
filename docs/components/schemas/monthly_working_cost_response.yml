@@ -1,0 +1,36 @@
+type: object
+required:
+  - year
+  - month
+  - employeeKey
+  - startDate
+  - endDate
+  - laborCostEstimate
+  - transportationExpense
+properties:
+  year:
+    description: 年
+    type: integer
+  month:
+    description: 月
+    type: integer
+  employeeKey:
+    description: 従業員識別キー（従業員コードが変更されても不変）
+    type: string
+  startDate:
+    description: 集計開始日
+    type: string
+    format: date
+  endDate:
+    description: 集計終了日
+    type: string
+    format: date
+  laborCostEstimate:
+    description: 人件費概算
+    type: integer
+  transportationExpense:
+    description: 交通費
+    type: integer
+  currentDateEmployee:
+    $ref: "../schemas/monthly_working_current_date_employee.yml"
+      
