@@ -710,6 +710,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetMonthlyWorkingHolidayRemained'
+  '/yearly-workings/holidays/{employeeTypeCode}/{year}':
+    get:
+      operationId: GetYearlyWorkingHoliday
+      summary: '/yearly-workings/holidays/{employeeTypeCode}/{year}{?additionalFields}'
+      parameters:
+        - $ref: '#/components/parameters/employeeTypeCode_in_path'
+        - $ref: '#/components/parameters/year_in_path'
+        - $ref: '#/components/parameters/additionalFields_monthly-workings-cost'
+      tags:
+        - Attendance
+      description: 指定した年度にて行った休暇付与、取得を一覧で取得する。
+      externalDocs:
+        description: 年度指定
+        url: 'https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0-%E5%B9%B4%E5%88%A5%E4%BC%91%E6%9A%87%E3%83%87%E3%83%BC%E3%82%BF-get'
+      responses:
+        '200':
+          description: ''
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetYearlyWorkingHoliday'
   '/requests/schedules/{date}':
     get:
       operationId: GetSchedules
@@ -1138,6 +1164,14 @@ components:
       schema:
         type: integer
         example: 1000
+    year_in_path:
+      name: year
+      in: path
+      required: true
+      description: 詳細を取得したい年度
+      schema:
+        type: integer
+        example: 2019
   schemas:
     employee_request:
       type: object
@@ -2167,6 +2201,184 @@ components:
           description: 交通費
         currentDateEmployee:
           $ref: '#/components/schemas/daily_working_current_date_employee'
+    yearly_working_employee:
+      type: object
+      required:
+        - employeeKey
+        - holidays
+      properties:
+        employeeKey:
+          type: string
+          description: 従業員識別キー（従業員コードが変更されても不変）
+        holidays:
+          type: array
+          description: 付与・取得一覧
+          items:
+            $ref: '#/components/schemas/yearly_working_employee_holiday'
+    yearly_working_employee_holiday:
+      type: object
+      required:
+        - code
+        - name
+        - granted
+        - obtained
+        - remained
+        - expired
+      properties:
+        code:
+          type: integer
+          description: 休暇区分コード
+        name:
+          type: string
+          description: 休暇区分名
+        granted:
+          type: array
+          description: 付与一覧
+          items:
+            $ref: '#/components/schemas/yearly_working_employee_holiday_granted'
+        obtained:
+          type: array
+          description: 取得一覧
+          items:
+            $ref: '#/components/schemas/yearly_working_employee_holiday_obtained'
+        remained:
+          type: array
+          description: 繰越一覧
+          items:
+            $ref: '#/components/schemas/yearly_working_employee_holiday_remained'
+        expired:
+          type: array
+          description: 失効一覧
+          items:
+            $ref: '#/components/schemas/yearly_working_employee_holiday_expired'
+    yearly_working_employee_holiday_granted:
+      type: object
+      required:
+        - date
+        - days
+        - minutes
+        - effectivePeriod
+      properties:
+        date:
+          type: string
+          format: date
+          description: 付与日
+        days:
+          type: integer
+          description: 付与日数
+        minutes:
+          type: integer
+          description: 付与時間(分)
+        effectivePeriod:
+          type: string
+          format: date
+          description: 有効期限
+    yearly_working_employee_holiday_obtained:
+      type: object
+      required:
+        - date
+        - days
+        - minutes
+      properties:
+        date:
+          type: string
+          format: date
+          description: 取得日
+        days:
+          type: integer
+          description: 取得日数
+        minutes:
+          type: integer
+          description: 取得時間(分)
+    yearly_working_employee_holiday_remained:
+      type: object
+      required:
+        - date
+        - days
+        - minutes
+      properties:
+        date:
+          type: string
+          format: date
+          description: 繰越日
+        days:
+          type: integer
+          description: 繰越日数
+        minutes:
+          type: integer
+          description: 繰越時間(分)
+    yearly_working_employee_holiday_expired:
+      type: object
+      required:
+        - date
+        - days
+        - minutes
+      properties:
+        date:
+          type: string
+          format: date
+          description: 失効日
+        days:
+          type: integer
+          description: 失効日数
+        minutes:
+          type: integer
+          description: 失効時間(分)
+    yearly_working_current_date_employee:
+      type: object
+      description: 今日時点の従業員データ
+      required:
+        - divisionCode
+        - divisionName
+        - gender
+        - typeCode
+        - typeName
+        - code
+        - lastName
+        - firstName
+        - lastNamePhonetics
+        - firstNamePhonetics
+        - employeeGroups
+      properties:
+        divisionCode:
+          type: string
+          description: 所属コード
+        divisionName:
+          type: string
+          description: 所属名
+        gender:
+          type: string
+          enum:
+            - no_selected
+            - male
+            - female
+          description: 性別（no_selected： 選択しない　male： 男性　female： 女性）
+        typeCode:
+          type: string
+          description: 雇用区分コード
+        typeName:
+          type: string
+          description: 雇用区分名
+        code:
+          type: string
+          description: 従業員コード
+        lastName:
+          type: string
+          description: 姓
+        firstName:
+          type: string
+          description: 名
+        lastNamePhonetics:
+          type: string
+          description: 姓（カナ）
+        firstNamePhonetics:
+          type: string
+          description: 名（カナ）
+        employeeGroups:
+          type: array
+          description: 従業員グループ情報
+          items:
+            $ref: '#/components/schemas/employee_group'
     RefreshAccessToken:
       type: object
       required:
@@ -3318,6 +3530,109 @@ components:
               minutes: 0
               code: 2
               name: 代休
+    GetYearlyWorkingHoliday:
+      type: object
+      required:
+        - year
+        - startDate
+        - endDate
+        - closeDate
+        - employees
+      properties:
+        year:
+          type: integer
+          description: 年度
+          example: 2019
+        startDate:
+          type: string
+          description: 年度開始日
+          format: date
+        endDate:
+          type: string
+          description: 年度終了日
+          format: date
+        closeDate:
+          type: integer
+          description: 締日
+        employees:
+          type: array
+          description: 従業員別の休暇情報
+          items:
+            $ref: '#/components/schemas/yearly_working_employee'
+        currentDateEmployee:
+          $ref: '#/components/schemas/yearly_working_current_date_employee'
+      example:
+        year: '2019'
+        startDate: '2019-01-01'
+        endDate: '2019-12-31'
+        closeDate: 30
+        employees:
+          - employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+            currentDateEmployee:
+              divisionCode: '1000'
+              divisionName: 本社
+              gender: male
+              typeCode: '1'
+              typeName: 正社員
+              code: '1000'
+              lastName: 勤怠
+              firstName: 太郎
+              lastNamePhonetics: キンタイ
+              firstNamePhonetics: タロウ
+              employeeGroups:
+                - code: '0001'
+                  name: 人事部
+                - code: '0002'
+                  name: 総務部
+            holidays:
+              - code: 1
+                name: 有休
+                granted:
+                  - date: '2019-01-01'
+                    days: 5
+                    minutes: 120
+                    effectivePeriod: '2019-04-01'
+                  - date: '2019-04-01'
+                    minutes: 180
+                    effectivePeriod: '2019-07-01'
+                obtained:
+                  - date: '2019-02-02'
+                    days: 1
+                  - date: '2019-05-10'
+                    minutes: 180
+                remained:
+                  - date: '2019-04-01'
+                    days: 2
+                    minutes: 120
+                expired:
+                  - date: '2019-06-01'
+                    days: 2
+                  - date: '2019-03-01'
+                    minutes: 120
+              - code: 2
+                name: 代休
+                granted:
+                  - date: '2019-01-01'
+                    days: 5
+                    minutes: 120
+                    effectivePeriod: '2019-04-01'
+                  - date: '2019-04-01'
+                    minutes: 180
+                    effectivePeriod: '2019-07-01'
+                obtained:
+                  - date: '2019-02-02'
+                    days: 1
+                  - date: '2019-05-10'
+                    minutes: 180
+                remained:
+                  - date: '2019-04-01'
+                    days: 2
+                    minutes: 120
+                expired:
+                  - date: '2019-06-01'
+                    days: 2
+                  - date: '2019-03-01'
+                    minutes: 120
     GetOvertime:
       type: object
       required:
