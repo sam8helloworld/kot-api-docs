@@ -7,7 +7,7 @@ required:
   - employees
 properties:
   year:
-    type: integer
+    type: string
     description: 年度
     example: 2019
   startDate:
