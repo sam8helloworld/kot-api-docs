@@ -33,6 +33,10 @@ parameters:
     $ref: "./parameters/employeeKeys.yml"
   additionalFields_monthly-workings:
     $ref: "./parameters/additionalFields_monthly-workings.yml"
+  date_year_month_in_path:
+    $ref: "./parameters/date_year_month_in_path.yml"
+  additionalFields_monthly-workings-cost:
+    $ref: "./parameters/additionalFields_monthly-workings-cost.yml"
 
 schemas:
   employee_request:
@@ -81,6 +85,8 @@ schemas:
     $ref: "./schemas/monthly_working_variational_work.yml"
   monthly_working_current_date_employee:
     $ref: "./schemas/monthly_working_current_date_employee.yml"
+  monthly_working_cost_response:
+    $ref: "./schemas/monthly_working_cost_response.yml"
   request_overtime_applicant:
     $ref: "./schemas/request_overtime_applicant.yml"
   request_overtime_requested:

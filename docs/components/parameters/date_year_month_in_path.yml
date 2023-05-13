@@ -1,0 +1,12 @@
+name: date
+in: path
+required: true
+description: |-
+  詳細を取得したい年月
+  ・過去日は最大3年前まで
+  ・未来日は最大1年後まで
+schema:
+  type: string
+  pattern: \d{4}-(0[1-9]|1[0-2])
+  description: defaultは当月
+  example: 2016-06

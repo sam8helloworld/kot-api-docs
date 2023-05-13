@@ -633,6 +633,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetMonthlyWorking'
+  '/monthly-workings/cost/{date}':
+    get:
+      operationId: GetMonthlyWorkingCost
+      parameters:
+        - $ref: '#/components/parameters/date_year_month_in_path'
+        - $ref: '#/components/parameters/division'
+        - $ref: '#/components/parameters/additionalFields_monthly-workings-cost'
+      tags:
+        - Attendance
+      description: 指定した年月の月別費用データを取得する。
+      externalDocs:
+        description: 年月指定
+        url: 'https://developer.kingtime.jp/#%E5%8B%A4%E6%80%A0-%E6%9C%88%E5%88%A5%E8%B2%BB%E7%94%A8%E3%83%87%E3%83%BC%E3%82%BF-get'
+      responses:
+        '200':
+          description: ''
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/monthly_working_cost_response'
+                example:
+                  - year: 2016
+                    month: 6
+                    employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
+                    currentEmployee:
+                      divisionCode: '1000'
+                      divisionName: 本社
+                      gender: male
+                      typeCode: '1'
+                      typeName: 正社員
+                      code: '1000'
+                      lastName: 勤怠
+                      firstName: 太郎
+                      lastNamePhonetics: キンタイ
+                      firstNamePhonetics: タロウ
+                      employeeGroups:
+                        - code: '0001'
+                          name: 人事部
+                        - code: '0002'
+                          name: 総務部
+                    startDate: '2016-06-01'
+                    endDate: '2016-06-30'
+                    laborCostEstimate: 200000
+                    transportationExpense: 20000
   '/requests/schedules/{date}':
     get:
       operationId: GetSchedules
@@ -1024,6 +1075,32 @@ components:
             - weeklyWork
             - variationalWork
             - isConfirmation
+            - currentDateEmployee
+        example:
+          - currentDateEmployee
+    date_year_month_in_path:
+      name: date
+      in: path
+      required: true
+      description: |-
+        詳細を取得したい年月
+        ・過去日は最大3年前まで
+        ・未来日は最大1年後まで
+      schema:
+        type: string
+        pattern: '\d{4}-(0[1-9]|1[0-2])'
+        description: defaultは当月
+        example: 2016-06
+    additionalFields_monthly-workings-cost:
+      name: additionalFields
+      in: query
+      description: 指定されたプロパティをレスポンスに追加
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
             - currentDateEmployee
         example:
           - currentDateEmployee
@@ -1805,6 +1882,42 @@ components:
           description: 従業員グループ情報
           items:
             $ref: '#/components/schemas/employee_group'
+    monthly_working_cost_response:
+      type: object
+      required:
+        - year
+        - month
+        - employeeKey
+        - startDate
+        - endDate
+        - laborCostEstimate
+        - transportationExpense
+      properties:
+        year:
+          description: 年
+          type: integer
+        month:
+          description: 月
+          type: integer
+        employeeKey:
+          description: 従業員識別キー（従業員コードが変更されても不変）
+          type: string
+        startDate:
+          description: 集計開始日
+          type: string
+          format: date
+        endDate:
+          description: 集計終了日
+          type: string
+          format: date
+        laborCostEstimate:
+          description: 人件費概算
+          type: integer
+        transportationExpense:
+          description: 交通費
+          type: integer
+        currentDateEmployee:
+          $ref: '#/components/schemas/monthly_working_current_date_employee'
     request_overtime_applicant:
       type: object
       description: 申請者

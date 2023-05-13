@@ -1173,6 +1173,47 @@ func TestGetMonthlyWorking(t *testing.T) {
 	}
 }
 
+func TestGetMonthlyWorkingCost(t *testing.T) {
+	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
+	if err != nil {
+		t.Fatalf("failed to securityprovider.NewSecurityProviderBearerToken: %v", err)
+	}
+	ctx := context.Background()
+	sut, err := kotclient.NewClientWithResponses("http://localhost:8001", kotclient.WithRequestEditorFn(bearerTokenProvider.Intercept))
+	if err != nil {
+		t.Fatalf("failed to kotclient.NewClient: %v", err)
+	}
+
+	date := "2016-06"
+	queries := kotclient.Ptr(kotclient.GetMonthlyWorkingCostParams{
+		Division:         kotclient.Ptr("1000"),
+		AdditionalFields: kotclient.Ptr([]string{"currentDateEmployee"}),
+	})
+	got, err := sut.GetMonthlyWorkingCostWithResponse(ctx, date, queries)
+	if err != nil {
+		t.Fatalf("failed to sut.GetMonthlyWorkingCostWithResponse: %v", err)
+	}
+
+	if diff := cmp.Diff(200, got.StatusCode()); diff != "" {
+		t.Errorf("value is mismatch (-want +got):\n%s", diff)
+	}
+
+	want := []kotclient.MonthlyWorkingCostResponse{
+		{
+			Year:                  2016,
+			Month:                 6,
+			EmployeeKey:           "8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3",
+			StartDate:             openapi_types.Date{Time: time.Date(2016, 6, 1, 0, 0, 0, 0, time.UTC)},
+			EndDate:               openapi_types.Date{Time: time.Date(2016, 6, 30, 0, 0, 0, 0, time.UTC)},
+			LaborCostEstimate:     200000,
+			TransportationExpense: 20000,
+		},
+	}
+	if diff := cmp.Diff(kotclient.Ptr(want), got.JSON200); diff != "" {
+		t.Errorf("value mismatch (-want +got):\n%s", diff)
+	}
+}
+
 func TestGetOvertime(t *testing.T) {
 	bearerTokenProvider, err := securityprovider.NewSecurityProviderBearerToken("8j9f7v4893y58rvt7nyfq2893n75tr78937n83")
 	if err != nil {
