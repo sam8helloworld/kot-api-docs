@@ -2215,6 +2215,8 @@ components:
           description: 付与・取得一覧
           items:
             $ref: '#/components/schemas/yearly_working_employee_holiday'
+        currentDateEmployee:
+          $ref: '#/components/schemas/yearly_working_current_date_employee'
     yearly_working_employee_holiday:
       type: object
       required:
@@ -3559,8 +3561,6 @@ components:
           description: 従業員別の休暇情報
           items:
             $ref: '#/components/schemas/yearly_working_employee'
-        currentDateEmployee:
-          $ref: '#/components/schemas/yearly_working_current_date_employee'
       example:
         year: '2019'
         startDate: '2019-01-01'
