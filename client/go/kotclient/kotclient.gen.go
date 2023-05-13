@@ -259,12 +259,17 @@ const (
 	GetMonthlyWorkingCostParamsAdditionalFieldsCurrentDateEmployee GetMonthlyWorkingCostParamsAdditionalFields = "currentDateEmployee"
 )
 
+// Defines values for GetMonthlyWorkingHolidayRemainedParamsAdditionalFields.
+const (
+	GetMonthlyWorkingHolidayRemainedParamsAdditionalFieldsCurrentDateEmployee GetMonthlyWorkingHolidayRemainedParamsAdditionalFields = "currentDateEmployee"
+)
+
 // Defines values for GetMonthlyWorkingParamsAdditionalFields.
 const (
-	GetMonthlyWorkingParamsAdditionalFieldsCurrentDateEmployee GetMonthlyWorkingParamsAdditionalFields = "currentDateEmployee"
-	GetMonthlyWorkingParamsAdditionalFieldsIsConfirmation      GetMonthlyWorkingParamsAdditionalFields = "isConfirmation"
-	GetMonthlyWorkingParamsAdditionalFieldsVariationalWork     GetMonthlyWorkingParamsAdditionalFields = "variationalWork"
-	GetMonthlyWorkingParamsAdditionalFieldsWeeklyWork          GetMonthlyWorkingParamsAdditionalFields = "weeklyWork"
+	CurrentDateEmployee GetMonthlyWorkingParamsAdditionalFields = "currentDateEmployee"
+	IsConfirmation      GetMonthlyWorkingParamsAdditionalFields = "isConfirmation"
+	VariationalWork     GetMonthlyWorkingParamsAdditionalFields = "variationalWork"
+	WeeklyWork          GetMonthlyWorkingParamsAdditionalFields = "weeklyWork"
 )
 
 // Defines values for GetOvertimeParamsAdditionalFields.
@@ -2018,14 +2023,14 @@ type GetMonthlyWorkingCostParams struct {
 // GetMonthlyWorkingCostParamsAdditionalFields defines parameters for GetMonthlyWorkingCost.
 type GetMonthlyWorkingCostParamsAdditionalFields string
 
-// GetMonthlyWorkingCostParams defines parameters for GetMonthlyWorkingCost.
-type GetMonthlyWorkingCostParams struct {
+// GetMonthlyWorkingHolidayRemainedParams defines parameters for GetMonthlyWorkingHolidayRemained.
+type GetMonthlyWorkingHolidayRemainedParams struct {
 	// AdditionalFields 指定されたプロパティをレスポンスに追加
 	AdditionalFields *AdditionalFieldsMonthlyWorkingsCost `form:"additionalFields,omitempty" json:"additionalFields,omitempty"`
 }
 
-// GetMonthlyWorkingCostParamsAdditionalFields defines parameters for GetMonthlyWorkingCost.
-type GetMonthlyWorkingCostParamsAdditionalFields string
+// GetMonthlyWorkingHolidayRemainedParamsAdditionalFields defines parameters for GetMonthlyWorkingHolidayRemained.
+type GetMonthlyWorkingHolidayRemainedParamsAdditionalFields string
 
 // GetMonthlyWorkingParams defines parameters for GetMonthlyWorking.
 type GetMonthlyWorkingParams struct {
@@ -2202,8 +2207,8 @@ type ClientInterface interface {
 	// GetMonthlyWorkingCost request
 	GetMonthlyWorkingCost(ctx context.Context, date DateYearMonthInPath, params *GetMonthlyWorkingCostParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetMonthlyWorkingCost request
-	GetMonthlyWorkingCost(ctx context.Context, employeeTypeCode EmployeeTypeCodeInPath, date DateYearMonthInPath, params *GetMonthlyWorkingCostParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetMonthlyWorkingHolidayRemained request
+	GetMonthlyWorkingHolidayRemained(ctx context.Context, employeeTypeCode EmployeeTypeCodeInPath, date DateYearMonthInPath, params *GetMonthlyWorkingHolidayRemainedParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetMonthlyWorking request
 	GetMonthlyWorking(ctx context.Context, date DateRequired, params *GetMonthlyWorkingParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -2467,8 +2472,8 @@ func (c *Client) GetMonthlyWorkingCost(ctx context.Context, date DateYearMonthIn
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetMonthlyWorkingCost(ctx context.Context, employeeTypeCode EmployeeTypeCodeInPath, date DateYearMonthInPath, params *GetMonthlyWorkingCostParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetMonthlyWorkingCostRequest(c.Server, employeeTypeCode, date, params)
+func (c *Client) GetMonthlyWorkingHolidayRemained(ctx context.Context, employeeTypeCode EmployeeTypeCodeInPath, date DateYearMonthInPath, params *GetMonthlyWorkingHolidayRemainedParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetMonthlyWorkingHolidayRemainedRequest(c.Server, employeeTypeCode, date, params)
 	if err != nil {
 		return nil, err
 	}
@@ -3757,8 +3762,8 @@ func NewGetMonthlyWorkingCostRequest(server string, date DateYearMonthInPath, pa
 	return req, nil
 }
 
-// NewGetMonthlyWorkingCostRequest generates requests for GetMonthlyWorkingCost
-func NewGetMonthlyWorkingCostRequest(server string, employeeTypeCode EmployeeTypeCodeInPath, date DateYearMonthInPath, params *GetMonthlyWorkingCostParams) (*http.Request, error) {
+// NewGetMonthlyWorkingHolidayRemainedRequest generates requests for GetMonthlyWorkingHolidayRemained
+func NewGetMonthlyWorkingHolidayRemainedRequest(server string, employeeTypeCode EmployeeTypeCodeInPath, date DateYearMonthInPath, params *GetMonthlyWorkingHolidayRemainedParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -4257,8 +4262,8 @@ type ClientWithResponsesInterface interface {
 	// GetMonthlyWorkingCost request
 	GetMonthlyWorkingCostWithResponse(ctx context.Context, date DateYearMonthInPath, params *GetMonthlyWorkingCostParams, reqEditors ...RequestEditorFn) (*GetMonthlyWorkingCostResponse, error)
 
-	// GetMonthlyWorkingCost request
-	GetMonthlyWorkingCostWithResponse(ctx context.Context, employeeTypeCode EmployeeTypeCodeInPath, date DateYearMonthInPath, params *GetMonthlyWorkingCostParams, reqEditors ...RequestEditorFn) (*GetMonthlyWorkingCostResponse, error)
+	// GetMonthlyWorkingHolidayRemained request
+	GetMonthlyWorkingHolidayRemainedWithResponse(ctx context.Context, employeeTypeCode EmployeeTypeCodeInPath, date DateYearMonthInPath, params *GetMonthlyWorkingHolidayRemainedParams, reqEditors ...RequestEditorFn) (*GetMonthlyWorkingHolidayRemainedResponse, error)
 
 	// GetMonthlyWorking request
 	GetMonthlyWorkingWithResponse(ctx context.Context, date DateRequired, params *GetMonthlyWorkingParams, reqEditors ...RequestEditorFn) (*GetMonthlyWorkingResponse, error)
@@ -4658,14 +4663,14 @@ func (r GetMonthlyWorkingCostResponse) StatusCode() int {
 	return 0
 }
 
-type GetMonthlyWorkingCostResponse struct {
+type GetMonthlyWorkingHolidayRemainedResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *GetMonthlyWorkingHolidayRemained
 }
 
 // Status returns HTTPResponse.Status
-func (r GetMonthlyWorkingCostResponse) Status() string {
+func (r GetMonthlyWorkingHolidayRemainedResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -4673,7 +4678,7 @@ func (r GetMonthlyWorkingCostResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetMonthlyWorkingCostResponse) StatusCode() int {
+func (r GetMonthlyWorkingHolidayRemainedResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -5010,13 +5015,13 @@ func (c *ClientWithResponses) GetMonthlyWorkingCostWithResponse(ctx context.Cont
 	return ParseGetMonthlyWorkingCostResponse(rsp)
 }
 
-// GetMonthlyWorkingCostWithResponse request returning *GetMonthlyWorkingCostResponse
-func (c *ClientWithResponses) GetMonthlyWorkingCostWithResponse(ctx context.Context, employeeTypeCode EmployeeTypeCodeInPath, date DateYearMonthInPath, params *GetMonthlyWorkingCostParams, reqEditors ...RequestEditorFn) (*GetMonthlyWorkingCostResponse, error) {
-	rsp, err := c.GetMonthlyWorkingCost(ctx, employeeTypeCode, date, params, reqEditors...)
+// GetMonthlyWorkingHolidayRemainedWithResponse request returning *GetMonthlyWorkingHolidayRemainedResponse
+func (c *ClientWithResponses) GetMonthlyWorkingHolidayRemainedWithResponse(ctx context.Context, employeeTypeCode EmployeeTypeCodeInPath, date DateYearMonthInPath, params *GetMonthlyWorkingHolidayRemainedParams, reqEditors ...RequestEditorFn) (*GetMonthlyWorkingHolidayRemainedResponse, error) {
+	rsp, err := c.GetMonthlyWorkingHolidayRemained(ctx, employeeTypeCode, date, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetMonthlyWorkingCostResponse(rsp)
+	return ParseGetMonthlyWorkingHolidayRemainedResponse(rsp)
 }
 
 // GetMonthlyWorkingWithResponse request returning *GetMonthlyWorkingResponse
@@ -5517,15 +5522,15 @@ func ParseGetMonthlyWorkingCostResponse(rsp *http.Response) (*GetMonthlyWorkingC
 	return response, nil
 }
 
-// ParseGetMonthlyWorkingCostResponse parses an HTTP response from a GetMonthlyWorkingCostWithResponse call
-func ParseGetMonthlyWorkingCostResponse(rsp *http.Response) (*GetMonthlyWorkingCostResponse, error) {
+// ParseGetMonthlyWorkingHolidayRemainedResponse parses an HTTP response from a GetMonthlyWorkingHolidayRemainedWithResponse call
+func ParseGetMonthlyWorkingHolidayRemainedResponse(rsp *http.Response) (*GetMonthlyWorkingHolidayRemainedResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetMonthlyWorkingCostResponse{
+	response := &GetMonthlyWorkingHolidayRemainedResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -5879,24 +5884,24 @@ var swaggerSpec = []string{
 	"BiTbiw/VWhW+qrzAXeQpJrv+mBJQJeDp7KZpUqFYJl+U81yvKLq9uK6g0fCF7YndtIF6pwpcCNxD2gDy",
 	"/om/WCj3kfh6xZ1uE49VZQX3OOhZ1nFPfNb7BzOZHmf/f4wR1nXK8SzgRNx04ygvHC1z8nSvj72EheTe",
 	"6yi60NG7RCkrL6qfE9WDnKieh/rMLmN6TC4VTcSonatG4jH4z2wClnL09zLfRjvg0aorjgHgHlzwBYj1",
-	"jkqMO/vBkeXE90Ksg5CiemnoqFEG3ZLNh/TNP9mZkDVKze9RCZsaHB2Hz+HrqFl0HTU7aknYnRa1bqyH",
-	"krWdi+mdEr1tTqpOBP7VVUh/twyWLpilzZ3utmzZuV3Ts3D8dnBdL+75Omllb8Xi27LTDnPSHtE6+jlH",
-	"2mdUw+mQwI16X5jGjbI/oUKxdBhtg7C1ZbV+H46jLMNfa+ftTfq3g52Q4T+WgEeB0bHBzBhmpyzkjfHs",
-	"YDalpz+OJuFni6/Qh2yWfL8TTrOVv3TxmKty4v2nrWe/2vC/gNwhp/DKjwhqfW1L+bv29zWUNvS4ebOq",
-	"Ld5LaC+eoTJur1TlHnqmefNB8x9L9mdY+MyrefwME2F4OBpSbaa1bKshhHOEZbECIlQyjsfYTDSWcfRu",
-	"P3IkfyJ5MvpO7DAbzU78jT0ci8Yn3qWlIW9nfU4I76sKEGetdXFk6SLamnLpNJdITibiheE8SMQmU4nE",
-	"cJ5Nslw+zSYnuUIqzSZy+Tib47KZVCYLCiCXLYB4OjEcTxW4XDweD7JWl8NMrS+g4mGX1PoZtfazWrtM",
-	"uq02X7/Uzt9GzFEuoiMEqsPntVin2PRYbAFXeDKNc6MOlaQX0PsMb6veatD1rd5qEAri9/hvQP6gXmrP",
-	"/GJcyMMZlRA9oaEm2vYu325pbnLgbplAnpIbGjhOCvV13+tOWLc+MPaoM31AViHtSCV4gnkrtAIW4lnj",
-	"g5mFY/iMRofdWTijY71RD0bdSqmvH/r6oa8fdkM/WCy46wrCLcq7UhCojKC07wT6v29U1016tZ/U2mO1",
-	"tobIrYHUwGNEdLos15SbzUc/+R2GA4piLC8zbnk5+p7xTcIQzqNx529x48aSKbfbAfKK9R6sSGUg5EdR",
-	"7cVDEFehj8MIwz2L9Bq7iefinVHV6a4tqFUFBUxvqcpD7eK8qnxvNCS95wOkdX118878W7bpXmlaBRFI",
-	"09uy5b3MuiJmuS0C6r8N5KY5UQLyf6/IhWimnWPCIEtSxOzjjnN8kZvE1+h9TdB2NKvMN2+e086/UJW5",
-	"1k+rmw8uvGV051n509rMUYwsvsjLs70jv95W+vSYLY0MvUhEd9qhOu7emdKOmr57LVk6O5gdQ1a9GUge",
-	"HszsHxwb1Z2ymVQnlr9xrQ3hpZdBWSvWKBBxxqBhOXqB5j0RjrOnNNiqLaO1G3WWD6Mr+hIQj9MPU5+J",
-	"pXwlhyog44cG3qlIQBoo8sfBQJ6TuXcJyuHKvINmjrNDuPyAE/JHpRxXdAKdKeWOUYCO7NtXhA9PlyR5",
-	"JBOLsWh39FWe2D4hZ1XG1vkULqLD0dqXobWNZtZ97Xw8zyrMtmGctX67GMxTJNgGs/KBuhnHGc+xr8UK",
-	"AnSFNaefwjaAcWI4OXHyvwIAAP//DEx3mRVMAQA=",
+	"jkqMO/vBkeXE90Ksg5CiemnoqFEG3ZLNh/TNP9mZkDVKze9RCZsaHB2Hz+HrqFl0HTU7aknYLkTtX111",
+	"4Ds1WIwNCCV2O5fYOyWF2xxa/XG5W7ZLF3zT5np3Ww7t3MTpWWR+OxiwF1d+nbSyt8Lybdlphzlpjygg",
+	"/cgj7TMK43RI4EbpL0zjRgWgUFFZOoy28djaslq/D8dRluGvtfP2fv3bwU7oDDCWgKeC0bHBzBhmpyzk",
+	"jfHsYDalZ0KOJuFni6/Qh2yWfL8TTrNVwnTxmKuI4v2nrWe/2vC/gDwjp/DKjwhqfW1L+bv29zWUQfS4",
+	"ebOqLd5LaC+eoYpur1TlHnqmefNB8x9L9mdY+MyrefwME2F4OBpSbabhbCsnhNOFZbECIlQyjsfYTDSW",
+	"cbRxP3IkfyJ5MvpO7DAbzU78jT0ci8Yn3qVlJG9nqU4I76sKEGetdXFkFSPamnLpNJdITibiheE8SMQm",
+	"U4nEcJ5Nslw+zSYnuUIqzSZy+Tib47KZVCYLCiCXLYB4OjEcTxW4XDweD7JWl+9MrS+gOmKX1PoZtfaz",
+	"WrtMerA2X7/Uzt9GzFEuotMEKsnntVin2PRYbAEXezLtdKMklaTX0vsMb6veddD1rd51EAri9/hvQP6g",
+	"XnXP/GJcgFabUEL0hIaaaNvGfLulucmBu2UCeUpuaOA4KdTXk6/7Y936wNijzvQBWZC0I5XgCeat0ApY",
+	"iGeND2ZCjuE+Gh12J+SMjvVGPRglLKW+fujrh75+2A39YLHgrisItyjvSkGgioLSvhPo/74BXjfp1X5S",
+	"a4/V2hoitwZSA48R0emyXFNuNh/95HcYDiiKsbzMuOXl6HvGNwlDOI/Gnb/FjctLptxuB8gr7HuwIpWB",
+	"kB9FZRgPQVyFPg4jDPcs6GvsJp6Ld3JVp7u2oFYVFDu9pSoPtYvzqvK90Zv0ng+Q1vXVzTvzb9mme2Vs",
+	"FUQgTW/LlvcyAYuY5bYIqP82kJvmRAnI/70iF6KZdo4JgyxJEbOPO87xRW4S36j3NUHb0awy37x5Tjv/",
+	"QlXmWj+tbj648JbRnWcRUGszRzGy+CIvz/aO/Hpb9NNjtjQy9CIR3WmHSrp7J007yvvutbzp7GB2DFn1",
+	"Zkx5eDCzf3BsVHfKZlKdWP7GDTeEl17GZ62wo0CEHING6Oi1mvdEZM6e3WArvIzWbpRcPoxu60tAPE4/",
+	"TH0mlvKVHCqGjB8aeKciAWmgyB8HA3lO5t4lKIcr8w6aOc4O4UoETsgflXJc0Ql0ppQ7RgE6sm9fET48",
+	"XZLkkUwsxqLd0Vd5YvuEnFUkW+dTuIgOR2tfkdY2mlkCtvPxPAsy24Zxlv3tYjBPkWAbzEoN6mYcZzzH",
+	"vhYrCNAV1px+CtsAxonh5MTJ/woAAP//8z5txCBMAQA=",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file
