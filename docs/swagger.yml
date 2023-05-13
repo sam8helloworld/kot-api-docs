@@ -657,7 +657,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetMonthlyWorking'
+                type: array
+                items:
+                  $ref: '#/components/schemas/monthly_working_cost_response'
   '/requests/schedules/{date}':
     get:
       operationId: GetSchedules
