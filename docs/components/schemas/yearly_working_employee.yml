@@ -1,0 +1,15 @@
+type: object
+required:
+  - employeeKey
+  - holidays
+properties:
+  employeeKey:
+    type: string
+    description: 従業員識別キー（従業員コードが変更されても不変）
+  holidays:
+    type: array
+    description: 付与・取得一覧
+    items:
+      $ref: "../schemas/yearly_working_employee_holiday.yml"
+  currentDateEmployee:
+    $ref: "../schemas/yearly_working_current_date_employee.yml"

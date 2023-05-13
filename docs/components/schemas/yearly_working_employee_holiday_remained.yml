@@ -1,0 +1,16 @@
+type: object
+required:
+  - date
+  - days
+  - minutes
+properties:
+  date:
+    type: string
+    format: date
+    description: 繰越日
+  days:
+    type: integer
+    description: 繰越日数
+  minutes:
+    type: integer
+    description: 繰越時間(分)
