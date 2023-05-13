@@ -664,7 +664,7 @@ paths:
                   - year: 2016
                     month: 6
                     employeeKey: 8b6ee646a9620b286499c3df6918c4888a97dd7bbc6a26a18743f4697a1de4b3
-                    currentEmployee:
+                    currentDateEmployee:
                       divisionCode: '1000'
                       divisionName: 本社
                       gender: male
@@ -1974,6 +1974,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/monthly_working_holiday_remained_holiday_remained'
+        currentDateEmployee:
+          $ref: '#/components/schemas/monthly_working_current_date_employee'
     monthly_working_holiday_remained_holiday_remained:
       type: object
       description: 残休暇
