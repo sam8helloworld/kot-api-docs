@@ -26,8 +26,6 @@ properties:
     description: 従業員別の休暇情報
     items:
       $ref: "../schemas/yearly_working_employee.yml"
-  currentDateEmployee:
-    $ref: "../schemas/yearly_working_current_date_employee.yml"
 example:
   {
     "year": "2019",

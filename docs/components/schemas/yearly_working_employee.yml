@@ -11,3 +11,5 @@ properties:
     description: 付与・取得一覧
     items:
       $ref: "../schemas/yearly_working_employee_holiday.yml"
+  currentDateEmployee:
+    $ref: "../schemas/yearly_working_current_date_employee.yml"
