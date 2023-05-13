@@ -1,0 +1,23 @@
+type: object
+description: 残休暇
+required:
+  - day
+  - minutes
+  - code
+  - name
+properties:
+  day:
+    type: integer
+    description:  残休暇日数
+  minutes:
+    type: integer
+    description:  残休暇時間
+  code:
+    type: integer
+    description: 休暇区分コード（1 または 2 の休暇はデフォルトで設定されている休暇）
+    enum:
+      - 1
+      - 2
+  name:
+    type: string
+    description: 休暇区分名

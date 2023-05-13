@@ -44,6 +44,8 @@
   $ref: ./monthly-workings/{date}.yml
 /monthly-workings/cost/{date}:
   $ref: ./monthly-workings/cost_{date}.yml
+/monthly-workings/holiday-remained/{employeeTypeCode}/{date}:
+  $ref: ./monthly-workings/holiday-remained_{employeeTypeCode}_{date}.yml
 
 /requests/schedules/{date}:
   $ref: ./requests/schedules_{date}.yml

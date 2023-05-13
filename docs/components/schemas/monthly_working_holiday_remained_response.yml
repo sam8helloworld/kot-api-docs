@@ -1,0 +1,23 @@
+type: object
+required:
+  - date
+  - closeDate
+  - employeeKey
+  - holidayRemained
+properties:
+  date:
+    type: string
+    description: 年月日(残休暇取得時点)
+    format: date
+  closeDate:
+    type: integer
+    description: 締日
+  employeeKey:
+    type: string
+    description: 従業員識別キー（従業員コードが変更されても不変）
+  holidayRemained:
+    type: array
+    items:
+      $ref: "../schemas/monthly_working_holiday_remained_holiday_remained.yml"
+  currentDateEmployee:
+    $ref: "../schemas/monthly_working_current_date_employee.yml"
