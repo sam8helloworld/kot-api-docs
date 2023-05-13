@@ -21,4 +21,4 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../components/responses/GetMonthlyWorking.yml"
+            $ref: "../../components/responses/GetMonthlyWorkingCost.yml"
